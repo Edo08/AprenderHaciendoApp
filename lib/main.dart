@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                       SocialIcon(
                         colors: [
-                          Color(0xFF28409b),
+                          Color(0xFFd32d32),
                           Color(0xFFd32d32),
                         ],
                         iconData: CustomIcons.googlePlus,
