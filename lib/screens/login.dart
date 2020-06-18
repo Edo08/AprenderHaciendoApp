@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FormCard extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -33,6 +34,7 @@ class FormCard extends StatelessWidget {
                 style: TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(30))),
+            
             TextField(
               decoration: InputDecoration(
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),

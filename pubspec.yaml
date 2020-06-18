@@ -14,6 +14,9 @@ dependencies:
 
   cupertino_icons: ^0.1.3
   flutter_screenutil: ^0.4.2
+  firebase_core: ^0.4.5
+  cloud_firestore: ^0.13.6
+  firebase_auth: ^0.16.1
 
 dev_dependencies:
   flutter_test:
@@ -23,20 +26,20 @@ flutter:
 
   uses-material-design: true
   assets:
-    - assets/LogoAH.png
-    - assets/wedo2.png
-    - assets/lego-spike.png
+    - images/
+    - icons/
+    - fonts/
 
   fonts:
     - family: CustomIcons
       fonts:
-        - asset: assets/CustomIcons.ttf
+        - asset: fonts/CustomIcons.ttf
 
     - family: Poppins-Bold
       fonts:
-        - asset: assets/Poppins-Bold.ttf
+        - asset: fonts/Poppins-Bold.ttf
 
     - family: Poppins-Medium
       fonts:
-        - asset: assets/Poppins-Medium.ttf
+        - asset: fonts/Poppins-Medium.ttf
 
