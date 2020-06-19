@@ -145,6 +145,9 @@ class _RegistroState extends State<Registro> {
                     )
                   ],
                 ),
+                SizedBox(
+              height: 22,
+            ),
               ])
             )
           )

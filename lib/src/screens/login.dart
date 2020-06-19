@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:aprender_haciendo_app/src/screens/index.dart';
 
 class Login extends StatelessWidget {
   static const String routeName = '/login';
@@ -76,7 +77,7 @@ class Login extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> Index()),);},
                         child: Center(
                           child: Text("INGRESAR",
                               style: TextStyle(
