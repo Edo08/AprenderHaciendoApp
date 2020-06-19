@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FormCard extends StatelessWidget {
-  
+class Login extends StatelessWidget {
+  static const String routeName = '/login';
+
   @override
   Widget build(BuildContext context) {
     return new Container(

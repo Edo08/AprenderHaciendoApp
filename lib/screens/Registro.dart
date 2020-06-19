@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Registro extends StatefulWidget {
+  static const String routeName = '/registro';
+
   @override
   _RegistroState createState() => _RegistroState();
 }

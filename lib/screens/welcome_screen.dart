@@ -4,6 +4,7 @@ import 'Registro.dart';
 import 'login.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static const String routeName = '';
   @override
   _WelcomeScreenState createState() => new _WelcomeScreenState();
 }
@@ -76,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(180),
                   ),
-                  FormCard(),
+                  Login(),
 
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(50),
