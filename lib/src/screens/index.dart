@@ -1,10 +1,10 @@
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
-import 'package:aprender_haciendo_app/src/screens/login.dart';
-import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
  
 class Index extends StatefulWidget {
+  static const String routeName = '/index';
+
   @override
   _IndexState createState() => _IndexState();
 }
@@ -109,6 +109,7 @@ class _IndexState extends State<Index> {
           ),
            SizedBox(
             height: ScreenUtil().setHeight(1050),
+            /*
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
@@ -124,7 +125,7 @@ class _IndexState extends State<Index> {
                   ),
                 );
               },
-            ),
+            ),*/
           ),
  
             ],
