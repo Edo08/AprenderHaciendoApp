@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/src/screens/index.dart';
 import 'package:aprender_haciendo_app/src/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:aprender_haciendo_app/src/screens/welcome_screen.dart';
@@ -17,7 +18,8 @@ void main() {
       routes: <String, WidgetBuilder>{
         Login.routeName: (BuildContext context) => Login(),
         WelcomeScreen.routeName: (BuildContext context) => WelcomeScreen(),
-        Registro.routeName: (BuildContext context) => Registro()
+        Registro.routeName: (BuildContext context) => Registro(),
+        Index.routeName: (BuildContext context) => Index()
       }
     )
   );
