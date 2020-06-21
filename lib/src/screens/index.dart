@@ -3,7 +3,9 @@ import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
- 
+
+//index 
+
 class Index extends StatefulWidget {
   static const String routeName = '/index';
 
