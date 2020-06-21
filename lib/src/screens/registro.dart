@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
 class Registro extends StatefulWidget {
   static const String routeName = '/registro';
 
@@ -18,18 +19,49 @@ class _RegistroState extends State<Registro> {
   TextEditingController emailCtrl = new TextEditingController();
   TextEditingController passwordCtrl = new TextEditingController();
   TextEditingController repeatPassCtrl = new TextEditingController();
-
-
-  static Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    bool _autovalidate = false;
+  
+  final FocusNode _nombreFocus = FocusNode();  
+  final FocusNode _apellidosFocus = FocusNode();  
+  final FocusNode _nacimientoFocus = FocusNode();
+  final FocusNode _telefonoFocus = FocusNode();  
+  final FocusNode _emailFocus = FocusNode();  
+  final FocusNode _passFocus = FocusNode();
+  final FocusNode _reppassFocus = FocusNode();
+  
+  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  RegExp regex = new RegExp(pattern);
+  static Pattern patternStr = r'(^[a-zA-Z ]*$)';
+  RegExp regExpStr = new RegExp(patternStr);
+  static Pattern pattterntel = r'(^[0-9]*$)';
+  RegExp regExptel = new RegExp(pattterntel);
+  
+  bool isDateSelected= false;
+  DateTime fechaNacimiento; // instance of DateTime
+  String birthDateInString;
 
 
 
 
   //String _email; // guion bajo es para que sea interna
   //String _password;
+_fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);  
+}
+
+_registrarse(){
+  if (keyForm.currentState.validate()) {
+      // If the form is valid, display a snackbar. In the real world,
+      // you'd often call a server or save the information in a database.
+    print ("${emailCtrl.text}");
+    /*
+    Scaffold
+      .of(context)
+      .showSnackBar(SnackBar(content: Text('Procesando información')));
+    */  
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +110,25 @@ class _RegistroState extends State<Registro> {
                   decoration: new InputDecoration(
                     labelText: 'Nombre',
                   ),
+                  focusNode: _nombreFocus,
+                  onFieldSubmitted: (value){
+                    _fieldFocusChange(context, _nombreFocus, _apellidosFocus);
+                  },
                   keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   onChanged: (value){
                     nombreCtrl = value as TextEditingController;
                   },
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value.length == 0) {
+                      return "El nombre es necesario";
+                    } else if (!regExpStr.hasMatch(value)) {
+                      return "El nombre debe de ser a-z y A-Z";
+                    } else if (value.isEmpty) {
                       return 'Por favor ingrese su Nombre';
                     }
                     return null;
                   },
-                  
                 ),
                 SizedBox(
                   height: 22,
@@ -98,27 +138,58 @@ class _RegistroState extends State<Registro> {
                   decoration: new InputDecoration(
                     labelText: 'Apellidos',
                   ),
+                  focusNode: _apellidosFocus,
+                  onFieldSubmitted: (value){
+                    _fieldFocusChange(context, _apellidosFocus, _nacimientoFocus);
+                  },
                   keyboardType: TextInputType.text,
                   onChanged: (value){
                     apellidosCtrl = value as TextEditingController;
                   },
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value.length == 0) {
+                      return "Los apellidos son necesario";
+                    } else if (!regExpStr.hasMatch(value)) {
+                      return "El apellido debe de ser a-z y A-Z";
+                    } else if (value.isEmpty) {
                       return 'Por favor ingrese sus Apellidos';
                     }
                     return null;
                   },
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: 22,
                 ),
+
                 TextFormField(
                   controller: nacimientoCtrl,
                   decoration: new InputDecoration(
                     labelText: 'Fecha nacimiento',
                   ),
+                  focusNode: _nacimientoFocus,
+                  onFieldSubmitted: (value){
+                    _fieldFocusChange(context, _nacimientoFocus, _telefonoFocus);
+                  },
                   keyboardType: TextInputType.datetime,
-                  onChanged: (value){
+                  onTap: ()async{
+                    final datePick= await showDatePicker(
+                        context: context,
+                        initialDate: new DateTime.now(),
+                        firstDate: new DateTime(1900),
+                        lastDate: new DateTime(2100)
+                    );
+                    if(datePick!=null && datePick!=fechaNacimiento){
+                      setState(() {
+                        fechaNacimiento=datePick;
+                        isDateSelected=true;
+                        nacimientoCtrl.text = "${fechaNacimiento.month}/${fechaNacimiento.day}/${fechaNacimiento.year}"; // 08/14/2019
+
+                      });
+                    }
+                     new Text(isDateSelected ? "$fechaNacimiento":"Seleccione su fecha de nacimiento");
+                  }
+                /*   onChanged: (value){
                     nacimientoCtrl = value as TextEditingController;
                   },
                   validator: (value) {
@@ -126,7 +197,8 @@ class _RegistroState extends State<Registro> {
                       return 'Por favor ingrese su Fecha de nacimiento';
                     }
                     return null;
-                  },
+                  }, 
+                  textInputAction: TextInputAction.next,*/
                 ),
                 SizedBox(
                   height: 22,
@@ -136,18 +208,23 @@ class _RegistroState extends State<Registro> {
                   decoration: new InputDecoration(
                     labelText: 'Telefono',
                   ),
+                  focusNode: _telefonoFocus,
+                  onFieldSubmitted: (value){
+                    _fieldFocusChange(context, _telefonoFocus, _emailFocus);
+                  },
                   keyboardType: TextInputType.phone,
                   onChanged: (value){
                     telCtrl = value as TextEditingController;
                   },
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Por favor ingrese su Nombre';
-                    } else if (value.length != 8)
+                      return 'Por favor ingrese su telefono';
+                    } else if (!regExptel.hasMatch(value))
                       return 'Su numero de telefono debe tener 8 digitos';
                     else 
                       return null;
                   },
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: 22,
@@ -157,25 +234,37 @@ class _RegistroState extends State<Registro> {
                   decoration: new InputDecoration(
                     labelText: 'Correo electrónico',
                   ),
+                  focusNode: _emailFocus,
+                  onFieldSubmitted: (value){
+                    _fieldFocusChange(context, _emailFocus, _passFocus);
+                  },
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value){
                     emailCtrl = value as TextEditingController;
                   },
                   validator: (value) {
-                    if (!regex.hasMatch(value))
+                    if (value.isEmpty) {
+                      return 'Por favor un Email';
+                    } else if (!regex.hasMatch(value))
                       return 'Ingrese un Email Valido';
                     else
                       return null;
-                  }            
+                  },
+                  textInputAction: TextInputAction.next                            
                 ),
                 SizedBox(
                   height: 22,
                 ),
                 TextFormField(
                   controller: passwordCtrl,
+                  obscureText: true,
                   decoration: new InputDecoration(
-                  labelText: 'Contraseña',
+                    labelText: 'Contraseña',
                   ),
+                  focusNode: _passFocus,
+                  onFieldSubmitted: (value){
+                    _fieldFocusChange(context, _passFocus, _reppassFocus);
+                  },
                   keyboardType: TextInputType.visiblePassword,
                   onChanged: (value){
                     passwordCtrl = value as TextEditingController;
@@ -186,15 +275,23 @@ class _RegistroState extends State<Registro> {
                     }
                     return null;
                   },
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: 22,
                 ),
                 TextFormField(
                   controller: repeatPassCtrl,
+                  obscureText: true,
                   decoration: new InputDecoration(
                     labelText: 'Confirmar contraseña',
                   ),
+                  focusNode: _reppassFocus,
+                  onFieldSubmitted: (term){
+                    _reppassFocus.unfocus();
+                    _registrarse(); //aqui va la accion de registrarse;
+                  },
+                  
                   keyboardType: TextInputType.visiblePassword,
                   onChanged: (value){
                     repeatPassCtrl = value as TextEditingController;
@@ -202,9 +299,12 @@ class _RegistroState extends State<Registro> {
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Por favor ingrese la contraseña';
-                    }
+                    } else if(value != passwordCtrl.text){
+                      return 'Las contraseñas no coinciden';
+                    } 
                     return null;
                   },
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
@@ -233,16 +333,7 @@ class _RegistroState extends State<Registro> {
                           color: Colors.transparent,
                           child: InkWell(
                             onTap: () {
-                              if (keyForm.currentState.validate()) {
-                                  // If the form is valid, display a snackbar. In the real world,
-                                  // you'd often call a server or save the information in a database.
-                                print ("${emailCtrl.text}");
-                                /*
-                                Scaffold
-                                  .of(context)
-                                  .showSnackBar(SnackBar(content: Text('Procesando información')));
-                                */
-                              }
+                               _registrarse();
                             },                          
                             child: Padding(
                             padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),            
@@ -272,3 +363,6 @@ class _RegistroState extends State<Registro> {
     );
   }
 }
+
+
+
