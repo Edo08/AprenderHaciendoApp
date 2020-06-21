@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class Registro extends StatefulWidget {
@@ -11,7 +13,11 @@ class Registro extends StatefulWidget {
 }
 
 class _RegistroState extends State<Registro> {
+  final auth = FirebaseAuth.instance;
+  final databaseReference = Firestore.instance;
+
   GlobalKey<FormState> keyForm = new GlobalKey();
+
   TextEditingController nombreCtrl = new TextEditingController();
   TextEditingController apellidosCtrl = new TextEditingController();
   TextEditingController nacimientoCtrl = new TextEditingController();
@@ -39,29 +45,41 @@ class _RegistroState extends State<Registro> {
   DateTime fechaNacimiento; // instance of DateTime
   String birthDateInString;
 
-
-
-
   //String _email; // guion bajo es para que sea interna
   //String _password;
-_fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);  
-}
-
-_registrarse(){
-  if (keyForm.currentState.validate()) {
-      // If the form is valid, display a snackbar. In the real world,
-      // you'd often call a server or save the information in a database.
-    print ("${emailCtrl.text}");
-    /*
-    Scaffold
-      .of(context)
-      .showSnackBar(SnackBar(content: Text('Procesando información')));
-    */  
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+      currentFocus.unfocus();
+      FocusScope.of(context).requestFocus(nextFocus);  
   }
-}
 
+  _registrarse() async{
+    if (keyForm.currentState.validate()) {      
+      try{
+        var newUser = await auth.createUserWithEmailAndPassword(email: emailCtrl.text, password: passwordCtrl.text);
+        if (newUser != null){
+          Navigator.pushNamed(context, '/index');
+          createRecord();
+          
+        }        
+      }catch (e){
+        print(e);
+      }  
+    }
+  }
+
+void createRecord() async {
+  await databaseReference.collection("users")
+    .document()
+    .setData({
+      'nombre': '${nombreCtrl.text}',
+      'apellido': '${apellidosCtrl.text}',
+      'fechaNacimiento': '$fechaNacimiento',
+      'telefono': '${nombreCtrl.text}',
+      'email': '${emailCtrl.text}',
+      'contraseña': '${passwordCtrl.text}'
+    }
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -174,10 +192,11 @@ _registrarse(){
                   keyboardType: TextInputType.datetime,
                   onTap: ()async{
                     final datePick= await showDatePicker(
-                        context: context,
-                        initialDate: new DateTime.now(),
-                        firstDate: new DateTime(1900),
-                        lastDate: new DateTime(2100)
+                      
+                      context: context,
+                      initialDate: new DateTime.now(),
+                      firstDate: new DateTime(1900),
+                      lastDate: new DateTime(2100)
                     );
                     if(datePick!=null && datePick!=fechaNacimiento){
                       setState(() {
@@ -272,8 +291,9 @@ _registrarse(){
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Por favor ingrese la contraseña';
-                    }
-                    return null;
+                    } else if (value.length < 6) {
+                      return 'Contraseña tiene que ser mayor de 6 caracteres';
+                    } return null;
                   },
                   textInputAction: TextInputAction.next,
                 ),
@@ -287,7 +307,7 @@ _registrarse(){
                     labelText: 'Confirmar contraseña',
                   ),
                   focusNode: _reppassFocus,
-                  onFieldSubmitted: (term){
+                  onFieldSubmitted: (value){
                     _reppassFocus.unfocus();
                     _registrarse(); //aqui va la accion de registrarse;
                   },

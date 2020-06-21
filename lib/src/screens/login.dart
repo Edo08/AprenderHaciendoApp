@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
 class Login extends StatelessWidget {
   static const String routeName = '/login';
+ 
+  final FocusNode _userFocus = FocusNode();
+  final FocusNode _passFocus = FocusNode();
+
+
+
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
+      currentFocus.unfocus();
+      FocusScope.of(context).requestFocus(nextFocus);  
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,53 +50,73 @@ class Login extends StatelessWidget {
                     fontSize: ScreenUtil.getInstance().setSp(30))),
             
             TextField(
+              focusNode: _userFocus,
+                onSubmitted: (value){
+                  _fieldFocusChange(context, _userFocus, _passFocus);
+                },
               decoration: InputDecoration(
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)
+              ),
+              textInputAction: TextInputAction.next
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),
             Text("Contraseña",
-                style: TextStyle(
-                    fontFamily: "Poppins-Medium",
-                    fontSize: ScreenUtil.getInstance().setSp(30))),
+              style: TextStyle(
+                fontFamily: "Poppins-Medium",
+                fontSize: ScreenUtil.getInstance().setSp(30)
+              )
+            ),
             TextField(
               obscureText: true,
+              focusNode: _passFocus,
+                onSubmitted: (term){
+                  _passFocus.unfocus();
+                  Navigator.pushNamed(context, '/index'); //aqui va la accion de registrarse;
+                },
               decoration: InputDecoration(
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+              textInputAction: TextInputAction.next              
+              ),
+            SizedBox(
+              height: ScreenUtil.getInstance().setHeight(40)
             ),
-            SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
                 InkWell(
                   child: Container(
                     width: ScreenUtil.getInstance().setWidth(580),
                     height: ScreenUtil.getInstance().setHeight(100),
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          Color(0xFF65c6f4),
-                          Color(0xFF0074c9)
-                        ]),
-                        borderRadius: BorderRadius.circular(6.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color(0xFF6078ea).withOpacity(.3),
-                              offset: Offset(0.0, 8.0),
-                              blurRadius: 8.0)
-                        ]),
+                      gradient: LinearGradient(colors: [
+                        Color(0xFF65c6f4),
+                        Color(0xFF0074c9)
+                      ]),
+                      borderRadius: BorderRadius.circular(6.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xFF6078ea).withOpacity(.3),
+                          offset: Offset(0.0, 8.0),
+                          blurRadius: 8.0
+                        )
+                      ]
+                    ),
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () {Navigator.pushNamed(context, '/index');},
                         child: Center(
                           child: Text("INGRESAR",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Poppins-Bold",
-                                  fontSize: 18,
-                                  letterSpacing: 1.0)),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "Poppins-Bold",
+                              fontSize: 18,
+                              letterSpacing: 1.0
+                            )
+                          ),
                         ),
                       ),
                     ),
@@ -94,6 +127,8 @@ class Login extends StatelessWidget {
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(35),
             ),
+            
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
