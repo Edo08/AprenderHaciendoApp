@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
+// ultimo 
 class Registro extends StatefulWidget {
   static const String routeName = '/registro';
 
@@ -58,8 +58,7 @@ class _RegistroState extends State<Registro> {
         var newUser = await auth.createUserWithEmailAndPassword(email: emailCtrl.text, password: passwordCtrl.text);
         if (newUser != null){
           Navigator.pushNamed(context, '/index');
-          createRecord();
-          
+          createRecord();         
         }        
       }catch (e){
         print(e);
@@ -156,10 +155,10 @@ void createRecord() async {
                   decoration: new InputDecoration(
                     labelText: 'Apellidos',
                   ),
-                  focusNode: _apellidosFocus,
+                  /* focusNode: _apellidosFocus,
                   onFieldSubmitted: (value){
                     _fieldFocusChange(context, _apellidosFocus, _nacimientoFocus);
-                  },
+                  }, */
                   keyboardType: TextInputType.text,
                   onChanged: (value){
                     apellidosCtrl = value as TextEditingController;
@@ -167,8 +166,8 @@ void createRecord() async {
                   validator: (value) {
                     if (value.length == 0) {
                       return "Los apellidos son necesario";
-                    } else if (!regExpStr.hasMatch(value)) {
-                      return "El apellido debe de ser a-z y A-Z";
+                    // } else if (!regExpStr.hasMatch(value)) {
+                    //   return "El apellido debe de ser a-z y A-Z";
                     } else if (value.isEmpty) {
                       return 'Por favor ingrese sus Apellidos';
                     }
@@ -189,7 +188,14 @@ void createRecord() async {
                   onFieldSubmitted: (value){
                     _fieldFocusChange(context, _nacimientoFocus, _telefonoFocus);
                   },
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.datetime,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese su Fecha de nacimiento';
+                    }
+                    return null;
+                  },
                   onTap: ()async{
                     final datePick= await showDatePicker(
                       
@@ -202,21 +208,16 @@ void createRecord() async {
                       setState(() {
                         fechaNacimiento=datePick;
                         isDateSelected=true;
-                        nacimientoCtrl.text = "${fechaNacimiento.month}/${fechaNacimiento.day}/${fechaNacimiento.year}"; // 08/14/2019
-
+                        nacimientoCtrl.text = "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}"; 
                       });
                     }
                      new Text(isDateSelected ? "$fechaNacimiento":"Seleccione su fecha de nacimiento");
                   }
+                  
                 /*   onChanged: (value){
                     nacimientoCtrl = value as TextEditingController;
                   },
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Por favor ingrese su Fecha de nacimiento';
-                    }
-                    return null;
-                  }, 
+                   
                   textInputAction: TextInputAction.next,*/
                 ),
                 SizedBox(
