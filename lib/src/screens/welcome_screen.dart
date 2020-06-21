@@ -1,5 +1,7 @@
+import 'package:aprender_haciendo_app/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'index.dart';
 import 'login.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -109,13 +111,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           Color(0xFFd32d32),
                         ],
                         iconData: CustomIcons.googlePlus,
-                        onPressed: () {},
-                      ),
-                    ],
+                        onPressed: () {
+                          signInWithGoogle().whenComplete(()
+                          {Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context){
+                                return Index();
+                              }
+                            ),
+                          );
+                        }
+                      );
+                    }
                   ),
-                  SizedBox(
+                  ],
+                ),
+                SizedBox(
                     height: ScreenUtil.getInstance().setHeight(30),
-                  ),
+                ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
