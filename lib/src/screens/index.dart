@@ -1,5 +1,5 @@
+import 'package:aprender_haciendo_app/src/screens/product_card.dart';
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
-import 'package:aprender_haciendo_app/src/screens/login.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -104,9 +104,7 @@ class _IndexState extends State<Index> {
           CategorySelector(
             categorias: ["Preescolar", "Primaria", "Secundaria"],
           ),
-          SizedBox(
-            height: ScreenUtil().setHeight(50),
-          ),
+          
            SizedBox(
             height: ScreenUtil().setHeight(1050),
             child: ListView.builder(
@@ -114,13 +112,14 @@ class _IndexState extends State<Index> {
               physics: BouncingScrollPhysics(),
               itemCount: products.length -1,
               itemBuilder: (context, index){
-                Sets kits = products[index];
+                Sets sets = products[index];
                 return Padding(
                   padding: EdgeInsets.only(
                     left: ScreenUtil().setWidth(30),
                   ),
-                  child: Login(
-                    
+                  child: ProductCard(
+                    sets: sets,
+                    cardNum: index,
                   ),
                 );
               },

@@ -1,11 +1,15 @@
 class Sets {
+  int id;
+  int codigo;
+  String nombre;
+  String categoria;
   String image;
-  String title;
   double precio;
-  Sets({this.precio, this.image, this.title});
+  bool isSelected ;
+  Sets({this.id, this.codigo, this.nombre, this.categoria, this.precio, this.isSelected = false,this.image});
 }
  
-var products = [
-  Sets(image: "assets/img/productos/lego_spike.png", title: "Spike Prime", precio: 1.0),
-  Sets(image: "assets/img/productos/lego_spike.png", title: "WeDo 2.0", precio: 12),
+List<Sets> products = [
+  Sets(id: 1, codigo: 45678, nombre: "Spike Prime", categoria: "Primaria", precio: 300 , image: "images/lego-spike.png"),
+  Sets(id: 2, codigo: 45300, nombre: "WeDo 2.0", categoria: "Primaria", precio: 300 , image: "images/lego-spike.png"),
 ];
