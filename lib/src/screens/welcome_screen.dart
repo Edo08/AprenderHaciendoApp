@@ -1,4 +1,7 @@
+import 'package:aprender_haciendo_app/sign_in.dart';
+import 'package:aprender_haciendo_app/src/screens/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Registro.dart';
 import 'login.dart';
@@ -110,7 +113,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           Color(0xFFd32d32),
                         ],
                         iconData: CustomIcons.googlePlus,
-                        onPressed: () {},
+                        onPressed: ()  {
+                          signInWithGoogle().whenComplete(()
+                          {Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context){
+                                return Index();
+                              },
+                            ),
+                          );
+                        }
+                      );
+                    },
                       ),
                     ],
                   ),
