@@ -1,7 +1,10 @@
 import 'package:aprender_haciendo_app/src/screens/product_card.dart';
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
+=======
+>>>>>>> 87f5cfbebec7717f248024c2bffa8c5f7810a9eb
 =======
 >>>>>>> 87f5cfbebec7717f248024c2bffa8c5f7810a9eb
 import 'package:flutter/material.dart';
