@@ -16,7 +16,7 @@ class _ValidacionPassState extends State<ValidacionPass>
   bool upperCaseChar = false;
   bool number = false;
 
-//incompleto....
+
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _ValidacionPassState extends State<ValidacionPass>
 
 
 
-
+    
     _controller = AnimationController(vsync: this);
   }
 
