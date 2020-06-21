@@ -20,7 +20,7 @@ class ProductCard extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Align(
+        Align(
             alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: EdgeInsets.only(
@@ -67,9 +67,9 @@ class ProductCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                // Text(
-                                //   sets.nombre,
-                                // )
+                                 Text(
+                                   sets.nombre,
+                                 )
                               ],
                             ),
                           ),)
@@ -78,14 +78,15 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              /* Positioned(
-                top: ScreenUtil().setHeight(60),
-                left: ScreenUtil().setWidth(-22),
-                child: Image.asset(
-                  sets.image,
-                  width: ScreenUtil().setWidth(640),
-                  height: ScreenUtil().setHeight(610),
-                ),) */
+              Positioned(
+              top: ScreenUtil().setHeight(60),
+              left: ScreenUtil().setWidth(-22),
+              child: Image.asset(
+                sets.image,
+                width: ScreenUtil().setWidth(640),
+                height: ScreenUtil().setHeight(610),
+              ),
+            ) 
             ],
         ),
     );

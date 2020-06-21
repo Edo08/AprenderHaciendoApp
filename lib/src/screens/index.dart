@@ -1,12 +1,6 @@
 import 'package:aprender_haciendo_app/src/screens/product_card.dart';
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
-=======
->>>>>>> 87f5cfbebec7717f248024c2bffa8c5f7810a9eb
-=======
->>>>>>> 87f5cfbebec7717f248024c2bffa8c5f7810a9eb
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
  
@@ -110,16 +104,14 @@ class _IndexState extends State<Index> {
               height: 20,
             ),            
           CategorySelector(
-            categorias: ["Preescolar", "Primaria", "Secundaria"],
-          ),
-          
-           SizedBox(
+            categorias: ["Preescolar", "Primaria", "Secundaria"],           
+          ),                 
+          SizedBox(            
             height: ScreenUtil().setHeight(1050),
-            /*
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
-              itemCount: products.length -1,
+              itemCount: products.length,
               itemBuilder: (context, index){
                 Sets sets = products[index];
                 return Padding(
@@ -132,12 +124,11 @@ class _IndexState extends State<Index> {
                   ),
                 );
               },
-            ),*/
+            ),
           ),
- 
-            ],
-          ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
