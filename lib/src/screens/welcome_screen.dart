@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Registro.dart';
 import 'login.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -127,7 +126,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             fontFamily: "Poppins-Medium"),
                       ),
                       InkWell(
-                        onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=> Registro()),);},
+                        onTap: () {Navigator.pushNamed(context, '/registro');},
                         child: Text("Regístrese",
                             style: TextStyle(
                                 color: Color(0xFF28409b),
