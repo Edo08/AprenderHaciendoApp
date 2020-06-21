@@ -8,14 +8,29 @@ class Registro extends StatefulWidget {
   @override
   _RegistroState createState() => _RegistroState();
 }
+
 class _RegistroState extends State<Registro> {
   GlobalKey<FormState> keyForm = new GlobalKey();
   TextEditingController nombreCtrl = new TextEditingController();
   TextEditingController apellidosCtrl = new TextEditingController();
   TextEditingController nacimientoCtrl = new TextEditingController();
+  TextEditingController telCtrl = new TextEditingController();
   TextEditingController emailCtrl = new TextEditingController();
   TextEditingController passwordCtrl = new TextEditingController();
   TextEditingController repeatPassCtrl = new TextEditingController();
+
+
+  static Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    bool _autovalidate = false;
+
+
+
+
+  //String _email; // guion bajo es para que sea interna
+  //String _password;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -64,42 +79,133 @@ class _RegistroState extends State<Registro> {
                     labelText: 'Nombre',
                   ),
                   keyboardType: TextInputType.text,
-                  maxLength: 20,),
+                  onChanged: (value){
+                    nombreCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese su Nombre';
+                    }
+                    return null;
+                  },
+                  
+                ),
+                SizedBox(
+                  height: 22,
+                ),
                 TextFormField(
                   controller: apellidosCtrl,
                   decoration: new InputDecoration(
                     labelText: 'Apellidos',
                   ),
                   keyboardType: TextInputType.text,
-                  maxLength: 40,),
+                  onChanged: (value){
+                    apellidosCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese sus Apellidos';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 22,
+                ),
                 TextFormField(
                   controller: nacimientoCtrl,
                   decoration: new InputDecoration(
                     labelText: 'Fecha nacimiento',
                   ),
                   keyboardType: TextInputType.datetime,
-                  maxLength: 13,),
+                  onChanged: (value){
+                    nacimientoCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese su Fecha de nacimiento';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 22,
+                ),
+                TextFormField(
+                  controller: telCtrl,
+                  decoration: new InputDecoration(
+                    labelText: 'Telefono',
+                  ),
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value){
+                    telCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese su Nombre';
+                    } else if (value.length != 8)
+                      return 'Su numero de telefono debe tener 8 digitos';
+                    else 
+                      return null;
+                  },
+                ),
+                SizedBox(
+                  height: 22,
+                ),
                 TextFormField(
                   controller: emailCtrl,
                   decoration: new InputDecoration(
                     labelText: 'Correo electrónico',
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  maxLength: 50,),
+                  onChanged: (value){
+                    emailCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (!regex.hasMatch(value))
+                      return 'Ingrese un Email Valido';
+                    else
+                      return null;
+                  }            
+                ),
+                SizedBox(
+                  height: 22,
+                ),
                 TextFormField(
                   controller: passwordCtrl,
                   decoration: new InputDecoration(
-                    labelText: 'Contraseña',
+                  labelText: 'Contraseña',
                   ),
                   keyboardType: TextInputType.visiblePassword,
-                  maxLength: 20,),
+                  onChanged: (value){
+                    passwordCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese la contraseña';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 22,
+                ),
                 TextFormField(
                   controller: repeatPassCtrl,
                   decoration: new InputDecoration(
                     labelText: 'Confirmar contraseña',
                   ),
                   keyboardType: TextInputType.visiblePassword,
-                  maxLength: 20,),
+                  onChanged: (value){
+                    repeatPassCtrl = value as TextEditingController;
+                  },
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Por favor ingrese la contraseña';
+                    }
+                    return null;
+                  },
+                ),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(20),
                 ),
@@ -126,16 +232,28 @@ class _RegistroState extends State<Registro> {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {},                            
+                            onTap: () {
+                              if (keyForm.currentState.validate()) {
+                                  // If the form is valid, display a snackbar. In the real world,
+                                  // you'd often call a server or save the information in a database.
+                                print ("${emailCtrl.text}");
+                                /*
+                                Scaffold
+                                  .of(context)
+                                  .showSnackBar(SnackBar(content: Text('Procesando información')));
+                                */
+                              }
+                            },                          
                             child: Padding(
                             padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),            
                               child: Center(
                                 child: Text("REGISTRARSE",
-                                    style: TextStyle(
+                                  style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: "Poppins-Bold",
                                         fontSize: 17,
-                                        letterSpacing: 1.0)
+                                        letterSpacing: 1.0
+                                  )
                                 ),
                               ),
                             ),
