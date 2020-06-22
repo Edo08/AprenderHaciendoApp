@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../sign_in.dart';
+
 class Index extends StatefulWidget {
   static const String routeName = '/index';
 
@@ -110,6 +112,7 @@ class _IndexState extends State<Index> {
               icon: Icon(Icons.power_settings_new),
               onPressed: () {
                 Authentication().singOut();
+                  signOutGoogle(); 
                   Navigator.pop(context);
               }
           ),
