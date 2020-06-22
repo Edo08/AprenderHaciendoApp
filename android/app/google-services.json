@@ -8,41 +8,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:780725093759:android:842c8cc1b835cf7598464a",
-        "android_client_info": {
-          "package_name": "com.aprenderhaciendo.aprender_haciendo_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "780725093759-8cobnmcr2lvosp0ncpcv57fssoqnakm0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCkFahS_UTu1IAJO5e8no8RZaMlbRf4LJU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "780725093759-8cobnmcr2lvosp0ncpcv57fssoqnakm0.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:780725093759:android:8738adf004345ffa98464a",
         "android_client_info": {
           "package_name": "com.aprenderhaciendoapp.aprender_haciendo_app"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "780725093759-6e5g5rrrj6qcqa1v4dnaq1vns6t4ahig.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aprenderhaciendoapp.aprender_haciendo_app",
+            "certificate_hash": "a45301b3b9b58ca1db42022c1a727faf52d5c6dc"
+          }
+        },
+        {
+          "client_id": "780725093759-k7pid28cd4b8chkqenm138gt1lo0t3cb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aprenderhaciendoapp.aprender_haciendo_app",
+            "certificate_hash": "76e3cd6f72c22883b722d223ef6396593a65855e"
+          }
+        },
         {
           "client_id": "780725093759-8cobnmcr2lvosp0ncpcv57fssoqnakm0.apps.googleusercontent.com",
           "client_type": 3

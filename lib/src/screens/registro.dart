@@ -142,8 +142,8 @@ void createRecord() async {
                   validator: (value) {
                     if (value.length == 0) {
                       return "El nombre es necesario";
-                    } else if (!regExpStr.hasMatch(value)) {
-                      return "El nombre debe de ser a-z y A-Z";
+                    /* } else if (!regExpStr.hasMatch(value)) {
+                      return "El nombre debe de ser a-z y A-Z"; */
                     } else if (value.isEmpty) {
                       return 'Por favor ingrese su Nombre';
                     }
@@ -169,8 +169,8 @@ void createRecord() async {
                   validator: (value) {
                     if (value.length == 0) {
                       return "Los apellidos son necesario";
-                    } else if (!regExpStr.hasMatch(value)) {
-                      return "El apellido debe de ser a-z y A-Z";
+                    /* } else if (!regExpStr.hasMatch(value)) {
+                      return "El apellido debe de ser a-z y A-Z"; */
                     } else if (value.isEmpty) {
                       return 'Por favor ingrese sus Apellidos';
                     }
