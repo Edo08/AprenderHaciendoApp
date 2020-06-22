@@ -1,13 +1,12 @@
+import 'package:aprender_haciendo_app/src/screens/contacto.dart';
+import 'package:aprender_haciendo_app/src/screens/historial_compras.dart';
 import 'package:aprender_haciendo_app/src/screens/product_card.dart';
-import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../sign_in.dart';
-
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+ 
 class Index extends StatefulWidget {
   static const String routeName = '/index';
 
@@ -19,6 +18,38 @@ final TextStyle searchBarStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
  
 class _IndexState extends State<Index> {
+
+  List<ScreenHiddenDrawer> items = new List();
+
+  @override
+  void initState() {
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Historial de compras",
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          colorLineSelected: Colors.teal,
+        ),
+        Historial_compras()));
+
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Contacto",
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          colorLineSelected: Colors.orange,
+        ),
+        Contacto()));
+
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Cerrar Sesión",
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          colorLineSelected: Colors.orange,
+        ),
+        Contacto()));
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
@@ -43,7 +74,29 @@ class _IndexState extends State<Index> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          return HiddenDrawerMenu(
+                            //backgroundColorMenu: Colors.blueGrey,
+                            //backgroundColorAppBar: Colors.cyan,
+                            screens: items,
+                              //    typeOpen: TypeOpen.FROM_RIGHT,
+                              //    enableScaleAnimin: true,
+                              //    enableCornerAnimin: true,
+                              slidePercent: 70.0,
+                              //    verticalScalePercent: 80.0,
+                              contentCornerRadius: 40.0,
+                              //    iconMenuAppBar: Icon(Icons.menu),
+                              //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+                              //    whithAutoTittleName: true,
+                              //    styleAutoTittleName: TextStyle(color: Colors.red),
+                              //    actionsAppBar: <Widget>[],
+                              //    backgroundColorContent: Colors.blue,
+                              //    elevationAppBar: 4.0,
+                              //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
+                              //    enableShadowItensMenu: true,
+                              //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+                          ); 
+                        },
                         child: Image.asset(
                         "icons/icon_menu.png",
                         width: ScreenUtil.getInstance().setWidth(110),
@@ -106,18 +159,7 @@ class _IndexState extends State<Index> {
           ),
           SizedBox(
               height: 20,
-            ),        
-
-          IconButton(
-              icon: Icon(Icons.power_settings_new),
-              onPressed: () {
-                Authentication().singOut();
-                  signOutGoogle(); 
-                  Navigator.pop(context);
-              }
-          ),
-
-
+            ),            
           CategorySelector(
             categorias: ["Preescolar", "Primaria", "Secundaria"],           
           ),                 
@@ -145,22 +187,5 @@ class _IndexState extends State<Index> {
         ),
       ),
     );
-  }
-  FirebaseUser loggedInUser;
-  @override
-  void initState() {
-    super.initState();
-    getCurrentUser();
-  }
-  void getCurrentUser() async{
-    try{
-    var user = await Authentication().getCurrentUser();
-    if(user != null){
-      loggedInUser = user;
-      print(loggedInUser.email);
-    }
-    }catch(e){
-      print(e);
-    }
   }
 }

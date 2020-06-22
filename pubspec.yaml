@@ -19,6 +19,7 @@ dependencies:
   firebase_auth: ^0.16.1
   google_sign_in: ^4.4.4
   http: ^0.12.1
+  hidden_drawer_menu: ^1.1.4
 
   
 
@@ -33,6 +34,9 @@ flutter:
     - images/
     - icons/
     - fonts/
+    - images/45025_Coding.png
+    - images/wedo.png
+    - images/steamP.png
 
   fonts:
     - family: CustomIcons
@@ -46,4 +50,8 @@ flutter:
     - family: Poppins-Medium
       fonts:
         - asset: fonts/Poppins-Medium.ttf
+
+    - family: Muli
+      fonts:
+        - asset: fonts/muli-extrabold.ttf
 

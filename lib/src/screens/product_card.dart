@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
  
-final TextStyle productTitleStyle =
-    TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
-final TextStyle productCardNum =
+final TextStyle codigoStyle =
+    TextStyle(fontSize: 15, fontFamily: "Muli", color: Colors.white,
+     fontWeight: FontWeight.w700,
+     shadows: <Shadow>[
+      Shadow(
+        offset: Offset(3.0, 1.0),
+        blurRadius: 3.0,
+        color: Color.fromARGB(150, 0, 0, 0),
+      )] );
+final TextStyle precioStyle =
+    TextStyle(fontSize: 16, fontFamily: "Muli", color: Colors.white, fontWeight: FontWeight.w500);
+final TextStyle nombreProductoStyle =
+    TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
+final TextStyle productCardNumStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle =
     TextStyle(fontFamily: "Poppins-Medium");
@@ -33,8 +44,8 @@ class ProductCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                                Color(0xFF65c6f4),
-                                Color(0xFF0074c9)
+                                Color(0xFF65a6f4),
+                                Color(0xFF25cfff)
                               ],
                               begin: Alignment.topRight,
                               end: Alignment.bottomLeft),
@@ -48,14 +59,14 @@ class ProductCard extends StatelessWidget {
                     ),
                     child: Stack(
                       children: <Widget>[
-                        Positioned(
+                        /* Positioned(
                           left: ScreenUtil().setWidth(40),
                           top: ScreenUtil().setHeight(50),
                           child: Text(
                             "0${cardNum+1}",
-                            style: productCardNum,
+                            style: productCardNumStyle,
                           ),
-                        ),
+                        ), */
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
@@ -67,9 +78,18 @@ class ProductCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
+                                Text(
+                                   "${sets.codigo}",
+                                   style: codigoStyle,
+                                 ),
                                  Text(
                                    sets.nombre,
-                                 )
+                                   style: nombreProductoStyle,
+                                 ),                                
+                                Text(
+                                   "\₡${sets.precio}",
+                                   style: precioStyle,
+                                 ),
                               ],
                             ),
                           ),)
@@ -79,12 +99,12 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-              top: ScreenUtil().setHeight(60),
-              left: ScreenUtil().setWidth(-22),
+              top: ScreenUtil().setHeight(10),
+              left: ScreenUtil().setWidth(50),
               child: Image.asset(
                 sets.image,
-                width: ScreenUtil().setWidth(640),
-                height: ScreenUtil().setHeight(610),
+                width: ScreenUtil().setWidth(600),
+                height: ScreenUtil().setHeight(530),
               ),
             ) 
             ],
