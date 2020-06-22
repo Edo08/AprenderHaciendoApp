@@ -16,7 +16,7 @@ class Index extends StatefulWidget {
   _IndexState createState() => _IndexState();
 }
  
-final TextStyle searchBarStyle =
+final TextStyle menuStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
  
 class _IndexState extends State<Index> {
@@ -28,8 +28,9 @@ class _IndexState extends State<Index> {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Tienda",
-          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), fontSize: 28.0 ),
-          colorLineSelected: Colors.teal,
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), 
+                                fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white,
         ),
         Tienda()));
 
@@ -37,24 +38,27 @@ class _IndexState extends State<Index> {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Historial de compras",
-          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), fontSize: 28.0 ),
-          colorLineSelected: Colors.teal,
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8),
+           fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white,
         ),
         Historial_compras()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Contacto",
-          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), fontSize: 28.0 ),
-          colorLineSelected: Colors.orange,
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), 
+          fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white,
         ),
         Contacto()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Cerrar Sesión",
-          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), fontSize: 28.0 ),
-          colorLineSelected: Colors.grey,
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), 
+          fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white10,
           onTap: (){Authentication().singOut();
                     signOutGoogle(); 
                     Navigator.pop(context);
@@ -89,15 +93,15 @@ class _IndexState extends State<Index> {
       )..init(context);
 
       return HiddenDrawerMenu(
-        //backgroundColorMenu: Colors.blueGrey,
+        backgroundColorMenu: Colors.lightBlue,
         backgroundColorAppBar: Colors.white,
         elevationAppBar: 0.0,
         screens: items,
         //    typeOpen: TypeOpen.FROM_RIGHT,
         //    enableScaleAnimin: true,
         //    enableCornerAnimin: true,
-        slidePercent: 70.0,
-        //    verticalScalePercent: 80.0,
+        slidePercent: 65.0,
+        verticalScalePercent: 85.0,
         contentCornerRadius: 40.0,
         iconMenuAppBar:
           // Padding(padding : EdgeInsets.only(left: 50)),
@@ -107,8 +111,13 @@ class _IndexState extends State<Index> {
           )
         ),
         actionsAppBar: <Widget>[
-          IconButton(icon: Image.asset("icons/icon_cart.png", width: ScreenUtil.getInstance().setWidth(130),
-                    height: ScreenUtil.getInstance().setHeight(130)), onPressed: null)
+          IconButton(icon: Image.asset("icons/icon_cart.png", 
+          width: ScreenUtil.getInstance().setWidth(130),
+          height: ScreenUtil.getInstance().setHeight(130)), 
+          onPressed: null),
+          SizedBox(
+            width: 15,
+          )
         ],
           
           /*  Image.asset(

@@ -1,11 +1,9 @@
 import 'package:aprender_haciendo_app/src/screens/product_card.dart';
-import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../sign_in.dart';
  
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -69,7 +67,7 @@ class _TiendaState extends State<Tienda> {
               height: 22,
             ),
               Padding(
-              padding: EdgeInsets.only(left: 25),
+              padding: EdgeInsets.only(left: 15),
               child: Text("Tienda",
               style: TextStyle(
                 color: Colors.black,
@@ -110,8 +108,9 @@ class _TiendaState extends State<Tienda> {
           ),
           SizedBox(
               height: 20,
-            ),            
+            ),       
           CategorySelector(
+            
             categorias: ["Preescolar", "Primaria", "Secundaria"],           
           ), 
           SizedBox(
@@ -123,15 +122,15 @@ class _TiendaState extends State<Tienda> {
               scrollDirection: Axis.horizontal,
               physics: BouncingScrollPhysics(),
               itemCount: products.length,
-              itemBuilder: (context, Tienda){
-                Sets sets = products[Tienda];
+              itemBuilder: (context, index){
+                Sets sets = products[index];
                 return Padding(
                   padding: EdgeInsets.only(
                     left: ScreenUtil().setWidth(30),
                   ),
                   child: ProductCard(
                     sets: sets,
-                    cardNum: Tienda,
+                    cardNum: index,
                   ),
                 );
               },
