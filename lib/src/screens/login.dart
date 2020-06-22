@@ -10,8 +10,9 @@ class Login extends StatelessWidget {
   final FocusNode _userFocus = FocusNode();
   final FocusNode _passFocus = FocusNode();
   final focusNode = FocusNode();
-  String _email;
-  String _password;
+  TextEditingController emailCtrl = new TextEditingController();
+  TextEditingController passwordCtrl = new TextEditingController();
+  
 
 
   _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
@@ -61,7 +62,7 @@ class Login extends StatelessWidget {
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)
               ),
               textInputAction: TextInputAction.next,
-              onChanged: (value){_email = value;},
+              onChanged: (value){emailCtrl = value as TextEditingController;},
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
@@ -82,7 +83,7 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
               textInputAction: TextInputAction.next,
-              onChanged: (value){_password = value;},                        
+              onChanged: (value){passwordCtrl = value as TextEditingController;},                        
               ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(40)
@@ -113,12 +114,12 @@ class Login extends StatelessWidget {
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: () async {
-                          var user = await Authentication().loginUser(email: _email, password: _password);
+                          var user = await Authentication().loginUser(email: emailCtrl.text, password: passwordCtrl.text);
                           if(user!= null){
                             Navigator.pushNamed(context, '/index');
-                            print('$_email y $_password');
+                            print('${emailCtrl.text} y ${passwordCtrl.text}');
                           } 
-                          print('$_email y $_password');
+                          print('${emailCtrl.text} y ${passwordCtrl.text}');
                         },
                         
                         child: Center(
@@ -144,15 +145,24 @@ class Login extends StatelessWidget {
             
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
+              
               children: <Widget>[
-                Text(
-                  "¿Olvidó la contraseña?",
-                  style: TextStyle(
+                new GestureDetector(
+                  onTap: (){Navigator.pushNamed(context, '/index');
+                    },
+                  child: new Text(
+                                      "¿Olvidó la contraseña?",
+                      style: TextStyle(
                       color: Colors.blue,
                       fontFamily: "Poppins-Medium",
-                      fontSize: ScreenUtil.getInstance().setSp(28)),
+                      fontSize: ScreenUtil.getInstance().setSp(28)
+                      ),
+                      
                 )
-              ],
+                
+                ),
+                ],
+
             )
           ],
         ),
