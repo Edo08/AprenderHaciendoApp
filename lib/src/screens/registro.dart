@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +57,11 @@ class _RegistroState extends State<Registro> {
   _registrarse() async{
     if (keyForm.currentState.validate()) {      
       try{
-        var newUser = await auth.createUserWithEmailAndPassword(email: emailCtrl.text, password: passwordCtrl.text);
+        var newUser = await Authentication().createUser(email: emailCtrl.text, password: passwordCtrl.text);
         if (newUser != null){
           Navigator.pushNamed(context, '/index');
-          createRecord();         
+          createRecord(); 
+                  
         }        
       }catch (e){
         print(e);

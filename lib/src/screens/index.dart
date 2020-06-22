@@ -1,12 +1,11 @@
-import 'package:aprender_haciendo_app/sign_in.dart';
 import 'package:aprender_haciendo_app/src/screens/product_card.dart';
+import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'login.dart';
- 
 class Index extends StatefulWidget {
   static const String routeName = '/index';
 
@@ -105,7 +104,17 @@ class _IndexState extends State<Index> {
           ),
           SizedBox(
               height: 20,
-            ),            
+            ),        
+
+          IconButton(
+              icon: Icon(Icons.power_settings_new),
+              onPressed: () {
+                Authentication().singOut();
+                  Navigator.pop(context);
+              }
+          ),
+
+
           CategorySelector(
             categorias: ["Preescolar", "Primaria", "Secundaria"],           
           ),                 
@@ -133,5 +142,22 @@ class _IndexState extends State<Index> {
         ),
       ),
     );
+  }
+  FirebaseUser loggedInUser;
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+  void getCurrentUser() async{
+    try{
+    var user = await Authentication().getCurrentUser();
+    if(user != null){
+      loggedInUser = user;
+      print(loggedInUser.email);
+    }
+    }catch(e){
+      print(e);
+    }
   }
 }

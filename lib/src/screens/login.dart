@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +9,9 @@ class Login extends StatelessWidget {
  
   final FocusNode _userFocus = FocusNode();
   final FocusNode _passFocus = FocusNode();
-
+  final focusNode = FocusNode();
+  String _email;
+  String _password;
 
 
   _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
@@ -57,7 +60,8 @@ class Login extends StatelessWidget {
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)
               ),
-              textInputAction: TextInputAction.next
+              textInputAction: TextInputAction.next,
+              onChanged: (value){_email = value;},
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
@@ -73,11 +77,12 @@ class Login extends StatelessWidget {
               focusNode: _passFocus,
                 onSubmitted: (term){
                   _passFocus.unfocus();
-                  Navigator.pushNamed(context, '/index'); //aqui va la accion de registrarse;
+                  focusNode.unfocus();
                 },
               decoration: InputDecoration(
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-              textInputAction: TextInputAction.next              
+              textInputAction: TextInputAction.next,
+              onChanged: (value){_password = value;},                        
               ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(40)
@@ -107,7 +112,15 @@ class Login extends StatelessWidget {
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () {Navigator.pushNamed(context, '/index');},
+                        onTap: () async {
+                          var user = await Authentication().loginUser(email: _email, password: _password);
+                          if(user!= null){
+                            Navigator.pushNamed(context, '/index');
+                            print('$_email y $_password');
+                          } 
+                          print('$_email y $_password');
+                        },
+                        
                         child: Center(
                           child: Text("INGRESAR",
                             style: TextStyle(
