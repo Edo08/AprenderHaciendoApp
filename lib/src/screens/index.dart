@@ -1,5 +1,8 @@
-import 'package:aprender_haciendo_app/src/screens/contacto.dart';
+import 'package:aprender_haciendo_app/src/screens/academia.dart';
+import 'package:aprender_haciendo_app/src/screens/cursos.dart';
+import 'package:aprender_haciendo_app/src/screens/eventos.dart';
 import 'package:aprender_haciendo_app/src/screens/historial_compras.dart';
+import 'package:aprender_haciendo_app/src/screens/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/src/screens/tienda.dart';
 import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +23,6 @@ final TextStyle menuStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
  
 class _IndexState extends State<Index> {
-
   List<ScreenHiddenDrawer> items = new List();
 
   @override
@@ -33,25 +35,51 @@ class _IndexState extends State<Index> {
           colorLineSelected: Colors.white,
         ),
         Tienda()));
-
-
+        
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Historial de compras",
+          name: "Quédate en casa",
           baseStyle: TextStyle( color: Colors.black.withOpacity(0.8),
            fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        Historial_compras()));
+        QuedateEnCasa()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Contacto",
-          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8), 
-          fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          name: "Academia",
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8),
+           fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        Contacto()));
+        Academia()));
+
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Eventos",
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8),
+           fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white,
+        ),
+        Eventos()));
+
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Cursos",
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8),
+           fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white,
+        ),
+        Cursos()));
+
+    items.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Historial compras",
+          baseStyle: TextStyle( color: Colors.black.withOpacity(0.8),
+           fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          colorLineSelected: Colors.white,
+        ),
+        HistorialCompras()));
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
@@ -62,36 +90,19 @@ class _IndexState extends State<Index> {
           onTap: (){Authentication().singOut();
                     signOutGoogle(); 
                     Navigator.pop(context);
-                },
-                
-
-
-          /* IconButton(
-              icon: Icon(Icons.power_settings_new),
-              onPressed: () {
-                Authentication().singOut();
-                  signOutGoogle(); 
-                  Navigator.pop(context);
-              }
-          ), */
-          
-        ),
-        
-        Contacto()));
-
+                },         
+        ),       
+        null));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
-
     ScreenUtil.instance = ScreenUtil(
       width: 1125,
       height: 2436,
       allowFontScaling: true
       )..init(context);
-
       return HiddenDrawerMenu(
         backgroundColorMenu: Colors.lightBlue,
         backgroundColorAppBar: Colors.white,
@@ -118,23 +129,10 @@ class _IndexState extends State<Index> {
           SizedBox(
             width: 15,
           )
-        ],
-          
-          /*  Image.asset(
-                    "icons/icon_cart.png",
-                    width: ScreenUtil.getInstance().setWidth(130),
-                    height: ScreenUtil.getInstance().setHeight(130),
-          )
-            */
-                        
+        ],                        
           //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-          //    whithAutoTittleName: true,
-          //    styleAutoTittleName: TextStyle(color: Colors.red),
-          //    actionsAppBar: <Widget>[],
           //    backgroundColorContent: Colors.blue,
-          //    elevationAppBar: 4.0,
           //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
-          //    enableShadowItensMenu: true,
           //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       );
       

@@ -13,13 +13,10 @@ class Login extends StatelessWidget {
   TextEditingController emailCtrl = new TextEditingController();
   TextEditingController passwordCtrl = new TextEditingController();
   
-
-
   _fieldFocusChange(BuildContext context, FocusNode currentFocus,FocusNode nextFocus) {
       currentFocus.unfocus();
       FocusScope.of(context).requestFocus(nextFocus);  
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +45,7 @@ class Login extends StatelessWidget {
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(30),
             ),
-            Text("Usuario",
+            Text("Correo Electrónico",
                 style: TextStyle(
                     fontFamily: "Poppins-Medium",
                     fontSize: ScreenUtil.getInstance().setSp(30))),
@@ -94,7 +91,7 @@ class Login extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   child: Container(
-                    width: ScreenUtil.getInstance().setWidth(580),
+                    width: ScreenUtil.getInstance().setWidth(560),
                     height: ScreenUtil.getInstance().setHeight(100),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [
@@ -140,9 +137,7 @@ class Login extends StatelessWidget {
             ),
             SizedBox(
               height: ScreenUtil.getInstance().setHeight(35),
-            ),
-            
-            
+            ),           
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               
@@ -156,13 +151,10 @@ class Login extends StatelessWidget {
                       color: Colors.blue,
                       fontFamily: "Poppins-Medium",
                       fontSize: ScreenUtil.getInstance().setSp(28)
-                      ),
-                      
-                )
-                
-                ),
+                      ),                      
+                    )                
+                  ),
                 ],
-
             )
           ],
         ),

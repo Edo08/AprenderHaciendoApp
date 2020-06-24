@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HistorialCompras extends StatelessWidget {
+class Eventos extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
       body: Center(
-        child: Text('Historial de compras'),
+        child: Text('Eventos'),
         ),
     );
   }

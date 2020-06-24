@@ -39,29 +39,7 @@ class _TiendaState extends State<Tienda> {
                 left: ScreenUtil().setWidth(50),
                 right: ScreenUtil().setWidth(50)
               ),
-              /* child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  InkWell(
-                        onTap: () {
-                           
-                        },
-                        child: Image.asset(
-                        "icons/icon_menu.png",
-                        width: ScreenUtil.getInstance().setWidth(110),
-                        height: ScreenUtil.getInstance().setHeight(110),
-                      )   
-                  ),
-                  InkWell(
-                        onTap: () {},
-                        child: Image.asset(
-                        "icons/icon_cart.png",
-                        width: ScreenUtil.getInstance().setWidth(130),
-                        height: ScreenUtil.getInstance().setHeight(130),
-                      )   
-                  )
-                ],
-              ), */
+
             ),
             SizedBox(
               height: 22,
@@ -115,7 +93,7 @@ class _TiendaState extends State<Tienda> {
           ), 
           SizedBox(
               height: 20,
-            ),                   
+            ),                              
           SizedBox(            
             height: ScreenUtil().setHeight(1050),
             child: ListView.builder(
@@ -140,6 +118,8 @@ class _TiendaState extends State<Tienda> {
         ),
       ),
     ); 
+
+    
   }
 }
 
