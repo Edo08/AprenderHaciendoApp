@@ -5,6 +5,7 @@ import 'package:aprender_haciendo_app/src/screens/historial_compras.dart';
 import 'package:aprender_haciendo_app/src/screens/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/src/screens/tienda.dart';
 import 'package:aprender_haciendo_app/src/services/authentication.dart';
+import 'package:aprender_haciendo_app/src/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
@@ -119,15 +120,23 @@ class _IndexState extends State<Index> {
         (Image.asset("icons/icon_menu.png",
                   width: ScreenUtil.getInstance().setWidth(110),
                   height: ScreenUtil.getInstance().setHeight(110)
-          )
+          )        
         ),
         actionsAppBar: <Widget>[
           IconButton(icon: Image.asset("icons/icon_cart.png", 
           width: ScreenUtil.getInstance().setWidth(130),
           height: ScreenUtil.getInstance().setHeight(130)), 
           onPressed: null),
+          ClipOval(
+            clipper: ProfileClipper(),
+            child: Image.asset("images/lego_M.jpg",
+            width: ScreenUtil().setWidth(160),
+            height: ScreenUtil().setHeight(160),
+            fit: BoxFit.fill,),
+          ),
+          
           SizedBox(
-            width: 15,
+            width: 10,
           )
         ],                        
           //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),

@@ -20,6 +20,8 @@ dependencies:
   google_sign_in: ^4.4.4
   http: ^0.12.1
   hidden_drawer_menu: ^1.1.4
+  carousel_slider: ^2.2.1
+  # flutter_launch: ^0.2.0
 
   
 
@@ -37,6 +39,9 @@ flutter:
     - images/45025_Coding.png
     - images/wedo.png
     - images/steamP.png
+    - images/lego_M.png
+    - images/lego_M.jpg
+    - images/breakdance_spike.png
 
   fonts:
     - family: CustomIcons

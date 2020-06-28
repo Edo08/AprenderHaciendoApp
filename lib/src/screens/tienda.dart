@@ -3,7 +3,7 @@ import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+// import 'package:flutter_launch/flutter_launch.dart';
  
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -14,8 +14,16 @@ class Tienda extends StatefulWidget {
  
 final TextStyle searchBarStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
- 
+final TextStyle newProductStyle =
+    TextStyle(fontSize: 24, fontFamily: "Poppins-Bold", color: Colors.white);
+final TextStyle nameProductStyle =
+    TextStyle(fontSize: 20, fontFamily: "Poppins-Medium", color: Colors.white);
+
 class _TiendaState extends State<Tienda> {
+
+  /* void whatsAppOpen() async {
+    await FlutterLaunch.launchWathsApp(phone: "+50684438017", message: null);
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +37,20 @@ class _TiendaState extends State<Tienda> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
-      body: SingleChildScrollView(
+      body:      
+      SingleChildScrollView(    
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: <Widget>[           
             Padding(
               padding: EdgeInsets.only(
                 top: ScreenUtil().setHeight(0),
                 left: ScreenUtil().setWidth(50),
                 right: ScreenUtil().setWidth(50)
               ),
-
             ),
             SizedBox(
-              height: 22,
+              height: 10,
             ),
               Padding(
               padding: EdgeInsets.only(left: 15),
@@ -54,7 +62,7 @@ class _TiendaState extends State<Tienda> {
                 fontWeight: FontWeight.w700)),
             ),
             SizedBox(
-              height: 22,
+              height: 10,
             ),
             Container(
               width: double.infinity,
@@ -87,12 +95,11 @@ class _TiendaState extends State<Tienda> {
           SizedBox(
               height: 20,
             ),       
-          CategorySelector(
-            
+          CategorySelector(            
             categorias: ["Preescolar", "Primaria", "Secundaria"],           
-          ), 
+          ),
           SizedBox(
-              height: 20,
+              height: 8,
             ),                              
           SizedBox(            
             height: ScreenUtil().setHeight(1050),
@@ -107,19 +114,73 @@ class _TiendaState extends State<Tienda> {
                     left: ScreenUtil().setWidth(30),
                   ),
                   child: ProductCard(
-                    sets: sets,
-                    cardNum: index,
+                    producto: sets,                    
                   ),
                 );
               },
             ),
           ),
-          ],
-        ),
+          GestureDetector(
+            child: Container(
+              height: ScreenUtil().setHeight(425),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setWidth(60),
+                      vertical: ScreenUtil().setHeight(30)
+                    ),
+                    padding: EdgeInsets.only(
+                      top: ScreenUtil().setHeight(60),
+                      left: ScreenUtil().setWidth(50),
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        Color(0xFFf29c1f),
+                        Color(0xFFf0c419),
+                      ],),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Nuevo producto",
+                          style: newProductStyle,
+                        ),
+                        Text(
+                          "Spike™ Prime",
+                          style: nameProductStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: ScreenUtil().setHeight(-75),
+                    right: ScreenUtil().setWidth(-50),
+                    child: Image.asset(
+                      "images/breakdance_spike.png",
+                      width: ScreenUtil().setWidth(580),
+                      height: ScreenUtil().setHeight(550),
+                    ),
+                    )
+                ],
+              ),
+            ),
+          ),
+        ],
+        ),        
       ),
-    ); 
-
-    
+      floatingActionButton:FloatingActionButton(
+        onPressed: () {
+          // whatsAppOpen();
+        },
+        child: Icon(Icons.phone),
+        backgroundColor: Colors.green,
+      )
+    );     
   }
 }
 

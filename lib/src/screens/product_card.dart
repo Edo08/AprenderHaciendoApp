@@ -1,3 +1,5 @@
+
+import 'package:aprender_haciendo_app/src/screens/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,25 +23,28 @@ final TextStyle productsubTitleStyle =
     TextStyle(fontFamily: "Poppins-Medium");
  
 class ProductCard extends StatelessWidget {
-  final Sets sets;
-  final int cardNum;
-  ProductCard({this.sets, this.cardNum});
+  final Sets producto; 
+  final ValueChanged<Sets> onSelected;
+  ProductCard({Key key, this.producto, this.onSelected}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       width: ScreenUtil().setWidth(542),
       child: Stack(
         fit: StackFit.expand,
-        children: <Widget>[
+        children: <Widget>[        
         Align(
             alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: EdgeInsets.only(
                   left: ScreenUtil().setHeight(50),
-                  bottom: ScreenUtil().setHeight(250)
+                  bottom: ScreenUtil().setHeight(140)
                 ),
-                child: Container(
-                  height: ScreenUtil().setWidth(620),
+                child: new InkWell(               
+                child: Container(                 
+                  height: ScreenUtil().setWidth(730),
                   width: ScreenUtil().setHeight(990),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -57,55 +62,73 @@ class ProductCard extends StatelessWidget {
                                 ],
                                 borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Stack(
-                      children: <Widget>[
-                        /* Positioned(
-                          left: ScreenUtil().setWidth(40),
-                          top: ScreenUtil().setHeight(50),
-                          child: Text(
-                            "0${cardNum+1}",
-                            style: productCardNumStyle,
-                          ),
-                        ), */
+                    child: Stack(                     
+                      children: <Widget>[                        
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
                             padding: EdgeInsets.only(
-                              left: ScreenUtil().setWidth(45),
-                              bottom: ScreenUtil().setHeight(45)
+                              left: ScreenUtil().setWidth(55),
+                              bottom: ScreenUtil().setHeight(65)
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
+                              children: <Widget>[                               
                                 Text(
-                                   "${sets.codigo}",
+                                   "${producto.codigo}",
                                    style: codigoStyle,
                                  ),
                                  Text(
-                                   sets.nombre,
-                                   style: nombreProductoStyle,
+                                   producto.nombre,
+                                   style: nombreProductoStyle,                                  
                                  ),                                
                                 Text(
-                                   "\₡${sets.precio}",
+                                   "\₡${producto.precio}",
                                    style: precioStyle,
                                  ),
+                                 SizedBox(
+                                   height: ScreenUtil().setHeight(25),
+                                 ),
+                                 GestureDetector(
+                                 child: Container(
+                                   width: ScreenUtil().setWidth(75),
+                                   height: ScreenUtil().setHeight(75),
+                                   decoration: BoxDecoration(
+                                     color: Colors.white,
+                                     borderRadius: BorderRadius.circular(8)
+                                   ),
+                                   child: Center(
+                                     child: Icon(
+                                       Icons.add,size: 18,
+                                       color: Colors.lightBlue,          
+                                     ),
+                                   ),
+                                 ),
+                                 onTap: (){
+                                   print("Agregar");
+                                 },
+                                ),
                               ],
                             ),
-                          ),)
+                          ),
+                        ),                         
                       ],
                     ),
-                  ),
+                  ), 
+                  onTap: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ProductDetail()));},
+                ),
                 ),
               ),
               Positioned(
-              top: ScreenUtil().setHeight(10),
-              left: ScreenUtil().setWidth(50),
+              top: ScreenUtil().setHeight(-15),
+              left: ScreenUtil().setWidth(60),
+
               child: Image.asset(
-                sets.image,
-                width: ScreenUtil().setWidth(600),
-                height: ScreenUtil().setHeight(530),
-              ),
+                producto.imagenCard,
+                width: ScreenUtil().setWidth(570),
+                height: ScreenUtil().setHeight(500),
+              ), 
             ) 
             ],
         ),
