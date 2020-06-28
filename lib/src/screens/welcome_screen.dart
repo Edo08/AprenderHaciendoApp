@@ -5,6 +5,7 @@ import 'index.dart';
 import 'login.dart';
 
 class WelcomeScreen extends StatefulWidget {
+
   static const String routeName = '/welcomeScreen';
   @override
   _WelcomeScreenState createState() => new _WelcomeScreenState();
