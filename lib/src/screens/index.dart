@@ -109,12 +109,7 @@ class _IndexState extends State<Index> {
       allowFontScaling: true
       
       )..init(context);
-<<<<<<< HEAD
       return HiddenDrawerMenu(        
-=======
-      return HiddenDrawerMenu(
-        
->>>>>>> ac801784d7050daadd2d101e73b4061514662264
         backgroundColorMenu: Colors.lightBlue,
         backgroundColorAppBar: Colors.white,
         elevationAppBar: 0.0,       
@@ -148,17 +143,9 @@ class _IndexState extends State<Index> {
           ),
           
           SizedBox(
-<<<<<<< HEAD
             width: 10,
           )
         ],                        
-=======
-            width: 15,
-          ),
-        ],
-        
-                                
->>>>>>> cbd9592... Version 1.23
           //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
           //    backgroundColorContent: Colors.blue,
           //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
@@ -169,7 +156,7 @@ class _IndexState extends State<Index> {
 
   
   makeProfileAvatar() {
-    child: Column(
+    return Column(
       children: <Widget>[
         // SizedBox(height: 10.0),
         CircleAvatar(

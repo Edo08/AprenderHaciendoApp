@@ -165,9 +165,7 @@ class _LoginFormState extends State<LoginForm>
                         ),
                       ),
                     ),
-<<<<<<< HEAD
-                  ),                  
-                )
+                  ),                                 
               ],
             ),
             SizedBox(
@@ -189,9 +187,6 @@ class _LoginFormState extends State<LoginForm>
                       ),                      
                     )                
                   ),
-=======
-                  )
->>>>>>> cbd9592... Version 1.23
                 ],
               ),
               SizedBox(
