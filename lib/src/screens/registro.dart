@@ -35,6 +35,7 @@ class _RegistroState extends State<Registro> {
   final FocusNode _emailFocus = FocusNode();  
   final FocusNode _passFocus = FocusNode();
   final FocusNode _reppassFocus = FocusNode();
+  final FocusNode _none = FocusNode();
   
   static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
@@ -76,7 +77,7 @@ void createRecord() async {
       'nombre': '${nombreCtrl.text}',
       'apellido': '${apellidosCtrl.text}',
       'fechaNacimiento': '$fechaNacimiento',
-      'telefono': '${nombreCtrl.text}',
+      'telefono': '${telCtrl.text}',
       'email': '${emailCtrl.text}',
       'contraseña': '${passwordCtrl.text}'
     }
@@ -158,10 +159,10 @@ void createRecord() async {
                   decoration: new InputDecoration(
                     labelText: 'Apellidos',
                   ),
-                  /* focusNode: _apellidosFocus,
+                  focusNode: _apellidosFocus,
                   onFieldSubmitted: (value){
-                    _fieldFocusChange(context, _apellidosFocus, _nacimientoFocus);
-                  }, */
+                    _fieldFocusChange(context, _apellidosFocus, _none );
+                  }, 
                   keyboardType: TextInputType.text,
                   onChanged: (value){
                     apellidosCtrl = value as TextEditingController;

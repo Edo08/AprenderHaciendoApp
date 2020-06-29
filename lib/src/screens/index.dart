@@ -18,16 +18,18 @@ class Index extends StatefulWidget {
 
   @override
   _IndexState createState() => _IndexState();
+  
 }
  
 final TextStyle menuStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
  
 class _IndexState extends State<Index> {
+  
   List<ScreenHiddenDrawer> items = new List();
-
   @override
   void initState() {
+
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Tienda",
@@ -90,7 +92,7 @@ class _IndexState extends State<Index> {
           colorLineSelected: Colors.white10,
           onTap: (){Authentication().singOut();
                     signOutGoogle(); 
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/welcomeScreen');
                 },         
         ),       
         null));
@@ -99,22 +101,32 @@ class _IndexState extends State<Index> {
 
   @override
   Widget build(BuildContext context) {
+    makeProfileAvatar(); // no funciona, aqui deberia salir el usuario
+    
     ScreenUtil.instance = ScreenUtil(
       width: 1125,
       height: 2436,
       allowFontScaling: true
+      
       )..init(context);
+<<<<<<< HEAD
       return HiddenDrawerMenu(        
+=======
+      return HiddenDrawerMenu(
+        
+>>>>>>> ac801784d7050daadd2d101e73b4061514662264
         backgroundColorMenu: Colors.lightBlue,
         backgroundColorAppBar: Colors.white,
         elevationAppBar: 0.0,       
         screens: items,
+        
         //    typeOpen: TypeOpen.FROM_RIGHT,
         //    enableScaleAnimin: true,
         //    enableCornerAnimin: true,
         slidePercent: 65.0,
         verticalScalePercent: 85.0,
         contentCornerRadius: 40.0,
+        
         iconMenuAppBar:
           // Padding(padding : EdgeInsets.only(left: 50)),
         (Image.asset("icons/icon_menu.png",
@@ -136,14 +148,52 @@ class _IndexState extends State<Index> {
           ),
           
           SizedBox(
+<<<<<<< HEAD
             width: 10,
           )
         ],                        
+=======
+            width: 15,
+          ),
+        ],
+        
+                                
+>>>>>>> cbd9592... Version 1.23
           //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
           //    backgroundColorContent: Colors.blue,
           //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
           //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       );
-      
+    
   }
+
+  
+  makeProfileAvatar() {
+    child: Column(
+      children: <Widget>[
+        // SizedBox(height: 10.0),
+        CircleAvatar(
+          radius: 60.0,
+          backgroundImage: new AssetImage("icons/018-lego.png"),
+        ),
+        SizedBox(height: 20.0),
+        Center(
+          child: new Text("Usuario",
+              style: new TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold)),
+        ),
+        Center(
+          child: new Text("Correo",
+              style: new TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.white70,
+                  fontWeight: FontWeight.normal)),
+        )
+      ],
+    );
+  }
+
+
 }
