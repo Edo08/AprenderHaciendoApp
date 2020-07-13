@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:aprender_haciendo_app/src/widgets/app_error_message.dart';
 
 //ultimo
 
@@ -48,6 +49,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   bool isDateSelected = false;
   DateTime fechaNacimiento; // instance of DateTime
   String birthDateInString;
+  String _errorMessage = "";
+
 
   void setSpinnerStatus(bool status) {
     setState(() {
@@ -106,9 +109,9 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   _registrarse() async {
     if (keyForm.currentState.validate()) {
       try {
-        var newUser = await Authentication()
+        var auth = await Authentication()
             .createUser(email: emailCtrl.text, password: passwordCtrl.text);
-        if (newUser != null) {
+        if (auth.success) {
           Navigator.pushNamed(context, '/index');
           createRecord();
           nombreCtrl.text = "";
@@ -117,6 +120,11 @@ class _RegistroState extends State<Registro> with ValidationMixins {
           telCtrl.text = "";
           emailCtrl.text = "";
           passwordCtrl.text = "";
+        }else{
+          print(auth.errorMessage);
+          setState(() {
+            _errorMessage = auth.errorMessage;
+          });
         }
       } catch (e) {
         print(e);
@@ -125,6 +133,19 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       setState(()=> _autoValidate = true);
     }
   }
+
+  Widget _showErrorMessage() {
+    if (_errorMessage.length > 0 && _errorMessage != null) {
+      return ErrorMessage(errorMessage: _errorMessage);
+    } else {
+      return Container(
+        height: 0.0,
+      );
+    }
+  }
+
+
+
 
   void createRecord() async {
     await databaseReference.collection("users").document().setData({
@@ -199,6 +220,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                             SizedBox(
                               height: ScreenUtil.getInstance().setHeight(20),
                             ),
+                            _showErrorMessage(),
+                            Sized22,
                             _submitButton(),
                             Sized22
                           ],

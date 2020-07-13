@@ -3,6 +3,7 @@ import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:aprender_haciendo_app/src/widgets/app_error_message.dart';
 
 class Login extends StatelessWidget {
   static const String routeName = '/login';
@@ -32,6 +33,7 @@ class _LoginFormState extends State<LoginForm>
   bool showSpinner = false;
   bool _autoValidate = false;
   GlobalKey<FormState> keyForm = new GlobalKey();
+  String _errorMessage = "";
 
   @override
   void initState() {
@@ -64,17 +66,34 @@ class _LoginFormState extends State<LoginForm>
   _login() async {
     if (keyForm.currentState.validate()) {
       try {
-        var user = await Authentication()
+        var auth = await Authentication()
             .loginUser(email: _email, password: _password);
         print('$_email y $_password');
-        if (user != null) {
+        if (auth.success) {
           Navigator.pushNamed(context, '/index');
+          _emailController.text = "";
+          _passwordController.text = "";
+        } else {
+          print(auth.errorMessage);
+          setState(() {
+            _errorMessage = auth.errorMessage;
+          });
         }
       } catch (e) {
         print(e);
       }
     } else {
       setState(() => _autoValidate = true);
+    }
+  }
+
+  Widget _showErrorMessage() {
+    if (_errorMessage.length > 0 && _errorMessage != null) {
+      return ErrorMessage(errorMessage: _errorMessage);
+    } else {
+      return Container(
+        height: 0.0,
+      );
     }
   }
 
@@ -132,7 +151,11 @@ class _LoginFormState extends State<LoginForm>
                               fontFamily: "Poppins-Medium",
                               fontSize: ScreenUtil.getInstance().setSp(30))),
                       _passField(),
-                      SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
+                      SizedBox(
+                        height: ScreenUtil.getInstance().setHeight(30),
+                      ),
+                      _showErrorMessage(),
+                      SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                       _ingresarButton(),
                       SizedBox(
                         height: ScreenUtil.getInstance().setHeight(30),
