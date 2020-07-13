@@ -5,40 +5,12 @@ import 'index.dart';
 import 'login.dart';
 
 class WelcomeScreen extends StatefulWidget {
-
   static const String routeName = '/welcomeScreen';
   @override
   _WelcomeScreenState createState() => new _WelcomeScreenState();
 }
+
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
-  Widget radioButton(bool isSelected) => Container(
-    width: 16.0,
-    height: 16.0,
-    padding: EdgeInsets.all(2.0),
-    decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(width: 2.0, color: Colors.black)),
-    child: isSelected
-        ? Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration:
-      BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-    )
-        : Container(),
-  );
-
-  Widget horizontalLine() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: 16.0),
-    child: Container(
-      width: ScreenUtil.getInstance().setWidth(450),
-      height: 1.0,
-      color: Colors.black26.withOpacity(.2),
-    ),
-  );
-
-
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
@@ -55,7 +27,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(left: 100.0),
-                child: Image.asset("images/wedo2.png", width: ScreenUtil.getInstance().setWidth(390)),
+                child: Image.asset("images/wedo2.png",
+                    width: ScreenUtil.getInstance().setWidth(390)),
               ),
               Expanded(
                 child: Container(),
@@ -67,93 +40,127 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 10.0),
               child: Column(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        "images/LogoAH.png",
-                        width: ScreenUtil.getInstance().setWidth(350),
-                        height: ScreenUtil.getInstance().setHeight(210),
-                      ),
-                    ],
-                  ),
+                  _logo(),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(180),
                   ),
                   Login(),
-
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(50),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      horizontalLine(),
-
-                    ],
-                  ),
+                  _horizontalLine(),
                   SizedBox(
                     height: ScreenUtil.getInstance().setHeight(40),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF28409b),
-                          Color(0xFF28409b),
-                          Color(0xFF28409b),
-                        ],
-                        iconData: CustomIcons.facebook,
-                        onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFFd32d32),
-                          Color(0xFFd32d32),
-                        ],
-                        iconData: CustomIcons.googlePlus,
-                        onPressed: () {
-                          signInWithGoogle().whenComplete(()
-                          {Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context){
-                                return Index();
-                              }
-                            ),
-                          );
-                        }
-                      );
-                    }
-                  ),
-                  ],
-                ),
-                SizedBox(
+                  _redesSociales(),
+                  SizedBox(
                     height: ScreenUtil.getInstance().setHeight(30),
-                ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "¿No tiene cuenta? ",
-                        style: TextStyle(
-                            color: Color(0xFFffffff),
-                            fontFamily: "Poppins-Medium"),
-                      ),
-                      InkWell(
-                        onTap: () {Navigator.pushNamed(context, '/registro');},
-                        child: Text("Regístrese",
-                            style: TextStyle(
-                                color: Color(0xFF28409b),
-                                fontFamily: "Poppins-Bold")),
-                      )
-                    ],
-                  )
+                  ),
+                  _registrarseButton(),
                 ],
               ),
             ),
           )
         ],
       ),
+    );
+  }
+
+  Widget radioButton(bool isSelected) => Container(
+        width: 16.0,
+        height: 16.0,
+        padding: EdgeInsets.all(2.0),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(width: 2.0, color: Colors.black)),
+        child: isSelected
+            ? Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+              )
+            : Container(),
+      );
+
+  Widget _horizontalLine() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Container(
+            width: ScreenUtil.getInstance().setWidth(450),
+            height: 1.0,
+            color: Colors.black26.withOpacity(.2),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _logo() {
+    return Row(
+      children: <Widget>[
+        Image.asset(
+          "images/LogoAH.png",
+          width: ScreenUtil.getInstance().setWidth(350),
+          height: ScreenUtil.getInstance().setHeight(210),
+        ),
+      ],
+    );
+  }
+
+  Widget _redesSociales() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SocialIcon(
+          colors: [
+            Color(0xFF28409b),
+            Color(0xFF28409b),
+            Color(0xFF28409b),
+          ],
+          iconData: CustomIcons.facebook,
+          onPressed: () {},
+        ),
+        SocialIcon(
+            colors: [
+              Color(0xFFd32d32),
+              Color(0xFFd32d32),
+            ],
+            iconData: CustomIcons.googlePlus,
+            onPressed: () {
+              signInWithGoogle().whenComplete(() {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return Index();
+                  }),
+                );
+              });
+            }),
+      ],
+    );
+  }
+
+  Widget _registrarseButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          "¿No tiene cuenta? ",
+          style:
+              TextStyle(color: Color(0xFFffffff), fontFamily: "Poppins-Medium"),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, '/registro');
+          },
+          child: Text("Regístrese",
+              style: TextStyle(
+                  color: Color(0xFF28409b), fontFamily: "Poppins-Bold")),
+        )
+      ],
     );
   }
 }
@@ -185,5 +192,6 @@ class SocialIcon extends StatelessWidget {
 
 class CustomIcons {
   static const IconData facebook = IconData(0xe901, fontFamily: "CustomIcons");
-  static const IconData googlePlus =  IconData(0xe902, fontFamily: "CustomIcons");
+  static const IconData googlePlus =
+      IconData(0xe902, fontFamily: "CustomIcons");
 }
