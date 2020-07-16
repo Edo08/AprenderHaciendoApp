@@ -46,7 +46,7 @@ final TextStyle nameProductStyle =
                 fontWeight: FontWeight.w700)),
             ),
             SizedBox(
-              height: 5,
+              height: 15,
             ),
             Padding(
               padding: EdgeInsets.only(left: 15, right: 15),
@@ -58,7 +58,7 @@ final TextStyle nameProductStyle =
             ),
           ),
            SizedBox(
-              height: 5,
+              height: 25,
             ),
               Padding(
               padding: EdgeInsets.only(left: 15),
@@ -68,6 +68,9 @@ final TextStyle nameProductStyle =
                 fontFamily: "Poppins-Bold",
                 fontSize: 22,
                 fontWeight: FontWeight.w700)),
+            ),
+            SizedBox(
+              height: 15,
             ),
             SizedBox(            
             height: ScreenUtil().setHeight(1050),
