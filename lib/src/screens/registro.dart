@@ -277,12 +277,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _fechaNacimientoField() {
     return TextFormField(
-<<<<<<< HEAD
       style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
-=======
-        autovalidate: _autoValidate,
->>>>>>> 8176075e725bd31d721eadba50784a964bea23ed
         controller: nacimientoCtrl,
         decoration: new InputDecoration(
           labelText: 'Fecha nacimiento',
@@ -342,12 +338,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
-<<<<<<< HEAD
       style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
-=======
-        autovalidate: _autoValidate,
->>>>>>> 8176075e725bd31d721eadba50784a964bea23ed
         controller: emailCtrl,
         decoration: new InputDecoration(
           labelText: 'Correo electrónico',

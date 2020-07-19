@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-
-class Sets {
-=======
  class Sets {
->>>>>>> 8176075e725bd31d721eadba50784a964bea23ed
   int id;
   int codigo;
   String nombre;
@@ -25,9 +20,6 @@ List<Sets> products = [
   Sets(id: 3, codigo: 45544, tag: 3, nombre: "Mindstorms EV3", categoria: "Secundaria", precio: 472695 , imagenCard: "images/mindstorms-ev3.png"),
   Sets(id: 3, codigo: 45024, tag: 4, nombre: "Steam Park", categoria: "Preescolar", precio: 166900 , imagenCard: "images/steamP.png"),
   Sets(id: 3, codigo: 45300, tag: 5, nombre: "WeDo 2.0", categoria: "Primaria", precio: 177265 , imagenCard: "images/wedo.png"),
-<<<<<<< HEAD
-];
-=======
 ]; 
 
 /* class Sets {
@@ -86,5 +78,4 @@ class ItemCount {
  } */
 
 
->>>>>>> 8176075e725bd31d721eadba50784a964bea23ed
 
