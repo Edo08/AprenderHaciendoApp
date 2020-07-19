@@ -285,7 +285,6 @@ class _LoginFormState extends State<LoginForm>
                 onTap: () async {
                   setSpinnerStatus(true);
                   _showDialog();
-                  _email = "";
                   setSpinnerStatus(false);
                 },
                 child: Center(
@@ -311,6 +310,7 @@ class _LoginFormState extends State<LoginForm>
         new GestureDetector(
             onTap: () {
               setState(() => _isVisible = !_isVisible);
+              _emailController.text = "";
             },
             child: new Text(
               "¿Olvidó la contraseña?",
@@ -331,6 +331,7 @@ class _LoginFormState extends State<LoginForm>
             onTap: () {
               setState(() => _isVisible = !_isVisible);
               _emailController.text = "";
+              _passwordController.text = "";
             },
             child: new Text(
               "Iniciar Sesion",
@@ -352,7 +353,7 @@ class _LoginFormState extends State<LoginForm>
         return AlertDialog(
           title: new Text("Recuperar Correo"),
           content: new Text(
-              "Recibira un correo a$_email con el link para cambiar la contraseña"),
+              "Recibira un correo con el link para cambiar la contraseña a $_email"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
@@ -368,9 +369,12 @@ class _LoginFormState extends State<LoginForm>
                   await Authentication().sendPasswordResetEmail(_emailController.text);
                   print('$_email');
                 } catch (e) {
+                  
                   print(e);
                 }
                 Navigator.of(context).pop();
+                _emailController.text = "";
+                _passwordController.text = "";
                 setState(() => _isVisible = !_isVisible);
               },
             ),
