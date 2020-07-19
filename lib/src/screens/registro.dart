@@ -164,8 +164,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       backgroundColor: Color(0xFF4cb2e2),
       resizeToAvoidBottomPadding: true,
       appBar: new AppBar(
-        title: new Text('Registro'),
+        centerTitle: true,
+        title: new Text('Registro', style: TextStyle(fontFamily: "Poppins-Medium",)),
         backgroundColor: Color(0xFF4cb2e2),
+        elevation: 0.0,
       ),
       body: new SingleChildScrollView(
         child: new Container(
@@ -230,6 +232,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _nombreField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
       controller: nombreCtrl,
       decoration: new InputDecoration(
@@ -250,6 +253,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _apellidosField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
       controller: apellidosCtrl,
       decoration: new InputDecoration(
@@ -270,6 +274,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _fechaNacimientoField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
         controller: nacimientoCtrl,
         decoration: new InputDecoration(
@@ -309,10 +314,11 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _telefonoField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
       controller: telCtrl,
       decoration: new InputDecoration(
-        labelText: 'Telefono',
+        labelText: 'Teléfono',
       ),
       focusNode: _telefonoFocus,
       onFieldSubmitted: (value) {
@@ -329,6 +335,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
         controller: emailCtrl,
         decoration: new InputDecoration(
@@ -348,6 +355,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _passField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
       controller: passwordCtrl,
       obscureText: true,
@@ -369,6 +377,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _passconfirmacionField() {
     return TextFormField(
+      style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
       controller: repeatPassCtrl,
       obscureText: true,

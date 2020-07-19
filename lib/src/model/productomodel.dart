@@ -1,3 +1,4 @@
+
 class Sets {
   int id;
   int codigo;
@@ -21,3 +22,4 @@ List<Sets> products = [
   Sets(id: 3, codigo: 45024, tag: 4, nombre: "Steam Park", categoria: "Preescolar", precio: 166900 , imagenCard: "images/steamP.png"),
   Sets(id: 3, codigo: 45300, tag: 5, nombre: "WeDo 2.0", categoria: "Primaria", precio: 177265 , imagenCard: "images/wedo.png"),
 ];
+

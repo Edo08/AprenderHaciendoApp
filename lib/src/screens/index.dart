@@ -3,6 +3,7 @@ import 'package:aprender_haciendo_app/src/screens/cursos.dart';
 import 'package:aprender_haciendo_app/src/screens/eventos.dart';
 import 'package:aprender_haciendo_app/src/screens/historial_compras.dart';
 import 'package:aprender_haciendo_app/src/screens/quedateEnCasa.dart';
+import 'package:aprender_haciendo_app/src/screens/shopping_cart.dart';
 import 'package:aprender_haciendo_app/src/screens/tienda.dart';
 import 'package:aprender_haciendo_app/src/services/authentication.dart';
 import 'package:aprender_haciendo_app/src/widgets/profileClipper.dart';
@@ -140,7 +141,12 @@ class _IndexState extends State<Index> {
             icon: Image.asset("icons/icon_cart.png",
                 width: ScreenUtil.getInstance().setWidth(130),
                 height: ScreenUtil.getInstance().setHeight(130)),
-            onPressed: null),
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ShoppingCart()),
+            );
+            }),
         ClipOval(
           clipper: ProfileClipper(),
           child: Image.asset(

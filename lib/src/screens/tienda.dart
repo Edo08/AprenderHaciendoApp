@@ -1,7 +1,6 @@
 import 'package:aprender_haciendo_app/src/screens/product_card.dart';
 import 'package:aprender_haciendo_app/src/widgets/category_list.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
-import 'package:aprender_haciendo_app/src/widgets/search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:flutter_launch/flutter_launch.dart';
@@ -59,7 +58,7 @@ class _TiendaState extends State<Tienda> {
               SizedBox(
                 height: 10,
               ),
-              SearchBox(),
+              //SearchBox(),
               Categorylist(),
 
               /* Container(
