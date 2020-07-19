@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/src/screens/product_card.dart';
+import 'package:aprender_haciendo_app/src/widgets/product_card.dart';
 import 'package:aprender_haciendo_app/src/widgets/category_list.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter/material.dart';

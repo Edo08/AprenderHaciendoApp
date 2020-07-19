@@ -1,5 +1,5 @@
 
-import 'package:aprender_haciendo_app/src/screens/product_detail.dart';
+import 'package:aprender_haciendo_app/src/widgets/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

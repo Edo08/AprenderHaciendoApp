@@ -51,7 +51,6 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   String birthDateInString;
   String _errorMessage = "";
 
-
   void setSpinnerStatus(bool status) {
     setState(() {
       showSpinner = status;
@@ -106,34 +105,6 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 
-  _registrarse() async {
-    if (keyForm.currentState.validate()) {
-      try {
-        var auth = await Authentication()
-            .createUser(email: emailCtrl.text, password: passwordCtrl.text);
-        if (auth.success) {
-          Navigator.pushNamed(context, '/index');
-          createRecord();
-          nombreCtrl.text = "";
-          apellidosCtrl.text = "";
-          fechaNacimiento = DateTime.now();
-          telCtrl.text = "";
-          emailCtrl.text = "";
-          passwordCtrl.text = "";
-        }else{
-          print(auth.errorMessage);
-          setState(() {
-            _errorMessage = auth.errorMessage;
-          });
-        }
-      } catch (e) {
-        print(e);
-      }
-    }else{
-      setState(()=> _autoValidate = true);
-    }
-  }
-
   Widget _showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return ErrorMessage(errorMessage: _errorMessage);
@@ -144,11 +115,42 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     }
   }
 
+  _registrarse() async {
+    if (keyForm.currentState.validate()) {
+      try {
+        var auth = await Authentication().createUser(email: emailCtrl.text, password: passwordCtrl.text);
+        if (auth.success) {
+          Navigator.pushNamed(context, '/index');
+          createRecord();
+        } else {
+          print(auth.errorMessage);
+          setState(() {
+            _errorMessage = auth.errorMessage;
+          });
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      setState(() => _autoValidate = true);
+    }
+  }
 
-
+  void borrarRegistro() {
+    nombreCtrl.text = "";
+    apellidosCtrl.text = "";
+    fechaNacimiento = DateTime.now();
+    telCtrl.text = "";
+    emailCtrl.text = "";
+    passwordCtrl.text = "";
+    repeatPassCtrl.text = "";
+  }
 
   void createRecord() async {
-    await databaseReference.collection("users").document().setData({
+    var userId = (await FirebaseAuth.instance.currentUser()).uid;
+    var ref = databaseReference.collection("users").document("$userId");
+    await ref.setData({
+      'uid': '$userId',
       'nombre': '${nombreCtrl.text}',
       'apellido': '${apellidosCtrl.text}',
       'fechaNacimiento': '$fechaNacimiento',
@@ -156,6 +158,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       'email': '${emailCtrl.text}',
       'contraseña': '${passwordCtrl.text}'
     });
+    borrarRegistro();
   }
 
   @override
@@ -274,8 +277,12 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _fechaNacimientoField() {
     return TextFormField(
+<<<<<<< HEAD
       style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
+=======
+        autovalidate: _autoValidate,
+>>>>>>> 8176075e725bd31d721eadba50784a964bea23ed
         controller: nacimientoCtrl,
         decoration: new InputDecoration(
           labelText: 'Fecha nacimiento',
@@ -335,8 +342,12 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
+<<<<<<< HEAD
       style: TextStyle(fontFamily: "Poppins-Medium",),
       autovalidate: _autoValidate,
+=======
+        autovalidate: _autoValidate,
+>>>>>>> 8176075e725bd31d721eadba50784a964bea23ed
         controller: emailCtrl,
         decoration: new InputDecoration(
           labelText: 'Correo electrónico',

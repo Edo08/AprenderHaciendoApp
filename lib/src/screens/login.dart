@@ -34,6 +34,7 @@ class _LoginFormState extends State<LoginForm>
   bool _autoValidate = false;
   GlobalKey<FormState> keyForm = new GlobalKey();
   String _errorMessage = "";
+  bool _isVisible = true;
 
   @override
   void initState() {
@@ -121,48 +122,55 @@ class _LoginFormState extends State<LoginForm>
                 offset: Offset(0.0, -10.0),
                 blurRadius: 10.0),
           ]),
+      child: Visibility(
+        visible: _isVisible,
+        child: loginScaffold(),
+        replacement: recuperarPassScaffold(),
+      ),
+    );
+  }
 
-      child: Scaffold(
-        body: ModalProgressHUD(
-          //estos hacen que no se puedan poner ratio en el borde
-          inAsyncCall: showSpinner,
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-                child: Form(
-                  key: keyForm,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(30),
-                      ),
-                      Text("Correo Electrónico",
-                          style: TextStyle(
-                              fontFamily: "Poppins-Medium",
-                              fontSize: ScreenUtil.getInstance().setSp(30))),
-                      _correoField(),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(30),
-                      ),
-                      Text("Contraseña",
-                          style: TextStyle(
-                              fontFamily: "Poppins-Medium",
-                              fontSize: ScreenUtil.getInstance().setSp(30))),
-                      _passField(),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(30),
-                      ),
-                      _showErrorMessage(),
-                      SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
-                      _ingresarButton(),
-                      SizedBox(
-                        height: ScreenUtil.getInstance().setHeight(30),
-                      ),
-                      _olvidoPass(),
-                    ],
-                  ),
+  Widget loginScaffold() {
+    return Scaffold(
+      body: ModalProgressHUD(
+        //estos hacen que no se puedan poner ratio en el borde
+        inAsyncCall: showSpinner,
+        child: SingleChildScrollView(
+          child: Container(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+              child: Form(
+                key: keyForm,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(30),
+                    ),
+                    Text("Correo Electrónico",
+                        style: TextStyle(
+                            fontFamily: "Poppins-Medium",
+                            fontSize: ScreenUtil.getInstance().setSp(30))),
+                    _correoField(),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(30),
+                    ),
+                    Text("Contraseña",
+                        style: TextStyle(
+                            fontFamily: "Poppins-Medium",
+                            fontSize: ScreenUtil.getInstance().setSp(30))),
+                    _passField(),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(30),
+                    ),
+                    _showErrorMessage(),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
+                    _ingresarButton(),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(50),
+                    ),
+                    _olvidoPass(),
+                  ],
                 ),
               ),
             ),
@@ -172,41 +180,42 @@ class _LoginFormState extends State<LoginForm>
     );
   }
 
-  Widget _correoField() {
-    return TextFormField(
-        autovalidate: _autoValidate,
-        controller: _emailController,
-        focusNode: _userFocus,
-        onFieldSubmitted: (value) {
-          _fieldFocusChange(context, _userFocus, _passFocus);
-        },
-        validator: validateEmail,
-        decoration: InputDecoration(
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-        keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.next,
-        onChanged: (value) {
-          _email = value;
-        });
-  }
-
-  Widget _passField() {
-    return TextFormField(
-      autovalidate: _autoValidate,
-      controller: _passwordController,
-      obscureText: true,
-      focusNode: _passFocus,
-      validator: validatePass,
-      onFieldSubmitted: (term) {
-        _passFocus.unfocus();
-        _focusNode.unfocus();
-      },
-      decoration: InputDecoration(
-          hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-      textInputAction: TextInputAction.next,
-      onChanged: (value) {
-        _password = value;
-      },
+  Widget recuperarPassScaffold() {
+    return Scaffold(
+      body: ModalProgressHUD(
+        //estos hacen que no se puedan poner ratio en el borde
+        inAsyncCall: showSpinner,
+        child: SingleChildScrollView(
+          child: Container(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+              child: Form(
+                key: keyForm,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(120),
+                    ),
+                    Text("Ingrese su Correo Electrónico",
+                        style: TextStyle(
+                            fontFamily: "Poppins-Medium",
+                            fontSize: ScreenUtil.getInstance().setSp(30))),
+                    _correoField(),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(30),
+                    ),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
+                    _recuperarButton(),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
+                    _iniciarSesion(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -252,13 +261,56 @@ class _LoginFormState extends State<LoginForm>
     );
   }
 
+  Widget _recuperarButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        InkWell(
+          child: Container(
+            width: ScreenUtil.getInstance().setWidth(560),
+            height: ScreenUtil.getInstance().setHeight(100),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
+                borderRadius: BorderRadius.circular(6.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0xFF6078ea).withOpacity(.3),
+                      offset: Offset(0.0, 8.0),
+                      blurRadius: 8.0)
+                ]),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () async {
+                  setSpinnerStatus(true);
+                  _showDialog();
+                  _email = "";
+                  setSpinnerStatus(false);
+                },
+                child: Center(
+                  child: Text("Recuperar",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins-Bold",
+                          fontSize: 18,
+                          letterSpacing: 1.0)),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _olvidoPass() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, '/index');
+              setState(() => _isVisible = !_isVisible);
             },
             child: new Text(
               "¿Olvidó la contraseña?",
@@ -268,6 +320,101 @@ class _LoginFormState extends State<LoginForm>
                   fontSize: ScreenUtil.getInstance().setSp(28)),
             )),
       ],
+    );
+  }
+
+  Widget _iniciarSesion() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        new GestureDetector(
+            onTap: () {
+              setState(() => _isVisible = !_isVisible);
+              _emailController.text = "";
+            },
+            child: new Text(
+              "Iniciar Sesion",
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontFamily: "Poppins-Medium",
+                  fontSize: ScreenUtil.getInstance().setSp(28)),
+            )),
+      ],
+    );
+  }
+
+  void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Recuperar Correo"),
+          content: new Text(
+              "Recibira un correo a$_email con el link para cambiar la contraseña"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Cancelar"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: new Text("Aceptar"),
+              onPressed: () async {
+                try {
+                  await Authentication().sendPasswordResetEmail(_emailController.text);
+                  print('$_email');
+                } catch (e) {
+                  print(e);
+                }
+                Navigator.of(context).pop();
+                setState(() => _isVisible = !_isVisible);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _correoField() {
+    return TextFormField(
+        autovalidate: _autoValidate,
+        controller: _emailController,
+        focusNode: _userFocus,
+        onFieldSubmitted: (value) {
+          _fieldFocusChange(context, _userFocus, _passFocus);
+        },
+        validator: validateEmail,
+        decoration: InputDecoration(
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+        keyboardType: TextInputType.emailAddress,
+        textInputAction: TextInputAction.next,
+        onChanged: (value) {
+          _email = value;
+        });
+  }
+
+  Widget _passField() {
+    return TextFormField(
+      autovalidate: _autoValidate,
+      controller: _passwordController,
+      obscureText: true,
+      focusNode: _passFocus,
+      validator: validatePass,
+      onFieldSubmitted: (term) {
+        _passFocus.unfocus();
+        _focusNode.unfocus();
+      },
+      decoration: InputDecoration(
+          hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+      textInputAction: TextInputAction.next,
+      onChanged: (value) {
+        _password = value;
+      },
     );
   }
 }

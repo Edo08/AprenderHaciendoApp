@@ -52,6 +52,15 @@ class Authentication {
     return null;
   }
 
+  Future sendPasswordResetEmail(String email) async {
+    try {
+      _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
+
   void _mapErrorMessage(AuthenticationRequest authRequest, String code) {
     switch (code) {
       case 'ERROR_USER_NOT_FOUND':
