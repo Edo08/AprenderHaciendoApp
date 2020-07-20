@@ -297,7 +297,6 @@ class _LoginFormState extends State<LoginForm>
                         secondaryButton: _cancelar, 
                     ),
                   );
-                  //_showDialog();
                   setSpinnerStatus(false);
                 },
                 child: Center(
@@ -357,49 +356,8 @@ class _LoginFormState extends State<LoginForm>
     );
   }
 
-<<<<<<< HEAD
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Recuperar Correo"),
-          content: new Text(
-              "Recibirá un correo con el link para cambiar la contraseña a $_email"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Cancelar"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: new Text("Aceptar"),
-              onPressed: () async {
-                try {
-                  await Authentication().sendPasswordResetEmail(_emailController.text);
-                  print('$_email');
-                } catch (e) {
-                  
-                  print(e);
-                }
-                Navigator.of(context).pop();
-                _emailController.text = "";
-                _passwordController.text = "";
-                setState(() => _isVisible = !_isVisible);
-              },
-            ),
-          ],
-        );
-      },
-    );
-=======
   void _cancelar() {
     Navigator.of(context).pop();
->>>>>>> 3b0dd30c24cd6a5f1dd312eb7855b70f1642b488
   }
 
   void _aceptar() async {
