@@ -4,6 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 class Authentication {
   final _auth = FirebaseAuth.instance;
 
+  Stream<String> get onAuthStateChanged => _auth.onAuthStateChanged.map(
+    (FirebaseUser user) => user?.uid,
+  );
+
+  // Email & Password Sign Up
   Future<AuthenticationRequest> createUser(
       {String email = "", String password = ""}) async {
     AuthenticationRequest authRequest = AuthenticationRequest();
@@ -19,6 +24,17 @@ class Authentication {
     return authRequest;
   }
 
+  // GET UID
+  Future<String> getCurrentUID() async {
+  try {
+      return (await _auth.currentUser()).uid;
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
+  
+  // GET CURRENT USER
   Future<FirebaseUser> getCurrentUser() async {
     try {
       return await _auth.currentUser();
@@ -43,6 +59,7 @@ class Authentication {
     return authRequest;
   }
 
+  // Sign Out
   Future<void> singOut() async {
     try {
       return await _auth.signOut();
@@ -52,6 +69,7 @@ class Authentication {
     return null;
   }
 
+  // Reset Password
   Future sendPasswordResetEmail(String email) async {
     try {
       _auth.sendPasswordResetEmail(email: email);

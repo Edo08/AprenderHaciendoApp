@@ -125,9 +125,9 @@ class ProductCard extends StatelessWidget {
               left: ScreenUtil().setWidth(60),
 
               child: Hero(
-                tag: producto.tag,
+                tag: producto.id,
                 child: Image.asset(
-                producto.imagenCard,
+                producto.imagen,
                 width: ScreenUtil().setWidth(570),
                 height: ScreenUtil().setHeight(500),
               ),),
