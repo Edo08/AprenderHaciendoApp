@@ -58,6 +58,7 @@ class _ShoppingCartState extends State<ShoppingCart>{
               CartItem(),
               CartItem(),
               CartItem(),
+              
               SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

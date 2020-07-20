@@ -1,4 +1,3 @@
-
 import 'package:aprender_haciendo_app/src/widgets/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
@@ -17,42 +16,40 @@ final TextStyle precioStyle =
     TextStyle(fontSize: 16, fontFamily: "Muli", color: Colors.white, fontWeight: FontWeight.w500);
 final TextStyle nombreProductoStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
-final TextStyle productCardNumStyle =
+final TextStyle cardNumStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle =
     TextStyle(fontFamily: "Poppins-Medium");
  
-class ProductCard extends StatelessWidget {
+class HorizontalCard extends StatelessWidget {
   final Sets producto; 
   final ValueChanged<Sets> onSelected;
-  ProductCard({Key key, this.producto, this.onSelected}) : super(key: key);
+  HorizontalCard({Key key, this.producto, this.onSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-      width: ScreenUtil().setWidth(542),
+    return Container(  
+      width: 350,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[        
         Align(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.topCenter,
               child: Padding(
                 padding: EdgeInsets.only(
-                  left: ScreenUtil().setHeight(50),
-                  bottom: ScreenUtil().setHeight(140)
+                  bottom: 5
                 ),
                 child: new InkWell(               
                 child: Container(                 
-                  height: ScreenUtil().setWidth(730),
-                  width: ScreenUtil().setHeight(990),
+                  height: ScreenUtil().setWidth(450),
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
                                 Color(0xFF65a6f4),
                                 Color(0xFF25cfff)
                               ],
-                              begin: Alignment.topRight,
+                              begin: Alignment.topLeft,
                               end: Alignment.bottomLeft),
                               boxShadow: [BoxShadow(
                                 color: Colors.black12,
@@ -65,7 +62,7 @@ class ProductCard extends StatelessWidget {
                     child: Stack(                     
                       children: <Widget>[                        
                         Align(
-                          alignment: Alignment.bottomLeft,
+                          alignment: Alignment.topLeft,
                           child: Padding(
                             padding: EdgeInsets.only(
                               left: ScreenUtil().setWidth(55),
@@ -122,17 +119,16 @@ class ProductCard extends StatelessWidget {
               ),
               Positioned(
               top: ScreenUtil().setHeight(-15),
-              left: ScreenUtil().setWidth(60),
-
+              left: 160,
               child: Hero(
                 tag: producto.codigo,
                 child: Image.asset(
                 producto.imagen,
                 width: ScreenUtil().setWidth(570),
                 height: ScreenUtil().setHeight(500),
-              ),),
+              ),
                 
-            ) 
+            ),) 
             ],
         ),
     );

@@ -48,25 +48,27 @@ class CustomDialog extends StatelessWidget {
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 25.0,
+                    fontFamily: "Poppins-Medium",
+                    color: Color(0xFF65c6f4),
+                    fontSize: 20.0,
                   ),
                 ),
-                SizedBox(height: 24.0),
+                SizedBox(height: 18.0),
                 AutoSizeText(
                   description,
                   maxLines: 4,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: grayColor,
-                    fontSize: 18.0,
+                    fontSize: 16.0,
+                    fontFamily: "Poppins-Medium",
                   ),
                 ),
-                SizedBox(height: 24.0),
+                SizedBox(height: 18.0),
                 RaisedButton(
-                  color: primaryColor,
+                  color: Color(0xFF65c6f4),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
+                      borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: AutoSizeText(
@@ -74,8 +76,8 @@ class CustomDialog extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w200,
                         color: Colors.white,
+                        fontFamily: "Poppins-Medium"
                       ),
                     ),
                   ),
@@ -101,7 +103,7 @@ class CustomDialog extends StatelessWidget {
           maxLines: 1,
           style: TextStyle(
             fontSize: 18,
-            color: primaryColor,
+            color: Color(0xFF65c6f4),
             fontWeight: FontWeight.w400,
           ),
         ),

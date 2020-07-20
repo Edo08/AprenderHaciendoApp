@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/src/model/productomodel.dart';
-import 'package:aprender_haciendo_app/src/widgets/product_card.dart';
+import 'package:aprender_haciendo_app/src/widgets/horizontal_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -84,7 +84,7 @@ final TextStyle nameProductStyle =
                   padding: EdgeInsets.only(
                     left: ScreenUtil().setWidth(30),
                   ),
-                  child: ProductCard(
+                  child: HorizontalCard(
                     producto: sets,                    
                   ),
                 );

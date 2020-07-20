@@ -288,13 +288,14 @@ class _LoginFormState extends State<LoginForm>
                   showDialog(
                     context: context,
                     builder: (BuildContext context) => CustomDialog(
-                        title: "Recuperar Correo",
+                        title: "Recuperación de contraseña",
                         description:
-                            "Recibira un correo con el link para cambiar la contraseña a ${_emailController.text}",
+                            "Recibirá un correo con el link para cambiar la contraseña a ${_emailController.text}",
                         primaryButtonText: "Aceptar",
                         primaryButton: _aceptar,
                         secondaryButtonText: "Cancelar",
-                        secondaryButton: _cancelar, 
+                        secondaryButton: _cancelar,
+                        
                     ),
                   );
                   setSpinnerStatus(false);
