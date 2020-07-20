@@ -197,7 +197,7 @@ class _LoginFormState extends State<LoginForm>
                     SizedBox(
                       height: ScreenUtil.getInstance().setHeight(120),
                     ),
-                    Text("Ingrese su Correo Electrónico",
+                    Text("Ingrese su correo electrónico",
                         style: TextStyle(
                             fontFamily: "Poppins-Medium",
                             fontSize: ScreenUtil.getInstance().setSp(30))),
@@ -288,7 +288,7 @@ class _LoginFormState extends State<LoginForm>
                   setSpinnerStatus(false);
                 },
                 child: Center(
-                  child: Text("Recuperar",
+                  child: Text("RECUPERAR",
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Poppins-Bold",
@@ -334,7 +334,7 @@ class _LoginFormState extends State<LoginForm>
               _passwordController.text = "";
             },
             child: new Text(
-              "Iniciar Sesion",
+              "Iniciar sesión",
               style: TextStyle(
                   color: Colors.blue,
                   fontFamily: "Poppins-Medium",
@@ -353,7 +353,7 @@ class _LoginFormState extends State<LoginForm>
         return AlertDialog(
           title: new Text("Recuperar Correo"),
           content: new Text(
-              "Recibira un correo con el link para cambiar la contraseña a $_email"),
+              "Recibirá un correo con el link para cambiar la contraseña a $_email"),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
             new FlatButton(
