@@ -1,5 +1,6 @@
 import 'package:aprender_haciendo_app/src/mixins/validation_mixins.dart';
 import 'package:aprender_haciendo_app/src/services/authentication.dart';
+import 'package:aprender_haciendo_app/src/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -284,7 +285,19 @@ class _LoginFormState extends State<LoginForm>
               child: InkWell(
                 onTap: () async {
                   setSpinnerStatus(true);
-                  _showDialog();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => CustomDialog(
+                        title: "Recuperar Correo",
+                        description:
+                            "Recibira un correo con el link para cambiar la contraseña a ${_emailController.text}",
+                        primaryButtonText: "Aceptar",
+                        primaryButton: _aceptar,
+                        secondaryButtonText: "Cancelar",
+                        secondaryButton: _cancelar, 
+                    ),
+                  );
+                  //_showDialog();
                   setSpinnerStatus(false);
                 },
                 child: Center(
@@ -344,45 +357,24 @@ class _LoginFormState extends State<LoginForm>
     );
   }
 
-  void _showDialog() {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return AlertDialog(
-          title: new Text("Recuperar Correo"),
-          content: new Text(
-              "Recibira un correo con el link para cambiar la contraseña a $_email"),
-          actions: <Widget>[
-            // usually buttons at the bottom of the dialog
-            new FlatButton(
-              child: new Text("Cancelar"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            FlatButton(
-              child: new Text("Aceptar"),
-              onPressed: () async {
-                try {
-                  await Authentication().sendPasswordResetEmail(_emailController.text);
-                  print('$_email');
-                } catch (e) {
-                  
-                  print(e);
-                }
-                Navigator.of(context).pop();
-                _emailController.text = "";
-                _passwordController.text = "";
-                setState(() => _isVisible = !_isVisible);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  void _cancelar() {
+    Navigator.of(context).pop();
   }
+
+  void _aceptar() async {
+    try {
+      await Authentication()
+          .sendPasswordResetEmail(_emailController.text);
+      print('$_email');
+    } catch (e) {
+      print(e);
+    }
+    Navigator.of(context).pop();
+    _emailController.text = "";
+    _passwordController.text = "";
+    setState(() => _isVisible = !_isVisible);
+  }
+
 
   Widget _correoField() {
     return TextFormField(
