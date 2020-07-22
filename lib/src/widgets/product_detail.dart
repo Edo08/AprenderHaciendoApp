@@ -2,6 +2,7 @@
 // import 'package:carousel_slider/carousel_options.dart';
 
 import 'package:flutter/material.dart';
+//import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 
 
 /* final List<String> imgList = [
