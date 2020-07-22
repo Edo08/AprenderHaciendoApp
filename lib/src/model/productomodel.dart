@@ -4,6 +4,7 @@ class Sets {
   String nombre;
   String categoria;
   String imagen;
+  String imagen2;
   double precio;
   int cantPiezas;
   bool isSelected;
@@ -55,14 +56,14 @@ List<Sets> products = [
       precio: 472695,
       imagen: "images/mindstorms-ev3.png"),
   Sets(
-      id: 3,
+      id: 4,
       codigo: 45024,
       nombre: "Steam Park",
       categoria: "Preescolar",
       precio: 166900,
       imagen: "images/steamP.png"),
   Sets(
-      id: 3,
+      id: 5,
       codigo: 45300,
       nombre: "WeDo 2.0",
       categoria: "Primaria",

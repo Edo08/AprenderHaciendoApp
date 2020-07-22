@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
                                    style: nombreProductoStyle,                                  
                                  ),                                
                                 Text(
-                                   "\₡${producto.precio}",
+                                   "\₡${(producto.precio).toStringAsFixed(0)}",
                                    style: precioStyle,
                                  ),
                                  SizedBox(
