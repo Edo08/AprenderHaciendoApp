@@ -1,19 +1,19 @@
-class Academys {
+class Cursos{
   int id;
   String nombre;
   String imagen;
   double precio;
   String modalidad;
-  String horario;
+  String rangoEdad;
   bool isSelected;
 
-  Academys(
+  Cursos(
       {this.id,
       this.nombre,
       this.precio,
       this.imagen,
       this.modalidad,
-      this.horario});
+      this.rangoEdad});
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -21,36 +21,39 @@ class Academys {
         'precio': precio,
         'modalidad': modalidad,
         'imagen': imagen,
-        'horario' : horario,
+        'rangoEdad' : rangoEdad,
         'isSelect': isSelected
       };
 }
 
-List<Academys> certificaciones = [
-  Academys(
+List<Cursos> cursos = [
+  Cursos(
       id: 1,
       nombre: "Spike Prime",
       precio: 359340,
-      imagen: "images/legoAcademy.png",
-      modalidad: "Online"),
-  Academys(
+      imagen: "images/lego-spike.png",
+      modalidad: "Online",
+      rangoEdad: "9 años en adelante"),
+  Cursos(
       id: 2,
-      nombre: "Preescolar",
+      nombre: "Coding Express",
       precio: 244420,
-      imagen: "images/legoAcademy.png",
+      imagen: "images/45025_Coding.png",
       modalidad: "Online"),
-  Academys(
+  Cursos(
       id: 3,
       nombre: "Mindstorms EV3",
       precio: 472695,
-      imagen: "images/legoAcademy.png",
-      modalidad: "Online"),
+      imagen: "images/mindstorms-ev3.png",
+      modalidad: "Online",
+      rangoEdad: "12 años en adelante"),
 
-  Academys(
+  Cursos(
       id: 5,
       nombre: "WeDo 2.0",
       precio: 177265,
-      imagen: "images/legoAcademy.png",
-      modalidad: "Online"),
+      imagen: "images/wedo.png",
+      modalidad: "Online",
+      rangoEdad: "6 a 8 años"),
       
 ];

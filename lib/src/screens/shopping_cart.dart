@@ -58,6 +58,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     fontFamily: "Poppins-Bold",
                     fontSize: 26,
                     fontWeight: FontWeight.w700)),
+            Container(
+
+            ),
             CartItem(),
             CartItem(),
             CartItem(),
