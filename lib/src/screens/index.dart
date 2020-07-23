@@ -137,7 +137,23 @@ class _IndexState extends State<Index> {
               width: ScreenUtil.getInstance().setWidth(110),
               height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
-        ClipOval(
+        IconButton(
+          icon: Image.asset("icons/icon_cart.png",
+              width: ScreenUtil.getInstance().setWidth(130),
+              height: ScreenUtil.getInstance().setHeight(130)),
+          onPressed: (){
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ShoppingCart()),
+          );
+          }),
+        SizedBox(
+          width: 10,
+        )
+      ],
+      //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+      //    backgroundColorContent: Colors.blue,
+          tittleAppBar: Center(child: ClipOval(
           clipper: ProfileClipper(),
           child: Image.asset(
             "images/lego_M.jpg",
@@ -145,24 +161,7 @@ class _IndexState extends State<Index> {
             height: ScreenUtil().setHeight(160),
             fit: BoxFit.fill,
           ),
-        ),
-          IconButton(
-            icon: Image.asset("icons/icon_cart.png",
-                width: ScreenUtil.getInstance().setWidth(130),
-                height: ScreenUtil.getInstance().setHeight(130)),
-            onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ShoppingCart()),
-            );
-            }),
-        SizedBox(
-          width: 10,
-        )
-      ],
-      //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-      //    backgroundColorContent: Colors.blue,
-      //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
+        ),),
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }
