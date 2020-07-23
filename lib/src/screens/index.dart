@@ -137,16 +137,6 @@ class _IndexState extends State<Index> {
               width: ScreenUtil.getInstance().setWidth(110),
               height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
-        IconButton(
-            icon: Image.asset("icons/icon_cart.png",
-                width: ScreenUtil.getInstance().setWidth(130),
-                height: ScreenUtil.getInstance().setHeight(130)),
-            onPressed: (){
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ShoppingCart()),
-            );
-            }),
         ClipOval(
           clipper: ProfileClipper(),
           child: Image.asset(
@@ -156,6 +146,16 @@ class _IndexState extends State<Index> {
             fit: BoxFit.fill,
           ),
         ),
+          IconButton(
+            icon: Image.asset("icons/icon_cart.png",
+                width: ScreenUtil.getInstance().setWidth(130),
+                height: ScreenUtil.getInstance().setHeight(130)),
+            onPressed: (){
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ShoppingCart()),
+            );
+            }),
         SizedBox(
           width: 10,
         )

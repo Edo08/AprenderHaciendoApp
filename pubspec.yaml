@@ -45,6 +45,9 @@ flutter:
     - images/lego_M.png
     - images/lego_M.jpg
     - images/breakdance_spike.png
+    - images/legoAcademy.png
+    - images/firstlego.png
+    - images/WRO.png
 
   fonts:
     - family: CustomIcons

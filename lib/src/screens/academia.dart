@@ -1,48 +1,17 @@
-import 'package:aprender_haciendo_app/src/services/productosApi.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:aprender_haciendo_app/src/widgets/bodyAcademia.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Academia extends StatefulWidget {
-  @override
-  _AcademiaState createState() => _AcademiaState();
-}
-
-class _AcademiaState extends State<Academia> {
+class Academia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomPadding: true,
-      body: ListPage(),
-      /* SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(0),
-                    left: ScreenUtil().setWidth(50),
-                    right: ScreenUtil().setWidth(50)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text("LEGO® Education Academy Training",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "Poppins-Bold",
-                        fontSize: 26,
-                        fontWeight: FontWeight.w700)),
-              ),
-            ]))); */
+      body: BodyAcademia(),
     );
   }
 }
-
-class ListPage extends StatefulWidget {
+/* class ListPage extends StatefulWidget {
   @override
   _ListPageState createState() => _ListPageState();
 }
@@ -122,4 +91,4 @@ class _DetailPageState extends State<DetailPage> {
       ),
     );
   }
-}
+} */

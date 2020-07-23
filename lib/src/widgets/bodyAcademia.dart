@@ -1,10 +1,9 @@
-import 'package:aprender_haciendo_app/src/model/productomodel.dart';
-import 'package:aprender_haciendo_app/src/widgets/horizontal_card.dart';
-import 'package:aprender_haciendo_app/src/widgets/product_detail.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:aprender_haciendo_app/src/model/academymodel.dart';
+import 'package:aprender_haciendo_app/src/widgets/academy_card.dart';
 import 'package:flutter/material.dart';
 
-class BodyStayHome extends StatelessWidget {
+class BodyAcademia extends StatelessWidget {
   
 final TextStyle newProductStyle =
     TextStyle(fontSize: 24, fontFamily: "Poppins-Bold", color: Colors.white);
@@ -21,8 +20,8 @@ final TextStyle nameProductStyle =
                 height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text("Quédate en casa",
+                padding: EdgeInsets.only(left: 15, right: 15),
+                child: Text("Únete a la Comunidad LEGO® Education Academy de Costa Rica",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Bold",
@@ -34,7 +33,7 @@ final TextStyle nameProductStyle =
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Mantener la educación emocionante y atractiva en casa puede ser difícil. Estamos aquí para hacerlo un poco más fácil con algunos recursos para apoyar el proceso de aprendizaje en el hogar.",
+                child: Text("Y abre tus puertas al mundo STEAM con soluciones LEGO® Education.",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Medium",
@@ -46,7 +45,7 @@ final TextStyle nameProductStyle =
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Productos disponibles:",
+                child: Text("Certificaciones disponibles:",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Bold",
@@ -66,14 +65,14 @@ final TextStyle nameProductStyle =
                     )                  ),
                 ),
                 ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) => HorizontalCard(
+                  itemCount: certificaciones.length,
+                  itemBuilder: (context, index) => AcademyCard(
                     itemIndex: index,
-                    producto: products[index],
+                    certificacion: certificaciones[index],
                     press: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
                     },
-                  )),
+                  )), 
               ],
             )
           ),

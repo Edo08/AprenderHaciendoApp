@@ -1,10 +1,9 @@
-import 'package:aprender_haciendo_app/src/model/productomodel.dart';
-import 'package:aprender_haciendo_app/src/widgets/horizontal_card.dart';
-import 'package:aprender_haciendo_app/src/widgets/product_detail.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:aprender_haciendo_app/src/model/eventosmodel.dart';
+import 'package:aprender_haciendo_app/src/widgets/eventosCard.dart';
 import 'package:flutter/material.dart';
 
-class BodyStayHome extends StatelessWidget {
+class BodyEventos extends StatelessWidget {
   
 final TextStyle newProductStyle =
     TextStyle(fontSize: 24, fontFamily: "Poppins-Bold", color: Colors.white);
@@ -21,8 +20,8 @@ final TextStyle nameProductStyle =
                 height: 10,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text("Quédate en casa",
+                padding: EdgeInsets.only(left: 15, right: 15),
+                child: Text("Eventos",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Bold",
@@ -34,7 +33,7 @@ final TextStyle nameProductStyle =
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Mantener la educación emocionante y atractiva en casa puede ser difícil. Estamos aquí para hacerlo un poco más fácil con algunos recursos para apoyar el proceso de aprendizaje en el hogar.",
+                child: Text("Inscríbase y participe en los mejores eventos de robótica a nivel nacional e internacionalmente.",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Medium",
@@ -44,36 +43,28 @@ final TextStyle nameProductStyle =
               SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Productos disponibles:",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "Poppins-Bold",
-                        fontSize: 22,
-                        fontWeight: FontWeight.w200)),
-              ),
+              
           Expanded(
             child: Stack(
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: 70),
                   decoration: BoxDecoration(
-                    color: Color(0xFFffd403),
+                    color: Color(0xFFd10100),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40)
                     )                  ),
                 ),
                 ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) => HorizontalCard(
+                  itemCount: eventos.length,
+                  itemBuilder: (context, index) => EventosCard(
                     itemIndex: index,
-                    producto: products[index],
+                    evento: eventos[index],
                     press: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
                     },
-                  )),
+                  )), 
               ],
             )
           ),
