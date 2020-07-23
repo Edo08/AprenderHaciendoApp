@@ -57,7 +57,7 @@ final TextStyle nameProductStyle =
                 Container(
                   margin: EdgeInsets.only(top: 70),
                   decoration: BoxDecoration(
-                    color: Color(0xFFffd403),
+                    color: Color(0xFFb0cb02),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40)

@@ -159,7 +159,7 @@ class _IndexState extends State<Index> {
             "images/lego_M.jpg",
             width: ScreenUtil().setWidth(160),
             height: ScreenUtil().setHeight(160),
-            fit: BoxFit.fill,
+            fit: BoxFit.fitWidth,
           ),
         ),),
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
