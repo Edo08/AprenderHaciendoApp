@@ -1,9 +1,8 @@
-
-import 'package:aprender_haciendo_app/src/model/cursosmodel.dart';
-import 'package:aprender_haciendo_app/src/widgets/cursos_card.dart';
+import 'package:aprender_haciendo_app/src/model/eventosmodel.dart';
+import 'package:aprender_haciendo_app/src/widgets/historialComprasCard.dart';
 import 'package:flutter/material.dart';
 
-class BodyCursos extends StatelessWidget {
+class BodyHistorialCompras extends StatelessWidget {
   
 final TextStyle newProductStyle =
     TextStyle(fontSize: 24, fontFamily: "Poppins-Bold", color: Colors.white);
@@ -21,58 +20,35 @@ final TextStyle nameProductStyle =
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Cursos de Robótica",
+                child: Text("Historial de compras",
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Bold",
                         fontSize: 26,
                         fontWeight: FontWeight.w700)),
               ),
-              SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Para niños y niñas desde los 3 años en adelante.",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "Poppins-Medium",
-                        fontSize: 17,
-                        fontWeight: FontWeight.w200)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Text("Cursos disponibles:",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "Poppins-Bold",
-                        fontSize: 22,
-                        fontWeight: FontWeight.w200)),
-              ),
+              
           Expanded(
             child: Stack(
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: 70),
                   decoration: BoxDecoration(
-                    color: Color(0xFF38b4e7),
+                    color: Color(0xFF00a7eb),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
                       topRight: Radius.circular(40)
                     )                  ),
                 ),
                 ListView.builder(
-                  itemCount: cursos.length,
-                  itemBuilder: (context, index) => CursosCard(
+                  itemCount: eventos.length,
+                  itemBuilder: (context, index) => HistorialCard(
                     itemIndex: index,
-                    curso: cursos[index],
+                    evento: eventos[index],
                     press: (){
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
                     },
-                  )), 
+                  )),  
               ],
             )
           ),

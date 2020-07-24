@@ -2,6 +2,7 @@ import 'package:aprender_haciendo_app/src/screens/academia.dart';
 import 'package:aprender_haciendo_app/src/screens/cursos.dart';
 import 'package:aprender_haciendo_app/src/screens/eventos.dart';
 import 'package:aprender_haciendo_app/src/screens/historial_compras.dart';
+import 'package:aprender_haciendo_app/src/screens/perfil.dart';
 import 'package:aprender_haciendo_app/src/screens/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/src/screens/shopping_cart.dart';
 import 'package:aprender_haciendo_app/src/screens/tienda.dart';
@@ -153,15 +154,25 @@ class _IndexState extends State<Index> {
       ],
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       //    backgroundColorContent: Colors.blue,
-          tittleAppBar: Center(child: ClipOval(
+          tittleAppBar: GestureDetector(
+            onTap: (){
+              Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Perfil()),
+          );
+            },
+          child: Center(child: ClipOval(
           clipper: ProfileClipper(),
           child: Image.asset(
             "images/lego_M.jpg",
             width: ScreenUtil().setWidth(160),
             height: ScreenUtil().setHeight(160),
-            fit: BoxFit.fill,
+            fit: BoxFit.fitHeight,
           ),
-        ),),
+          ),
+          ),
+          ),
+          
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }

@@ -25,110 +25,111 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(  
-    margin: EdgeInsets.symmetric(vertical: 15.0),              
-    child: Row(               
-      children: <Widget>[
-        Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.lightBlue[200],
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Center(
-          child: Container(
-            width: 110,
-            height: 110,
-            padding: EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-              fit: BoxFit.scaleDown,
-              image: NetworkImage(
-                  "https://www.robotix.es/img/cms/lego-spike-prime-montar-negocio.png",)
-              ),          
-              gradient: LinearGradient(
-                colors: [
-                          Color(0xFF65a6f4),
-                          Color(0xFF25cfff)
+    return SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 15.0),              
+          child: Row(               
+            children: <Widget>[
+              Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.lightBlue[200],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Container(
+                  width: 110,
+                  height: 110,
+                  padding: EdgeInsets.all(4.0),
+                  child:Image.asset(
+                    "images/lego-spike.png",
+                    fit: BoxFit.contain,),
+                  decoration: BoxDecoration(                      
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF65a6f4),
+                        Color(0xFF25cfff)
+                      ],
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft),
+                      boxShadow: [BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0,8),
+                        blurRadius: 8,
+                        ),
                         ],
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft),
-                        boxShadow: [BoxShadow(
-                          color: Colors.black12,
-                          offset: Offset(0,8),
-                          blurRadius: 8,
+                        borderRadius: BorderRadius.circular(20),
+                    ),                  
+                ),
+              ),
+              ),
+              SizedBox(width: 15,),
+              Expanded(
+                child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    width: 160,
+                    child: Text("Spike Prime", style: nameStyle,),
+                  ),
+                  SizedBox(width: 15,),
+                  Row(
+                    children: <Widget>[
+                      GestureDetector(
+                        child:Container(
+                          width: 20.0,
+                          height: 20.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF0074c9),
+                            borderRadius: BorderRadius.circular(4.0),
                           ),
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-              ),                  
-          ),
-        ),
-        ),
-        SizedBox(width: 15,),
-        Expanded(
-          child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              width: 160,
-              child: Text("Spike Prime", style: nameStyle,),
-            ),
-            SizedBox(width: 15,),
-            Row(
-              children: <Widget>[
-                GestureDetector(
-                  child:Container(
-                    width: 20.0,
-                    height: 20.0,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    child: Icon(
-                      Icons.remove,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                  onTap: (){
-                    
-                  },
-                ),                           
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text("1", style: nameStyle,),
-                ),  
-                GestureDetector(
-                  child: Container(
-                    width: 20.0,
-                    height: 20.0,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF65c6f4),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ),
-                  onTap: (){
+                          child: Icon(
+                            Icons.remove,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                        onTap: (){
+                          
+                        },
+                      ),                           
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text("1", style: nameStyle,),
+                      ),  
+                      GestureDetector(
+                        child: Container(
+                          width: 20.0,
+                          height: 20.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF65c6f4),
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                        onTap: (){
 
-                  },
-                ),                                                 
-                Spacer(),
-                Text(
-                  "₡"+"320 630",
-                  style: precioStyle,
-                )
-                ],
-              ),                    
-            ],
+                        },
+                      ),                                                 
+                      Spacer(),
+                      Text(
+                        "₡"+"320 630",
+                        style: precioStyle,
+                      )
+                      ],
+                    ),                    
+                  ],
+                ),
+              )
+            ],             
           ),
-        )
-      ],             
-    ),
-  );
+      ),
+      );
+
 }
 }           
