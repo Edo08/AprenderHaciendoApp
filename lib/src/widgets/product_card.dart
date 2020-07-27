@@ -1,7 +1,7 @@
 
+import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/src/widgets/product_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:aprender_haciendo_app/src/model/productomodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
  
 final TextStyle codigoStyle =
@@ -23,9 +23,9 @@ final TextStyle productsubTitleStyle =
     TextStyle(fontFamily: "Poppins-Medium");
  
 class ProductCard extends StatelessWidget {
-  final Sets producto; 
-  final ValueChanged<Sets> onSelected;
-  ProductCard({Key key, this.producto, this.onSelected}) : super(key: key);
+  final Product product; 
+  final ValueChanged<Product> onSelected;
+  ProductCard({Key key, this.product, this.onSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +76,15 @@ class ProductCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[                               
                                 Text(
-                                   "${producto.codigo}",
+                                   "${product.codigo}",
                                    style: codigoStyle,
                                  ),
                                  Text(
-                                   producto.nombre,
+                                   product.nombre,
                                    style: nombreProductoStyle,                                  
                                  ),                                
                                 Text(
-                                   "\₡${(producto.precio).toStringAsFixed(0)}",
+                                   "\₡${(product.precio).toStringAsFixed(0)}",
                                    style: precioStyle,
                                  ),
                                  SizedBox(
@@ -125,9 +125,9 @@ class ProductCard extends StatelessWidget {
               left: ScreenUtil().setWidth(60),
 
               child: Hero(
-                tag: producto.codigo,
+                tag: product.codigo,
                 child: Image.asset(
-                producto.imagen,
+                product.imagen,
                 width: ScreenUtil().setWidth(570),
                 height: ScreenUtil().setHeight(500),
               ),),

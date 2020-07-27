@@ -7,12 +7,13 @@ import 'package:aprender_haciendo_app/src/screens/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/src/screens/shopping_cart.dart';
 import 'package:aprender_haciendo_app/src/screens/tienda.dart';
 import 'package:aprender_haciendo_app/src/services/authentication.dart';
+import 'package:aprender_haciendo_app/src/widgets/custom_dialog.dart';
 import 'package:aprender_haciendo_app/src/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 
-import '../../sign_in.dart';
+import '../services/sign_in.dart';
 
 class Index extends StatefulWidget {
   static const String routeName = '/index';
@@ -50,7 +51,8 @@ class _IndexState extends State<Index> {
         ),
         QuedateEnCasa()));
 
-    items.add(new ScreenHiddenDrawer(
+    items.add(
+      new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Academia",
           baseStyle: TextStyle(
@@ -59,7 +61,9 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        Academia()));
+        Academia(),
+      ),
+    );
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
@@ -103,9 +107,17 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white10,
           onTap: () {
-            Authentication().singOut();
-            signOutGoogle();
-            Navigator.pushNamed(context, '/welcomeScreen');
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => CustomDialog(
+                title: "Cerrar Sesion",
+                description: "¿Desea cerrar sesion?                          ",
+                primaryButtonText: "Aceptar",
+                primaryButton: _cerrarSesion,
+                secondaryButtonText: "Cancelar",
+                secondaryButton: _cancelar,
+              ),
+            );
           },
         ),
         null));
@@ -139,40 +151,41 @@ class _IndexState extends State<Index> {
               height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
         IconButton(
-          icon: Image.asset("icons/icon_cart.png",
-              width: ScreenUtil.getInstance().setWidth(130),
-              height: ScreenUtil.getInstance().setHeight(130)),
-          onPressed: (){
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ShoppingCart()),
-          );
-          }),
+            icon: Image.asset("icons/icon_cart.png",
+                width: ScreenUtil.getInstance().setWidth(130),
+                height: ScreenUtil.getInstance().setHeight(130)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShoppingCart()),
+              );
+            }),
         SizedBox(
           width: 10,
         )
       ],
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       //    backgroundColorContent: Colors.blue,
-          tittleAppBar: GestureDetector(
-            onTap: (){
-              Navigator.push(
+      tittleAppBar: GestureDetector(
+        onTap: () {
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => Perfil()),
           );
-            },
-          child: Center(child: ClipOval(
-          clipper: ProfileClipper(),
-          child: Image.asset(
-            "images/lego_M.jpg",
-            width: ScreenUtil().setWidth(160),
-            height: ScreenUtil().setHeight(160),
-            fit: BoxFit.fitHeight,
+        },
+        child: Center(
+          child: ClipOval(
+            clipper: ProfileClipper(),
+            child: Image.asset(
+              "images/lego_M.jpg",
+              width: ScreenUtil().setWidth(160),
+              height: ScreenUtil().setHeight(160),
+              fit: BoxFit.fitHeight,
+            ),
           ),
-          ),
-          ),
-          ),
-          
+        ),
+      ),
+
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }
@@ -202,5 +215,19 @@ class _IndexState extends State<Index> {
         )
       ],
     );
+  }
+
+  void _cerrarSesion() async {
+    try {
+      await Authentication().singOut();
+      signOutGoogle();
+      Navigator.pushNamed(context, '/welcomeScreen');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _cancelar() {
+    Navigator.pushNamed(context, '/index');
   }
 }

@@ -14,3 +14,15 @@ class ProductService{
 
 
 }
+  //final _service = FirestoreService.instance;
+
+  /* Stream<List<Product>> products() => _service.collectionStream(
+        path: FirestorePath.products(),
+        builder: (data, documentId) => Product.fromMap(data, documentId),
+      );
+
+  Stream<Product> product(String code) => _service.documentStream(
+        path: FirestorePath.product(code),
+        builder: (data, documentId) => Product.fromMap(data, documentId),
+      );
+*/

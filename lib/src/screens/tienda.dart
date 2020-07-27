@@ -1,9 +1,8 @@
-import 'package:aprender_haciendo_app/src/widgets/product_card.dart';
-import 'package:aprender_haciendo_app/src/widgets/category_list.dart';
-import 'package:aprender_haciendo_app/src/model/productomodel.dart';
+import 'package:aprender_haciendo_app/src/services/productosApi.dart';
+import 'package:aprender_haciendo_app/src/widgets/categoryselector.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_launch/flutter_launch.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -59,9 +58,8 @@ class _TiendaState extends State<Tienda> {
                 height: 10,
               ),
               //SearchBox(),
-              Categorylist(),
-
-              /* Container(
+              //Categorylist(),
+              Container(
                 height: 60.0,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -78,9 +76,13 @@ class _TiendaState extends State<Tienda> {
                     ),
                   ],
                 ),
-              ), */
-             
-              SizedBox(
+              ),
+              Container(
+                height: ScreenUtil().setHeight(1000),
+                child: ListPage(),
+              ),
+
+              /* SizedBox(
                 height: ScreenUtil().setHeight(1050),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -98,7 +100,9 @@ class _TiendaState extends State<Tienda> {
                     );
                   },
                 ),
-              ),
+              ), 
+              */
+
               GestureDetector(
                 child: Container(
                   height: ScreenUtil().setHeight(425),
@@ -160,5 +164,86 @@ class _TiendaState extends State<Tienda> {
           child: Icon(Icons.phone),
           backgroundColor: Colors.green,
         ));
+  }
+}
+
+class ListPage extends StatefulWidget {
+  @override
+  _ListPageState createState() => _ListPageState();
+}
+
+Future _data;
+
+class _ListPageState extends State<ListPage> {
+  navigateToDetail(DocumentSnapshot product) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailPage(
+          product: product,
+        ),
+      ),
+    );
+  }
+  @override
+  void initState() {
+    super.initState();
+    _data = getProductsSnap();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: _data,
+        builder: (_, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: Text("Cargando..."),
+            );
+          } else {
+            return ListView.builder(
+              //scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: ScreenUtil().setWidth(30),
+                  ),
+                  child: ListTile(
+                    title: Text(snapshot.data[index].data["nombre"]),
+                    onTap: () => navigateToDetail(snapshot.data[index]),
+                  ),
+                );
+              },
+            );
+          }
+        },
+     
+    );
+  }
+}
+
+class DetailPage extends StatefulWidget {
+  final DocumentSnapshot product;
+  DetailPage({this.product});
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+class _DetailPageState extends State<DetailPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          //title:widget.product.data["nombre"]
+          ),
+      body: Container(
+        child: Card(
+          child: ListTile(
+            title: Text(widget.product.data["nombre"]),
+            subtitle: Text(widget.product.data["image"]),
+          ),
+        ),
+      ),
+    );
   }
 }

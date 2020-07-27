@@ -36,7 +36,7 @@ class CustomDialog extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black,
                     blurRadius: 10.0,
-                    offset: const Offset(0.0, 10.0),
+                    offset: const Offset(1.0, 10.0),
                   ),
                 ]),
             child: Column(

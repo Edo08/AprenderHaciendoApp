@@ -6,9 +6,12 @@ Future getProducts() async {
   QuerySnapshot qn = await firestore.collection("products").getDocuments();  
   return qn.documents;
 }
-
-
-/* getProducts(ProductProvider productProvider) async {
+Future getProductsSnap() async {
+    QuerySnapshot qn = await firestore.collection("products").getDocuments();
+    return qn.documents;
+  }
+/*
+getProducts(ProductProvider productProvider) async {
   QuerySnapshot snapshot =
       await Firestore.instance.collection('products').getDocuments();
   List<ProductModel> _productList = [];
