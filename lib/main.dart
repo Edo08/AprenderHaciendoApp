@@ -1,9 +1,8 @@
-import 'package:aprender_haciendo_app/src/screens/index.dart';
-import 'package:aprender_haciendo_app/src/screens/login.dart';
+import 'package:aprender_haciendo_app/ui/views/index.dart';
+import 'package:aprender_haciendo_app/ui/views/login.dart';
+import 'package:aprender_haciendo_app/ui/views/registro.dart';
+import 'package:aprender_haciendo_app/ui/views/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:aprender_haciendo_app/src/screens/welcome_screen.dart';
-import 'package:aprender_haciendo_app/src/screens/registro.dart';
-
 
 void main() {
   runApp(
