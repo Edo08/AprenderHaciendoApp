@@ -121,7 +121,7 @@ final TextStyle subTitleStyle =
           ),           
             Positioned(
               top: 110,
-              right: 0,
+              right: 5,
               child: SizedBox(
                 height: 160,
                 width: size.width -230,
