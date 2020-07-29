@@ -1,11 +1,8 @@
-import 'package:aprender_haciendo_app/core/services/providers/categoryProvider.dart';
-import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/index.dart';
 import 'package:aprender_haciendo_app/ui/views/login.dart';
 import 'package:aprender_haciendo_app/ui/views/registro.dart';
 import 'package:aprender_haciendo_app/ui/views/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(

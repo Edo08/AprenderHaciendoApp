@@ -1,13 +1,10 @@
 import 'package:aprender_haciendo_app/core/models/productomodel.dart';
 import 'package:aprender_haciendo_app/core/services/productosApi.dart';
-import 'package:aprender_haciendo_app/core/services/providers/categoryProvider.dart';
-import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
-import 'package:aprender_haciendo_app/ui/widgets/product_card.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';

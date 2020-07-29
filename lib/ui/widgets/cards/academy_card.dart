@@ -17,11 +17,8 @@ final TextStyle nombreProductoStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle =
     TextStyle(fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
-const kDefaultShadow = BoxShadow(
-  offset: Offset(0, 15),
-  blurRadius: 27,
-  color: Colors.black12, // Black color with 12% opacity
-);
+final TextStyle botonStyle =
+    TextStyle(fontSize: 14, fontFamily: "Poppins-Medium", color: Colors.black, fontWeight: FontWeight.w500);
  
 
  class AcademyCard extends StatelessWidget {
@@ -45,12 +42,12 @@ const kDefaultShadow = BoxShadow(
       ),
       height: 160,
       child: InkWell(
-        onTap: press,
+        onTap: () {Navigator.pushNamed(context, '/inscripcion');},
         child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
-            height: 136,
+            height: 145,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
               gradient: LinearGradient(
@@ -86,7 +83,7 @@ const kDefaultShadow = BoxShadow(
                 width: size.width -180,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 35,), 
+                    SizedBox(height: 7,), 
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Text(
@@ -107,6 +104,27 @@ const kDefaultShadow = BoxShadow(
                       "₡"+"${(certificacion.precio).toStringAsFixed(0)}",
                       style: precioStyle,
                       ),
+                    ),
+                     SizedBox(height: 10,),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              height: 30,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [
+                                      Color(0xFFffffff), Color(0xFFffffff)
+                                    ],begin: Alignment.topCenter,
+                                    end: Alignment.bottomRight ),
+                                    borderRadius: BorderRadius.circular(10)),
+                              child: Text("Inscribirse", style: botonStyle,),
+                            )
+                          ],
+                        ), 
                     ),     
                   ],
                 ),
