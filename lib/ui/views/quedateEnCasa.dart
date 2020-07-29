@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/ui/widgets/body_stayHome.dart';
+import 'package:aprender_haciendo_app/ui/widgets/bodies/body_stayHome.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

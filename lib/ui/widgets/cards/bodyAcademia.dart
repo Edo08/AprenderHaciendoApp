@@ -1,6 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/academymodel.dart';
-import 'package:aprender_haciendo_app/ui/widgets/academy_card.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/academy_card.dart';
 import 'package:flutter/material.dart';
 
 class BodyAcademia extends StatelessWidget {

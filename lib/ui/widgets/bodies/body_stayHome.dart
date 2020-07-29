@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/models/productomodel.dart';
-import 'package:aprender_haciendo_app/ui/widgets/horizontal_card.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/horizontal_card.dart';
 import 'package:aprender_haciendo_app/ui/widgets/product_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

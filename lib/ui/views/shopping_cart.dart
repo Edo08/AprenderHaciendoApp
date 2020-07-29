@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/ui/widgets/cartItem.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/cartItem.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle nameStyle = TextStyle(

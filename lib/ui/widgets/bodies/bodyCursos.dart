@@ -1,6 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/cursosmodel.dart';
-import 'package:aprender_haciendo_app/ui/widgets/cursos_card.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/cursos_card.dart';
 import 'package:flutter/material.dart';
 
 class BodyCursos extends StatelessWidget {

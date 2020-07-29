@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/ui/widgets/bodyPerfil.dart';
+import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyPerfil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

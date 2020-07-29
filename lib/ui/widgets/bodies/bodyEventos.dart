@@ -1,6 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/eventosmodel.dart';
-import 'package:aprender_haciendo_app/ui/widgets/eventosCard.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/eventosCard.dart';
 import 'package:flutter/material.dart';
 
 class BodyEventos extends StatelessWidget {
