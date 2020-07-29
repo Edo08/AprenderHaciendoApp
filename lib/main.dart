@@ -9,12 +9,12 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(
+    /* MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
         ChangeNotifierProvider.value(value: ProductProvider.initialize()),
       ],
-    child: MaterialApp(
+    child: */ MaterialApp(
       home: WelcomeScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -28,7 +28,7 @@ void main() {
         Registro.routeName: (BuildContext context) => Registro(),
         Index.routeName: (BuildContext context) => Index()
       }
-    ),
+   // ),
     ),
   );
 } 

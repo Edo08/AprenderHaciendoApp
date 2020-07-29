@@ -1,8 +1,13 @@
+import 'package:aprender_haciendo_app/core/models/productomodel.dart';
 import 'package:aprender_haciendo_app/core/services/productosApi.dart';
+import 'package:aprender_haciendo_app/core/services/providers/categoryProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
+import 'package:aprender_haciendo_app/ui/widgets/product_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -25,6 +30,8 @@ class _TiendaState extends State<Tienda> {
 
   @override
   Widget build(BuildContext context) {
+    //final categoryProvider = Provider.of<CategoryProvider>(context);
+    //final productProvider = Provider.of<ProductProvider>(context);
     ScreenUtil.instance =
         ScreenUtil(width: 1125, height: 2436, allowFontScaling: true)
           ..init(context);
@@ -78,11 +85,6 @@ class _TiendaState extends State<Tienda> {
                 ),
               ),
               Container(
-                height: ScreenUtil().setHeight(1000),
-                child: ListPage(),
-              ),
-
-              /* SizedBox(
                 height: ScreenUtil().setHeight(1050),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -95,13 +97,16 @@ class _TiendaState extends State<Tienda> {
                         left: ScreenUtil().setWidth(30),
                       ),
                       child: ProductCard(
-                        producto: sets,
+                        product : sets,
                       ),
                     );
                   },
                 ),
-              ), 
-              */
+                //child: ListPage(),
+              ),
+
+              
+              
 
               GestureDetector(
                 child: Container(
@@ -185,45 +190,46 @@ class _ListPageState extends State<ListPage> {
       ),
     );
   }
+
   @override
   void initState() {
     super.initState();
     _data = getProducts();
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: _data,
-        builder: (_, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-              ),
-            );
-          } else {
-            return ListView.builder(
-              //scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
-              itemCount: snapshot.data.length,
-              itemBuilder: (_, index) {
-                //Product products = snapshot.data[index];
-                return Padding(
-                  padding: EdgeInsets.only(
-                    left: ScreenUtil().setWidth(30),
-                  ),
-                  //child: Container(child: ProductCard(product: products),
+      future: _data,
+      builder: (_, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+            ),
+          );
+        } else {
+          return ListView.builder(
+            //scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            itemCount: snapshot.data.length,
+            itemBuilder: (_, index) {
+              //Product products = snapshot.data[index];
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: ScreenUtil().setWidth(30),
+                ),
+                //child: Container(child: ProductCard(product: products),
                 //),
-                  child: ListTile(
-                    title: Text(snapshot.data[index].data["nombre"]),
-                    onTap: () => navigateToDetail(snapshot.data[index]),
-                  ),
-                );
-              },
-            );
-          }
-        },
-     
+                child: ListTile(
+                  title: Text(snapshot.data[index].data["nombre"]),
+                  onTap: () => navigateToDetail(snapshot.data[index]),
+                ),
+              );
+            },
+          );
+        }
+      },
     );
   }
 }
@@ -234,6 +240,7 @@ class DetailPage extends StatefulWidget {
   @override
   _DetailPageState createState() => _DetailPageState();
 }
+
 class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
@@ -252,3 +259,4 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 }
+ 
