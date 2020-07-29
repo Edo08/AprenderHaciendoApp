@@ -13,8 +13,8 @@ final TextStyle productCardNumStyle = TextStyle(fontSize: 18, fontFamily: "Poppi
 final TextStyle productsubTitleStyle = TextStyle(fontFamily: "Poppins-Medium");
  
 class ProductCard extends StatelessWidget {
-  final Product product; 
-  final ValueChanged<Product> onSelected;
+  final ProductModel product; 
+  final ValueChanged<ProductModel> onSelected;
   ProductCard({Key key, this.product, this.onSelected}) : super(key: key);
 
   @override
@@ -116,7 +116,7 @@ class ProductCard extends StatelessWidget {
 
               child: Hero(
                 tag: product.codigo,
-                child: Image.asset(
+                child: Image.network(
                 product.imagen,
                 width: ScreenUtil().setWidth(570),
                 height: ScreenUtil().setHeight(500),
