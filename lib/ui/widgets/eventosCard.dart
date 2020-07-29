@@ -66,11 +66,11 @@ const kDefaultShadow = BoxShadow(
             ),
           ),
           Positioned(
-            top: 30,
+            top: 40,
             left: 0,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              height: 100,
+              height: 90,
               width: 160,
               child: Image.asset(
                 evento.imagen,
@@ -83,12 +83,12 @@ const kDefaultShadow = BoxShadow(
               right: 0,
               child: SizedBox(
                 height: 150,
-                width: size.width -180,
+                width: size.width -155,
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 7,), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(  
                         evento.nombre,
                         textAlign: TextAlign.center,                                             
@@ -96,7 +96,7 @@ const kDefaultShadow = BoxShadow(
                         ),
                       ),                                      
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         evento.fecha,
                         textAlign: TextAlign.center,

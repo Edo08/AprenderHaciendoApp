@@ -68,12 +68,12 @@ const kDefaultShadow = BoxShadow(
             ),
           ),
           Positioned(
-            top: 0,
+            top: 5,
             right: 0,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              height: 160,
-              width: 200,
+              height: 130,
+              width: 190,
               child: Image.asset(
                 producto.imagen,
                 fit: BoxFit.cover,
@@ -84,24 +84,24 @@ const kDefaultShadow = BoxShadow(
               bottom: 0,
               left: 0,
               child: SizedBox(
-                height: 136,
-                width: size.width -200,
+                height: 160,
+                width: size.width -170,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 35,),
+                    SizedBox(height: 55,),
                     Text(
                       "${producto.codigo}",
                       style: codigoStyle,
                     ), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                       producto.nombre,
                       style: nombreProductoStyle,
                       ),
                     ), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                       "₡"+"${(producto.precio).toStringAsFixed(0)}",
                       style: precioStyle,

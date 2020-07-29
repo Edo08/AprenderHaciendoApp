@@ -67,7 +67,7 @@ final TextStyle productsubTitleStyle =
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: 130,
-              width: 200,
+              width: 190,
               child: Image.asset(
                 curso.imagen,
                 fit: BoxFit.cover,
@@ -78,19 +78,19 @@ final TextStyle productsubTitleStyle =
               left: 0,
               child: SizedBox(
                 height: 160,
-                width: size.width -200,
+                width: size.width -170,
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 35,), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                       curso.nombre,
                       style: nombreProductoStyle,
                       ),
                     ), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                       curso.modalidad,
                       style: productsubTitleStyle,

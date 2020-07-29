@@ -70,8 +70,8 @@ const kDefaultShadow = BoxShadow(
             left: 0,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              height: 160,
-              width: 200,
+              height: 140,
+              width: 180,
               child: Image.asset(
                 certificacion.imagen,
                 fit: BoxFit.cover,
@@ -83,7 +83,7 @@ const kDefaultShadow = BoxShadow(
               right: 0,
               child: SizedBox(
                 height: 136,
-                width: size.width -200,
+                width: size.width -180,
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: 35,), 
