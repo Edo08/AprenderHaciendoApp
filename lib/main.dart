@@ -14,7 +14,8 @@ void main() {
         ChangeNotifierProvider.value(value: CategoryProvider.initialize()),
         ChangeNotifierProvider.value(value: ProductProvider.initialize()),
       ],
-    child: */ MaterialApp(
+    child: */ 
+    MaterialApp(
       home: WelcomeScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
