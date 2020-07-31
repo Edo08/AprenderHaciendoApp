@@ -68,7 +68,7 @@ class _TiendaState extends State<Tienda> {
               Container(
                 height: 60.0,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
