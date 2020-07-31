@@ -1,5 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/cursosmodel.dart';
+import 'package:aprender_haciendo_app/ui/views/curso_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/cursos_card.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,10 @@ final TextStyle nameProductStyle =
                     itemIndex: index,
                     curso: cursos[index],
                     press: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => CursoDetail(
+                        curso: cursos[index]),
+                        ),
+                      );
                     },
                   )), 
               ],

@@ -32,8 +32,9 @@ final TextStyle nameProductStyle =
                 height: 5,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
+                padding: EdgeInsets.only(left: 15, right: 25),
                 child: Text("Inscríbase y participe en los mejores eventos de robótica a nivel nacional e internacionalmente.",
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Medium",

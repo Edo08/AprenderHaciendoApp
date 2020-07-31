@@ -1,6 +1,6 @@
-import 'package:aprender_haciendo_app/core/models/productomodel.dart';
+import 'package:aprender_haciendo_app/core/models/paquetesmodel.dart';
+import 'package:aprender_haciendo_app/ui/views/packs_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/horizontal_card.dart';
-import 'package:aprender_haciendo_app/ui/widgets/product_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,8 +33,9 @@ final TextStyle nameProductStyle =
                 height: 5,
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
+                padding: EdgeInsets.only(left: 15, right: 20),
                 child: Text("Mantener la educación emocionante y atractiva en casa puede ser difícil. Estamos aquí para hacerlo un poco más fácil con algunos recursos para apoyar el proceso de aprendizaje en el hogar.",
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
                         color: Colors.black,
                         fontFamily: "Poppins-Medium",
@@ -66,12 +67,14 @@ final TextStyle nameProductStyle =
                     )                  ),
                 ),
                 ListView.builder(
-                  itemCount: products.length,
+                  itemCount: paquetes.length,
                   itemBuilder: (context, index) => HorizontalCard(
                     itemIndex: index,
-                    producto: products[index],
+                    pack: paquetes[index],
                     press: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PackDetail(
+                        pack: paquetes[index],
+                      )));
                     },
                   )),
               ],

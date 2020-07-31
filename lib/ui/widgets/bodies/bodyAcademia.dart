@@ -1,5 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/academymodel.dart';
+import 'package:aprender_haciendo_app/ui/views/inscripcion.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/academy_card.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,11 @@ final TextStyle nameProductStyle =
                     itemIndex: index,
                     certificacion: certificaciones[index],
                     press: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Inscripcion(
+                        academy: certificaciones[index]),
+                        ),
+                      );
+                      print("certificacion");
                     },
                   )), 
               ],

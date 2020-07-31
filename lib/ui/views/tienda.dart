@@ -1,10 +1,12 @@
 import 'package:aprender_haciendo_app/core/models/productomodel.dart';
 import 'package:aprender_haciendo_app/core/services/productosApi.dart';
+import 'package:aprender_haciendo_app/ui/views/product_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -87,17 +89,20 @@ class _TiendaState extends State<Tienda> {
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
                   itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    Sets sets = products[index];
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        left: ScreenUtil().setWidth(30),
-                      ),
-                      child: ProductCard(
-                        product : sets,
-                      ),
-                    );
-                  },
+                  itemBuilder: (context, index) => ProductCard(
+                    itemIndex: index,
+                    product: products[index],
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetail(
+                            kit: products[index],
+                          ),
+                        ),
+                      );
+                    },
+                  )
                 ),
                 //child: ListPage(),
               ),
@@ -163,7 +168,7 @@ class _TiendaState extends State<Tienda> {
           onPressed: () {
             // whatsAppOpen();
           },
-          child: Icon(Icons.phone),
+          child: FaIcon(FontAwesomeIcons.whatsapp),
           backgroundColor: Colors.green,
         ));
   }

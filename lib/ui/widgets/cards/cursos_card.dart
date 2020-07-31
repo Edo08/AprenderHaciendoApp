@@ -2,19 +2,10 @@
 import 'package:aprender_haciendo_app/core/models/cursosmodel.dart';
 import 'package:flutter/material.dart';
  
-final TextStyle codigoStyle =
-    TextStyle(fontSize: 15, fontFamily: "Muli", color: Colors.white,
-     fontWeight: FontWeight.w700,
-     shadows: <Shadow>[
-      Shadow(
-        offset: Offset(3.0, 1.0),
-        blurRadius: 3.0,
-        color: Color.fromARGB(150, 0, 0, 0),
-      )] );
 final TextStyle botonStyle =
     TextStyle(fontSize: 14, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w500);
 final TextStyle precioStyle =
-    TextStyle(fontSize: 16, fontFamily: "Muli", color: Colors.white, fontWeight: FontWeight.w500);
+    TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
 final TextStyle nombreProductoStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle =
@@ -39,14 +30,14 @@ final TextStyle productsubTitleStyle =
         horizontal: 20.0,
         vertical: 20.0 / 2,
       ),
-      height: 160,
+      height: 170,
       child: InkWell(
         onTap: press,
         child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
-            height: 136,
+            height: 150,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
               gradient: LinearGradient(
@@ -81,21 +72,22 @@ final TextStyle productsubTitleStyle =
                 width: size.width -170,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 35,), 
+                    SizedBox(height: 30,), 
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                       curso.nombre,
+                      textAlign: TextAlign.center,
                       style: nombreProductoStyle,
                       ),
                     ), 
-                    Padding(
+                    /* Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                       curso.modalidad,
                       style: productsubTitleStyle,
                       ),
-                    ),
+                    ), */
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(

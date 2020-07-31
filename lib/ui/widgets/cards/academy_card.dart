@@ -1,18 +1,9 @@
 
 import 'package:aprender_haciendo_app/core/models/academymodel.dart';
 import 'package:flutter/material.dart';
- 
-final TextStyle codigoStyle =
-    TextStyle(fontSize: 15, fontFamily: "Muli", color: Colors.white,
-     fontWeight: FontWeight.w700,
-     shadows: <Shadow>[
-      Shadow(
-        offset: Offset(3.0, 1.0),
-        blurRadius: 3.0,
-        color: Color.fromARGB(150, 0, 0, 0),
-      )] );
+
 final TextStyle precioStyle =
-    TextStyle(fontSize: 16, fontFamily: "Muli", color: Colors.white, fontWeight: FontWeight.w500);
+    TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
 final TextStyle nombreProductoStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle =
@@ -41,9 +32,7 @@ final TextStyle botonStyle =
         vertical: 20.0 / 2,
       ),
       height: 160,
-      child: InkWell(
-        onTap: () {Navigator.pushNamed(context, '/inscripcion');},
-        child: Stack(
+      child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
@@ -111,18 +100,22 @@ final TextStyle botonStyle =
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              alignment: Alignment.center,
-                              height: 30,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: [
-                                      Color(0xFFffffff), Color(0xFFffffff)
-                                    ],begin: Alignment.topCenter,
-                                    end: Alignment.bottomRight ),
-                                    borderRadius: BorderRadius.circular(10)),
-                              child: Text("Inscribirse", style: botonStyle,),
+                            GestureDetector(
+                              child:Container(
+                                alignment: Alignment.center,
+                                height: 30,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                      gradient: LinearGradient(colors: [
+                                        Color(0xFFffffff), Color(0xFFffffff)
+                                      ],begin: Alignment.topCenter,
+                                      end: Alignment.bottomRight ),
+                                      borderRadius: BorderRadius.circular(10)),
+                                child: Text("Inscribirse", style: botonStyle,),
+                              ),
+                              onTap: press,
                             )
+                            
                           ],
                         ), 
                     ),     
@@ -131,7 +124,6 @@ final TextStyle botonStyle =
               ))
         ],
       ), 
-      ),
           
     );
     

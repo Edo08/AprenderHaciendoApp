@@ -1,38 +1,21 @@
 
-import 'package:aprender_haciendo_app/core/models/productomodel.dart';
+import 'package:aprender_haciendo_app/core/models/paquetesmodel.dart';
 import 'package:flutter/material.dart';
  
-final TextStyle codigoStyle =
-    TextStyle(fontSize: 15, fontFamily: "Muli", color: Colors.white,
-     fontWeight: FontWeight.w700,
-     shadows: <Shadow>[
-      Shadow(
-        offset: Offset(3.0, 1.0),
-        blurRadius: 3.0,
-        color: Color.fromARGB(150, 0, 0, 0),
-      )] );
 final TextStyle precioStyle =
-    TextStyle(fontSize: 16, fontFamily: "Muli", color: Colors.white, fontWeight: FontWeight.w500);
+    TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500);
 final TextStyle nombreProductoStyle =
-    TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
-final TextStyle cardNumStyle =
     TextStyle(fontSize: 18, fontFamily: "Poppins-Medium", color: Colors.white, fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle =
     TextStyle(fontFamily: "Poppins-Medium");
-const kDefaultShadow = BoxShadow(
-  offset: Offset(0, 15),
-  blurRadius: 27,
-  color: Colors.black12, // Black color with 12% opacity
-);
- 
 
  class HorizontalCard extends StatelessWidget {
   const HorizontalCard({
-    Key key, this.itemIndex, this.producto, this.press,
+    Key key, this.itemIndex, this.pack, this.press,
   }) : super(key: key);
 
   final int itemIndex;
-  final Sets producto;
+  final Packs pack;
   final Function press;
 
 
@@ -68,15 +51,15 @@ const kDefaultShadow = BoxShadow(
             ),
           ),
           Positioned(
-            top: 5,
+            bottom: 0,
             right: 0,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: 130,
               width: 190,
               child: Image.asset(
-                producto.imagen,
-                fit: BoxFit.cover,
+                pack.imagen,
+                fit: BoxFit.fitWidth,
                 ),            
             )),
             
@@ -85,27 +68,30 @@ const kDefaultShadow = BoxShadow(
               left: 0,
               child: SizedBox(
                 height: 160,
-                width: size.width -170,
+                width: size.width -200,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 55,),
-                    Text(
-                      "${producto.codigo}",
-                      style: codigoStyle,
-                    ), 
+                    SizedBox(height: 55,), 
+                    Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          pack.nombre,
+                          style: nombreProductoStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ), 
+                    ),
+                    
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                      producto.nombre,
-                      style: nombreProductoStyle,
-                      ),
-                    ), 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                      "₡"+"${(producto.precio).toStringAsFixed(0)}",
-                      style: precioStyle,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                        "₡"+"${(pack.precio).toStringAsFixed(0)}",
+                        style: precioStyle,
+                        ),
+                      ),                     
                     ),     
                   ],
                 ),

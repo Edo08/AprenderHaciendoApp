@@ -1,6 +1,5 @@
-import 'package:aprender_haciendo_app/core/models/productModel.dart';
+
 import 'package:aprender_haciendo_app/core/models/productomodel.dart';
-import 'package:aprender_haciendo_app/ui/widgets/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +17,6 @@ final TextStyle codigoStyle = TextStyle(
     ]);
 final TextStyle precioStyle = TextStyle(
     fontSize: 16,
-    fontFamily: "Muli",
     color: Colors.white,
     fontWeight: FontWeight.w500);
 final TextStyle nombreProductoStyle = TextStyle(
@@ -34,10 +32,16 @@ final TextStyle productCardNumStyle = TextStyle(
 final TextStyle productsubTitleStyle = TextStyle(fontFamily: "Poppins-Medium");
 
 class ProductCard extends StatelessWidget {
-  final Sets product;
-  final ValueChanged<ProductModel> onSelected;
-  ProductCard({Key key, this.product, this.onSelected}) : super(key: key);
+  const ProductCard({
+    Key key,
+    this.itemIndex,
+    this.product,
+    this.press,
+  }) : super(key: key);
 
+  final int itemIndex;
+  final Function press;
+  final Sets product;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,6 +56,7 @@ class ProductCard extends StatelessWidget {
                   left: ScreenUtil().setHeight(50),
                   bottom: ScreenUtil().setHeight(140)),
               child: new InkWell(
+                onTap: press,
                 child: Container(
                   height: ScreenUtil().setWidth(730),
                   width: ScreenUtil().setHeight(990),
@@ -122,24 +127,28 @@ class ProductCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                onTap: () {
+                /* onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ProductDetail()));
-                },
+                }, */
               ),
             ),
           ),
           Positioned(
             top: ScreenUtil().setHeight(-15),
             left: ScreenUtil().setWidth(60),
-            child: Hero(
-              tag: product.codigo,
-              child: Image.asset(
-                product.imagen,
-                width: ScreenUtil().setWidth(570),
-                height: ScreenUtil().setHeight(500),
+            child: new InkWell(
+                onTap: press,
+                child: Hero(
+                tag: product.codigo,
+                child: Image.asset(
+                  product.imagen,
+                  width: ScreenUtil().setWidth(570),
+                  height: ScreenUtil().setHeight(500),
+                ),
               ),
-            ),
+            )
+            
           )
         ],
       ),

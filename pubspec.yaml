@@ -28,6 +28,7 @@ dependencies:
   auto_size_text: ^2.0.2
   provider: ^3.0.0+1
   get_it: ^1.0.3+2
+  font_awesome_flutter: ^8.8.1
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,11 @@ flutter:
     - images/legoAcademy.png
     - images/firstlego.png
     - images/WRO.png
+    - images/Logo_7bricks.png
+    - images/Logo_7bricks_+.png
+    - images/9656.png
+    - images/mezcladora.png
+    - images/motorizado.png
 
   fonts:
     - family: CustomIcons
