@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/productModel1.dart';
+/* import 'package:aprender_haciendo_app/core/models/productModel1.dart';
 import 'package:flutter/material.dart';
 
     class ProductProvider with ChangeNotifier {
@@ -35,4 +35,4 @@ import 'package:flutter/material.dart';
         notifyListeners();
       }
 
-    }
+    } */

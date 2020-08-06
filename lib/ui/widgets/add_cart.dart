@@ -1,4 +1,7 @@
+import 'package:aprender_haciendo_app/core/models/productModel.dart';
+import 'package:aprender_haciendo_app/ui/widgets/product_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 final TextStyle botonStyle = TextStyle(
     fontSize: 20,
@@ -9,7 +12,10 @@ final TextStyle botonStyle = TextStyle(
 class AddToCart extends StatelessWidget {
   const AddToCart({
     Key key,
+    this.press,
   }) : super(key: key);
+
+  final Function press;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +37,10 @@ class AddToCart extends StatelessWidget {
               "Agregar al carrito",
               style: botonStyle,
             ),
-            ),
+          ),
         ),
+        onTap: press,
       ),
-      
     );
   }
 }

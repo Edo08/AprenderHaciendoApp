@@ -1,7 +1,11 @@
 
+import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/core/models/productomodel.dart';
+import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 final TextStyle codigoStyle = TextStyle(
     fontSize: 15,
@@ -41,9 +45,12 @@ class ProductCard extends StatelessWidget {
 
   final int itemIndex;
   final Function press;
-  final Sets product;
+  final ProductModel product;
+ 
+
   @override
   Widget build(BuildContext context) {
+  final cart = Provider.of<CartProvider>(context, listen: false);
     return Container(
       width: ScreenUtil().setWidth(542),
       child: Stack(
@@ -94,31 +101,30 @@ class ProductCard extends StatelessWidget {
                                 product.nombre,
                                 style: nombreProductoStyle,
                               ),
-                              Text(
-                                "\₡${(product.precio).toStringAsFixed(0)}",
-                                style: precioStyle,
-                              ),
-                              SizedBox(
-                                height: ScreenUtil().setHeight(25),
-                              ),
-                              GestureDetector(
-                                child: Container(
-                                  width: ScreenUtil().setWidth(75),
-                                  height: ScreenUtil().setHeight(75),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.add,
-                                      size: 18,
-                                      color: Colors.lightBlue,
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                  "\₡${(product.precio).toStringAsFixed(0)}",
+                                  style: precioStyle),
+                                  SizedBox(width: 40),
+                                  GestureDetector(
+                                    child: Container(
+                                      width: ScreenUtil().setWidth(75),
+                                      height: ScreenUtil().setHeight(75),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8)),
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 18,
+                                        color: Colors.lightBlue,
+                                      ),
                                     ),
+                                    onTap: () {
+                                      cart.addItem(product.codigo, product.precio, product.imagen2, product.nombre);
+                                    },
                                   ),
-                                ),
-                                onTap: () {
-                                  print("Agregar");
-                                },
+                                ],
                               ),
                             ],
                           ),
@@ -135,14 +141,14 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: ScreenUtil().setHeight(-15),
+            top: ScreenUtil().setHeight(25),
             left: ScreenUtil().setWidth(60),
             child: new InkWell(
                 onTap: press,
                 child: Hero(
                 tag: product.codigo,
-                child: Image.asset(
-                  product.imagen,
+                child: Image.network(
+                  product.imagen2,
                   width: ScreenUtil().setWidth(570),
                   height: ScreenUtil().setHeight(500),
                 ),

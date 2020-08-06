@@ -7,6 +7,7 @@ import 'package:aprender_haciendo_app/ui/views/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/ui/views/shopping_cart.dart';
 import 'package:aprender_haciendo_app/ui/views/tienda.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
+import 'package:aprender_haciendo_app/ui/widgets/badge.dart';
 import 'package:aprender_haciendo_app/ui/widgets/custom_dialog.dart';
 import 'package:aprender_haciendo_app/ui/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
@@ -126,8 +127,6 @@ class _IndexState extends State<Index> {
 
   @override
   Widget build(BuildContext context) {
-    makeProfileAvatar(); // no funciona, aqui deberia salir el usuario
-
     ScreenUtil.instance =
         ScreenUtil(width: 1125, height: 2436, allowFontScaling: true)
           ..init(context);
@@ -136,21 +135,20 @@ class _IndexState extends State<Index> {
       backgroundColorAppBar: Colors.white,
       elevationAppBar: 0.0,
       screens: items,
-
       //    typeOpen: TypeOpen.FROM_RIGHT,
       //    enableScaleAnimin: true,
       //    enableCornerAnimin: true,
       slidePercent: 65.0,
       verticalScalePercent: 85.0,
       contentCornerRadius: 40.0,
-
       iconMenuAppBar:
           // Padding(padding : EdgeInsets.only(left: 50)),
           (Image.asset("icons/icon_menu.png",
               width: ScreenUtil.getInstance().setWidth(110),
               height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
-        IconButton(
+        Badge(
+          child: IconButton(
             icon: Image.asset("icons/icon_cart.png",
                 width: ScreenUtil.getInstance().setWidth(130),
                 height: ScreenUtil.getInstance().setHeight(130)),
@@ -159,7 +157,11 @@ class _IndexState extends State<Index> {
                 context,
                 MaterialPageRoute(builder: (context) => ShoppingCart()),
               );
-            }),
+            },
+          ),
+          value: _cantidadCarrito(),
+          //cart.itemCount.toString(),
+        ),
         SizedBox(
           width: 10,
         )
@@ -185,9 +187,17 @@ class _IndexState extends State<Index> {
           ),
         ),
       ),
-
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
+  }
+
+  String _cantidad = "";
+  String _cantidadCarrito() {
+    setState(() {
+      _cantidad = "3";
+      //cart.itemCount.toString(),
+    });
+    return _cantidad;
   }
 
   makeProfileAvatar() {

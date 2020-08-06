@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/productomodel.dart';
+import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:aprender_haciendo_app/core/services/productosApi.dart';
 import 'package:aprender_haciendo_app/ui/views/product_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -29,6 +30,8 @@ class _TiendaState extends State<Tienda> {
 
   @override
   Widget build(BuildContext context) {
+    final products = Provider.of<ProductsProvider>(context);
+    final productList = products.items;
     //final categoryProvider = Provider.of<CategoryProvider>(context);
     //final productProvider = Provider.of<ProductProvider>(context);
     ScreenUtil.instance =
@@ -86,29 +89,45 @@ class _TiendaState extends State<Tienda> {
               Container(
                 height: ScreenUtil().setHeight(1050),
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) => ProductCard(
+                    scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
+                    itemCount: productList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ChangeNotifierProvider.value(
+                        value: productList[index],
+                        child: ProductCard(
+                          itemIndex: index,
+                          product: productList[index],
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductDetail(
+                                  kit: productList[index],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    }
+                    /* itemBuilder: (context, index) => ProductCard(
                     itemIndex: index,
-                    product: products[index],
+                    product: productList[index],
                     press: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProductDetail(
-                            kit: products[index],
+                            kit: productList[index],
                           ),
                         ),
                       );
                     },
-                  )
-                ),
+                  ), */
+                    ),
                 //child: ListPage(),
               ),
-
-              
-              
 
               GestureDetector(
                 child: Container(
@@ -174,7 +193,7 @@ class _TiendaState extends State<Tienda> {
   }
 }
 
-class ListPage extends StatefulWidget {
+/* class ListPage extends StatefulWidget {
   @override
   _ListPageState createState() => _ListPageState();
 }
@@ -261,4 +280,4 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 }
- 
+  */

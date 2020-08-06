@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/productModel1.dart';
+/* import 'package:aprender_haciendo_app/core/models/productModel1.dart';
 import 'package:aprender_haciendo_app/core/services/productProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -27,7 +27,7 @@ set productList(List<Product> productList) {
       }
 
 
-
+ */
 /*
 
 

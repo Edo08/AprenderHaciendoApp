@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/* import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Api{
   final Firestore _db = Firestore.instance;
@@ -32,4 +32,4 @@ class Api{
   }
   
 
-}
+} */
