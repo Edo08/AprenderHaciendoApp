@@ -1,4 +1,4 @@
-class Sets {
+/* class Sets {
   int id;
   int codigo;
   String nombre;
@@ -84,7 +84,7 @@ List<Sets> products = [
       descripcion: "Este set fue diseñado para fomentar la colaboración, combina ladrillos LEGO® con software para su programación, que presenta a los estudiantes principios de ciencia, ingeniería y computación.",
       cantPiezas: 280,
       edades: "6 a 10 años"),
-];
+]; */
 
 /* class Sets {
   int id;

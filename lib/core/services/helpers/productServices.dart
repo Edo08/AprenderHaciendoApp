@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/productModel.dart';
+/* import 'package:aprender_haciendo_app/core/models/productModel2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductServices {
@@ -63,4 +63,4 @@ class ProductServices {
           return products;
         });
   }
-}
+} */

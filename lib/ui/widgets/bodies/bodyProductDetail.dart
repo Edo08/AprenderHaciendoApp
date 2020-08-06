@@ -1,5 +1,8 @@
+import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/core/models/productomodel.dart';
+import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../add_cart.dart';
 import '../product_image.dart';
 
@@ -27,7 +30,7 @@ final TextStyle descripcionProductoStyle = TextStyle(
     fontWeight: FontWeight.w500);
 
 class BodyProductDetail extends StatelessWidget {
-  final Sets product;
+  final ProductModel product;
 
   const BodyProductDetail({Key key, this.product}) : super(key: key);
   @override
@@ -35,6 +38,8 @@ class BodyProductDetail extends StatelessWidget {
     // it provide us total height and width
     Size size = MediaQuery.of(context).size;
     // it enable scrolling on small devices
+    final cart = Provider.of<CartProvider>(context, listen: false);
+
     return SafeArea(
       bottom: false,
       child: SingleChildScrollView(
@@ -59,7 +64,7 @@ class BodyProductDetail extends StatelessWidget {
                       tag: '${product.id}',
                       child: ProductPoster(
                         size: size,
-                        image: product.imagen,
+                        image: product.imagen2,
                       ),
                     ),
                   ),
@@ -125,7 +130,11 @@ class BodyProductDetail extends StatelessWidget {
                 ],
               ),
             ),
-            AddToCart(),
+            AddToCart(
+              press: () { 
+                cart.addItem(product.codigo, product.precio, product.imagen2, product.nombre);
+              },
+            ),
           ],
         ),
       ),

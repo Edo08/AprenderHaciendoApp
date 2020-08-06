@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
-  final TextStyle nameStyle =
-    TextStyle(fontSize: 16, fontFamily: "Poppins-Bold",);
-  final TextStyle precioStyle =
-    TextStyle(fontSize: 16, fontFamily: "Muli",);
-  final TextStyle totalStyle =
-    TextStyle(fontSize: 26, fontFamily: "Poppins-Bold", fontWeight: FontWeight.bold);
-    final TextStyle subtotalStyle =
-    TextStyle(fontSize: 24, fontFamily: "Poppins-Bold",);
-  final TextStyle subtotalPrecioStyle =
+final TextStyle nameStyle = TextStyle(
+  fontSize: 16,
+  fontFamily: "Poppins-Bold",
+);
+final TextStyle precioStyle = TextStyle(
+  fontSize: 16,
+  fontFamily: "Muli",
+);
+final TextStyle totalStyle = TextStyle(
+    fontSize: 26, fontFamily: "Poppins-Bold", fontWeight: FontWeight.bold);
+final TextStyle subtotalStyle = TextStyle(
+  fontSize: 24,
+  fontFamily: "Poppins-Bold",
+);
+final TextStyle subtotalPrecioStyle =
     TextStyle(fontSize: 22, fontFamily: "Muli", fontWeight: FontWeight.bold);
-  final TextStyle totalprecioStyle =
+final TextStyle totalprecioStyle =
     TextStyle(fontSize: 24, fontFamily: "Muli", fontWeight: FontWeight.w800);
-  final TextStyle confirmarStyle =
+final TextStyle confirmarStyle =
     TextStyle(fontSize: 16, fontFamily: "Poppins-Medium", color: Colors.white);
 
-  GlobalKey<FormState> keyForm = new GlobalKey();
-  TextEditingController codigoCtrl = new TextEditingController();
+GlobalKey<FormState> keyForm = new GlobalKey();
+TextEditingController codigoCtrl = new TextEditingController();
 
 class CartItem extends StatelessWidget {
   const CartItem({
@@ -26,11 +32,11 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 15.0),              
-          child: Row(               
-            children: <Widget>[
-              Container(
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 15.0),
+        child: Row(
+          children: <Widget>[
+            Container(
               width: 100,
               height: 100,
               decoration: BoxDecoration(
@@ -42,42 +48,48 @@ class CartItem extends StatelessWidget {
                   width: 110,
                   height: 110,
                   padding: EdgeInsets.all(4.0),
-                  child:Image.asset(
+                  child: Image.asset(
                     "images/lego-spike.png",
-                    fit: BoxFit.contain,),
-                  decoration: BoxDecoration(                      
+                    fit: BoxFit.contain,
+                  ),
+                  decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF65a6f4),
-                        Color(0xFF25cfff)
-                      ],
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft),
-                      boxShadow: [BoxShadow(
+                        colors: [Color(0xFF65a6f4), Color(0xFF25cfff)],
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft),
+                    boxShadow: [
+                      BoxShadow(
                         color: Colors.black12,
-                        offset: Offset(0,8),
+                        offset: Offset(0, 8),
                         blurRadius: 8,
-                        ),
-                        ],
-                        borderRadius: BorderRadius.circular(20),
-                    ),                  
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
-              ),
-              SizedBox(width: 15,),
-              Expanded(
-                child: Column(
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
                     width: 160,
-                    child: Text("Spike Prime", style: nameStyle,),
+                    child: Text(
+                      "Spike Prime",
+                      style: nameStyle,
+                    ),
                   ),
-                  SizedBox(width: 15,),
+                  SizedBox(
+                    width: 15,
+                  ),
                   Row(
                     children: <Widget>[
                       GestureDetector(
-                        child:Container(
+                        child: Container(
                           width: 20.0,
                           height: 20.0,
                           decoration: BoxDecoration(
@@ -90,14 +102,15 @@ class CartItem extends StatelessWidget {
                             size: 18,
                           ),
                         ),
-                        onTap: (){
-                          
-                        },
-                      ),                           
+                        onTap: () {},
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text("1", style: nameStyle,),
-                      ),  
+                        child: Text(
+                          "1",
+                          style: nameStyle,
+                        ),
+                      ),
                       GestureDetector(
                         child: Container(
                           width: 20.0,
@@ -112,24 +125,21 @@ class CartItem extends StatelessWidget {
                             size: 18,
                           ),
                         ),
-                        onTap: (){
-
-                        },
-                      ),                                                 
+                        onTap: () {},
+                      ),
                       Spacer(),
                       Text(
-                        "₡"+"320 630",
+                        "₡" + "320 630",
                         style: precioStyle,
-                      )
-                      ],
-                    ),                    
-                  ],
-                ),
-              )
-            ],             
-          ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      );
-
+    );
+  }
 }
-}           

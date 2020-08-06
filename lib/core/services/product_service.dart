@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/* import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductService{
   final _fireStore = Firestore.instance;
@@ -13,7 +13,7 @@ class ProductService{
   }
 
 
-}
+} */
   //final _service = FirestoreService.instance;
 
   /* Stream<List<Product>> products() => _service.collectionStream(

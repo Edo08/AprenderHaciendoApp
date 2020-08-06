@@ -1,4 +1,4 @@
-import 'dart:collection';
+/* import 'dart:collection';
 
 import 'package:aprender_haciendo_app/core/models/productModel1.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,4 +21,4 @@ class ProductNotifier with ChangeNotifier {
     _currentProduct = product;
     notifyListeners();
   }
-}
+} */
