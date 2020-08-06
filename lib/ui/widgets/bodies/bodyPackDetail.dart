@@ -71,6 +71,7 @@ class BodyPackDetail extends StatelessWidget {
                         child: Text(
                         pack.nombre,
                         style: nombreProductoStyle,
+                        textAlign: TextAlign.center,
                         ),
                       ),                  
                   ),

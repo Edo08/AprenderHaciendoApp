@@ -71,6 +71,7 @@ class BodyProductDetail extends StatelessWidget {
                         child: Text(
                         product.nombre,
                         style: nombreProductoStyle,
+                        textAlign: TextAlign.center,
                         ),
                       ),                  
                   ),
