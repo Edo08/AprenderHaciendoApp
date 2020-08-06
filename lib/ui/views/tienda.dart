@@ -1,9 +1,7 @@
 import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
-import 'package:aprender_haciendo_app/core/services/productosApi.dart';
 import 'package:aprender_haciendo_app/ui/views/product_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

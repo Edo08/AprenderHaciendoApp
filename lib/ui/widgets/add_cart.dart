@@ -1,7 +1,5 @@
-import 'package:aprender_haciendo_app/core/models/productModel.dart';
-import 'package:aprender_haciendo_app/ui/widgets/product_image.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 final TextStyle botonStyle = TextStyle(
     fontSize: 20,

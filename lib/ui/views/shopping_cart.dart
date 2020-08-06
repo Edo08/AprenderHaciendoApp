@@ -1,10 +1,5 @@
-import 'package:aprender_haciendo_app/core/models/cursosmodel.dart';
 import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
-import 'package:aprender_haciendo_app/ui/views/curso_detail.dart';
-import 'package:aprender_haciendo_app/ui/widgets/cards/cartItem.dart';
-import 'package:aprender_haciendo_app/ui/widgets/cards/cursos_card.dart';
-import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

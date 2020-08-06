@@ -1,7 +1,6 @@
 
 
 import 'package:aprender_haciendo_app/core/models/productModel.dart';
-import 'package:aprender_haciendo_app/core/models/productomodel.dart';
 import 'package:aprender_haciendo_app/ui/views/shopping_cart.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductDetail.dart';
 import 'package:flutter/material.dart';

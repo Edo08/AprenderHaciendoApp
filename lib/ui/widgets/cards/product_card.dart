@@ -1,8 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/productModel.dart';
-import 'package:aprender_haciendo_app/core/models/productomodel.dart';
 import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
-import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
