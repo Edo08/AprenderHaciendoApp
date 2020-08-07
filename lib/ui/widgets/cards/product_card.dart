@@ -1,9 +1,9 @@
-
 import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle codigoStyle = TextStyle(
     fontSize: 15,
@@ -33,6 +33,20 @@ final TextStyle productCardNumStyle = TextStyle(
     fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle = TextStyle(fontFamily: "Poppins-Medium");
 
+var alertStyle = AlertStyle(
+      animationType: AnimationType.fromTop, 
+      isCloseButton: false,
+      isOverlayTapDismiss: false,
+      descStyle: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+      animationDuration: Duration(milliseconds: 400),
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        side: BorderSide(
+          color: Colors.grey,
+        ),
+      ),
+    );
+
 class ProductCard extends StatelessWidget {
   const ProductCard({
     Key key,
@@ -44,11 +58,30 @@ class ProductCard extends StatelessWidget {
   final int itemIndex;
   final Function press;
   final ProductModel product;
- 
+
+  _onAlertButton(context) {
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.success,
+      title: "", 
+      desc: "Producto agregado al carrito con éxito.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "ACEPTAR",
+            style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "Poppins-Medium"),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        )
+      ],
+    ).show();
+  }
 
   @override
   Widget build(BuildContext context) {
-  final cart = Provider.of<CartProvider>(context, listen: false);
+  final cart = Provider.of<CartProvider>(context, listen: false);  
     return Container(
       width: ScreenUtil().setWidth(542),
       child: Stack(
@@ -119,6 +152,7 @@ class ProductCard extends StatelessWidget {
                                       ),
                                     ),
                                     onTap: () {
+                                      _onAlertButton(context);
                                       cart.addItem(product.codigo, product.precio, product.imagen2, product.nombre);
                                     },
                                   ),
@@ -159,3 +193,5 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
+
+

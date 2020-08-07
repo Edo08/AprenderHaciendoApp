@@ -74,7 +74,7 @@ final TextStyle productsubTitleStyle =
                   children: <Widget>[
                     SizedBox(height: 30,), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
                       curso.nombre,
                       textAlign: TextAlign.center,

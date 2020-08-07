@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../add_cart.dart';
 import '../product_image.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle nombreProductoStyle = TextStyle(
     fontSize: 25,
@@ -27,9 +28,42 @@ final TextStyle descripcionProductoStyle = TextStyle(
     fontFamily: "Poppins-Medium",
     color: Colors.grey,
     fontWeight: FontWeight.w500);
+var alertStyle = AlertStyle(
+      animationType: AnimationType.fromTop, 
+      isCloseButton: false,
+      isOverlayTapDismiss: false,
+      descStyle: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+      animationDuration: Duration(milliseconds: 400),
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        side: BorderSide(
+          color: Colors.grey,
+        ),
+      ),
+    );
 
 class BodyProductDetail extends StatelessWidget {
   final ProductModel product;
+
+  _onAlertButton(context) {
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.success,
+      title: "", 
+      desc: "Producto agregado al carrito con éxito.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "ACEPTAR",
+            style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "Poppins-Medium"),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        )
+      ],
+    ).show();
+  }
 
   const BodyProductDetail({Key key, this.product}) : super(key: key);
   @override
@@ -132,6 +166,7 @@ class BodyProductDetail extends StatelessWidget {
             ),
             AddToCart(
               press: () { 
+                _onAlertButton(context);
                 cart.addItem(product.codigo, product.precio, product.imagen2, product.nombre);
               },
             ),
