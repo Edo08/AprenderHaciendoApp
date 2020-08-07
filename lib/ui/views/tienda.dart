@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_launch/flutter_launch.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -31,13 +30,13 @@ class _TiendaState extends State<Tienda> {
   }
 
   void whatsAppOpen() async {
-    bool whatsapp = await FlutterLaunch.hasApp(name: "whatsApp");
+    /* bool whatsapp = await FlutterLaunch.hasApp(name: "whatsApp");
 
     if (whatsapp) {
       await FlutterLaunch.launchWathsApp(phone: "+50684438017", message: "Hola");
     } else {
       print("WhatsApp no instalado");
-    }
+    } */
   }
 
   @override

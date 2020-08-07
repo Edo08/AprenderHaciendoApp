@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Academia extends StatelessWidget {
+  static const String routeName = '/academia';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

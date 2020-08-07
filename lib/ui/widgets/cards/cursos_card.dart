@@ -59,7 +59,7 @@ final TextStyle productsubTitleStyle =
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: 130,
               width: 190,
-              child: Image.asset(
+              child: Image.network(
                 curso.imagen,
                 fit: BoxFit.cover,
                 ),            

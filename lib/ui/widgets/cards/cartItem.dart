@@ -48,8 +48,8 @@ class CartItem extends StatelessWidget {
                   width: 110,
                   height: 110,
                   padding: EdgeInsets.all(4.0),
-                  child: Image.asset(
-                    "images/lego-spike.png",
+                  child: Image.network(
+                    "https://firebasestorage.googleapis.com/v0/b/aprender-haciendo-app.appspot.com/o/lego-spike.png?alt=media&token=c0e0a7b6-aead-462f-a904-07386aea29d1",
                     fit: BoxFit.contain,
                   ),
                   decoration: BoxDecoration(

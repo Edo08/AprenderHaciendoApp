@@ -1,4 +1,3 @@
-import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/cursos.dart';
 import 'package:aprender_haciendo_app/ui/views/eventos.dart';
@@ -8,13 +7,11 @@ import 'package:aprender_haciendo_app/ui/views/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/ui/views/shopping_cart.dart';
 import 'package:aprender_haciendo_app/ui/views/tienda.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
-import 'package:aprender_haciendo_app/ui/widgets/badge.dart';
 import 'package:aprender_haciendo_app/ui/widgets/custom_dialog.dart';
 import 'package:aprender_haciendo_app/ui/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
-import 'package:provider/provider.dart';
 
 import '../../core/services/sign_in.dart';
 
@@ -129,7 +126,6 @@ class _IndexState extends State<Index> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context);
     ScreenUtil.instance =
         ScreenUtil(width: 1125, height: 2436, allowFontScaling: true)
           ..init(context);
@@ -150,8 +146,8 @@ class _IndexState extends State<Index> {
               width: ScreenUtil.getInstance().setWidth(110),
               height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
-        Badge(
-          child: IconButton(
+        //Badge(child: 
+          IconButton(
             icon: Image.asset("icons/icon_cart.png",
                 width: ScreenUtil.getInstance().setWidth(130),
                 height: ScreenUtil.getInstance().setHeight(130)),
@@ -162,8 +158,8 @@ class _IndexState extends State<Index> {
               );
             },
           ),
-          value: cart.itemCount.toString(),
-        ),
+        //  value: cart.itemCount.toString(),
+        //),
         SizedBox(
           width: 10,
         )

@@ -1,6 +1,7 @@
 import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
+import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/index.dart';
 import 'package:aprender_haciendo_app/ui/views/login.dart';
 import 'package:aprender_haciendo_app/ui/views/registro.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           Login.routeName: (BuildContext context) => Login(),
           WelcomeScreen.routeName: (BuildContext context) => WelcomeScreen(),
           Registro.routeName: (BuildContext context) => Registro(),
-          Index.routeName: (BuildContext context) => Index()
+          Index.routeName: (BuildContext context) => Index(),
+          Academia.routeName: (BuildContext context) => Academia()
         },
       ),
     );

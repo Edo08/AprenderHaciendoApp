@@ -58,7 +58,7 @@ final TextStyle botonStyle =
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: 140,
               width: 180,
-              child: Image.asset(
+              child: Image.network(
                 certificacion.imagen,
                 fit: BoxFit.cover,
                 ),            

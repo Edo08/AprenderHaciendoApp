@@ -72,7 +72,7 @@ const kDefaultShadow = BoxShadow(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: 90,
               width: 160,
-              child: Image.asset(
+              child: Image.network(
                 evento.imagen,
                 fit: BoxFit.fitWidth,
                 ),            

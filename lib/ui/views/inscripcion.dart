@@ -1,4 +1,3 @@
-
 import 'package:aprender_haciendo_app/core/models/academymodel.dart';
 import 'package:aprender_haciendo_app/core/services/validation_mixins.dart';
 import 'package:aprender_haciendo_app/ui/shared/constants.dart';
@@ -11,18 +10,15 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:aprender_haciendo_app/ui/widgets/app_error_message.dart';
 
 class Inscripcion extends StatefulWidget {
-final Academys academy;
-const Inscripcion({Key key, this.academy}) : super(key: key);
+  final Academys academy;
+  const Inscripcion({Key key, this.academy}) : super(key: key);
   @override
   _InscripcionState createState() => _InscripcionState();
-  
 }
-
-
 
 class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   final TextStyle barStyle =
-    TextStyle(fontFamily: "Poppins-Bold", color: Colors.black);
+      TextStyle(fontFamily: "Poppins-Bold", color: Colors.black);
   final auth = FirebaseAuth.instance;
   final databaseReference = Firestore.instance;
   GlobalKey<FormState> keyForm = new GlobalKey();
@@ -73,7 +69,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     _none = FocusNode();
   }
 
- @override
+  @override
   void dispose() {
     super.dispose();
     nombreCtrl.dispose();
@@ -105,28 +101,16 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     }
   }
 
- /*  _registrarse() async {
+  _registrarse() async {
     if (keyForm.currentState.validate()) {
-      try {
-        var auth = await Authentication().createUser(email: emailCtrl.text, password: passwordCtrl.text);
-        if (auth.success) {
-          Navigator.pushNamed(context, '/index');
-          createRecord();
-        } else {
-          print(auth.errorMessage);
-          setState(() {
-            _errorMessage = auth.errorMessage;
-          });
-        }
-      } catch (e) {
-        print(e);
-      }
+      Navigator.pushNamed(context, '/academia');
+      createRecord();
     } else {
       setState(() => _autoValidate = true);
     }
-  } */
+  }
 
-   void borrarInscripcion() {
+  void borrarInscripcion() {
     nombreCtrl.text = "";
     apellidosCtrl.text = "";
     telCtrl.text = "";
@@ -136,15 +120,17 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   void createRecord() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
-    var ref = databaseReference.collection("users").document("$userId");
-    await ref.setData({
-      'uid': '$userId',
-      'nombre': '${nombreCtrl.text}',
-      'apellido': '${apellidosCtrl.text}',
-      'domicilio': '${domicilioCtrl.text}',
-      'telefono': '${telCtrl.text}',
-      'email': '${emailCtrl.text}'
-    });
+    var ref = databaseReference.collection("inscripciones").document("$userId");
+    await ref.setData(
+      {
+        'uid': '$userId',
+        'nombre': '${nombreCtrl.text}',
+        'apellido': '${apellidosCtrl.text}',
+        'telefono': '${telCtrl.text}',
+        'domicilio': '${domicilioCtrl.text}',
+        'email': '${emailCtrl.text}'
+      },
+    );
     borrarInscripcion();
   }
 
@@ -174,13 +160,12 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                     color: Colors.black,
                     fontFamily: "Poppins-Bold",
                     fontSize: 26,
-                    fontWeight: FontWeight.w700)
+                    fontWeight: FontWeight.w700)),
+            new Form(
+              key: keyForm,
+              child: formUI(),
             ),
-          new Form(
-            key: keyForm,
-            child: formUI(),
-          ),
-          ]
+          ],
         ),
       ),
     );
@@ -188,43 +173,49 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget formUI() {
     return Container(
-        height: ScreenUtil.getInstance().setHeight(1070),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
+      height: ScreenUtil.getInstance().setHeight(1070),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Scaffold(
+        body: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
+              child: Column(
+                children: <Widget>[
+                  _nombreField(),
+                  Sized22,
+                  _apellidosField(),
+                  Sized22,
+                  _telefonoField(),
+                  Sized22,
+                  _emailField(),
+                  Sized22,
+                  _domicilioField(),
+                  SizedBox(
+                    height: ScreenUtil.getInstance().setHeight(20),
+                  ),
+                  _showErrorMessage(),
+                  Sized22,
+                  _submitButton(),
+                  Sized22
+                ],
+              ),
             ),
-        child: Scaffold(
-            body: ModalProgressHUD(
-                inAsyncCall: showSpinner,
-                child: SingleChildScrollView(
-                    child: Padding(
-                        padding:
-                            EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
-                        child: Column(                         
-                          children: <Widget>[                           
-                            _nombreField(),
-                            Sized22,
-                            _apellidosField(),
-                            Sized22,
-                            _telefonoField(),
-                            Sized22,
-                            _emailField(),
-                            Sized22,
-                            _domicilioField(),
-                            SizedBox(
-                              height: ScreenUtil.getInstance().setHeight(20),
-                            ),
-                            _showErrorMessage(),
-                            Sized22,
-                            _submitButton(),
-                            Sized22
-                          ],
-                        ))))));
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _nombreField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: nombreCtrl,
       decoration: new InputDecoration(
@@ -245,7 +236,9 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _apellidosField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: apellidosCtrl,
       decoration: new InputDecoration(
@@ -266,7 +259,9 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _telefonoField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: telCtrl,
       decoration: new InputDecoration(
@@ -287,8 +282,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
-      autovalidate: _autoValidate,
+        style: TextStyle(
+          fontFamily: "Poppins-Medium",
+        ),
+        autovalidate: _autoValidate,
         controller: emailCtrl,
         decoration: new InputDecoration(
           labelText: 'Correo electrónico',
@@ -305,9 +302,11 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
         textInputAction: TextInputAction.next);
   }
 
-Widget _domicilioField() {
+  Widget _domicilioField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: domicilioCtrl,
       decoration: new InputDecoration(
@@ -325,8 +324,6 @@ Widget _domicilioField() {
       //validator: validateNombre,
     );
   }
-
-  
 
   Widget _submitButton() {
     return Row(
@@ -351,7 +348,7 @@ Widget _domicilioField() {
               child: InkWell(
                 onTap: () async {
                   setSpinnerStatus(true);
-                  //await _registrarse();
+                  await _registrarse();
                   setSpinnerStatus(false);
                 },
                 child: Padding(
