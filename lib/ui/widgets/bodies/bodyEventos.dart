@@ -1,5 +1,6 @@
 
 import 'package:aprender_haciendo_app/core/models/eventosmodel.dart';
+import 'package:aprender_haciendo_app/ui/views/evento_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/eventosCard.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,10 @@ final TextStyle nameProductStyle =
                     itemIndex: index,
                     evento: eventos[index],
                     press: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetail()));
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => EventosDetail(
+                        evento: eventos[index]),
+                        ),
+                      );
                     },
                   )), 
               ],

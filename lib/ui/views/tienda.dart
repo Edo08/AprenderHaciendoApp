@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_launch/flutter_launch.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -21,10 +22,23 @@ final TextStyle newProductStyle =
 final TextStyle nameProductStyle =
     TextStyle(fontSize: 20, fontFamily: "Poppins-Medium", color: Colors.white);
 
+
 class _TiendaState extends State<Tienda> {
-  /* void whatsAppOpen() async {
-    await FlutterLaunch.launchWathsApp(phone: "+50684438017", message: null);
-  } */
+
+  @override
+  initState() {
+    super.initState();
+  }
+
+  void whatsAppOpen() async {
+    bool whatsapp = await FlutterLaunch.hasApp(name: "whatsApp");
+
+    if (whatsapp) {
+      await FlutterLaunch.launchWathsApp(phone: "+50684438017", message: "Hola");
+    } else {
+      print("WhatsApp no instalado");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +142,16 @@ class _TiendaState extends State<Tienda> {
               ),
 
               GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetail(
+                        kit: productList[0],
+                      ),
+                    ),
+                  );
+                },
                 child: Container(
                   height: ScreenUtil().setHeight(425),
                   child: Stack(
@@ -182,11 +206,11 @@ class _TiendaState extends State<Tienda> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // whatsAppOpen();
+          onPressed: () async {
+              whatsAppOpen();
           },
-          child: FaIcon(FontAwesomeIcons.whatsapp),
-          backgroundColor: Colors.green,
+          child: FaIcon(FontAwesomeIcons.whatsapp, size: 30,),
+          backgroundColor: Color(0xFF1bd741),
         ));
   }
 }

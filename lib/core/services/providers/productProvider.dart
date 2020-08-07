@@ -68,9 +68,9 @@ class ProductsProvider with ChangeNotifier {
     return [...products];
   }
 
-  ProductModel findByCode(int productCode) {
+ /*  ProductModel findByCode(int productCode) {
     return products.firstWhere((p) => p.codigo == productCode);
-  }
+  } */
 
   void showSelected() {
     isSelected = true;

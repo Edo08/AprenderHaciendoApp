@@ -1,6 +1,9 @@
 
 import 'package:aprender_haciendo_app/core/models/paquetesmodel.dart';
+import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
  
 final TextStyle precioStyle =
     TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500);
@@ -23,6 +26,7 @@ final TextStyle productsubTitleStyle =
   Widget build(BuildContext context) {
     // It  will provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
+    final cart = Provider.of<CartProvider>(context, listen: false);
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 20.0,
@@ -35,7 +39,7 @@ final TextStyle productsubTitleStyle =
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
-            height: 136,
+            height: 150,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
               gradient: LinearGradient(
@@ -68,31 +72,58 @@ final TextStyle productsubTitleStyle =
               left: 0,
               child: SizedBox(
                 height: 160,
-                width: size.width -200,
+                width: size.width -120,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 55,), 
-                    Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    SizedBox(height: 40,), 
+                    Padding(padding: const EdgeInsets.only(left: 25.0),
                       child: Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.topLeft,
                         child: Text(
                           pack.nombre,
                           style: nombreProductoStyle,
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.left,
                         ),
                       ), 
                     ),
                     
+                    
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
                       child: Align(
-                        alignment: Alignment.center,
+                        alignment: Alignment.topLeft,
                         child: Text(
                         "₡"+"${(pack.precio).toStringAsFixed(0)}",
                         style: precioStyle,
                         ),
                       ),                     
-                    ),     
+                    ),
+                    SizedBox(height: 10,), 
+                    
+                    GestureDetector(
+                      
+                      child: Padding(padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                            child: Container(
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8)),
+                            child: Icon(
+                              Icons.add,
+                              size: 22,
+                              color: Colors.lightBlue,
+                            ),
+                          ),
+                        ),
+                      ),
+                      
+                      onTap: () {
+                        cart.addItem(pack.edades, pack.precio, pack.imagen, pack.nombre);
+                      },
+                    ),    
                   ],
                 ),
               ))
