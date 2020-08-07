@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_launch/flutter_launch.dart';
+//import 'package:flutter_launch/flutter_launch.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -30,7 +30,7 @@ class _TiendaState extends State<Tienda> {
     super.initState();
   }
 
-  void whatsAppOpen() async {
+/*   void whatsAppOpen() async {
     bool whatsapp = await FlutterLaunch.hasApp(name: "whatsApp");
 
     if (whatsapp) {
@@ -38,7 +38,7 @@ class _TiendaState extends State<Tienda> {
     } else {
       print("WhatsApp no instalado");
     }
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +207,7 @@ class _TiendaState extends State<Tienda> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-              whatsAppOpen();
+              //whatsAppOpen();
           },
           child: FaIcon(FontAwesomeIcons.whatsapp, size: 30,),
           backgroundColor: Color(0xFF1bd741),

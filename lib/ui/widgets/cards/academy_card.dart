@@ -36,7 +36,7 @@ final TextStyle botonStyle =
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
-            height: 145,
+            height: 150,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
               gradient: LinearGradient(
@@ -72,21 +72,16 @@ final TextStyle botonStyle =
                 width: size.width -180,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 7,), 
+                    SizedBox(height: 3,), 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
                       certificacion.nombre,
                       style: nombreProductoStyle,
+                      textAlign: TextAlign.center,
                       ),
                     ), 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Text(
-                      certificacion.modalidad,
-                      style: productsubTitleStyle,
-                      ),
-                    ),
+                    
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(
