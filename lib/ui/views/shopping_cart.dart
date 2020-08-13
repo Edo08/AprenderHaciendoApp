@@ -1,7 +1,9 @@
 import 'package:aprender_haciendo_app/core/models/productModel.dart';
 import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
+import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle nameStyle = TextStyle(fontSize: 16, fontFamily: "Poppins-Bold");
 final TextStyle precioStyle = TextStyle(fontSize: 16, fontFamily: "Muli");
@@ -20,11 +22,13 @@ TextEditingController codigoCtrl = new TextEditingController();
 ProductModel product;
 
 class ShoppingCart extends StatefulWidget {
+  static const String routeName = '/shopping_cart';
   @override
   _ShoppingCartState createState() => _ShoppingCartState();
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
+  
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context);
@@ -128,7 +132,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       ),
                                       Row(
                                         children: <Widget>[
-                                          GestureDetector(
+                                          /* GestureDetector(
                                             child: Container(
                                               width: 20.0,
                                               height: 20.0,
@@ -144,6 +148,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               ),
                                             ),
                                             onTap: () {},
+                                          ), */
+                                          Text(
+                                            "Cantidad: ",
+                                            style: nameStyle,
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -153,7 +161,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               style: nameStyle,
                                             ),
                                           ),
-                                          GestureDetector(
+                                          /* GestureDetector(
                                             child: Container(
                                               width: 20.0,
                                               height: 20.0,
@@ -169,7 +177,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               ),
                                             ),
                                             onTap: () {},
-                                          ),
+                                          ), */
                                           Spacer(),
                                           Text(
                                             "₡" + "${cartList[index].precio}",
@@ -207,7 +215,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
             SizedBox(
               height: 10,
             ),
-            Row(
+            /* Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
@@ -237,7 +245,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   onTap: () {},
                 ),
               ],
-            ),
+            ), */
             Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -267,7 +275,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   style: confirmarStyle,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                _onAlertButton(context);
+              },
             ),
             SizedBox(
               height: 30.0,
@@ -276,6 +286,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
         ),
       ),
     );
+  }
+  _onAlertButton(context) {
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.success,
+      title: "", 
+      desc: "Orden de compra generada.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "ACEPTAR",
+            style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "Poppins-Medium"),
+          ),
+          onPressed: () => Navigator.pushNamed(context, '/tienda'),
+          width: 120,
+        )
+      ],
+    ).show();
   }
 }
 

@@ -72,7 +72,7 @@ class Authentication {
   // Reset Password
   Future sendPasswordResetEmail(String email) async {
     try {
-      _auth.sendPasswordResetEmail(email: email);
+       await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
       print(e);
     }

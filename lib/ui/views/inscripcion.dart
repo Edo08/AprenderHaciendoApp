@@ -149,25 +149,20 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
             onPressed: () {
               Navigator.pop(context);
             },
-          )),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Text("Inscripción",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "Poppins-Bold",
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700)),
-            new Form(
+          ),),
+      body:  new SingleChildScrollView(
+        child: new Container(
+          margin: new EdgeInsets.all(25.0),
+            child: new Form(
               key: keyForm,
               child: formUI(),
             ),
-          ],
         ),
       ),
+      
+      
+      
+     
     );
   }
 
@@ -177,6 +172,16 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0.0, 15.0),
+              blurRadius: 15.0),
+          BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0.0, -10.0),
+              blurRadius: 10.0),
+        ],
       ),
       child: Scaffold(
         body: ModalProgressHUD(

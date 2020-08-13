@@ -5,6 +5,8 @@ import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/index.dart';
 import 'package:aprender_haciendo_app/ui/views/login.dart';
 import 'package:aprender_haciendo_app/ui/views/registro.dart';
+import 'package:aprender_haciendo_app/ui/views/shopping_cart.dart';
+import 'package:aprender_haciendo_app/ui/views/tienda.dart';
 import 'package:aprender_haciendo_app/ui/views/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +38,9 @@ class MyApp extends StatelessWidget {
           WelcomeScreen.routeName: (BuildContext context) => WelcomeScreen(),
           Registro.routeName: (BuildContext context) => Registro(),
           Index.routeName: (BuildContext context) => Index(),
-          Academia.routeName: (BuildContext context) => Academia()
+          Academia.routeName: (BuildContext context) => Academia(),
+          Tienda.routeName: (BuildContext context) => Tienda(),
+          ShoppingCart.routeName: (BuildContext context) => ShoppingCart(),
         },
       ),
     );

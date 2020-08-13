@@ -1,6 +1,5 @@
 import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/product_detail.dart';
-import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -81,10 +80,10 @@ class _TiendaState extends State<Tienda> {
               //SearchBox(),
               //Categorylist(),
               Container(
-                height: 60.0,
+                height: 30.0,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                child: ListView(
+                /* child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     CategorySelector(
@@ -96,7 +95,7 @@ class _TiendaState extends State<Tienda> {
                       ],
                     ),
                   ],
-                ),
+                ), */
               ),
               Container(
                 height: ScreenUtil().setHeight(1050),

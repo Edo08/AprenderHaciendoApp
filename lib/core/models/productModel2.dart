@@ -1,4 +1,4 @@
-/* import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductModel2 {
   static const CODIGO = "codigo";
@@ -46,4 +46,3 @@ class ProductModel2 {
     _isSelected = snapshot.data[ISSELECTED];
   }
 }
- */

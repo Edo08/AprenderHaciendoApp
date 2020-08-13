@@ -199,7 +199,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                   color: Colors.black12,
                   offset: Offset(0.0, -10.0),
                   blurRadius: 10.0),
-            ]),
+            ],),
         child: Scaffold(
             body: ModalProgressHUD(
                 inAsyncCall: showSpinner,

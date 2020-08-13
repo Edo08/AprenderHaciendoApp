@@ -1,4 +1,5 @@
-/* import 'package:aprender_haciendo_app/core/models/productModel2.dart';
+/* 
+import 'package:aprender_haciendo_app/core/models/productModel2.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/productServices.dart';
 import 'package:flutter/material.dart';
 
