@@ -1,11 +1,12 @@
 import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/product_detail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
+import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-//import 'package:flutter_launch/flutter_launch.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 
 class Tienda extends StatefulWidget {
   static const String routeName = '/tienda';
@@ -83,7 +84,7 @@ class _TiendaState extends State<Tienda> {
                 height: 30.0,
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                /* child: ListView(
+                child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     CategorySelector(
@@ -95,7 +96,7 @@ class _TiendaState extends State<Tienda> {
                       ],
                     ),
                   ],
-                ), */
+                ),
               ),
               Container(
                 height: ScreenUtil().setHeight(1050),
@@ -205,8 +206,8 @@ class _TiendaState extends State<Tienda> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-              //whatsAppOpen();
+          onPressed: () {
+              FlutterOpenWhatsapp.sendSingleMessage("+50684438017", "");
           },
           child: FaIcon(FontAwesomeIcons.whatsapp, size: 30,),
           backgroundColor: Color(0xFF1bd741),

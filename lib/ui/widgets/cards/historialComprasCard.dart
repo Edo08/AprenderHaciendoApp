@@ -1,4 +1,5 @@
-import 'package:aprender_haciendo_app/core/models/eventosmodel.dart';
+
+import 'package:aprender_haciendo_app/core/models/historialmodel.dart';
 import 'package:flutter/material.dart';
  
 final TextStyle codigoStyle =
@@ -21,11 +22,11 @@ final TextStyle subTitleStyle =
 
  class HistorialCard extends StatelessWidget {
   const HistorialCard({
-    Key key, this.itemIndex, this.press, this.evento,
+    Key key, this.itemIndex, this.press, this.compra,
   }) : super(key: key);
 
   final int itemIndex;
-  final Eventos evento;
+  final Historial compra;
   final Function press;
 
 
@@ -39,7 +40,9 @@ final TextStyle subTitleStyle =
         vertical: 20.0 / 2,
       ),
       height: 160,
-      child: Stack(
+      child: InkWell(
+        onTap: press,
+        child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Container(
@@ -68,11 +71,11 @@ final TextStyle subTitleStyle =
                     child: Row(
                       children: <Widget>[
                       Text(
-                        "Número de compra:",
+                        "Número de compra: ",
                           style: tituloStyle
                         ),
                       Text(
-                        " "+"001",
+                        compra.numOrden,
                         style: subTitleStyle
                       ),
                       SizedBox(width: 15,),                  
@@ -81,16 +84,16 @@ final TextStyle subTitleStyle =
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 25.0, top: 5.0),
+                    padding: const EdgeInsets.only(left: 25.0, top: 5.0, right: 5),
                     child: Container(
                     child: Row(
                       children: <Widget>[
                       Text(
-                        "Fecha de compra:",
+                        "Fecha: ",
                           style: tituloStyle
                         ),
                       Text(
-                        " "+"23/07/2020",
+                        compra.fecha,
                         style: subTitleStyle
                       ),
                       SizedBox(width: 15,),                  
@@ -152,6 +155,7 @@ final TextStyle subTitleStyle =
                 ),
               ))
         ],
+      ),
       ),           
     );    
   }
