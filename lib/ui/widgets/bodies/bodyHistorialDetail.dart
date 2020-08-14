@@ -68,7 +68,7 @@ class BodyHistorialDetail extends StatelessWidget {
                       ),                  
                   ),                  
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.0 / 2, horizontal: 15),
+                    padding: EdgeInsets.symmetric(vertical: 20.0 / 2, horizontal: 12),
                     child: Container(
                       child: Row(
                         children: <Widget>[

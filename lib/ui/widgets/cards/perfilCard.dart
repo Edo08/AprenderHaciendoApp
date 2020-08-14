@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/ui/views/EditarPerfil.dart';
 import 'package:flutter/material.dart';
  
 final TextStyle codigoStyle =
@@ -24,12 +25,11 @@ final TextStyle subTitleStyle =
 
  class PerfilCard extends StatelessWidget {
   const PerfilCard({
-    Key key, this.itemIndex, this.press,
+    Key key, this.itemIndex,
   }) : super(key: key);
 
   final int itemIndex;
   //final Cursos curso;
-  final Function press;
 
 
   @override
@@ -110,7 +110,10 @@ final TextStyle subTitleStyle =
                             child: Text("Editar perfil", style: botonStyle,),
                           ),
                           onTap: (){
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => EditarPerfil()),
+                            );
                           },
                         ),                            
                       ],

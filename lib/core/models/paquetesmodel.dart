@@ -37,8 +37,8 @@ List<Packs> paquetes = [
       codigo: 2000,
       nombre: "7 Bricks",
       precio: 16500,
-      imagen: "https://firebasestorage.googleapis.com/v0/b/aprender-haciendo-app.appspot.com/o/Logo_7bricks.png?alt=media&token=d7654f3e-4323-4650-af94-a462058be98e",
-      descripcion: "Set pensado para desarrollar tanto el área cognitiva como el pensamiento lógico matemático, habilidades lingüísticas y el desarrollo psicomotor de los niños. Contiene libro con más de 60 actividades en el área de matemática y español.",
+      imagen: "https://firebasestorage.googleapis.com/v0/b/aprender-haciendo-app.appspot.com/o/7Brciks.png?alt=media&token=e95a2636-4367-456f-afda-5b1db7be9323",
+      descripcion: "Set pensado para desarrollar tanto el área cognitiva como el pensamiento lógico matemático, habilidades lingüísticas y el desarrollo psicomotor de los niños. Contiene stickers para los ladrillos y libro con más de 60 actividades en el área de matemática y español.",
       cantPiezas: 7,
       edades: "4 a 6 años"),
   Packs(
@@ -46,8 +46,8 @@ List<Packs> paquetes = [
       codigo: 2000,
       nombre: "7 Bricks Plus",
       precio: 21500,
-      imagen: "https://firebasestorage.googleapis.com/v0/b/aprender-haciendo-app.appspot.com/o/Logo_7bricks_%2B.png?alt=media&token=ecd08ae4-53de-42bf-ad26-7242c147367b",
-      descripcion: "La versión extendida del set 7 Bricks. Este contiene dos libros con más de 60 actividades cada uno, para desarrollar tanto el área cognitiva como el pensamiento lógico matemático, habilidades lingüísticas y el desarrollo psicomotor de los niños.",
+      imagen: "https://firebasestorage.googleapis.com/v0/b/aprender-haciendo-app.appspot.com/o/creativebricks%20(1).png?alt=media&token=a43a7037-d267-467b-8681-1c19a2d5d133",
+      descripcion: "La versión extendida del set 7 Bricks. Este contiene stickers para los ladrillos y dos libros con más de 60 actividades cada uno, para desarrollar tanto el área cognitiva como el pensamiento lógico matemático, habilidades lingüísticas y el desarrollo psicomotor de los niños.",
       cantPiezas: 35,
       edades: "4 a 6 años"),
   Packs(
