@@ -1,7 +1,6 @@
-
-import 'package:aprender_haciendo_app/core/models/eventosmodel.dart';
+import 'package:aprender_haciendo_app/core/models/eventosModelDB.dart';
+import 'package:aprender_haciendo_app/ui/widgets/packImage.dart';
 import 'package:flutter/material.dart';
-import '../pack_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final TextStyle nombreProductoStyle = TextStyle(
@@ -33,9 +32,7 @@ final TextStyle botonStyle = TextStyle(
     fontWeight: FontWeight.w700);
 
 class BodyEventoDetail extends StatelessWidget {
-  final Eventos evento;
-
-  
+  final EventosModelDB evento;
 
   const BodyEventoDetail({Key key, this.evento}) : super(key: key);
   @override
@@ -73,36 +70,36 @@ class BodyEventoDetail extends StatelessWidget {
                   ),
                   //ListOfColors(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                    vertical: 10.0 / 2),
-                      child: Center(
-                        child: Text(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
+                    child: Center(
+                      child: Text(
                         evento.nombre,
                         style: nombreProductoStyle,
                         textAlign: TextAlign.center,
-                        ),
-                      ),                  
-                  ),                  
+                      ),
+                    ),
+                  ),
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 20.0 / 2, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 20.0 / 2, horizontal: 20),
                     child: Text(
                       evento.descripcion,
                       style: descripcionProductoStyle,
                       textAlign: TextAlign.justify,
-                    ), 
+                    ),
                   ),
                   SizedBox(height: 10.0),
                   SizedBox(height: 10.0),
-                  Row(
-                    children: <Widget>[
-                    SizedBox(width: 20,),
-                    Text(
-                      "Para más información o inscribirse:",
-                      style: cantPiezasStyle
-                    ),]            
+                  Row(children: <Widget>[
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text("Para más información o inscribirse:",
+                        style: cantPiezasStyle),
+                  ]),
+                  SizedBox(
+                    height: 25,
                   ),
-                  SizedBox(height: 25,), 
                 ],
               ),
             ),
@@ -119,24 +116,24 @@ class BodyEventoDetail extends StatelessWidget {
               child: GestureDetector(
                 child: Container(
                   height: 40,
-                  child: Center(  
+                  child: Center(
                     child: Text(
                       "Clic aquí",
-                      style: botonStyle,                     
+                      style: botonStyle,
                     ),
                   ),
                 ),
                 onTap: () async {
-                      final url = evento.link;
-                        if (await canLaunch(url)) {
-                        await launch(
-                          url,
-                          forceSafariVC: false,
-                        );
-                      }else {
-                        print('No se encontró $url') ;
-                    }
-                }
+                  final url = evento.link;
+                  if (await canLaunch(url)) {
+                    await launch(
+                      url,
+                      forceSafariVC: false,
+                    );
+                  } else {
+                    print('No se encontró $url');
+                  }
+                },
               ),
             ),
           ],

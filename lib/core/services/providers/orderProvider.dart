@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem {

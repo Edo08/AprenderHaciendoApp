@@ -1,10 +1,10 @@
-import 'package:aprender_haciendo_app/core/services/validation_mixins.dart';
+import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
-import 'package:aprender_haciendo_app/ui/widgets/custom_dialog.dart';
+import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
+import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:aprender_haciendo_app/ui/widgets/app_error_message.dart';
 
 class Login extends StatelessWidget {
   static const String routeName = '/login';
@@ -288,14 +288,13 @@ class _LoginFormState extends State<LoginForm>
                   showDialog(
                     context: context,
                     builder: (BuildContext context) => CustomDialog(
-                        title: "Recuperación de contraseña",
-                        description:
-                            "Recibirá un correo con el link para cambiar la contraseña a ${_emailController.text}",
-                        primaryButtonText: "Aceptar",
-                        primaryButton: _aceptar,
-                        secondaryButtonText: "Cancelar",
-                        secondaryButton: _cancelar,
-                        
+                      title: "Recuperación de contraseña",
+                      description:
+                          "Recibirá un correo con el link para cambiar la contraseña a ${_emailController.text}",
+                      primaryButtonText: "Aceptar",
+                      primaryButton: _aceptar,
+                      secondaryButtonText: "Cancelar",
+                      secondaryButton: _cancelar,
                     ),
                   );
                   setSpinnerStatus(false);
@@ -321,17 +320,18 @@ class _LoginFormState extends State<LoginForm>
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new GestureDetector(
-            onTap: () {
-              setState(() => _isVisible = !_isVisible);
-              _emailController.text = "";
-            },
-            child: new Text(
-              "¿Olvidó la contraseña?",
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontFamily: "Poppins-Medium",
-                  fontSize: ScreenUtil.getInstance().setSp(28)),
-            )),
+          onTap: () {
+            setState(() => _isVisible = !_isVisible);
+            _emailController.text = "";
+          },
+          child: new Text(
+            "¿Olvidó la contraseña?",
+            style: TextStyle(
+                color: Colors.blue,
+                fontFamily: "Poppins-Medium",
+                fontSize: ScreenUtil.getInstance().setSp(28)),
+          ),
+        ),
       ],
     );
   }
@@ -341,18 +341,19 @@ class _LoginFormState extends State<LoginForm>
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new GestureDetector(
-            onTap: () {
-              setState(() => _isVisible = !_isVisible);
-              _emailController.text = "";
-              _passwordController.text = "";
-            },
-            child: new Text(
-              "Iniciar sesión",
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontFamily: "Poppins-Medium",
-                  fontSize: ScreenUtil.getInstance().setSp(28)),
-            )),
+          onTap: () {
+            setState(() => _isVisible = !_isVisible);
+            _emailController.text = "";
+            _passwordController.text = "";
+          },
+          child: new Text(
+            "Iniciar sesión",
+            style: TextStyle(
+                color: Colors.blue,
+                fontFamily: "Poppins-Medium",
+                fontSize: ScreenUtil.getInstance().setSp(28)),
+          ),
+        ),
       ],
     );
   }
@@ -363,8 +364,7 @@ class _LoginFormState extends State<LoginForm>
 
   void _aceptar() async {
     try {
-      await Authentication()
-          .sendPasswordResetEmail(_emailController.text);
+      await Authentication().sendPasswordResetEmail(_emailController.text);
       print('$_email');
     } catch (e) {
       print(e);
@@ -375,23 +375,23 @@ class _LoginFormState extends State<LoginForm>
     setState(() => _isVisible = !_isVisible);
   }
 
-
   Widget _correoField() {
     return TextFormField(
-        autovalidate: _autoValidate,
-        controller: _emailController,
-        focusNode: _userFocus,
-        onFieldSubmitted: (value) {
-          _fieldFocusChange(context, _userFocus, _passFocus);
-        },
-        validator: validateEmail,
-        decoration: InputDecoration(
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-        keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.next,
-        onChanged: (value) {
-          _email = value;
-        });
+      autovalidate: _autoValidate,
+      controller: _emailController,
+      focusNode: _userFocus,
+      onFieldSubmitted: (value) {
+        _fieldFocusChange(context, _userFocus, _passFocus);
+      },
+      validator: validateEmail,
+      decoration: InputDecoration(
+          hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+      keyboardType: TextInputType.emailAddress,
+      textInputAction: TextInputAction.next,
+      onChanged: (value) {
+        _email = value;
+      },
+    );
   }
 
   Widget _passField() {

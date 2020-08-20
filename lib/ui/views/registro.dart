@@ -1,16 +1,15 @@
-import 'package:aprender_haciendo_app/core/services/validation_mixins.dart';
+import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
 import 'package:aprender_haciendo_app/ui/shared/constants.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
+import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:aprender_haciendo_app/ui/widgets/app_error_message.dart';
 
 //ultimo
-
 class Registro extends StatefulWidget {
   static const String routeName = '/registro';
 
@@ -118,7 +117,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   _registrarse() async {
     if (keyForm.currentState.validate()) {
       try {
-        var auth = await Authentication().createUser(email: emailCtrl.text, password: passwordCtrl.text);
+        var auth = await Authentication()
+            .createUser(email: emailCtrl.text, password: passwordCtrl.text);
         if (auth.success) {
           Navigator.pushNamed(context, '/index');
           createRecord();
@@ -149,15 +149,17 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   void createRecord() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     var ref = databaseReference.collection("users").document("$userId");
-    await ref.setData({
-      'uid': '$userId',
-      'nombre': '${nombreCtrl.text}',
-      'apellido': '${apellidosCtrl.text}',
-      'fechaNacimiento': '$fechaNacimiento',
-      'telefono': '${telCtrl.text}',
-      'email': '${emailCtrl.text}',
-      'contraseña': '${passwordCtrl.text}'
-    });
+    await ref.setData(
+      {
+        'uid': '$userId',
+        'nombre': '${nombreCtrl.text}',
+        'apellido': '${apellidosCtrl.text}',
+        'fechaNacimiento': '$fechaNacimiento',
+        'telefono': '${telCtrl.text}',
+        'email': '${emailCtrl.text}',
+        'contraseña': '${passwordCtrl.text}'
+      },
+    );
     borrarRegistro();
   }
 
@@ -168,7 +170,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       resizeToAvoidBottomPadding: true,
       appBar: new AppBar(
         centerTitle: true,
-        title: new Text('Registro', style: TextStyle(fontFamily: "Poppins-Medium",)),
+        title: new Text('Registro',
+            style: TextStyle(
+              fontFamily: "Poppins-Medium",
+            )),
         backgroundColor: Color(0xFF4cb2e2),
         elevation: 0.0,
       ),
@@ -186,56 +191,63 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget formUI() {
     return Container(
-        height: ScreenUtil.getInstance().setHeight(1070),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black12,
-                  offset: Offset(0.0, 15.0),
-                  blurRadius: 15.0),
-              BoxShadow(
-                  color: Colors.black12,
-                  offset: Offset(0.0, -10.0),
-                  blurRadius: 10.0),
-            ],),
-        child: Scaffold(
-            body: ModalProgressHUD(
-                inAsyncCall: showSpinner,
-                child: SingleChildScrollView(
-                    child: Padding(
-                        padding:
-                            EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
-                        child: Column(
-                          children: <Widget>[
-                            _nombreField(),
-                            Sized22,
-                            _apellidosField(),
-                            Sized22,
-                            _fechaNacimientoField(),
-                            Sized22,
-                            _telefonoField(),
-                            Sized22,
-                            _emailField(),
-                            Sized22,
-                            _passField(),
-                            Sized22,
-                            _passconfirmacionField(),
-                            SizedBox(
-                              height: ScreenUtil.getInstance().setHeight(20),
-                            ),
-                            _showErrorMessage(),
-                            Sized22,
-                            _submitButton(),
-                            Sized22
-                          ],
-                        ))))));
+      height: ScreenUtil.getInstance().setHeight(1070),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.0),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0.0, 15.0),
+              blurRadius: 15.0),
+          BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0.0, -10.0),
+              blurRadius: 10.0),
+        ],
+      ),
+      child: Scaffold(
+        body: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
+              child: Column(
+                children: <Widget>[
+                  _nombreField(),
+                  Sized22,
+                  _apellidosField(),
+                  Sized22,
+                  _fechaNacimientoField(),
+                  Sized22,
+                  _telefonoField(),
+                  Sized22,
+                  _emailField(),
+                  Sized22,
+                  _passField(),
+                  Sized22,
+                  _passconfirmacionField(),
+                  SizedBox(
+                    height: ScreenUtil.getInstance().setHeight(20),
+                  ),
+                  _showErrorMessage(),
+                  Sized22,
+                  _submitButton(),
+                  Sized22
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _nombreField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: nombreCtrl,
       decoration: new InputDecoration(
@@ -256,7 +268,9 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _apellidosField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: apellidosCtrl,
       decoration: new InputDecoration(
@@ -277,47 +291,53 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _fechaNacimientoField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
-        controller: nacimientoCtrl,
-        decoration: new InputDecoration(
-          labelText: 'Fecha nacimiento',
-        ),
-        focusNode: _nacimientoFocus,
-        onFieldSubmitted: (value) {
-          _fieldFocusChange(context, _nacimientoFocus, _telefonoFocus);
-        },
-        textInputAction: TextInputAction.next,
-        keyboardType: TextInputType.datetime,
-        validator: validateNacimiento,
-        onTap: () async {
-          final datePick = await showDatePicker(
-              context: context,
-              initialDate: new DateTime.now(),
-              firstDate: new DateTime(1900),
-              lastDate: new DateTime(2100));
-          if (datePick != null && datePick != fechaNacimiento) {
-            setState(() {
+      controller: nacimientoCtrl,
+      decoration: new InputDecoration(
+        labelText: 'Fecha nacimiento',
+      ),
+      focusNode: _nacimientoFocus,
+      onFieldSubmitted: (value) {
+        _fieldFocusChange(context, _nacimientoFocus, _telefonoFocus);
+      },
+      textInputAction: TextInputAction.next,
+      keyboardType: TextInputType.datetime,
+      validator: validateNacimiento,
+      onTap: () async {
+        final datePick = await showDatePicker(
+            context: context,
+            initialDate: new DateTime.now(),
+            firstDate: new DateTime(1900),
+            lastDate: new DateTime(2100));
+        if (datePick != null && datePick != fechaNacimiento) {
+          setState(
+            () {
               fechaNacimiento = datePick;
               isDateSelected = true;
               nacimientoCtrl.text =
                   "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
-            });
-          }
-          new Text(isDateSelected
-              ? "$fechaNacimiento"
-              : "Seleccione su fecha de nacimiento");
+            },
+          );
         }
-        /*   onChanged: (value){
+        new Text(isDateSelected
+            ? "$fechaNacimiento"
+            : "Seleccione su fecha de nacimiento");
+      },
+      /*   onChanged: (value){
         nacimientoCtrl = value as TextEditingController;
       },                
           textInputAction: TextInputAction.next,*/
-        );
+    );
   }
 
   Widget _telefonoField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: telCtrl,
       decoration: new InputDecoration(
@@ -338,8 +358,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
-      autovalidate: _autoValidate,
+        style: TextStyle(
+          fontFamily: "Poppins-Medium",
+        ),
+        autovalidate: _autoValidate,
         controller: emailCtrl,
         decoration: new InputDecoration(
           labelText: 'Correo electrónico',
@@ -358,7 +380,9 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _passField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: passwordCtrl,
       obscureText: true,
@@ -380,7 +404,9 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _passconfirmacionField() {
     return TextFormField(
-      style: TextStyle(fontFamily: "Poppins-Medium",),
+      style: TextStyle(
+        fontFamily: "Poppins-Medium",
+      ),
       autovalidate: _autoValidate,
       controller: repeatPassCtrl,
       obscureText: true,
@@ -438,12 +464,14 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                   padding: EdgeInsets.only(
                       left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),
                   child: Center(
-                    child: Text("REGISTRARSE",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins-Bold",
-                            fontSize: 17,
-                            letterSpacing: 1.0)),
+                    child: Text(
+                      "REGISTRARSE",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Poppins-Bold",
+                          fontSize: 17,
+                          letterSpacing: 1.0),
+                    ),
                   ),
                 ),
               ),

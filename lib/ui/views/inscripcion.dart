@@ -1,17 +1,17 @@
-import 'package:aprender_haciendo_app/core/models/academymodel.dart';
-import 'package:aprender_haciendo_app/core/services/validation_mixins.dart';
+import 'package:aprender_haciendo_app/core/models/academyModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
 import 'package:aprender_haciendo_app/ui/shared/constants.dart';
+import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:aprender_haciendo_app/ui/widgets/app_error_message.dart';
 
 class Inscripcion extends StatefulWidget {
-  final Academys academy;
-  const Inscripcion({Key key, this.academy}) : super(key: key);
+  final AcademyModelDB certifiacion;
+  const Inscripcion({Key key, this.certifiacion}) : super(key: key);
   @override
   _InscripcionState createState() => _InscripcionState();
 }
@@ -138,31 +138,28 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            icon: Icon(
-              Icons.keyboard_arrow_left,
-              color: Colors.black,
-              size: 30,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),),
-      body:  new SingleChildScrollView(
-        child: new Container(
-          margin: new EdgeInsets.all(25.0),
-            child: new Form(
-              key: keyForm,
-              child: formUI(),
-            ),
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(
+            Icons.keyboard_arrow_left,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
-      
-      
-      
-     
+      body: new SingleChildScrollView(
+        child: new Container(
+          margin: new EdgeInsets.all(25.0),
+          child: new Form(
+            key: keyForm,
+            child: formUI(),
+          ),
+        ),
+      ),
     );
   }
 
@@ -339,15 +336,16 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
             width: ScreenUtil.getInstance().setWidth(450),
             height: ScreenUtil.getInstance().setHeight(100),
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Color(0xFFd10100), Color(0xFFfe4936)]),
-                borderRadius: BorderRadius.circular(6.0),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0xFF6078ea).withOpacity(.3),
-                      offset: Offset(0.0, 8.0),
-                      blurRadius: 8.0)
-                ]),
+              gradient: LinearGradient(
+                  colors: [Color(0xFFd10100), Color(0xFFfe4936)]),
+              borderRadius: BorderRadius.circular(6.0),
+              boxShadow: [
+                BoxShadow(
+                    color: Color(0xFF6078ea).withOpacity(.3),
+                    offset: Offset(0.0, 8.0),
+                    blurRadius: 8.0)
+              ],
+            ),
             child: Material(
               color: Colors.transparent,
               child: InkWell(

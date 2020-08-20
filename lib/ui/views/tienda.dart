@@ -1,7 +1,7 @@
-import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
-import 'package:aprender_haciendo_app/ui/views/product_detail.dart';
-import 'package:aprender_haciendo_app/ui/widgets/cards/product_card.dart';
-import 'package:aprender_haciendo_app/ui/widgets/categoryselector.dart';
+import 'package:aprender_haciendo_app/core/services/providers/productoProvider.dart';
+import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/productoCard.dart';
+import 'package:aprender_haciendo_app/ui/widgets/categorySelector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,9 +22,7 @@ final TextStyle newProductStyle =
 final TextStyle nameProductStyle =
     TextStyle(fontSize: 20, fontFamily: "Poppins-Medium", color: Colors.white);
 
-
 class _TiendaState extends State<Tienda> {
-
   @override
   initState() {
     super.initState();
@@ -42,8 +40,8 @@ class _TiendaState extends State<Tienda> {
 
   @override
   Widget build(BuildContext context) {
-    final products = Provider.of<ProductsProvider>(context);
-    final productList = products.items;
+    final products = Provider.of<ProductoProvider>(context);
+    final productList = products.products;
     //final categoryProvider = Provider.of<CategoryProvider>(context);
     //final productProvider = Provider.of<ProductProvider>(context);
     ScreenUtil.instance =
@@ -51,79 +49,79 @@ class _TiendaState extends State<Tienda> {
           ..init(context);
 
     return Scaffold(
-        backgroundColor: Colors.white,
-        resizeToAvoidBottomPadding: true,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(0),
-                    left: ScreenUtil().setWidth(50),
-                    right: ScreenUtil().setWidth(50)),
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: true,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(0),
+                  left: ScreenUtil().setWidth(50),
+                  right: ScreenUtil().setWidth(50)),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: Text("Tienda",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: "Poppins-Bold",
+                      fontSize: 26,
+                      fontWeight: FontWeight.w700)),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            //SearchBox(),
+            //Categorylist(),
+            Container(
+              height: 30.0,
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  CategorySelector(
+                    categorias: [
+                      "Preescolar",
+                      "Primaria",
+                      "Secundaria",
+                      "Todos"
+                    ],
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Text("Tienda",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: "Poppins-Bold",
-                        fontSize: 26,
-                        fontWeight: FontWeight.w700)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              //SearchBox(),
-              //Categorylist(),
-              Container(
-                height: 30.0,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
-                child: ListView(
+            ),
+            Container(
+              height: ScreenUtil().setHeight(1050),
+              child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    CategorySelector(
-                      categorias: [
-                        "Preescolar",
-                        "Primaria",
-                        "Secundaria",
-                        "Todos"
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                height: ScreenUtil().setHeight(1050),
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    itemCount: productList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ChangeNotifierProvider.value(
-                        value: productList[index],
-                        child: ProductCard(
-                          itemIndex: index,
-                          product: productList[index],
-                          press: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProductDetail(
-                                  kit: productList[index],
-                                ),
+                  physics: BouncingScrollPhysics(),
+                  itemCount: productList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ChangeNotifierProvider.value(
+                      value: productList[index],
+                      child: ProductCard(
+                        itemIndex: index,
+                        product: productList[index],
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetail(
+                                product: productList[index],
                               ),
-                            );
-                          },
-                        ),
-                      );
-                    }
-                    /* itemBuilder: (context, index) => ProductCard(
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                  /* itemBuilder: (context, index) => ProductCard(
                     itemIndex: index,
                     product: productList[index],
                     press: () {
@@ -137,81 +135,85 @@ class _TiendaState extends State<Tienda> {
                       );
                     },
                   ), */
-                    ),
-                //child: ListPage(),
-              ),
+                  ),
+              //child: ListPage(),
+            ),
 
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductDetail(
-                        kit: productList[0],
-                      ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductDetail(
+                      product: productList[0],
                     ),
-                  );
-                },
-                child: Container(
-                  height: ScreenUtil().setHeight(425),
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.symmetric(
-                            horizontal: ScreenUtil().setWidth(60),
-                            vertical: ScreenUtil().setHeight(30)),
-                        padding: EdgeInsets.only(
-                          top: ScreenUtil().setHeight(60),
-                          left: ScreenUtil().setWidth(50),
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFf29c1f),
-                              Color(0xFFf0c419),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Nuevo producto",
-                              style: newProductStyle,
-                            ),
-                            Text(
-                              "Spike™ Prime",
-                              style: nameProductStyle,
-                            ),
+                  ),
+                );
+              },
+              child: Container(
+                height: ScreenUtil().setHeight(425),
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(60),
+                          vertical: ScreenUtil().setHeight(30)),
+                      padding: EdgeInsets.only(
+                        top: ScreenUtil().setHeight(60),
+                        left: ScreenUtil().setWidth(50),
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFf29c1f),
+                            Color(0xFFf0c419),
                           ],
                         ),
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      Positioned(
-                        top: ScreenUtil().setHeight(-75),
-                        right: ScreenUtil().setWidth(-50),
-                        child: Image.asset(
-                          "images/breakdance_spike.png",
-                          width: ScreenUtil().setWidth(580),
-                          height: ScreenUtil().setHeight(550),
-                        ),
-                      )
-                    ],
-                  ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Nuevo producto",
+                            style: newProductStyle,
+                          ),
+                          Text(
+                            "Spike™ Prime",
+                            style: nameProductStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      top: ScreenUtil().setHeight(-75),
+                      right: ScreenUtil().setWidth(-50),
+                      child: Image.asset(
+                        "images/breakdance_spike.png",
+                        width: ScreenUtil().setWidth(580),
+                        height: ScreenUtil().setHeight(550),
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-              FlutterOpenWhatsapp.sendSingleMessage("+50684438017", "");
-          },
-          child: FaIcon(FontAwesomeIcons.whatsapp, size: 30,),
-          backgroundColor: Color(0xFF1bd741),
-        ));
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          FlutterOpenWhatsapp.sendSingleMessage("+50684438017", "");
+        },
+        child: FaIcon(
+          FontAwesomeIcons.whatsapp,
+          size: 30,
+        ),
+        backgroundColor: Color(0xFF1bd741),
+      ),
+    );
   }
 }
 

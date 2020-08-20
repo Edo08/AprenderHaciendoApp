@@ -1,4 +1,3 @@
-
 import 'package:aprender_haciendo_app/core/models/historialmodel.dart';
 import 'package:flutter/material.dart';
 
@@ -20,15 +19,11 @@ final TextStyle descripcionProductoStyle = TextStyle(
     color: Colors.grey,
     fontWeight: FontWeight.w500);
 
-final TextStyle montoStyle = TextStyle(
-    fontSize: 20,
-    color: Colors.grey,
-    fontWeight: FontWeight.w500);
+final TextStyle montoStyle =
+    TextStyle(fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w500);
 
 class BodyHistorialDetail extends StatelessWidget {
   final Historial historial;
-
-  
 
   const BodyHistorialDetail({Key key, this.historial}) : super(key: key);
   @override
@@ -57,48 +52,42 @@ class BodyHistorialDetail extends StatelessWidget {
                 children: <Widget>[
                   //ListOfColors(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                    vertical: 10.0 / 2),
-                      child: Center(
-                        child: Text(
-                        "Número de orden "+historial.numOrden,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
+                    child: Center(
+                      child: Text(
+                        "Número de orden " + historial.numOrden,
                         style: numOrdenStyle,
                         textAlign: TextAlign.center,
-                        ),
-                      ),                  
-                  ),                  
+                      ),
+                    ),
+                  ),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.0 / 2, horizontal: 12),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 20.0 / 2, horizontal: 12),
                     child: Container(
-                      child: Row(
-                        children: <Widget>[
-                        Text(
-                          "Fecha: ",
-                            style: tituloStyle
-                          ),
+                      child: Row(children: <Widget>[
+                        Text("Fecha: ", style: tituloStyle),
                         Text(
                           historial.fecha,
                           style: descripcionProductoStyle,
                         ),
-                        SizedBox(width: 15,),                  
-                        ]            
-                      ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                      ]),
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  Row(
-                    children: <Widget>[
-                    SizedBox(width: 20,),
-                    Text(
-                      "Monto: ",
-                      style: tituloStyle
+                  Row(children: <Widget>[
+                    SizedBox(
+                      width: 20,
                     ),
-                    Text(
-                      "₡"+ "137670",
-                      style: montoStyle
-                    )]            
+                    Text("Monto: ", style: tituloStyle),
+                    Text("₡" + "137670", style: montoStyle),
+                  ]),
+                  SizedBox(
+                    height: 25,
                   ),
-                  SizedBox(height: 25,), 
                 ],
               ),
             ),

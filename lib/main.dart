@@ -1,13 +1,16 @@
-import 'package:aprender_haciendo_app/core/models/productModel.dart';
-import 'package:aprender_haciendo_app/core/services/providers/cartProvider.dart';
-import 'package:aprender_haciendo_app/core/services/providers/productProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/cursoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/eventoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/paqueteProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/productoProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
+import 'package:aprender_haciendo_app/ui/views/carrito.dart';
 import 'package:aprender_haciendo_app/ui/views/index.dart';
 import 'package:aprender_haciendo_app/ui/views/login.dart';
 import 'package:aprender_haciendo_app/ui/views/registro.dart';
-import 'package:aprender_haciendo_app/ui/views/shopping_cart.dart';
 import 'package:aprender_haciendo_app/ui/views/tienda.dart';
-import 'package:aprender_haciendo_app/ui/views/welcome_screen.dart';
+import 'package:aprender_haciendo_app/ui/views/welcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,13 +22,22 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
-          value: ProductModel(),
+          value: AcademyProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: ProductsProvider(),
+          value: ProductoProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: CartProvider(),
+          value: CarritoProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CursoProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: EventoProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: PaqueteProvider(),
         ),
       ],
       child: MaterialApp(

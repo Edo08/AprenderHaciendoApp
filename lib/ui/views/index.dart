@@ -1,19 +1,19 @@
+import 'package:aprender_haciendo_app/core/services/singIn.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
+import 'package:aprender_haciendo_app/ui/views/carrito.dart';
 import 'package:aprender_haciendo_app/ui/views/cursos.dart';
 import 'package:aprender_haciendo_app/ui/views/eventos.dart';
-import 'package:aprender_haciendo_app/ui/views/historial_compras.dart';
+import 'package:aprender_haciendo_app/ui/views/historialCompras.dart';
 import 'package:aprender_haciendo_app/ui/views/perfil.dart';
 import 'package:aprender_haciendo_app/ui/views/quedateEnCasa.dart';
-import 'package:aprender_haciendo_app/ui/views/shopping_cart.dart';
 import 'package:aprender_haciendo_app/ui/views/tienda.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
-import 'package:aprender_haciendo_app/ui/widgets/custom_dialog.dart';
+import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:aprender_haciendo_app/ui/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 
-import '../../core/services/sign_in.dart';
 
 class Index extends StatefulWidget {
   static const String routeName = '/index';
@@ -29,7 +29,8 @@ class _IndexState extends State<Index> {
   List<ScreenHiddenDrawer> items = new List();
   @override
   void initState() {
-    items.add(new ScreenHiddenDrawer(
+    items.add(
+      new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Tienda",
           baseStyle: TextStyle(
@@ -38,9 +39,12 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        Tienda()));
+        Tienda(),
+      ),
+    );
 
-    items.add(new ScreenHiddenDrawer(
+    items.add(
+      new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Quédate en casa",
           baseStyle: TextStyle(
@@ -49,7 +53,9 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        QuedateEnCasa()));
+        QuedateEnCasa(),
+      ),
+    );
 
     items.add(
       new ScreenHiddenDrawer(
@@ -65,7 +71,8 @@ class _IndexState extends State<Index> {
       ),
     );
 
-    items.add(new ScreenHiddenDrawer(
+    items.add(
+      new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Eventos",
           baseStyle: TextStyle(
@@ -74,9 +81,12 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        Eventos()));
+        Eventos(),
+      ),
+    );
 
-    items.add(new ScreenHiddenDrawer(
+    items.add(
+      new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Cursos",
           baseStyle: TextStyle(
@@ -85,9 +95,12 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        Cursos()));
+        Cursos(),
+      ),
+    );
 
-    items.add(new ScreenHiddenDrawer(
+    items.add(
+      new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Historial compras",
           baseStyle: TextStyle(
@@ -96,7 +109,9 @@ class _IndexState extends State<Index> {
               fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
-        HistorialCompras()));
+        HistorialCompras(),
+      ),
+    );
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
@@ -146,18 +161,18 @@ class _IndexState extends State<Index> {
               width: ScreenUtil.getInstance().setWidth(110),
               height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
-        //Badge(child: 
-          IconButton(
-            icon: Image.asset("icons/icon_cart.png",
-                width: ScreenUtil.getInstance().setWidth(130),
-                height: ScreenUtil.getInstance().setHeight(130)),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ShoppingCart()),
-              );
-            },
-          ),
+        //Badge(child:
+        IconButton(
+          icon: Image.asset("icons/icon_cart.png",
+              width: ScreenUtil.getInstance().setWidth(130),
+              height: ScreenUtil.getInstance().setHeight(130)),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ShoppingCart()),
+            );
+          },
+        ),
         //  value: cart.itemCount.toString(),
         //),
         SizedBox(
@@ -214,12 +229,14 @@ class _IndexState extends State<Index> {
                   fontWeight: FontWeight.bold)),
         ),
         Center(
-          child: new Text("Correo",
-              style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white70,
-                  fontWeight: FontWeight.normal)),
-        )
+          child: new Text(
+            "Correo",
+            style: new TextStyle(
+                fontSize: 18.0,
+                color: Colors.white70,
+                fontWeight: FontWeight.normal),
+          ),
+        ),
       ],
     );
   }

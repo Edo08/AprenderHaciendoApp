@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/auth_request.dart';
+import 'package:aprender_haciendo_app/core/services/authRequest.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication {
