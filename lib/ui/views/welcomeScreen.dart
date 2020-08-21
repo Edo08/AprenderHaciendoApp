@@ -117,15 +117,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       children: <Widget>[
         SocialIcon(
           colors: [
-            Color(0xFF28409b),
-            Color(0xFF28409b),
-            Color(0xFF28409b),
-          ],
-          iconData: CustomIcons.facebook,
-          onPressed: () {},
-        ),
-        SocialIcon(
-          colors: [
             Color(0xFFd32d32),
             Color(0xFFd32d32),
           ],

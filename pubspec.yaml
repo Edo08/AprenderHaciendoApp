@@ -58,6 +58,7 @@ flutter:
     - images/9656.png
     - images/mezcladora.png
     - images/motorizado.png
+    - images/LogoAH_color.png
 
   fonts:
     - family: CustomIcons

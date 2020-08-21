@@ -142,7 +142,7 @@ class _TiendaState extends State<Tienda> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ProductDetail(
-                      product: productList[0],
+                      product: productList[3],
                     ),
                   ),
                 );

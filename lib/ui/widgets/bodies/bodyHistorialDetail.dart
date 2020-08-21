@@ -2,25 +2,25 @@ import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle numOrdenStyle = TextStyle(
-    fontSize: 25,
+    fontSize: 24,
     fontFamily: "Poppins-Medium",
     color: Colors.black,
     fontWeight: FontWeight.w700);
 
 final TextStyle tituloStyle = TextStyle(
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "Poppins-Medium",
     color: Colors.black,
     fontWeight: FontWeight.w500);
 
 final TextStyle descripcionProductoStyle = TextStyle(
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: "Poppins-Medium",
     color: Colors.grey,
-    fontWeight: FontWeight.w500);
+    fontWeight: FontWeight.w500,);
 
 final TextStyle montoStyle =
-    TextStyle(fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w500);
+    TextStyle(fontSize: 19, color: Colors.grey, fontWeight: FontWeight.w500);
 
 class BodyHistorialDetail extends StatelessWidget {
   final ComprasModelDB historial;
@@ -50,12 +50,18 @@ class BodyHistorialDetail extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  //ListOfColors(),
+                  Center(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                           horizontal: 12),
+                      child: Image.asset("images/LogoAH_color.png", height: 100, width: 200,),
+                    ),
+                  ),                  
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        "Número de orden " + historial.transactionCode.toString(),
+                        "Número de compra #" + historial.transactionCode.toString(),
                         style: numOrdenStyle,
                         textAlign: TextAlign.center,
                       ),
@@ -79,13 +85,34 @@ class BodyHistorialDetail extends StatelessWidget {
                       ]),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  FittedBox(
+                      child: DataTable(
+                      columns: [
+                        DataColumn(label: Text('Producto', style: tituloStyle)),
+                        DataColumn(label: Text('Cantidad', style: tituloStyle)),
+                        DataColumn(label: Text('Subtotal', style: tituloStyle)),
+                      ],
+                      rows: <DataRow>[
+                        DataRow(
+                          cells: <DataCell>[
+                            DataCell(Text('AAAAAA', style: descripcionProductoStyle,)),
+                            DataCell(Text('1', style: descripcionProductoStyle, textAlign: TextAlign.center,)),
+                            DataCell(Text("₡" +'Yes', style: montoStyle,)),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
                   Row(children: <Widget>[
                     SizedBox(
-                      width: 20,
+                      width: 15,
                     ),
-                    Text("Monto: ", style: tituloStyle),
-                    Text("₡" + "137670", style: montoStyle),
+                    Text("Total de la compra: ", style: tituloStyle),
+                    Text("₡" + historial.precio.toString(), style: montoStyle),
                   ]),
                   SizedBox(
                     height: 25,

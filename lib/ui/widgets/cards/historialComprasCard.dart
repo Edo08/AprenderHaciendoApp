@@ -31,6 +31,11 @@ final TextStyle subTitleStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.w500);
 
+final TextStyle precioStyle = TextStyle(
+    fontSize: 17,
+    color: Colors.black,
+    fontWeight: FontWeight.w500);
+
 class HistorialCard extends StatelessWidget {
   const HistorialCard({
     Key key,
@@ -115,8 +120,8 @@ class HistorialCard extends StatelessWidget {
                   child: Container(
                     child: Row(
                       children: <Widget>[
-                        Text("Monto:", style: tituloStyle),
-                        Text(" " + compra.precio.toString(), style: subTitleStyle),
+                        Text("Monto: ", style: tituloStyle),
+                        Text("₡" + compra.precio.toString(), style: precioStyle),
                         SizedBox(
                           width: 15,
                         ),

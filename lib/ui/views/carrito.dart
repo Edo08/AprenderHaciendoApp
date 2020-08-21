@@ -6,17 +6,20 @@ import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle nameStyle = TextStyle(fontSize: 16, fontFamily: "Poppins-Bold");
-final TextStyle precioStyle = TextStyle(fontSize: 16, fontFamily: "Muli");
+final TextStyle precioStyle = TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
 final TextStyle totalStyle = TextStyle(
     fontSize: 26, fontFamily: "Poppins-Bold", fontWeight: FontWeight.bold);
 final TextStyle subtotalStyle =
     TextStyle(fontSize: 24, fontFamily: "Poppins-Bold");
+
 final TextStyle subtotalPrecioStyle =
-    TextStyle(fontSize: 22, fontFamily: "Muli", fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 22,fontWeight: FontWeight.bold);
+
 final TextStyle totalprecioStyle =
-    TextStyle(fontSize: 24, fontFamily: "Muli", fontWeight: FontWeight.w800);
+    TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
+
 final TextStyle confirmarStyle =
-    TextStyle(fontSize: 16, fontFamily: "Poppins-Medium", color: Colors.white);
+    TextStyle(fontSize: 18, fontFamily: "Poppins-Bold", color: Colors.white);
 GlobalKey<FormState> keyForm = new GlobalKey();
 TextEditingController codigoCtrl = new TextEditingController();
 ProductoModelDB product;
@@ -180,7 +183,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           ), */
                                           Spacer(),
                                           Text(
-                                            "₡" + "${cartList[index].precio}",
+                                            "\₡${(cartList[index].precio).toStringAsFixed(0)}",
                                             style: precioStyle,
                                           ),
                                         ],
@@ -255,7 +258,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   style: totalStyle,
                 ),
                 Text(
-                  "₡" + "${cart.totalAmount}",
+                  "\₡${(cart.totalAmount).toStringAsFixed(0)}",
                   style: totalprecioStyle,
                 ),
               ],
