@@ -1,7 +1,6 @@
 import 'package:aprender_haciendo_app/core/services/providers/productoProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/productoCard.dart';
-import 'package:aprender_haciendo_app/ui/widgets/categorySelector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,8 +41,6 @@ class _TiendaState extends State<Tienda> {
   Widget build(BuildContext context) {
     final products = Provider.of<ProductoProvider>(context);
     final productList = products.products;
-    //final categoryProvider = Provider.of<CategoryProvider>(context);
-    //final productProvider = Provider.of<ProductProvider>(context);
     ScreenUtil.instance =
         ScreenUtil(width: 1125, height: 2436, allowFontScaling: true)
           ..init(context);
@@ -62,7 +59,7 @@ class _TiendaState extends State<Tienda> {
                   right: ScreenUtil().setWidth(50)),
             ),
             SizedBox(
-              height: 10,
+              height: 25,
             ),
             Padding(
               padding: EdgeInsets.only(left: 15),
@@ -74,11 +71,11 @@ class _TiendaState extends State<Tienda> {
                       fontWeight: FontWeight.w700)),
             ),
             SizedBox(
-              height: 10,
+              height: 25,
             ),
             //SearchBox(),
             //Categorylist(),
-            Container(
+            /* Container(
               height: 30.0,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 2),
@@ -95,7 +92,7 @@ class _TiendaState extends State<Tienda> {
                   ),
                 ],
               ),
-            ),
+            ), */
             Container(
               height: ScreenUtil().setHeight(1050),
               child: ListView.builder(

@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/historialmodel.dart';
+import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle numOrdenStyle = TextStyle(
@@ -23,7 +23,7 @@ final TextStyle montoStyle =
     TextStyle(fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w500);
 
 class BodyHistorialDetail extends StatelessWidget {
-  final Historial historial;
+  final ComprasModelDB historial;
 
   const BodyHistorialDetail({Key key, this.historial}) : super(key: key);
   @override
@@ -55,7 +55,7 @@ class BodyHistorialDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        "Número de orden " + historial.numOrden,
+                        "Número de orden " + historial.transactionCode.toString(),
                         style: numOrdenStyle,
                         textAlign: TextAlign.center,
                       ),
@@ -68,7 +68,9 @@ class BodyHistorialDetail extends StatelessWidget {
                       child: Row(children: <Widget>[
                         Text("Fecha: ", style: tituloStyle),
                         Text(
-                          historial.fecha,
+                          historial.fecha.toDate().day.toString()+"/"+
+                          historial.fecha.toDate().month.toString()+"/"+
+                          historial.fecha.toDate().year.toString(),
                           style: descripcionProductoStyle,
                         ),
                         SizedBox(

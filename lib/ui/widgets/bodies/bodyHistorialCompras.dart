@@ -1,7 +1,8 @@
-import 'package:aprender_haciendo_app/core/models/historialmodel.dart';
+import 'package:aprender_haciendo_app/core/services/providers/compraProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/historialDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/historialComprasCard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BodyHistorialCompras extends StatelessWidget {
   final TextStyle newProductStyle =
@@ -11,6 +12,9 @@ class BodyHistorialCompras extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final compras = Provider.of<CompraProvider>(context);
+    final comprasList = compras.compras;
+    
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,16 +46,16 @@ class BodyHistorialCompras extends StatelessWidget {
                 ),
               ),
               ListView.builder(
-                itemCount: compras.length,
+                itemCount: comprasList.length,
                 itemBuilder: (context, index) => HistorialCard(
                   itemIndex: index,
-                  compra: compras[index],
+                  compra: comprasList[index],
                   press: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            HistorialDetail(historial: compras[index]),
+                            HistorialDetail(historial: comprasList[index]),
                       ),
                     );
                   },

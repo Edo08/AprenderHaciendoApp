@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/historialmodel.dart';
+import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle codigoStyle = TextStyle(
@@ -40,7 +40,7 @@ class HistorialCard extends StatelessWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final Historial compra;
+  final ComprasModelDB compra;
   final Function press;
 
   @override
@@ -83,7 +83,7 @@ class HistorialCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Text("Número de compra: ", style: tituloStyle),
-                        Text(compra.numOrden, style: subTitleStyle),
+                        Text(compra.transactionCode.toString(), style: subTitleStyle),
                         SizedBox(
                           width: 15,
                         ),
@@ -98,7 +98,11 @@ class HistorialCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Text("Fecha: ", style: tituloStyle),
-                        Text(compra.fecha, style: subTitleStyle),
+                        Text(
+                          compra.fecha.toDate().day.toString()+"/"+
+                          compra.fecha.toDate().month.toString()+"/"+
+                          compra.fecha.toDate().year.toString(), 
+                          style: subTitleStyle),
                         SizedBox(
                           width: 15,
                         ),
@@ -112,7 +116,7 @@ class HistorialCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Text("Monto:", style: tituloStyle),
-                        Text(" " + "1230700", style: subTitleStyle),
+                        Text(" " + compra.precio.toString(), style: subTitleStyle),
                         SizedBox(
                           width: 15,
                         ),

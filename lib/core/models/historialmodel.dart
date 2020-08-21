@@ -1,4 +1,4 @@
-class Historial {
+/* class Historial {
   int id;
   String numOrden;
   String fecha;
@@ -9,13 +9,6 @@ class Historial {
       this.numOrden,
       this.fecha,
       this.idcliente});
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'numOrden': numOrden,
-        'fecha': fecha,
-        'idcliente': idcliente
-      };
 }
 
 List<Historial> compras = [
@@ -45,4 +38,4 @@ List<Historial> compras = [
       idcliente: "0001",
       ),
       
-];
+]; */
