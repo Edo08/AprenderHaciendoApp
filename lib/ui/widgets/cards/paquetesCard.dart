@@ -2,6 +2,7 @@ import 'package:aprender_haciendo_app/core/models/paquetesModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/productoImage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -96,22 +97,20 @@ class PaquetesCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 0,
-              right:  0,
-              height: 130,
-              width: 190,
+              top: ScreenUtil().setHeight(0),
+              left: ScreenUtil().setWidth(300),
               child: new InkWell(
-              onTap: press,
+                onTap: press,
                 child: Hero(
-                      tag: '${paquete.id}',
-                      child: ProductPoster(
-                        size: size,
-                        image: paquete.imagen,
-                      ),
-                    ),
+                  tag: '${paquete.id}',
+                  child: Image.network(
+                    paquete.imagen,
+                    width: ScreenUtil().setWidth(400),
+                    height: ScreenUtil().setHeight(280),
+                  ),
+                ),
               ),
-            ), 
-           
+            ),
             Positioned(
               bottom: 0,
               left: 0,
@@ -168,8 +167,8 @@ class PaquetesCard extends StatelessWidget {
                       ),
                       onTap: () {
                         _onAlertButton(context);
-                        cart.addItem(
-                            paquete.edades, paquete.precio, paquete.imagen, paquete.nombre);
+                        cart.addItem(paquete.edades, paquete.precio,
+                            paquete.imagen, paquete.nombre);
                       },
                     ),
                   ],

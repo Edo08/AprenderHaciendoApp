@@ -68,7 +68,7 @@ class CursosCard extends StatelessWidget {
             child: new InkWell(
               onTap: press,
               child: Hero(
-                tag: curso.id,
+                tag: '${curso.id}',
                 child: Image.network(
                   curso.imagen,
                   width: ScreenUtil().setWidth(570),

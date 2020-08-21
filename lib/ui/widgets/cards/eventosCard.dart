@@ -79,12 +79,12 @@ class EventosCard extends StatelessWidget {
               ),
             ),
             Positioned(
-            top: ScreenUtil().setHeight(25),
-            left: ScreenUtil().setWidth(60),
+            top: ScreenUtil().setHeight(0),
+            left: ScreenUtil().setWidth(30),
             child: new InkWell(
               onTap: press,
               child: Hero(
-                tag: evento.id,
+                tag: '${evento.id}',
                 child: Image.network(
                   evento.imagen,
                   width: ScreenUtil().setWidth(250),

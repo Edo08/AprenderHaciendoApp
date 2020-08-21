@@ -182,15 +182,15 @@ class ProductCard extends StatelessWidget {
           ),
           Positioned(
             top: ScreenUtil().setHeight(25),
-            left: ScreenUtil().setWidth(60),
+            left: ScreenUtil().setWidth(30),
             child: new InkWell(
               onTap: press,
               child: Hero(
                 tag: product.codigo,
                 child: Image.network(
                   product.image,
-                  width: ScreenUtil().setWidth(570),
-                  height: ScreenUtil().setHeight(500),
+                  width: ScreenUtil().setWidth(700),
+                  height: ScreenUtil().setHeight(600),
                 ),
               ),
             ),
