@@ -17,7 +17,7 @@ class CompraProvider with ChangeNotifier {
   //methods
   void _getComprasByUID() async {
     Future<String> uid = Authentication().getCurrentUID();
-    _compras = await _compraServices.getProductsByUser(uid);
+    _compras = await _compraServices.getComprasByUser(uid);
     notifyListeners();
   }
 /* 

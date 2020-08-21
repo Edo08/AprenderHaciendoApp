@@ -1,7 +1,7 @@
 import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
-import 'package:aprender_haciendo_app/ui/widgets/productoImage.dart';
+import 'package:aprender_haciendo_app/ui/widgets/packImage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -98,7 +98,7 @@ class BodyCursoDetail extends StatelessWidget {
                   Center(
                     child: Hero(
                       tag: '${curso.id}',
-                      child: ProductPoster(
+                      child: PackPoster(
                         size: size,
                         image: curso.imagen,
                       ),

@@ -1,5 +1,6 @@
 import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final TextStyle botonStyle = TextStyle(
     fontSize: 14,
@@ -62,18 +63,20 @@ class CursosCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 5,
-              right: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                height: 130,
-                width: 190,
+            top: ScreenUtil().setHeight(0),
+            left: ScreenUtil().setWidth(500),
+            child: new InkWell(
+              onTap: press,
+              child: Hero(
+                tag: curso.id,
                 child: Image.network(
                   curso.imagen,
-                  fit: BoxFit.cover,
+                  width: ScreenUtil().setWidth(570),
+                  height: ScreenUtil().setHeight(500),
                 ),
               ),
             ),
+          ),
             Positioned(
               bottom: 0,
               left: 0,

@@ -23,13 +23,14 @@ class Oders with ChangeNotifier {
   }
 
   void addOder(List<CartItem> cartProducts, double total) {
-    _orders.add(OrderItem(
-      amount: total,
-      datetime: DateTime.now(),
-      id: DateTime.now().toString(),
-      orderedProducts: cartProducts,
-    ));
-
+    _orders.add(
+      OrderItem(
+        amount: total,
+        datetime: DateTime.now(),
+        id: DateTime.now().toString(),
+        orderedProducts: cartProducts,
+      ),
+    );
     notifyListeners();
   }
 

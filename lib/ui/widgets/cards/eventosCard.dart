@@ -1,5 +1,6 @@
 import 'package:aprender_haciendo_app/core/models/eventosModelDB.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final TextStyle codigoStyle = TextStyle(
     fontSize: 15,
@@ -78,18 +79,20 @@ class EventosCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 40,
-              left: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                height: 90,
-                width: 160,
+            top: ScreenUtil().setHeight(25),
+            left: ScreenUtil().setWidth(60),
+            child: new InkWell(
+              onTap: press,
+              child: Hero(
+                tag: evento.id,
                 child: Image.network(
                   evento.imagen,
-                  fit: BoxFit.fitWidth,
+                  width: ScreenUtil().setWidth(250),
+                  height: ScreenUtil().setHeight(240),
                 ),
               ),
             ),
+          ),
             Positioned(
               bottom: 0,
               right: 0,

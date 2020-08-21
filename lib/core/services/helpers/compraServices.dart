@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/core/models/cartItemModel.dart';
 import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -16,7 +17,7 @@ class CompraServices {
         },
       );
 
-  Future<List<ComprasModelDB>> getProductsByUser(Future<String> uid) async =>
+  Future<List<ComprasModelDB>> getComprasByUser(Future<String> uid) async =>
       _firestore
           .collection(collection)
           .where ("uid", isEqualTo:await  uid)
@@ -28,4 +29,22 @@ class CompraServices {
         }
         return compras;
       },);
+
+  void createCompra({String userId ,String id,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
+    List<Map> convertedCart = [];
+
+    for(CartItemModel item in cart){
+      convertedCart.add(item.toMap());
+    }
+
+    _firestore.collection(collection).document(id).setData({
+      "userId": userId,
+      "id": id,
+      "cart": convertedCart,
+      "total": totalPrice,
+      "createdAt": DateTime.now().millisecondsSinceEpoch,
+      "description": description,
+      "status": status
+    });
+  }
 }

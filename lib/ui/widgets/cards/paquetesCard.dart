@@ -1,5 +1,6 @@
 import 'package:aprender_haciendo_app/core/models/paquetesModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/ui/widgets/productoImage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -96,17 +97,21 @@ class PaquetesCard extends StatelessWidget {
             ),
             Positioned(
               bottom: 0,
-              right: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                height: 130,
-                width: 190,
-                child: Image.network(
-                  paquete.imagen,
-                  fit: BoxFit.fitWidth,
-                ),
+              right:  0,
+              height: 130,
+              width: 190,
+              child: new InkWell(
+              onTap: press,
+                child: Hero(
+                      tag: '${paquete.id}',
+                      child: ProductPoster(
+                        size: size,
+                        image: paquete.imagen,
+                      ),
+                    ),
               ),
-            ),
+            ), 
+           
             Positioned(
               bottom: 0,
               left: 0,
