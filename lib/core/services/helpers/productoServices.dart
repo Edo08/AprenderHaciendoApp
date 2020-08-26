@@ -6,15 +6,15 @@ class ProductoServices {
   Firestore _firestore = Firestore.instance;
 
   Future<List<ProductoModelDB>> getProducts() async =>
-  _firestore.collection(collection).getDocuments().then(
-    (result) {
-      List<ProductoModelDB> products = [];
-      for (DocumentSnapshot product in result.documents) {
-        products.add(ProductoModelDB.fromSnapshot(product));
-      }
-      return products;
-    },
-  );
+    _firestore.collection(collection).getDocuments().then(
+      (result) {
+        List<ProductoModelDB> products = [];
+        for (DocumentSnapshot product in result.documents) {
+          products.add(ProductoModelDB.fromSnapshot(product));
+        }
+        return products;
+      },
+    );
 
   Future<List<ProductoModelDB>> searchProducts({String productName}) {
     // code to convert the first character to uppercase

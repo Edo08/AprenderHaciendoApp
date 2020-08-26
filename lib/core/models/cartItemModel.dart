@@ -1,4 +1,4 @@
-class CartItemModel {
+/* class CartItemModel {
   static const ID = "id";
   static const NAME = "name";
   static const IMAGE = "image";
@@ -52,3 +52,4 @@ class CartItemModel {
     COLOR: _color
   };
 }
+ */

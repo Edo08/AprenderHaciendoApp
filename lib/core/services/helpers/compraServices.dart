@@ -1,5 +1,5 @@
-import 'package:aprender_haciendo_app/core/models/cartItemModel.dart';
 import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompraServices {
@@ -30,10 +30,10 @@ class CompraServices {
         return compras;
       },);
 
-  void createCompra({String userId ,String id,String description,String status ,List<CartItemModel> cart, int totalPrice}) {
+  void createCompra({String userId ,String id,String description,String status ,List<CartItem> cart, int totalPrice}) {
     List<Map> convertedCart = [];
 
-    for(CartItemModel item in cart){
+    for(CartItem item in cart){
       convertedCart.add(item.toMap());
     }
 
@@ -47,4 +47,4 @@ class CompraServices {
       "status": status
     });
   }
-}
+} 

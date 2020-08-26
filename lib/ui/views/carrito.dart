@@ -1,19 +1,21 @@
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductoDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle nameStyle = TextStyle(fontSize: 16, fontFamily: "Poppins-Bold");
-final TextStyle precioStyle = TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
+final TextStyle precioStyle =
+    TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
 final TextStyle totalStyle = TextStyle(
     fontSize: 26, fontFamily: "Poppins-Bold", fontWeight: FontWeight.bold);
 final TextStyle subtotalStyle =
     TextStyle(fontSize: 24, fontFamily: "Poppins-Bold");
 
 final TextStyle subtotalPrecioStyle =
-    TextStyle(fontSize: 22,fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
 
 final TextStyle totalprecioStyle =
     TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
@@ -183,7 +185,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                           ), */
                                           Spacer(),
                                           Text(
-                                            "\₡${(cartList[index].precio).toStringAsFixed(0)}",
+                                            "\₡${(cartList[index].precio * cartList[index].quantity).toStringAsFixed(0)}",
                                             style: precioStyle,
                                           ),
                                         ],
@@ -197,8 +199,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                         key: ValueKey(cart.items.keys.toList()[index]),
                         direction: DismissDirection.endToStart,
-                        onDismissed: (direction) {
+                        onDismissed: (direction) async {
                           cart.removeItem(cart.items.keys.toList()[index]);
+                          await cart.removeFromCart(cartItem: cartList[index]);
                         },
                         background: Container(
                           padding: EdgeInsets.only(right: 20),
@@ -279,7 +282,48 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
               ),
               onTap: () {
-                _onAlertButton(context);
+                Alert(
+                  context: context,
+                  style: alertStyle,
+                  type: AlertType.success,
+                  title: "",
+                  desc: "Orden de compra generada.",
+                  buttons: [
+                    DialogButton(
+                      child: Text(
+                        "ACEPTAR",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: "Poppins-Medium"),
+                      ),
+                      onPressed: () async {
+                         /*var uuid = Uuid();
+                        String id = uuid.v4();
+                        var userId =
+                            (await FirebaseAuth.instance.currentUser()).uid;
+                        order.createOrder(
+                            uid: userId,
+                            id: id,
+                            total: CarritoProvider().userModel.getTotalPrice(),
+                            cart: CarritoProvider().userModel.cart);
+                        for (CartItem cartItem
+                            in CarritoProvider().userModel.cart) {
+                          bool value = await CarritoProvider()
+                              .removeFromCart(cartItem: cartItem);
+                          if (value) {
+                            CarritoProvider().reloadUserModel();
+                            print("Item added to cart");
+                          } else {
+                            print("ITEM WAS NOT REMOVED");
+                          } */
+                          Navigator.pushNamed(context, '/tienda');
+                        //}
+                      },
+                      width: 120,
+                    )
+                  ],
+                ).show();
               },
             ),
             SizedBox(
@@ -290,25 +334,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ),
     );
   }
-  _onAlertButton(context) {
-    Alert(
-      context: context,
-      style: alertStyle,
-      type: AlertType.success,
-      title: "", 
-      desc: "Orden de compra generada.",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "ACEPTAR",
-            style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "Poppins-Medium"),
-          ),
-          onPressed: () => Navigator.pushNamed(context, '/tienda'),
-          width: 120,
-        )
-      ],
-    ).show();
-  }
+
+  
 }
 
 /* Widget formUI() {
