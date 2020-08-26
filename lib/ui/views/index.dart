@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/singIn.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/carrito.dart';
@@ -7,7 +8,6 @@ import 'package:aprender_haciendo_app/ui/views/historialCompras.dart';
 import 'package:aprender_haciendo_app/ui/views/perfil.dart';
 import 'package:aprender_haciendo_app/ui/views/quedateEnCasa.dart';
 import 'package:aprender_haciendo_app/ui/views/tienda.dart';
-import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:aprender_haciendo_app/ui/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
@@ -243,7 +243,7 @@ class _IndexState extends State<Index> {
 
   void _cerrarSesion() async {
     try {
-      await Authentication().singOut();
+      await Authentication().signOut();
       signOutGoogle();
       Navigator.pushNamed(context, '/welcomeScreen');
     } catch (e) {

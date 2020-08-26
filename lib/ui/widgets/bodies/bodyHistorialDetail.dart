@@ -95,9 +95,9 @@ class BodyHistorialDetail extends StatelessWidget {
                       rows: <DataRow>[
                         DataRow(
                           cells: <DataCell>[
-                            DataCell(Text('AAAAAA', style: descripcionProductoStyle,)),
-                            DataCell(Text('1', style: descripcionProductoStyle, textAlign: TextAlign.center,)),
-                            DataCell(Text("₡" +'Yes', style: montoStyle,)),
+                            DataCell(Text(historial.nombreProducto, style: descripcionProductoStyle,)),
+                            DataCell(Text(historial.cantidad.toString(), style: descripcionProductoStyle, textAlign: TextAlign.center,)),
+                            DataCell(Text("₡" +historial.total.toString(), style: montoStyle,)),
                           ],
                         ),
 
@@ -112,7 +112,7 @@ class BodyHistorialDetail extends StatelessWidget {
                       width: 15,
                     ),
                     Text("Total de la compra: ", style: tituloStyle),
-                    Text("₡" + historial.precio.toString(), style: montoStyle),
+                    Text("₡" + historial.total.toString(), style: montoStyle),
                   ]),
                   SizedBox(
                     height: 25,

@@ -121,7 +121,7 @@ class HistorialCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Text("Monto: ", style: tituloStyle),
-                        Text("₡" + compra.precio.toString(), style: precioStyle),
+                        Text("₡" + compra.total.toString(), style: precioStyle),
                         SizedBox(
                           width: 15,
                         ),

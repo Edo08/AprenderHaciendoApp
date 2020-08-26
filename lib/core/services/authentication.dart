@@ -9,12 +9,33 @@ class Authentication {
   );
 
   // Email & Password Sign Up
-  Future<AuthenticationRequest> createUser(
-      {String email = "", String password = ""}) async {
+  Future<AuthenticationRequest> createUser({
+      String nombre,
+      String apellido,
+      String telefono,
+      String email,
+      String password,
+      DateTime fechaNacimiento}) async {
     AuthenticationRequest authRequest = AuthenticationRequest();
     try {
       var user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      /* 
+          .then(
+        (user) {
+          _userServices.createUser(
+            {
+              'nombre': nombre,
+              'apellido': apellido,
+              'telefono': telefono,
+              'email': email,
+              'password': password,
+              'uid': user.user.uid,
+
+            },
+          );
+        },
+      ); */
       if (user != null) {
         authRequest.success = true;
       }
@@ -60,7 +81,7 @@ class Authentication {
   }
 
   // Sign Out
-  Future<void> singOut() async {
+  Future<void> signOut() async {
     try {
       return await _auth.signOut();
     } catch (e) {
