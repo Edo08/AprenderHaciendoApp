@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/noSeUsa/carrito/carritoItemModel.dart';
+/* import 'package:aprender_haciendo_app/noSeUsa/carrito/carritoItemModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
@@ -65,3 +65,4 @@ class UserModel {
     return total;
   }
 }
+ */

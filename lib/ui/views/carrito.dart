@@ -1,10 +1,13 @@
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductoDetail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:uuid/uuid.dart';
 
 final TextStyle nameStyle = TextStyle(fontSize: 16, fontFamily: "Poppins-Bold");
 final TextStyle precioStyle =
@@ -33,11 +36,13 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
-  
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CarritoProvider>(context);
     final cartList = cart.items.values.toList();
+    final order = Provider.of<OrderProvider>(context);
+    UserServices userServices = UserServices();
 
     return Scaffold(
       appBar: AppBar(
@@ -281,7 +286,27 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   style: confirmarStyle,
                 ),
               ),
-              onTap: () {
+              onTap: () async {
+                var uuid = Uuid();
+                String id = uuid.v4();
+                var userId =
+                    (await FirebaseAuth.instance.currentUser()).uid;
+                var userModel = await userServices.getUserById(userId);
+                order.createOrder(
+                    uid: userId,
+                    id: id,
+                    cart: userModel.cart,
+                    total: userModel.totalCartPrice);
+                for (CartItem cartItem in userModel.cart) {
+                  bool value =
+                      await cart.removeFromCart(cartItem: cartItem);
+                  if (value) {
+                    cart.reloadUserModel();
+                    print("Item added to cart");
+                  } else {
+                    print("ITEM WAS NOT REMOVED");
+                  }
+                }
                 Alert(
                   context: context,
                   style: alertStyle,
@@ -297,28 +322,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             fontSize: 18,
                             fontFamily: "Poppins-Medium"),
                       ),
-                      onPressed: () async {
-                         /*var uuid = Uuid();
-                        String id = uuid.v4();
-                        var userId =
-                            (await FirebaseAuth.instance.currentUser()).uid;
-                        order.createOrder(
-                            uid: userId,
-                            id: id,
-                            total: CarritoProvider().userModel.getTotalPrice(),
-                            cart: CarritoProvider().userModel.cart);
-                        for (CartItem cartItem
-                            in CarritoProvider().userModel.cart) {
-                          bool value = await CarritoProvider()
-                              .removeFromCart(cartItem: cartItem);
-                          if (value) {
-                            CarritoProvider().reloadUserModel();
-                            print("Item added to cart");
-                          } else {
-                            print("ITEM WAS NOT REMOVED");
-                          } */
-                          Navigator.pushNamed(context, '/tienda');
-                        //}
+                      onPressed: () {
+                          Navigator.pop(context);
+                          //Navigator.pushNamed(context, '/tienda');
                       },
                       width: 120,
                     )
@@ -334,8 +340,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
       ),
     );
   }
-
-  
 }
 
 /* Widget formUI() {

@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+/* import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrdernesModelDB {
   static const TRANSACTIONCODE = "transactionCode";
@@ -43,3 +43,4 @@ class OrdernesModelDB {
     return _fecha;
   } */
 }
+ */

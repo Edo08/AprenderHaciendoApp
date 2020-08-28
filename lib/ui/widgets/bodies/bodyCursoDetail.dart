@@ -180,7 +180,7 @@ class BodyCursoDetail extends StatelessWidget {
                   ),
                   onTap: () {
                     _onAlertButton(context);
-                    cart.addItem(curso.rangoEdad, curso.precio, curso.imagen,
+                    cart.addItem(curso.codigo, curso.precio, curso.imagen,
                         curso.nombre);
                   }),
             ),

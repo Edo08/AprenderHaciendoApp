@@ -165,7 +165,7 @@ class PaquetesCard extends StatelessWidget {
                       ),
                       onTap: () {
                         _onAlertButton(context);
-                        cart.addItem(paquete.edades, paquete.precio,
+                        cart.addItem(paquete.codigo, paquete.precio,
                             paquete.imagen, paquete.nombre);
                       },
                     ),

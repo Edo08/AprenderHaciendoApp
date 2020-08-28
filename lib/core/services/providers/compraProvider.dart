@@ -1,10 +1,10 @@
-import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/compraServices.dart';
+import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:flutter/cupertino.dart';
 
 class CompraProvider with ChangeNotifier {
-  List<ComprasModelDB> _compras = [];
+  List<OrderItem> _compras = [];
   CompraServices _compraServices = CompraServices();
 
   CompraProvider() {
@@ -12,7 +12,7 @@ class CompraProvider with ChangeNotifier {
   }
 
   //getter
-  List<ComprasModelDB> get compras => _compras;
+  List<OrderItem> get compras => _compras;
 
   //methods
   void _getComprasByUID() async {

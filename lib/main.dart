@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/compraProvider.dart';
@@ -6,7 +7,6 @@ import 'package:aprender_haciendo_app/core/services/providers/eventoProvider.dar
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/paqueteProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/productoProvider.dart';
-import 'package:aprender_haciendo_app/noSeUsa/carrito/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/carrito.dart';
 import 'package:aprender_haciendo_app/ui/views/index.dart';
@@ -47,9 +47,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: OrderProvider(),
-        ),
-        ChangeNotifierProvider.value(
-          value: UserProvider(),
         ),
       ],
       child: MaterialApp(

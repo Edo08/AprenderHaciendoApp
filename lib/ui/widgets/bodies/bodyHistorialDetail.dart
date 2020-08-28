@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle numOrdenStyle = TextStyle(
@@ -23,7 +23,7 @@ final TextStyle montoStyle =
     TextStyle(fontSize: 19, color: Colors.grey, fontWeight: FontWeight.w500);
 
 class BodyHistorialDetail extends StatelessWidget {
-  final ComprasModelDB historial;
+  final OrderItem historial;
 
   const BodyHistorialDetail({Key key, this.historial}) : super(key: key);
   @override
@@ -61,7 +61,7 @@ class BodyHistorialDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        "Número de compra #" + historial.transactionCode.toString(),
+                        "Número de compra #" + historial.id.toString(),
                         style: numOrdenStyle,
                         textAlign: TextAlign.center,
                       ),
@@ -95,9 +95,9 @@ class BodyHistorialDetail extends StatelessWidget {
                       rows: <DataRow>[
                         DataRow(
                           cells: <DataCell>[
-                            DataCell(Text(historial.nombreProducto, style: descripcionProductoStyle,)),
-                            DataCell(Text(historial.cantidad.toString(), style: descripcionProductoStyle, textAlign: TextAlign.center,)),
-                            DataCell(Text("₡" +historial.total.toString(), style: montoStyle,)),
+                            //DataCell(Text(historial.cart, style: descripcionProductoStyle,)),
+                            //DataCell(Text(historial.cantidad.toString(), style: descripcionProductoStyle, textAlign: TextAlign.center,)),
+                            //DataCell(Text("₡" +historial.total.toString(), style: montoStyle,)),
                           ],
                         ),
 

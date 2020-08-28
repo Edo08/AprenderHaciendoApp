@@ -12,9 +12,10 @@ class BodyHistorialCompras extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final compras = Provider.of<CompraProvider>(context);
+    CompraProvider compras = CompraProvider();
+    //final compra = Provider.of<CompraProvider>(context);
     final comprasList = compras.compras;
-    
+
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,10 +47,10 @@ class BodyHistorialCompras extends StatelessWidget {
                 ),
               ),
               ListView.builder(
-                itemCount: comprasList.length,
+                itemCount: compras.compras.length,
                 itemBuilder: (context, index) => HistorialCard(
                   itemIndex: index,
-                  compra: comprasList[index],
+                  compra: compras.compras[index],
                   press: () {
                     Navigator.push(
                       context,

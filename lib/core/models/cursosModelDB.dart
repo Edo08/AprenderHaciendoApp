@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CursosModelDB with ChangeNotifier {
+  static const CODIGO = "codigo";
   static const ID = "id";
   static const NOMBRE = "nombre";
   static const PRECIO = "precio";
@@ -10,6 +11,7 @@ class CursosModelDB with ChangeNotifier {
   static const RANGOEDAD = "rangoEdad";
   static const DESCRIPCION = "descripcion";
 
+  String _codigo;
   int _id;
   String _nombre;
   int _precio;
@@ -17,9 +19,8 @@ class CursosModelDB with ChangeNotifier {
   String _modalidad;
   String _rangoEdad;
   String _descripcion;
-  
 
-
+  String get codigo => _codigo;
   int get id => _id;
   String get nombre => _nombre;
   int get precio => _precio;
@@ -27,11 +28,12 @@ class CursosModelDB with ChangeNotifier {
   String get modalidad => _modalidad;
   String get rangoEdad => _rangoEdad;
   String get descripcion => _descripcion;
-  
+
   // public variable
   bool liked = false;
 
   CursosModelDB.fromSnapshot(DocumentSnapshot snapshot) {
+    _codigo = snapshot.data[CODIGO];
     _id = snapshot.data[ID];
     _nombre = snapshot.data[NOMBRE];
     _precio = snapshot.data[PRECIO].floor();

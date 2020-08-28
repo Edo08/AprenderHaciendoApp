@@ -14,12 +14,12 @@ class OrderItem {
   String _uid;
   int _createdAt;
   int _total;
-  DateTime _fecha;
+  Timestamp _fecha;
 
   String get id => _id;
   String get uid => _uid;
   int get createdAt => _createdAt;
-  DateTime get fecha => _fecha;
+  Timestamp get fecha => _fecha;
   int get total => _total;
 
   List cart;

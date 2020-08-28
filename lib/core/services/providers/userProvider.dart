@@ -1,4 +1,4 @@
-import 'dart:async';
+/* import 'dart:async';
 import 'package:aprender_haciendo_app/core/models/userModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
@@ -16,6 +16,10 @@ class UserProvider with ChangeNotifier {
   OrderProvider _orderServices = OrderProvider();
 
   UserModel _userModel;
+
+  UserProvider() {
+    UserProvider.initialize();
+  }
 
 //  getter
   UserModel get userModel => _userModel;
@@ -52,3 +56,4 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 }
+ */

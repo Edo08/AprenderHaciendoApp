@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/comprasModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle codigoStyle = TextStyle(
@@ -45,7 +45,7 @@ class HistorialCard extends StatelessWidget {
   }) : super(key: key);
 
   final int itemIndex;
-  final ComprasModelDB compra;
+  final OrderItem compra;
   final Function press;
 
   @override
@@ -88,7 +88,7 @@ class HistorialCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Text("Número de compra: ", style: tituloStyle),
-                        Text(compra.transactionCode.toString(), style: subTitleStyle),
+                        Text(compra.id.toString(), style: subTitleStyle),
                         SizedBox(
                           width: 15,
                         ),

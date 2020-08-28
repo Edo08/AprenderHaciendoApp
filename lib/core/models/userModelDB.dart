@@ -26,6 +26,15 @@ class UserModel with ChangeNotifier {
   List<CartItem> cart;
   int totalCartPrice;
 
+   UserModel.fromSnapshot(DocumentSnapshot snapshot) {
+    _nombre = snapshot.data[NOMBRE];
+    _apellido = snapshot.data[APELLIDO];
+    _email = snapshot.data[EMAIL];
+    _uid = snapshot.data[UID];
+    cart = _convertCartItems(snapshot.data[CART] ?? []);
+    totalCartPrice = snapshot.data[CART] == null? 0 : getTotalPrice(cart: snapshot.data[CART]); 
+  }
+
   List<CartItem> _convertCartItems(List cart) {
     List<CartItem> convertedCart = [];
     for (Map cartItem in cart) {
@@ -39,20 +48,11 @@ class UserModel with ChangeNotifier {
       return 0;
     }
     for (Map cartItem in cart) {
-      _priceSum += cartItem["total"];
+      _priceSum += cartItem["precio"];
     }
     int total = _priceSum;
     return total;
   }
 
-  UserModel.fromSnapshot(DocumentSnapshot snapshot) {
-    _nombre = snapshot.data[NOMBRE];
-    _apellido = snapshot.data[APELLIDO];
-    _email = snapshot.data[EMAIL];
-    _uid = snapshot.data[UID];
-    cart = _convertCartItems(snapshot.data[CART] ?? []);
-     /* totalCartPrice = snapshot.data[CART] == null
-        ? 0
-        : getTotalPrice(cart: snapshot.data[CART]);  */
-  }
+ 
 }

@@ -10,9 +10,9 @@ class CartItem {
   static const CODIGO = "codigo";
   static const NOMBRE = "nombre";
   static const IMAGE = "image";
-  static const QUANTITY = "quantity";
   static const PRECIO = "precio";
 
+  String id;
   String codigo;
   String nombre;
   String image;
@@ -27,40 +27,39 @@ class CartItem {
     @required this.precio,
   });
 
-  String _id;
+/*   String _id;
   String _codigo;
   String _nombre;
   String _image;
-  int _precio;
+  int _precio; */
 
-  CartItem.fromMap(Map data){
-    _id = data[ID];
-    _nombre =  data[NOMBRE];
-    _image =  data[IMAGE];
-    _codigo = data[CODIGO];
-    _precio = data[PRECIO];
+  CartItem.fromMap(Map data) {
+    id = data[ID];
+    nombre = data[NOMBRE];
+    image = data[IMAGE];
+    codigo = data[CODIGO];
+    precio = data[PRECIO];
   }
 
   Map toMap() => {
-    ID: _id,
-    IMAGE: _image,
-    NOMBRE: _nombre,
-    CODIGO: _codigo,
-    PRECIO: _precio,
+    ID: id,
+    IMAGE: image,
+    NOMBRE: nombre,
+    CODIGO: codigo,
+    PRECIO: precio,
   };
-  
+
 }
 
 class CarritoProvider with ChangeNotifier {
   UserServices _userServices = UserServices();
   Map<String, CartItem> _items = {};
-  UserModel _userModel;
   List<OrderItem> orders = [];
+  UserModel _userModel;
+
 
   UserModel get userModel => _userModel;
-  
 
-  
   Map<String, CartItem> get items {
     return {..._items};
   }
@@ -78,23 +77,22 @@ class CarritoProvider with ChangeNotifier {
   }
   
 
-  void addItem(String codigo, int precio, String image, String nombre) async{
-    var userId = (await FirebaseAuth.instance.currentUser()).uid;
-    _userModel = await _userServices.getUserById(userId);
-    var uuid = Uuid();
-    String cartItemId = uuid.v4();
-    //List<CartItem> cart = _userModel.cart;
-    Map cartItem = {
+  void addItem(String codigo, int precio, String image, String nombre) async {
+    try {
+      var userId = (await FirebaseAuth.instance.currentUser()).uid;
+      _userModel = await _userServices.getUserById(userId);
+      var uuid = Uuid();
+      String cartItemId = uuid.v4();
+      Map cartItem = {
         "id": cartItemId,
         "nombre": nombre,
         "image": image,
         "codigo": codigo,
         "precio": precio,
       };
-    CartItem item = CartItem.fromMap(cartItem);  
-    _userServices.addToCart(userId: userId, cartItem: item);
-
-    if (_items.containsKey(codigo)) {
+      CartItem item = CartItem.fromMap(cartItem);
+      _userServices.addToCart(userId: userId, cartItem: item);
+      if (_items.containsKey(codigo)) {
       _items.update(
         codigo,
         (existing) => CartItem(
@@ -118,16 +116,22 @@ class CarritoProvider with ChangeNotifier {
               ));
       print("$nombre is added to cart");
     }
-    notifyListeners();
+      notifyListeners();
+    } catch (e) {
+      print("The error ${e.toString()}");
+      notifyListeners();
+    }
+
+     
   }
 
-  Future<bool> removeFromCart({CartItem cartItem})async{
+  Future<bool> removeFromCart({CartItem cartItem}) async {
     print("THE PRODUC IS: ${cartItem.toString()}, ${cartItem.nombre}");
-    var userId = (await FirebaseAuth.instance.currentUser()).uid;  
-    try{
+    var userId = (await FirebaseAuth.instance.currentUser()).uid;
+    try {
       _userServices.removeFromCart(userId: userId, cartItem: cartItem);
       return true;
-    }catch(e){
+    } catch (e) {
       print("THE ERROR ${e.toString()}");
       return false;
     }
@@ -148,18 +152,15 @@ class CarritoProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  getOrders()async{
+  getOrders() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     orders = await OrderProvider().getUserOrders(userId: userId);
     notifyListeners();
   }
 
-
-  Future<void> reloadUserModel()async{
+  Future<void> reloadUserModel() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     _userModel = await _userServices.getUserById(userId);
     notifyListeners();
   }
-  
-
 }
