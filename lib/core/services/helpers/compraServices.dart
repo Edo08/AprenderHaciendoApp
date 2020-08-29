@@ -3,7 +3,7 @@ import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompraServices {
-  String collection = "compras";
+  String collection = "orders";
   Firestore _firestore = Firestore.instance;
 
   Future<List<OrderItem>> getCompras() async =>
@@ -20,7 +20,7 @@ class CompraServices {
   Future<List<OrderItem>> getComprasByUser(Future<String> uid) async =>
       _firestore
           .collection(collection)
-          .where ("uid", isEqualTo:await  uid)
+          .where ("uid", isEqualTo:await uid)
           .getDocuments()
           .then((result) {
         List<OrderItem> compras = [];

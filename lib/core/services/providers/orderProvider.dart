@@ -1,3 +1,5 @@
+import 'package:aprender_haciendo_app/core/services/authentication.dart';
+import 'package:aprender_haciendo_app/core/services/helpers/compraServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +36,22 @@ class OrderItem {
   }
 }
 
+enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 class OrderProvider with ChangeNotifier {
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
-  List<OrderItem> convertedCart = [];
+  List<OrderItem> _order = [];
+  CompraServices _compraServices = CompraServices();
+
+  /* OrderProvider.initialize() : _auth = FirebaseAuth.instance {
+    _auth.onAuthStateChanged.listen(_onStateChanged);
+  } */
+
+  OrderProvider() {
+    _getOrdersByUID();
+  }
+
+  List<OrderItem> get order => _order;
 
   void createOrder({String uid, String id, List<CartItem> cart, int total}) {
     List<Map> convertedCart = [];
@@ -54,15 +68,34 @@ class OrderProvider with ChangeNotifier {
     });
   }
 
-  Future<List<OrderItem>> getUserOrders({String userId}) async => _firestore
-          .collection(collection)
-          .where("userId", isEqualTo: userId)
-          .getDocuments()
-          .then((result) {
-        List<OrderItem> orders = [];
-        for (DocumentSnapshot order in result.documents) {
-          orders.add(OrderItem.fromSnapshot(order));
-        }
-        return orders;
-      });
+  _getOrdersByUID() async {
+    Future<String> uid = Authentication().getCurrentUID();
+    _order = await _compraServices.getComprasByUser(uid);
+    notifyListeners();
+  }
 }
+
+/*  Future<List<OrderItem>> getUserOrders(String userId) async => _firestore
+          .collection(collection)
+          .where("uid", isEqualTo: userId)
+          .getDocuments()
+          .then(
+        (result) {
+          List<OrderItem> orders = [];
+          for (DocumentSnapshot order in result.documents) {
+            orders.add(OrderItem.fromSnapshot(order));
+          }
+          return orders;
+        },
+      ); */
+
+/* Future<void> _onStateChanged(FirebaseUser user) async {
+    if (user == null) {
+      _status = Status.Unauthenticated;
+    } else {
+      _user = user;
+      _orderItem = await _compraProvider.getComprasByUID(user.uid);
+      _status = Status.Authenticated;
+    }
+    notifyListeners();
+  } */

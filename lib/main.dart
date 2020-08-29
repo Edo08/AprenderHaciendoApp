@@ -1,4 +1,3 @@
-import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/compraProvider.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
           value: ProductoProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: CarritoProvider(),
+          value: CarritoProvider.initialize(),
         ),
         ChangeNotifierProvider.value(
           value: CursoProvider(),
@@ -43,10 +42,10 @@ class MyApp extends StatelessWidget {
           value: PaqueteProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: CompraProvider(),
+          value: OrderProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: OrderProvider(),
+          value: CompraProvider(),
         ),
       ],
       child: MaterialApp(
