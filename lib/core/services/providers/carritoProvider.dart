@@ -42,21 +42,29 @@ class CartItem {
   }
 
   Map toMap() => {
-    ID: id,
-    IMAGE: image,
-    NOMBRE: nombre,
-    CODIGO: codigo,
-    PRECIO: precio,
-  };
-
+        ID: id,
+        IMAGE: image,
+        NOMBRE: nombre,
+        CODIGO: codigo,
+        PRECIO: precio,
+      };
 }
+
+enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class CarritoProvider with ChangeNotifier {
   UserServices _userServices = UserServices();
+  FirebaseAuth _auth;
+  FirebaseUser _user;
   Map<String, CartItem> _items = {};
   List<OrderItem> orders = [];
   UserModel _userModel;
 
+  Status _status = Status.Uninitialized;
+
+  CarritoProvider.initialize() : _auth = FirebaseAuth.instance {
+    _auth.onAuthStateChanged.listen(_onStateChanged);
+  }
 
   UserModel get userModel => _userModel;
 
@@ -93,36 +101,34 @@ class CarritoProvider with ChangeNotifier {
       CartItem item = CartItem.fromMap(cartItem);
       _userServices.addToCart(userId: userId, cartItem: item);
       if (_items.containsKey(codigo)) {
-      _items.update(
-        codigo,
-        (existing) => CartItem(
-          codigo: existing.codigo,
-          precio: existing.precio,
-          image: existing.image,
-          quantity: existing.quantity + 1,
-          nombre: existing.nombre,
-        ),
-      );
-      print("$nombre is added to cart multiple");
-    } else {
-      _items.putIfAbsent(
+        _items.update(
           codigo,
-          () => CartItem(
-                codigo: DateTime.now().toString(),
-                precio: precio,
-                image: image,
-                quantity: 1,
-                nombre: nombre,
-              ));
-      print("$nombre is added to cart");
-    }
+          (existing) => CartItem(
+            codigo: existing.codigo,
+            precio: existing.precio,
+            image: existing.image,
+            quantity: existing.quantity + 1,
+            nombre: existing.nombre,
+          ),
+        );
+        print("$nombre is added to cart multiple");
+      } else {
+        _items.putIfAbsent(
+            codigo,
+            () => CartItem(
+                  codigo: DateTime.now().toString(),
+                  precio: precio,
+                  image: image,
+                  quantity: 1,
+                  nombre: nombre,
+                ));
+        print("$nombre is added to cart");
+      }
       notifyListeners();
     } catch (e) {
       print("The error ${e.toString()}");
       notifyListeners();
     }
-
-     
   }
 
   Future<bool> removeFromCart({CartItem cartItem}) async {
@@ -152,15 +158,26 @@ class CarritoProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  getOrders() async {
+/*   void getOrders() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     orders = await OrderProvider().getUserOrders(userId: userId);
     notifyListeners();
-  }
+  } */
 
   Future<void> reloadUserModel() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     _userModel = await _userServices.getUserById(userId);
+    notifyListeners();
+  }
+
+  Future<void> _onStateChanged(FirebaseUser user) async {
+    if (user == null) {
+      _status = Status.Unauthenticated;
+    } else {
+      _user = user;
+      _userModel = await _userServices.getUserById(user.uid);
+      _status = Status.Authenticated;
+    }
     notifyListeners();
   }
 }

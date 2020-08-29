@@ -295,8 +295,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 order.createOrder(
                     uid: userId,
                     id: id,
-                    cart: userModel.cart,
-                    total: userModel.totalCartPrice);
+                    cart: userModel.cart, //cart.userModel.cart,
+                    total: userModel.totalCartPrice); //cart.userModel.totalCartPrice);
                 for (CartItem cartItem in userModel.cart) {
                   bool value =
                       await cart.removeFromCart(cartItem: cartItem);

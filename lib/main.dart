@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           value: ProductoProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: CarritoProvider(),
+          value: CarritoProvider.initialize(),
         ),
         ChangeNotifierProvider.value(
           value: CursoProvider(),
@@ -42,10 +42,10 @@ class MyApp extends StatelessWidget {
           value: PaqueteProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: CompraProvider(),
+          value: OrderProvider(),
         ),
         ChangeNotifierProvider.value(
-          value: OrderProvider(),
+          value: CompraProvider(),
         ),
       ],
       child: MaterialApp(

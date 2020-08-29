@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,11 @@ final TextStyle tituloStyle = TextStyle(
     fontWeight: FontWeight.w500);
 
 final TextStyle descripcionProductoStyle = TextStyle(
-    fontSize: 18,
-    fontFamily: "Poppins-Medium",
-    color: Colors.grey,
-    fontWeight: FontWeight.w500,);
+  fontSize: 18,
+  fontFamily: "Poppins-Medium",
+  color: Colors.grey,
+  fontWeight: FontWeight.w500,
+);
 
 final TextStyle montoStyle =
     TextStyle(fontSize: 19, color: Colors.grey, fontWeight: FontWeight.w500);
@@ -28,6 +30,53 @@ class BodyHistorialDetail extends StatelessWidget {
   const BodyHistorialDetail({Key key, this.historial}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    List<Map<String, String>> listaProducts(List<CartItem> cartList) {
+      List<Map<String, String>> lista = [];
+      Map<String, String> map;
+      for (var item in cartList) {
+        map = {
+          "codigo": item.codigo.toString(),
+          "nombre": item.nombre.toString(),
+          "precio": item.precio.toString()
+        };
+        lista.add(map);
+      }
+      return lista;
+    }
+
+  var mainList = historial.cart.toList();
+    List<CartItem> listToCartList(List<String> list) {
+      List<CartItem> cartList = [];
+      for (var item in list) {
+        var carts = item.toString().split(",");
+        for (var i = 0; i < carts.length; i++) {
+          if (carts[i].contains("image")) {
+            CartItem item = new CartItem(
+                codigo: carts[i + 1].replaceAll("codigo:", "").trim(),
+                nombre: carts[i + 4].replaceAll("nombre:", "").trim(),
+                image: carts[i].replaceAll("image:", "").trim(),
+                quantity: 1,
+                precio: int.parse(
+                    '${carts[i + 2].replaceAll("precio:", "").trim()}'));
+            cartList.add(item);
+          }
+        }
+      }
+      return cartList;
+    }
+
+    List<CartItem> stringToList(List list) {
+      List<String> lista = [];
+      for (var item in list) {
+        lista.add(item.toString().replaceAll("{", " ").replaceAll("}", " "));
+      }
+      return listToCartList(lista);
+    }
+
+    //wil(mainList);
+    List<Map<String, String>> listaFinal = listaProducts(stringToList(mainList));
+
     // it provide us total height and width
     //Size size = MediaQuery.of(context).size;
     // it enable scrolling on small devices
@@ -52,16 +101,19 @@ class BodyHistorialDetail extends StatelessWidget {
                 children: <Widget>[
                   Center(
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                           horizontal: 12),
-                      child: Image.asset("images/LogoAH_color.png", height: 100, width: 200,),
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: Image.asset(
+                        "images/LogoAH_color.png",
+                        height: 100,
+                        width: 200,
+                      ),
                     ),
-                  ),                  
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        "Número de compra #" + historial.id.toString(),
+                        "Número de compra #" + historial.createdAt.toString(),
                         style: numOrdenStyle,
                         textAlign: TextAlign.center,
                       ),
@@ -74,9 +126,11 @@ class BodyHistorialDetail extends StatelessWidget {
                       child: Row(children: <Widget>[
                         Text("Fecha: ", style: tituloStyle),
                         Text(
-                          historial.fecha.toDate().day.toString()+"/"+
-                          historial.fecha.toDate().month.toString()+"/"+
-                          historial.fecha.toDate().year.toString(),
+                          historial.fecha.toDate().day.toString() +
+                              "/" +
+                              historial.fecha.toDate().month.toString() +
+                              "/" +
+                              historial.fecha.toDate().year.toString(),
                           style: descripcionProductoStyle,
                         ),
                         SizedBox(
@@ -86,22 +140,30 @@ class BodyHistorialDetail extends StatelessWidget {
                     ),
                   ),
                   FittedBox(
-                      child: DataTable(
+                    child: DataTable(
                       columns: [
-                        DataColumn(label: Text('Producto', style: tituloStyle)),
-                        DataColumn(label: Text('Cantidad', style: tituloStyle)),
-                        DataColumn(label: Text('Subtotal', style: tituloStyle)),
+                        DataColumn(label: Text('Codigo', style: tituloStyle)),
+                        DataColumn(label: Text('Nombre', style: tituloStyle)),
+                        DataColumn(label: Text('Precio', style: tituloStyle)),
                       ],
-                      rows: <DataRow>[
-                        DataRow(
-                          cells: <DataCell>[
-                            //DataCell(Text(historial.cart, style: descripcionProductoStyle,)),
-                            //DataCell(Text(historial.cantidad.toString(), style: descripcionProductoStyle, textAlign: TextAlign.center,)),
-                            //DataCell(Text("₡" +historial.total.toString(), style: montoStyle,)),
-                          ],
-                        ),
+                      rows: listaFinal
+                          .map(
+                            // Loops through dataColumnText, each iteration assigning the value to element
 
-                      ],
+                            ((element) => DataRow(
+                                  cells: <DataCell>[
+                                    DataCell(Text(element["codigo"],
+                                        style:
+                                            descripcionProductoStyle)), //Extracting from Map element the value
+                                    DataCell(Text(element["nombre"],
+                                        style: descripcionProductoStyle,
+                                        textAlign: TextAlign.center)),
+                                    DataCell(Text(element["precio"],
+                                        style: montoStyle)),
+                                  ],
+                                )),
+                          )
+                          .toList(),
                     ),
                   ),
                   SizedBox(

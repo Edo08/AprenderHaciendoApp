@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/providers/compraProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/historialDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/historialComprasCard.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +11,8 @@ class BodyHistorialCompras extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CompraProvider compras = CompraProvider();
-    //final compra = Provider.of<CompraProvider>(context);
-    final comprasList = compras.compras;
+    final compras = Provider.of<OrderProvider>(context);
+    final comprasList = compras.order;
 
     return SafeArea(
       child: Column(
@@ -46,10 +45,10 @@ class BodyHistorialCompras extends StatelessWidget {
                 ),
               ),
               ListView.builder(
-                itemCount: compras.compras.length,
+                itemCount: comprasList.length,
                 itemBuilder: (context, index) => HistorialCard(
                   itemIndex: index,
-                  compra: compras.compras[index],
+                  compra: comprasList[index],
                   press: () {
                     Navigator.push(
                       context,
