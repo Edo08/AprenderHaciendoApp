@@ -115,7 +115,7 @@ class _IndexState extends State<Index> {
 
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
-          name: "Cerrar Sesión",
+          name: "Cerrar sesión",
           baseStyle: TextStyle(
               color: Colors.black.withOpacity(0.8),
               fontSize: 20.0,
@@ -125,8 +125,8 @@ class _IndexState extends State<Index> {
             showDialog(
               context: context,
               builder: (BuildContext context) => CustomDialog(
-                title: "Cerrar Sesion",
-                description: "¿Desea cerrar sesion?                          ",
+                title: "CERRAR SESIÓN",
+                description: "¿Desea cerrar sesión?                          ",
                 primaryButtonText: "Aceptar",
                 primaryButton: _cerrarSesion,
                 secondaryButtonText: "Cancelar",

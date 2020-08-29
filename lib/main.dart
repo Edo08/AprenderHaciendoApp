@@ -1,4 +1,3 @@
-import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/compraProvider.dart';

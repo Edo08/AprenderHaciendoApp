@@ -8,12 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Inscripcion extends StatefulWidget {
   final AcademyModelDB certifiacion;
   const Inscripcion({Key key, this.certifiacion}) : super(key: key);
   @override
-  _InscripcionState createState() => _InscripcionState();
+  _InscripcionState createState() => _InscripcionState(); 
 }
 
 class _InscripcionState extends State<Inscripcion> with ValidationMixins {
@@ -46,6 +47,21 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   DateTime fechaNacimiento; // instance of DateTime
   String birthDateInString;
   String _errorMessage = "";
+
+  var alertStyle = AlertStyle(
+  animationType: AnimationType.fromTop,
+  isCloseButton: false,
+  isOverlayTapDismiss: false,
+  descStyle:
+      TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+  animationDuration: Duration(milliseconds: 400),
+  alertBorder: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+    side: BorderSide(
+      color: Colors.grey,
+    ),
+  ),
+);
 
   void setSpinnerStatus(bool status) {
     setState(() {
@@ -102,9 +118,8 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   }
 
   _registrarse() async {
-    if (keyForm.currentState.validate()) {
-      Navigator.pushNamed(context, '/academia');
-      createRecord();
+    if (keyForm.currentState.validate()) {    
+      createRecord();     
     } else {
       setState(() => _autoValidate = true);
     }
@@ -131,13 +146,37 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
         'email': '${emailCtrl.text}'
       },
     );
-    borrarInscripcion();
+    _onAlertButton(context);
+    borrarInscripcion(); 
+  }
+
+  _onAlertButton(context) {
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.success,
+      title: "",
+      desc: "Inscripción enviada.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "ACEPTAR",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: "Poppins-Medium"),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        ),
+      ],
+    ).show();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar:AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -352,7 +391,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                 onTap: () async {
                   setSpinnerStatus(true);
                   await _registrarse();
-                  setSpinnerStatus(false);
+                  setSpinnerStatus(false);                 
                 },
                 child: Padding(
                   padding: EdgeInsets.only(

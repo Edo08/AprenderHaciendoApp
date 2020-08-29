@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class CustomDialog extends StatelessWidget {
-  final primaryColor = const Color(0xFF75A2EA);
+  final primaryColor = const Color(0xFF2DACFE);
   final grayColor = const Color(0xFF939393);
 
   final String title, description, primaryButtonText, secondaryButtonText;
@@ -66,7 +66,7 @@ class CustomDialog extends StatelessWidget {
                 ),
                 SizedBox(height: 18.0),
                 RaisedButton(
-                  color: Color(0xFF65c6f4),
+                  color: primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
