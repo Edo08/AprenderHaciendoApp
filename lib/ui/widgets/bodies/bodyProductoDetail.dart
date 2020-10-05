@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
 import 'package:aprender_haciendo_app/ui/widgets/productoImage.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +71,7 @@ class BodyProductDetail extends StatelessWidget {
     // it provide us total height and width
     Size size = MediaQuery.of(context).size;
     // it enable scrolling on small devices
-    final cart = Provider.of<CarritoProvider>(context, listen: false);
+    final cart = Provider.of<UserProvider>(context, listen: false);
 
     return SafeArea(
       bottom: false,

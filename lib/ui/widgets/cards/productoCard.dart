@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CarritoProvider>(context, listen: false);
+    final cart = Provider.of<UserProvider>(context, listen: false);
     return Container(
       width: ScreenUtil().setWidth(542),
       child: Stack(

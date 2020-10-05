@@ -1,7 +1,7 @@
+import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductoDetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,13 +36,12 @@ class ShoppingCart extends StatefulWidget {
 }
 
 class _ShoppingCartState extends State<ShoppingCart> {
-
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CarritoProvider>(context);
-    final cartList = cart.items.values.toList();
+    //final cart = Provider.of<UserProvider>(context);
+    //final cartList = cart.items.values.toList();
     final order = Provider.of<OrderProvider>(context);
-    UserServices userServices = UserServices();
+    final user = Provider.of<UserProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +77,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Stack(
                 children: <Widget>[
                   ListView.builder(
-                    itemCount: cartList.length,
+                    itemCount: user.userModel.cart.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Dismissible(
                         child: SingleChildScrollView(
@@ -99,7 +98,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       height: 110,
                                       padding: EdgeInsets.all(4.0),
                                       child: Image.network(
-                                        "${cartList[index].image}",
+                                        "${user.userModel.cart[index].image}",
                                         fit: BoxFit.contain,
                                       ),
                                       decoration: BoxDecoration(
@@ -133,7 +132,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       Container(
                                         width: 160,
                                         child: Text(
-                                          "${cartList[index].nombre}",
+                                          "${user.userModel.cart[index].nombre}",
                                           style: nameStyle,
                                         ),
                                       ),
@@ -160,17 +159,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             onTap: () {},
                                           ), */
                                           Text(
-                                            "Cantidad: ",
+                                            "Precio: ",
                                             style: nameStyle,
                                           ),
-                                          Padding(
+                                          /* Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 20.0),
-                                            child: Text(
-                                              "${cartList[index].quantity}",
+                                             child: Text(
+                                              "${user.userModel.cart[index].quantity.toString()}",
                                               style: nameStyle,
                                             ),
-                                          ),
+                                          ), */
                                           /* GestureDetector(
                                             child: Container(
                                               width: 20.0,
@@ -189,10 +188,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             onTap: () {},
                                           ), */
                                           Spacer(),
-                                          Text(
-                                            "\₡${(cartList[index].precio * cartList[index].quantity).toStringAsFixed(0)}",
+                                           Text(
+                                            "\₡${user.userModel.cart[index].precio}",
                                             style: precioStyle,
-                                          ),
+                                          ), 
                                         ],
                                       ),
                                     ],
@@ -202,11 +201,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           ),
                         ),
-                        key: ValueKey(cart.items.keys.toList()[index]),
+                        key: ValueKey(user.userModel.cart.toList()[index]),
                         direction: DismissDirection.endToStart,
                         onDismissed: (direction) async {
-                          cart.removeItem(cart.items.keys.toList()[index]);
-                          await cart.removeFromCart(cartItem: cartList[index]);
+                          //cart.removeItem(user.userModel.cart.toList()[index]);
+                          //await user.userModel.cart.removeFromCart(cartItem: user.userModel.cart[index]);
                         },
                         background: Container(
                           padding: EdgeInsets.only(right: 20),
@@ -266,7 +265,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   style: totalStyle,
                 ),
                 Text(
-                  "\₡${(cart.totalAmount).toStringAsFixed(0)}",
+                  "\₡${(user.userModel.totalCartPrice).toStringAsFixed(0)}",
                   style: totalprecioStyle,
                 ),
               ],
@@ -289,19 +288,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
               onTap: () async {
                 var uuid = Uuid();
                 String id = uuid.v4();
-                var userId =
-                    (await FirebaseAuth.instance.currentUser()).uid;
-                var userModel = await userServices.getUserById(userId);
+                var userId = (await FirebaseAuth.instance.currentUser()).uid;
+                //var userModel = await userServices.getUserById(userId);
                 order.createOrder(
                     uid: userId,
                     id: id,
-                    cart: userModel.cart, //cart.userModel.cart,
-                    total: userModel.totalCartPrice); //cart.userModel.totalCartPrice);
-                for (CartItem cartItem in userModel.cart) {
-                  bool value =
-                      await cart.removeFromCart(cartItem: cartItem);
+                    cart: user.userModel.cart, //cart.userModel.cart,
+                    total: user.userModel.totalCartPrice); //cart.userModel.totalCartPrice);
+                for (CarritoModelDB cartItem in user.userModel.cart) {
+                  bool value = await user.removeFromCart(cartItem: cartItem);
                   if (value) {
-                    cart.reloadUserModel();
+                    user.reloadUserModel();
                     print("Item added to cart");
                   } else {
                     print("ITEM WAS NOT REMOVED");
@@ -323,8 +320,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             fontFamily: "Poppins-Medium"),
                       ),
                       onPressed: () {
-                          Navigator.pop(context);
-                          //Navigator.pushNamed(context, '/tienda');
+                        Navigator.pop(context);
+                        //Navigator.pushNamed(context, '/tienda');
                       },
                       width: 120,
                     )

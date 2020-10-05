@@ -135,7 +135,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   void createRecord() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
-    var ref = databaseReference.collection("inscripciones").document("$userId");
+    var ref = databaseReference.collection("inscripciones").document();
     await ref.setData(
       {
         'uid': '$userId',

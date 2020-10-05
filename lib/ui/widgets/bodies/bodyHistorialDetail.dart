@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class BodyHistorialDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<Map<String, String>> listaProducts(List<CartItem> cartList) {
+    List<Map<String, String>> listaProducts(List<CarritoModelDB> cartList) {
       List<Map<String, String>> lista = [];
       Map<String, String> map;
       for (var item in cartList) {
@@ -46,13 +46,13 @@ class BodyHistorialDetail extends StatelessWidget {
     }
 
   var mainList = historial.cart.toList();
-    List<CartItem> listToCartList(List<String> list) {
-      List<CartItem> cartList = [];
+    List<CarritoModelDB> listToCartList(List<String> list) {
+      List<CarritoModelDB> cartList = [];
       for (var item in list) {
         var carts = item.toString().split(",");
         for (var i = 0; i < carts.length; i++) {
           if (carts[i].contains("image")) {
-            CartItem item = new CartItem(
+            CarritoModelDB item = new CarritoModelDB(
                 codigo: carts[i + 1].replaceAll("codigo:", "").trim(),
                 nombre: carts[i + 4].replaceAll("nombre:", "").trim(),
                 image: carts[i].replaceAll("image:", "").trim(),
@@ -66,7 +66,7 @@ class BodyHistorialDetail extends StatelessWidget {
       return cartList;
     }
 
-    List<CartItem> stringToList(List list) {
+    List<CarritoModelDB> stringToList(List list) {
       List<String> lista = [];
       for (var item in list) {
         lista.add(item.toString().replaceAll("{", " ").replaceAll("}", " "));

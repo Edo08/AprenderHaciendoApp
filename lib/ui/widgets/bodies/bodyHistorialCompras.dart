@@ -2,6 +2,7 @@ import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart
 import 'package:aprender_haciendo_app/ui/views/historialDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/historialComprasCard.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BodyHistorialCompras extends StatelessWidget {
   final TextStyle newProductStyle =

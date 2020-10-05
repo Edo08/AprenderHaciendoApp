@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
 import 'package:aprender_haciendo_app/ui/widgets/packImage.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +72,7 @@ class BodyCursoDetail extends StatelessWidget {
   const BodyCursoDetail({Key key, this.curso}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CarritoProvider>(context, listen: false);
+    final cart = Provider.of<UserProvider>(context, listen: false);
     // it provide us total height and width
     Size size = MediaQuery.of(context).size;
     // it enable scrolling on small devices

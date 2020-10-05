@@ -1,6 +1,6 @@
+import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/compraServices.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,6 @@ class OrderItem {
   }
 }
 
-enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 class OrderProvider with ChangeNotifier {
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
@@ -53,9 +52,9 @@ class OrderProvider with ChangeNotifier {
 
   List<OrderItem> get order => _order;
 
-  void createOrder({String uid, String id, List<CartItem> cart, int total}) {
+  void createOrder({String uid, String id, List<CarritoModelDB> cart, int total}) {
     List<Map> convertedCart = [];
-    for (CartItem item in cart) {
+    for (CarritoModelDB item in cart) {
       convertedCart.add(item.toMap());
     }
     _firestore.collection(collection).document(id).setData({

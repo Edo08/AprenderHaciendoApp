@@ -1,5 +1,5 @@
+import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
 import 'package:aprender_haciendo_app/core/models/userModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserServices{
@@ -14,13 +14,13 @@ class UserServices{
     return UserModel.fromSnapshot(doc);
   });
 
-  void addToCart({String userId, CartItem cartItem}){
+  void addToCart({String userId, CarritoModelDB cartItem}){
     _firestore.collection(collection).document(userId).updateData({
       "cart": FieldValue.arrayUnion([cartItem.toMap()])
     });
   }
 
-  void removeFromCart({String userId, CartItem cartItem}){
+  void removeFromCart({String userId, CarritoModelDB cartItem}){
     _firestore.collection(collection).document(userId).updateData({
       "cart": FieldValue.arrayRemove([cartItem.toMap()])
     });

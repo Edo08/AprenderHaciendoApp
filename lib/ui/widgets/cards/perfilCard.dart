@@ -1,3 +1,4 @@
+import 'package:aprender_haciendo_app/core/models/userModelDB.dart';
 import 'package:aprender_haciendo_app/ui/views/EditarPerfil.dart';
 import 'package:flutter/material.dart';
 
@@ -37,14 +38,14 @@ final TextStyle subTitleStyle = TextStyle(
   ],
 );
 
-class PerfilCard extends StatelessWidget {
-  const PerfilCard({
-    Key key,
-    this.itemIndex,
-  }) : super(key: key);
+class PerfilCard extends StatefulWidget {
+    //final Cursos curso;
+  @override
+  _PerfilCardState createState() => _PerfilCardState();
+}
 
-  final int itemIndex;
-  //final Cursos curso;
+class _PerfilCardState extends State<PerfilCard> {
+  UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class PerfilCard extends StatelessWidget {
                   style: nombreStyle,
                 ),
                 Text(
-                  "edomm08@gmail.com",
+                  "${user.email}",
                   style: subTitleStyle,
                 ),
                 SizedBox(

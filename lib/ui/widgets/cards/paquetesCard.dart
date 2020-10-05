@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/models/paquetesModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/carritoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -66,7 +66,7 @@ class PaquetesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // It  will provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
-    final cart = Provider.of<CarritoProvider>(context, listen: false);
+    final cart = Provider.of<UserProvider>(context, listen: false);
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 20.0,
