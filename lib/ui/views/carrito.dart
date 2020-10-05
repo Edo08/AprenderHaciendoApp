@@ -1,5 +1,6 @@
 import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductoDetail.dart';
@@ -42,6 +43,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //final cartList = cart.items.values.toList();
     final order = Provider.of<OrderProvider>(context);
     final user = Provider.of<UserProvider>(context);
+    UserServices userServices = UserServices();
 
     return Scaffold(
       appBar: AppBar(
@@ -188,10 +190,10 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             onTap: () {},
                                           ), */
                                           Spacer(),
-                                           Text(
+                                          Text(
                                             "\₡${user.userModel.cart[index].precio}",
                                             style: precioStyle,
-                                          ), 
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -201,9 +203,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             ),
                           ),
                         ),
-                        key: ValueKey(user.userModel.cart.toList()[index]),
+                        key: ValueKey(user.userModel.cart[index]),
                         direction: DismissDirection.endToStart,
                         onDismissed: (direction) async {
+                          /* user.removeItem(
+                              user.userModel.cart.toString()[index]); */
+                          await user.removeFromCart(
+                              cartItem: user.userModel.cart[index]);
                           //cart.removeItem(user.userModel.cart.toList()[index]);
                           //await user.userModel.cart.removeFromCart(cartItem: user.userModel.cart[index]);
                         },
@@ -289,13 +295,14 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 var uuid = Uuid();
                 String id = uuid.v4();
                 var userId = (await FirebaseAuth.instance.currentUser()).uid;
-                //var userModel = await userServices.getUserById(userId);
+                var userModel = await userServices.getUserById(userId);
                 order.createOrder(
                     uid: userId,
                     id: id,
-                    cart: user.userModel.cart, //cart.userModel.cart,
-                    total: user.userModel.totalCartPrice); //cart.userModel.totalCartPrice);
-                for (CarritoModelDB cartItem in user.userModel.cart) {
+                    cart: userModel.cart, //cart.userModel.cart,
+                    total: userModel
+                        .totalCartPrice); //cart.userModel.totalCartPrice);
+                for (CarritoModelDB cartItem in userModel.cart) {
                   bool value = await user.removeFromCart(cartItem: cartItem);
                   if (value) {
                     user.reloadUserModel();

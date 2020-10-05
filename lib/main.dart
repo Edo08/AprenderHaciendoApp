@@ -63,7 +63,7 @@ class ScreensController extends StatelessWidget {
       case Status.Authenticating:
         return WelcomeScreen();
       case Status.Authenticated:
-        return Tienda();
+        return Index();
       default:
         return WelcomeScreen();
     }
