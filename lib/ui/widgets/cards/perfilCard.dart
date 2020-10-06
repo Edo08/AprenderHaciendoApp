@@ -1,6 +1,8 @@
 import 'package:aprender_haciendo_app/core/models/userModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/EditarPerfil.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 final TextStyle codigoStyle = TextStyle(
   fontSize: 15,
@@ -45,10 +47,11 @@ class PerfilCard extends StatefulWidget {
 }
 
 class _PerfilCardState extends State<PerfilCard> {
-  UserModel user;
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 40.0,
@@ -82,11 +85,22 @@ class _PerfilCardState extends State<PerfilCard> {
                   height: 35,
                 ),
                 Text(
+                  "Nombre completo",
+                  style: nombreStyle,
+                ),
+                Text(
+                  "${user.user.displayName}",
+                  style: subTitleStyle,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
                   "Correo Electrónico",
                   style: nombreStyle,
                 ),
                 Text(
-                  "${user.email}",
+                  "${user.user.email}",
                   style: subTitleStyle,
                 ),
                 SizedBox(
@@ -97,20 +111,31 @@ class _PerfilCardState extends State<PerfilCard> {
                   style: nombreStyle,
                 ),
                 Text(
-                  "20/06/1992",
+                  "${user.userModel.fechaNacimiento}",
                   style: subTitleStyle,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Nombre completo",
+                  "Numero de Telefono",
                   style: nombreStyle,
                 ),
                 Text(
-                  "Eduardo Muñoz",
+                  "${user.userModel.telefono}",
                   style: subTitleStyle,
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Direccion de Entrega",
+                  style: nombreStyle,
+                ),
+                if (user.userModel.direccion== null || user.userModel.direccion==  "") 
+                Text("No ha registrado una dirección", style: subTitleStyle,)
+                else 
+                  Text("${user.userModel.direccion}", style: subTitleStyle),
                 SizedBox(
                   height: 20,
                 ),

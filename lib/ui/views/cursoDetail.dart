@@ -1,7 +1,9 @@
 import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/carrito.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyCursoDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CursoDetail extends StatelessWidget {
   final CursosModelDB curso;
@@ -19,6 +21,7 @@ class CursoDetail extends StatelessWidget {
   }
 
   AppBar buildAppBar(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -36,6 +39,7 @@ class CursoDetail extends StatelessWidget {
         IconButton(
           icon: Image.asset("icons/icon_cart.png", width: 130.0, height: 130.0),
           onPressed: () {
+            user.reloadUserModel();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ShoppingCart()),

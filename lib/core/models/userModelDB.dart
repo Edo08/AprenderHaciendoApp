@@ -9,24 +9,27 @@ class UserModel with ChangeNotifier {
   static const EMAIL = "email";
   static const CART = "cart";
   static const TOTALCARTPRICE = "totalCartPrice";
-  static const FECHANACIMIENTO = "fechanacimiento";
+  static const FECHANACIMIENTO = "fechaNacimiento";
   static const TELEFONO = "telefono";
+  static const DIRECCION = "direccion";
 
   String _uid;
   String _nombre;
   String _apellido;
   String _email;
   int _priceSum = 0;
-  String _fechanacimiento;
+  String _fechaNacimiento;
   String _telefono;
+  String _direccion;
 
 //  getters
   String get nombre => _nombre;
   String get apellido => _apellido;
   String get email => _email;
   String get uid => _uid;
-  String get fechanacimiento => _fechanacimiento;
+  String get fechaNacimiento => _fechaNacimiento;
   String get telefono => _telefono;
+  String get direccion => _direccion;
 
   // public variables
   List<CarritoModelDB> cart;
@@ -36,9 +39,10 @@ class UserModel with ChangeNotifier {
     _nombre = snapshot.data[NOMBRE];
     _apellido = snapshot.data[APELLIDO];
     _email = snapshot.data[EMAIL];
-    _fechanacimiento = snapshot.data[FECHANACIMIENTO];
+    _fechaNacimiento = snapshot.data[FECHANACIMIENTO];
     _telefono = snapshot.data[TELEFONO];
     _uid = snapshot.data[UID];
+    _direccion = snapshot.data[DIRECCION];
     cart = _convertCartItems(snapshot.data[CART] ?? []);
     totalCartPrice = snapshot.data[CART] == null
         ? 0
