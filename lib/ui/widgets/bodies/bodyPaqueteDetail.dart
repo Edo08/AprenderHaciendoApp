@@ -183,6 +183,7 @@ class BodyPackDetail extends StatelessWidget {
                     _onAlertButton(context);
                     cart.addItem(
                         paquete.edades, paquete.precio, paquete.imagen, paquete.nombre);
+                    cart.reloadUserModel();
                   }),
             ),
           ],

@@ -41,6 +41,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //final cart = Provider.of<UserProvider>(context);
     //final cartList = cart.items.values.toList();
     final user = Provider.of<UserProvider>(context);
+    user.reloadUserModel();
     UserServices userServices = UserServices();
 
     return Scaffold(
@@ -77,7 +78,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Stack(
                 children: <Widget>[
                   ListView.builder(
-                    itemCount: user.userModel.cart.length,
+                   itemCount: (user.userModel.cart.length == null) ? 0: user.userModel.cart.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Dismissible(
                         child: SingleChildScrollView(
@@ -208,6 +209,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                               user.userModel.cart.toString()[index]); */
                           await user.removeFromCart(
                               cartItem: user.userModel.cart[index]);
+                          user.reloadUserModel();
                           //cart.removeItem(user.userModel.cart.toList()[index]);
                           //await user.userModel.cart.removeFromCart(cartItem: user.userModel.cart[index]);
                         },
@@ -290,48 +292,74 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
               ),
               onTap: () async {
-                var uuid = Uuid();
-                String id = uuid.v4();
-                var userId = (await FirebaseAuth.instance.currentUser()).uid;
-                var userModel = await userServices.getUserById(userId);
-                user.createOrder(
-                    uid: userId,
-                    id: id,
-                    cart: userModel.cart, //cart.userModel.cart,
-                    total: userModel
-                        .totalCartPrice); //cart.userModel.totalCartPrice);
-                for (CarritoModelDB cartItem in userModel.cart) {
-                  bool value = await user.removeFromCart(cartItem: cartItem);
-                  if (value) {
-                    user.reloadUserModel();
-                    print("Item added to cart");
-                  } else {
-                    print("ITEM WAS NOT REMOVED");
+                if (user.userModel.cart.length != 0){
+                  var uuid = Uuid();
+                  String id = uuid.v4();
+                  var userId = (await FirebaseAuth.instance.currentUser()).uid;
+                  var userModel = await userServices.getUserById(userId);
+                  user.createOrder(
+                      uid: userId,
+                      id: id,
+                      cart: userModel.cart, //cart.userModel.cart,
+                      total: userModel
+                          .totalCartPrice); //cart.userModel.totalCartPrice);
+                  user.reloadUserModel();
+                  for (CarritoModelDB cartItem in userModel.cart) {
+                    bool value = await user.removeFromCart(cartItem: cartItem);
+                    if (value) {
+                      user.reloadUserModel();
+                      print("Item added to cart");
+                    } else {
+                      print("ITEM WAS NOT REMOVED");
+                    }
                   }
-                }
-                Alert(
-                  context: context,
-                  style: alertStyle,
-                  type: AlertType.success,
-                  title: "",
-                  desc: "Orden de compra generada.",
-                  buttons: [
-                    DialogButton(
-                      child: Text(
-                        "ACEPTAR",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: "Poppins-Medium"),
-                      ),
-                      onPressed: () {
-                        //Navigator.pop(context);
+                  Alert(
+                    context: context,
+                    style: alertStyle,
+                    type: AlertType.success,
+                    title: "",
+                    desc: "Orden de compra generada.",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "ACEPTAR",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: "Poppins-Medium"),
+                        ),
+                        onPressed: () {
+                          //Navigator.pop(context);
                           Navigator.pushNamed(context, '/index');
-                      },
-                      width: 120,
-                    )
-                  ],
-                ).show();
+                        },
+                        width: 120,
+                      )
+                    ],
+                  ).show();
+                } else {
+                  Alert(
+                    context: context,
+                    style: alertStyle,
+                    type: AlertType.warning,
+                    title: "",
+                    desc: "No hay articulos en el carrito",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "ACEPTAR",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: "Poppins-Medium"),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        width: 120,
+                      )
+                    ],
+                  ).show();
+                }    
               },
             ),
             SizedBox(

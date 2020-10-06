@@ -182,6 +182,7 @@ class BodyCursoDetail extends StatelessWidget {
                     _onAlertButton(context);
                     cart.addItem(curso.codigo, curso.precio, curso.imagen,
                         curso.nombre);
+                    cart.reloadUserModel();
                   }),
             ),
           ],

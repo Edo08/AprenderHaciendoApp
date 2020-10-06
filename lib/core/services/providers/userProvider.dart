@@ -162,6 +162,7 @@ class UserProvider with ChangeNotifier {
 
   Future<void> reloadUserModel() async {
     _userModel = await _userServices.getUserById(user.uid);
+    _order = await _orderServices.getOrdersByUser(user.uid);
     notifyListeners();
   }
   /* Future<void> reloadUserModel() async {

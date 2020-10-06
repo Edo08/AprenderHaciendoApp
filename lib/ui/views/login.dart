@@ -363,7 +363,7 @@ class _LoginFormState extends State<LoginForm>
 
   void _aceptar() async {
     try {
-      await UserProvider.initialize().sendPasswordResetEmail(_emailController.text);
+      await UserProvider.initialize().sendPasswordResetEmail(_emailController.text.trim());
       print('$_email');
     } catch (e) {
       print(e);

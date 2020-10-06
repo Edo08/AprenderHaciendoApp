@@ -118,11 +118,11 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     if (keyForm.currentState.validate()) {
       try {
         var auth = await UserProvider.initialize().createUser(  
-            nombre: nombreCtrl.text, 
-            apellido: apellidosCtrl.text, 
-            telefono: telCtrl.text, 
-            email: emailCtrl.text, 
-            password: passwordCtrl.text, 
+            nombre: nombreCtrl.text.trim(), 
+            apellido: apellidosCtrl.text.trim(), 
+            telefono: telCtrl.text.trim(), 
+            email: emailCtrl.text.trim(), 
+            password: passwordCtrl.text.trim(), 
             fechaNacimiento: fechaNacimiento);
         if (auth.success) {
           Navigator.pushNamed(context, '/index');

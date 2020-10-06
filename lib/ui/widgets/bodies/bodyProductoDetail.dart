@@ -168,6 +168,7 @@ class BodyProductDetail extends StatelessWidget {
               press: () { 
                 _onAlertButton(context);
                 cart.addItem(product.codigo, product.precio, product.image, product.nombre);
+                cart.reloadUserModel();
               },
             ),
           ],

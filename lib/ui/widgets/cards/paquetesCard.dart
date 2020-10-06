@@ -167,6 +167,7 @@ class PaquetesCard extends StatelessWidget {
                         _onAlertButton(context);
                         cart.addItem(paquete.codigo, paquete.precio,
                             paquete.imagen, paquete.nombre);
+                        cart.reloadUserModel();
                       },
                     ),
                   ],

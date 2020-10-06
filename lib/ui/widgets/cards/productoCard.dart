@@ -162,6 +162,7 @@ class ProductCard extends StatelessWidget {
                                           product.precio,
                                           product.image,
                                           product.nombre);
+                                      cart.reloadUserModel();
                                     },
                                   ),
                                 ],
