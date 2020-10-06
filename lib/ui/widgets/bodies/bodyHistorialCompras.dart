@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/historialDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/historialComprasCard.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class BodyHistorialCompras extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final compras = Provider.of<OrderProvider>(context);
+    final compras = Provider.of<UserProvider>(context);
     final comprasList = compras.order;
 
     return SafeArea(

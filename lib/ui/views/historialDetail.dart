@@ -1,9 +1,9 @@
-import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
+import 'package:aprender_haciendo_app/core/models/orderModelDB.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyHistorialDetail.dart';
 import 'package:flutter/material.dart';
 
 class HistorialDetail extends StatelessWidget {
-  final OrderItem historial;
+  final OrderModelDB historial;
 
   const HistorialDetail({Key key, this.historial}) : super(key: key);
   @override

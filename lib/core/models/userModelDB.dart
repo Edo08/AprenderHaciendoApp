@@ -45,14 +45,6 @@ class UserModel with ChangeNotifier {
         : getTotalPrice(cart: snapshot.data[CART]);
   }
 
-  List<CarritoModelDB> _convertCartItems(List cart) {
-    List<CarritoModelDB> convertedCart = [];
-    for (Map cartItem in cart) {
-      convertedCart.add(CarritoModelDB.fromMap(cartItem));
-    }
-    return convertedCart;
-  }
-
   int getTotalPrice({List cart}) {
     if (cart == null) {
       return 0;
@@ -62,5 +54,13 @@ class UserModel with ChangeNotifier {
     }
     int total = _priceSum;
     return total;
+  }
+
+  List<CarritoModelDB> _convertCartItems(List cart) {
+    List<CarritoModelDB> convertedCart = [];
+    for (Map cartItem in cart) {
+      convertedCart.add(CarritoModelDB.fromMap(cartItem));
+    }
+    return convertedCart;
   }
 }

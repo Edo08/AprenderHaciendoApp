@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/authentication.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/core/services/singIn.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/carrito.dart';
@@ -243,7 +243,7 @@ class _IndexState extends State<Index> {
 
   void _cerrarSesion() async {
     try {
-      await Authentication().signOut();
+      await UserProvider.initialize().signOut();
       signOutGoogle();
       Navigator.pushNamed(context, '/welcomeScreen');
     } catch (e) {

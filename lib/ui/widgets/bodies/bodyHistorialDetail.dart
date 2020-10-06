@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
+import 'package:aprender_haciendo_app/core/models/orderModelDB.dart';
 import 'package:flutter/material.dart';
 
 final TextStyle numOrdenStyle = TextStyle(
@@ -25,7 +25,7 @@ final TextStyle montoStyle =
     TextStyle(fontSize: 19, color: Colors.grey, fontWeight: FontWeight.w500);
 
 class BodyHistorialDetail extends StatelessWidget {
-  final OrderItem historial;
+  final OrderModelDB historial;
 
   const BodyHistorialDetail({Key key, this.historial}) : super(key: key);
   @override
@@ -56,7 +56,7 @@ class BodyHistorialDetail extends StatelessWidget {
                 codigo: carts[i + 1].replaceAll("codigo:", "").trim(),
                 nombre: carts[i + 4].replaceAll("nombre:", "").trim(),
                 image: carts[i].replaceAll("image:", "").trim(),
-                quantity: 1,
+                //quantity: 1,
                 precio: int.parse(
                     '${carts[i + 2].replaceAll("precio:", "").trim()}'));
             cartList.add(item);

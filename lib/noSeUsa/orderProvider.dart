@@ -1,10 +1,12 @@
+/*
 import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
+import 'package:aprender_haciendo_app/core/models/orderModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/compraServices.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class OrderItem {
+ class OrderItem {
   static const ID = "id";
   static const CART = "cart";
   static const UID = "uid";
@@ -34,13 +36,20 @@ class OrderItem {
     _total = snapshot.data[TOTAL];
     cart = snapshot.data[CART];
   }
-}
+} 
+
+import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
+import 'package:aprender_haciendo_app/core/models/orderModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/helpers/orderServices.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class OrderProvider with ChangeNotifier {
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
-  List<OrderItem> _order = [];
-  CompraServices _compraServices = CompraServices();
+  List<OrderModelDB> _order = [];
+  OrderServices _orderServices = OrderServices();
 
   /* OrderProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
@@ -50,9 +59,10 @@ class OrderProvider with ChangeNotifier {
     _getOrdersByUID();
   }
 
-  List<OrderItem> get order => _order;
+  List<OrderModelDB> get order => _order;
 
-  void createOrder({String uid, String id, List<CarritoModelDB> cart, int total}) {
+  void createOrder(
+      {String uid, String id, List<CarritoModelDB> cart, int total}) {
     List<Map> convertedCart = [];
     for (CarritoModelDB item in cart) {
       convertedCart.add(item.toMap());
@@ -68,13 +78,13 @@ class OrderProvider with ChangeNotifier {
   }
 
   _getOrdersByUID() async {
-    Future<String> uid = Authentication().getCurrentUID();
-    _order = await _compraServices.getComprasByUser(uid);
+    Future<String> uid = UserProvider.initialize().getCurrentUID();
+    _order = await _orderServices.getOrdersByUser(uid);
     notifyListeners();
   }
 }
 
-/*  Future<List<OrderItem>> getUserOrders(String userId) async => _firestore
+ Future<List<OrderItem>> getUserOrders(String userId) async => _firestore
           .collection(collection)
           .where("uid", isEqualTo: userId)
           .getDocuments()

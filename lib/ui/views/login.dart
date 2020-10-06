@@ -1,5 +1,5 @@
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
-import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
 import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:flutter/material.dart';
@@ -68,8 +68,7 @@ class _LoginFormState extends State<LoginForm>
   _login() async {
     if (keyForm.currentState.validate()) {
       try {
-        var auth = await Authentication()
-            .loginUser(email: _email, password: _password);
+        var auth = await UserProvider.initialize().loginUser(email: _email, password: _password);
         print('$_email y $_password');
         if (auth.success) {
           Navigator.pushNamed(context, '/index');
@@ -364,7 +363,7 @@ class _LoginFormState extends State<LoginForm>
 
   void _aceptar() async {
     try {
-      await Authentication().sendPasswordResetEmail(_emailController.text);
+      await UserProvider.initialize().sendPasswordResetEmail(_emailController.text);
       print('$_email');
     } catch (e) {
       print(e);

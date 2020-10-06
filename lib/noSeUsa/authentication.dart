@@ -1,4 +1,3 @@
-import 'package:aprender_haciendo_app/core/services/authRequest.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication {
@@ -8,7 +7,7 @@ class Authentication {
     (FirebaseUser user) => user?.uid,
   );
 
-  // Email & Password Sign Up
+  /* // Email & Password Sign Up
   Future<AuthenticationRequest> createUser({
       String nombre,
       String apellido,
@@ -43,29 +42,29 @@ class Authentication {
       _mapErrorMessage(authRequest, e.code);
     }
     return authRequest;
-  }
+  } */
 
   // GET UID
-  Future<String> getCurrentUID() async {
+  /*  Future<String> getCurrentUID() async {
   try {
       return (await _auth.currentUser()).uid;
     } catch (e) {
       print(e);
     }
     return null;
-  }
-  
+  } 
+   */
   // GET CURRENT USER
-  Future<FirebaseUser> getCurrentUser() async {
+  /* Future<FirebaseUser> getCurrentUser() async {
     try {
       return await _auth.currentUser();
     } catch (e) {
       print(e);
     }
     return null;
-  }
+  } */
 
-  Future<AuthenticationRequest> loginUser(
+  /* Future<AuthenticationRequest> loginUser(
       {String email = "", String password = ""}) async {
     AuthenticationRequest authRequest = AuthenticationRequest();
     try {
@@ -78,29 +77,29 @@ class Authentication {
       _mapErrorMessage(authRequest, e.code);
     }
     return authRequest;
-  }
+  } */
 
   // Sign Out
-  Future<void> signOut() async {
+  /* Future<void> signOut() async {
     try {
       return await _auth.signOut();
     } catch (e) {
       print(e);
     }
     return null;
-  }
+  } */
 
   // Reset Password
-  Future sendPasswordResetEmail(String email) async {
+  /* Future sendPasswordResetEmail(String email) async {
     try {
        await _auth.sendPasswordResetEmail(email: email);
     } catch (e) {
       print(e);
     }
     return null;
-  }
+  } */
 
-  void _mapErrorMessage(AuthenticationRequest authRequest, String code) {
+  /* void _mapErrorMessage(AuthenticationRequest authRequest, String code) {
     switch (code) {
       case 'ERROR_USER_NOT_FOUND':
         authRequest.errorMessage = "Usuario no encontrado";
@@ -117,5 +116,5 @@ class Authentication {
       default:
         authRequest.errorMessage = code;
     }
-  }
+  } */
 }

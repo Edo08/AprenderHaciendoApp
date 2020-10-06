@@ -1,6 +1,6 @@
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
 import 'package:aprender_haciendo_app/ui/shared/constants.dart';
-import 'package:aprender_haciendo_app/core/services/authentication.dart';
 import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -117,8 +117,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   _registrarse() async {
     if (keyForm.currentState.validate()) {
       try {
-        var auth = await Authentication()
-            .createUser(  
+        var auth = await UserProvider.initialize().createUser(  
             nombre: nombreCtrl.text, 
             apellido: apellidosCtrl.text, 
             telefono: telCtrl.text, 

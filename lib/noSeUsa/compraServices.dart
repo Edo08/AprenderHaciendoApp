@@ -1,31 +1,31 @@
-import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
+/* import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
+import 'package:aprender_haciendo_app/core/models/orderModelDB.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompraServices {
   String collection = "orders";
   Firestore _firestore = Firestore.instance;
 
-  Future<List<OrderItem>> getCompras() async =>
+  Future<List<OrderModelDB>> getCompras() async =>
       _firestore.collection(collection).getDocuments().then(
         (result) {
-          List<OrderItem> compras = [];
+          List<OrderModelDB> compras = [];
           for (DocumentSnapshot compra in result.documents) {
-            compras.add(OrderItem.fromSnapshot(compra));
+            compras.add(OrderModelDB.fromSnapshot(compra));
           }
           return compras;
         },
       );
 
-  Future<List<OrderItem>> getComprasByUser(Future<String> uid) async =>
+  Future<List<OrderModelDB>> getComprasByUser(Future<String> uid) async =>
       _firestore
           .collection(collection)
           .where ("uid", isEqualTo:await uid)
           .getDocuments()
           .then((result) {
-        List<OrderItem> compras = [];
+        List<OrderModelDB> compras = [];
         for (DocumentSnapshot compra in result.documents) {
-          compras.add(OrderItem.fromSnapshot(compra));
+          compras.add(OrderModelDB.fromSnapshot(compra));
         }
         return compras;
       },);
@@ -47,4 +47,4 @@ class CompraServices {
       "status": status
     });
   }
-} 
+}  */

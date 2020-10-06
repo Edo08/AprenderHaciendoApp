@@ -1,7 +1,6 @@
 import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
-import 'package:aprender_haciendo_app/core/services/providers/orderProvider.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/bodies/bodyProductoDetail.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +40,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
   Widget build(BuildContext context) {
     //final cart = Provider.of<UserProvider>(context);
     //final cartList = cart.items.values.toList();
-    final order = Provider.of<OrderProvider>(context);
     final user = Provider.of<UserProvider>(context);
     UserServices userServices = UserServices();
 
@@ -296,7 +294,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 String id = uuid.v4();
                 var userId = (await FirebaseAuth.instance.currentUser()).uid;
                 var userModel = await userServices.getUserById(userId);
-                order.createOrder(
+                user.createOrder(
                     uid: userId,
                     id: id,
                     cart: userModel.cart, //cart.userModel.cart,
