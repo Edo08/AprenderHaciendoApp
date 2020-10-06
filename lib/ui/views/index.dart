@@ -13,18 +13,16 @@ import 'package:aprender_haciendo_app/ui/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:provider/provider.dart';
 
 
 class Index extends StatefulWidget {
   static const String routeName = '/index';
-
   @override
   _IndexState createState() => _IndexState();
 }
 
-final TextStyle menuStyle =
-    TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
-
+final TextStyle menuStyle = TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
 class _IndexState extends State<Index> {
   List<ScreenHiddenDrawer> items = new List();
   @override
@@ -141,6 +139,7 @@ class _IndexState extends State<Index> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     ScreenUtil.instance =
         ScreenUtil(width: 1125, height: 2436, allowFontScaling: true)
           ..init(context);
@@ -167,6 +166,7 @@ class _IndexState extends State<Index> {
               width: ScreenUtil.getInstance().setWidth(130),
               height: ScreenUtil.getInstance().setHeight(130)),
           onPressed: () {
+            user.reloadUserModel();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ShoppingCart()),

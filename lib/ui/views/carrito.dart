@@ -41,8 +41,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //final cart = Provider.of<UserProvider>(context);
     //final cartList = cart.items.values.toList();
     final user = Provider.of<UserProvider>(context);
-    user.reloadUserModel();
     UserServices userServices = UserServices();
+    //user.reloadUserModel();
 
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +78,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
               child: Stack(
                 children: <Widget>[
                   ListView.builder(
-                   itemCount: (user.userModel.cart.length == null) ? 0: user.userModel.cart.length,
+                    itemCount: (user.userModel.cart.length == null)
+                        ? 0
+                        : user.userModel.cart.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Dismissible(
                         child: SingleChildScrollView(
@@ -207,8 +209,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         onDismissed: (direction) async {
                           /* user.removeItem(
                               user.userModel.cart.toString()[index]); */
-                          await user.removeFromCart(
-                              cartItem: user.userModel.cart[index]);
+                          await user.removeFromCart(cartItem: user.userModel.cart[index]);
                           user.reloadUserModel();
                           //cart.removeItem(user.userModel.cart.toList()[index]);
                           //await user.userModel.cart.removeFromCart(cartItem: user.userModel.cart[index]);
@@ -292,7 +293,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 ),
               ),
               onTap: () async {
-                if (user.userModel.cart.length != 0){
+                if (user.userModel.cart.length != 0) {
                   var uuid = Uuid();
                   String id = uuid.v4();
                   var userId = (await FirebaseAuth.instance.currentUser()).uid;
@@ -359,7 +360,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       )
                     ],
                   ).show();
-                }    
+                }
               },
             ),
             SizedBox(
