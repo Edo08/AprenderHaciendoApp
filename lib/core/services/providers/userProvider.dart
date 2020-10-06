@@ -129,7 +129,7 @@ class UserProvider with ChangeNotifier {
     }
     return null;
   }
-
+  
   
   
   Future sendPasswordResetEmail(String email) async {
@@ -174,7 +174,6 @@ class UserProvider with ChangeNotifier {
     if (firebaseUser == null) {
       _status = Status.Unauthenticated;
     } else {
-      //Future<String> uid = UserProvider.initialize().getCurrentUID();
       _user = firebaseUser;
       _status = Status.Authenticated;
       _userModel = await _userServices.getUserById(user.uid);
@@ -254,6 +253,7 @@ class UserProvider with ChangeNotifier {
 
   void createOrder(
       {String uid, String id, List<CarritoModelDB> cart, int total}) {
+        
     List<Map> convertedCart = [];
     for (CarritoModelDB item in cart) {
       convertedCart.add(item.toMap());

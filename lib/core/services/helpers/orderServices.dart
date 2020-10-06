@@ -11,7 +11,7 @@ class OrderServices{
     for(CarritoModelDB item in cart){
       convertedCart.add(item.toMap());
     }
-    _firestore.collection(collection).document(id).setData({
+    _firestore.collection(collection).document(id).updateData({
       "userId": userId,
       "id": id,
       "cart": convertedCart,
@@ -35,7 +35,7 @@ class OrderServices{
         return orders;
       }); */
 
-  Future<List<OrderModelDB>> getOrders() async =>
+  /* Future<List<OrderModelDB>> getOrders() async =>
       _firestore.collection(collection).getDocuments().then(
         (result) {
           List<OrderModelDB> compras = [];
@@ -45,9 +45,9 @@ class OrderServices{
           return compras;
         },
       );
-
-  Future<List<OrderModelDB>> getOrdersByUser(String uid)  =>
-      _firestore
+ */
+  Future<List<OrderModelDB>> getOrdersByUser(String uid) async =>
+      await _firestore
           .collection(collection)
           .where ("uid", isEqualTo: uid)
           .getDocuments()

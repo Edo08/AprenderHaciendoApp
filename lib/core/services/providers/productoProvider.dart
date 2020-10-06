@@ -7,7 +7,7 @@ class ProductoProvider with ChangeNotifier {
   List<ProductoModelDB> productsSearched = [];
   ProductoServices _productServices = ProductoServices();
 
-  ProductoProvider() {
+  ProductoProvider.initialize() {
     _getProducts();
   }
 

@@ -325,8 +325,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             fontFamily: "Poppins-Medium"),
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
-                        //Navigator.pushNamed(context, '/tienda');
+                        //Navigator.pop(context);
+                          Navigator.pushNamed(context, '/index');
                       },
                       width: 120,
                     )

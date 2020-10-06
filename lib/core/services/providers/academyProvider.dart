@@ -6,7 +6,7 @@ class AcademyProvider with ChangeNotifier {
   List<AcademyModelDB> _certificaciones = [];
   AcademyServices _academyServices = AcademyServices();
 
-  AcademyProvider() {
+  AcademyProvider.initialize() {
     _getCertificaciones();
   }
 

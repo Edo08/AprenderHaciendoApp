@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: UserProvider.initialize()),
-        ChangeNotifierProvider.value(value: AcademyProvider()),
-        ChangeNotifierProvider.value(value: ProductoProvider()),
-        ChangeNotifierProvider.value(value: CursoProvider()),
-        ChangeNotifierProvider.value(value: EventoProvider()),
-        ChangeNotifierProvider.value(value: PaqueteProvider()),
+        ChangeNotifierProvider.value(value: AcademyProvider.initialize()),
+        ChangeNotifierProvider.value(value: ProductoProvider.initialize()),
+        ChangeNotifierProvider.value(value: CursoProvider.initialize()),
+        ChangeNotifierProvider.value(value: EventoProvider.initialize()),
+        ChangeNotifierProvider.value(value: PaqueteProvider.initialize()),
       ],
       child: MaterialApp(
         home: ScreensController(),

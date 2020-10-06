@@ -6,7 +6,7 @@ class PaqueteProvider with ChangeNotifier {
   List<PaquetesModelDB> _paquetes = [];
   PaqueteServices _paqueteServices = PaqueteServices();
 
-  PaqueteProvider() {
+  PaqueteProvider.initialize() {
     _getPaquetes();
   }
 

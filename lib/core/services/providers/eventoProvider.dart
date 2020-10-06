@@ -6,7 +6,7 @@ class EventoProvider with ChangeNotifier {
   List<EventosModelDB> _eventos = [];
   EventoServices _eventoServices = EventoServices();
 
-  EventoProvider() {
+  EventoProvider.initialize() {
     _getEventos();
   }
 

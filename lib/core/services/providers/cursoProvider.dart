@@ -6,7 +6,7 @@ class CursoProvider with ChangeNotifier {
   List<CursosModelDB> _cursos = [];
   CursoServices _cursoServices = CursoServices();
 
-  CursoProvider() {
+  CursoProvider.initialize() {
     _getCursos();
   }
 
