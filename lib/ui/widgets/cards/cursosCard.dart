@@ -2,22 +2,10 @@ import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-final TextStyle botonStyle = TextStyle(
-    fontSize: 14,
-    fontFamily: "Poppins-Medium",
-    color: Colors.white,
-    fontWeight: FontWeight.w500);
-final TextStyle precioStyle =
-    TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
-final TextStyle nombreProductoStyle = TextStyle(
-    fontSize: 18,
-    fontFamily: "Poppins-Medium",
-    color: Colors.white,
-    fontWeight: FontWeight.w700);
-final TextStyle productsubTitleStyle = TextStyle(
-    fontFamily: "Poppins-Medium",
-    color: Colors.white,
-    fontWeight: FontWeight.w700);
+final TextStyle botonStyle = TextStyle(fontSize: 14,fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w500);
+final TextStyle precioStyle = TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
+final TextStyle nombreProductoStyle = TextStyle(fontSize: 18,fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w700);
+final TextStyle productsubTitleStyle = TextStyle(fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w700);
 
 class CursosCard extends StatelessWidget {
   const CursosCard({
@@ -36,10 +24,7 @@ class CursosCard extends StatelessWidget {
     // It  will provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 20.0 / 2,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 20.0 / 2),
       height: 170,
       child: InkWell(
         onTap: press,
@@ -50,16 +35,8 @@ class CursosCard extends StatelessWidget {
               height: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(22),
-                gradient: LinearGradient(
-                    colors: [Color(0xFFb0cb02), Color(0xFFdae87d)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomRight),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0xFF6078ea).withOpacity(.3),
-                      offset: Offset(0.0, 8.0),
-                      blurRadius: 8.0)
-                ],
+                gradient: LinearGradient(colors: [Color(0xFFb0cb02), Color(0xFFdae87d)],begin: Alignment.topCenter,end: Alignment.bottomRight),
+                boxShadow: [BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)],
               ),
             ),
             Positioned(
@@ -69,11 +46,7 @@ class CursosCard extends StatelessWidget {
               onTap: press,
               child: Hero(
                 tag: '${curso.id}',
-                child: Image.network(
-                  curso.imagen,
-                  width: ScreenUtil().setWidth(570),
-                  height: ScreenUtil().setHeight(500),
-                ),
+                child: Image.network(curso.imagen,width: ScreenUtil().setWidth(570),height: ScreenUtil().setHeight(500)),
               ),
             ),
           ),
@@ -85,16 +58,10 @@ class CursosCard extends StatelessWidget {
                 width: size.width - 170,
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      height: 30,
-                    ),
+                    SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Text(
-                        curso.nombre,
-                        textAlign: TextAlign.center,
-                        style: nombreProductoStyle,
-                      ),
+                      child: Text(curso.nombre,textAlign: TextAlign.center,style: nombreProductoStyle),
                     ),
                     /* Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -105,14 +72,9 @@ class CursosCard extends StatelessWidget {
                     ), */
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text(
-                        "₡" + "${(curso.precio).toStringAsFixed(0)}",
-                        style: precioStyle,
-                      ),
+                      child: Text("₡" + "${(curso.precio).toStringAsFixed(0)}",style: precioStyle),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    SizedBox(height: 10),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Row(
@@ -122,19 +84,8 @@ class CursosCard extends StatelessWidget {
                             alignment: Alignment.center,
                             height: 30,
                             width: 100,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF37b5e7),
-                                      Color(0xFF61bfd4)
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomRight),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              "Ver más",
-                              style: botonStyle,
-                            ),
+                            decoration: BoxDecoration(gradient: LinearGradient(colors: [Color(0xFF37b5e7),Color(0xFF61bfd4)],begin: Alignment.topCenter,end: Alignment.bottomRight),borderRadius: BorderRadius.circular(10)),
+                            child: Text("Ver más",style: botonStyle),
                           ),
                         ],
                       ),

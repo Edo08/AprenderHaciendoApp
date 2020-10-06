@@ -14,8 +14,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
-    ScreenUtil.instance =
-        ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+    ScreenUtil.instance = ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Scaffold(
       backgroundColor: Color(0xFF4cb2e2),
       resizeToAvoidBottomPadding: true,
@@ -27,12 +26,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(left: 100.0),
-                child: Image.asset("images/wedo2.png",
-                    width: ScreenUtil.getInstance().setWidth(390)),
+                child: Image.asset("images/wedo2.png",width: ScreenUtil.getInstance().setWidth(390)),
               ),
-              Expanded(
-                child: Container(),
-              ),
+              Expanded(child: Container()),
             ],
           ),
           SingleChildScrollView(
@@ -41,21 +37,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Column(
                 children: <Widget>[
                   _logo(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(180),
-                  ),
+                  SizedBox(height: ScreenUtil.getInstance().setHeight(180)),
                   Login(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(50),
-                  ),
+                  SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
                   _horizontalLine(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(40),
-                  ),
+                  SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   _redesSociales(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(30),
-                  ),
+                  SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                   _registrarseButton(),
                 ],
               ),
@@ -66,22 +54,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  Widget radioButton(bool isSelected) => Container(
-        width: 16.0,
-        height: 16.0,
-        padding: EdgeInsets.all(2.0),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(width: 2.0, color: Colors.black)),
-        child: isSelected
-            ? Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-              )
-            : Container(),
-      );
+  Widget radioButton(bool isSelected) => 
+  Container(
+    width: 16.0,
+    height: 16.0,
+    padding: EdgeInsets.all(2.0),
+    decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 2.0, color: Colors.black)),
+    child: isSelected ? 
+    Container(
+    width: double.infinity,
+    height: double.infinity,
+    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black)
+    ) : Container(),
+  );
 
   Widget _horizontalLine() {
     return Row(
@@ -89,11 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Container(
-            width: ScreenUtil.getInstance().setWidth(450),
-            height: 1.0,
-            color: Colors.black26.withOpacity(.2),
-          ),
+          child: Container(width: ScreenUtil.getInstance().setWidth(450),height: 1.0,color: Colors.black26.withOpacity(.2)),
         ),
       ],
     );
@@ -116,10 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         SocialIcon(
-          colors: [
-            Color(0xFFd32d32),
-            Color(0xFFd32d32),
-          ],
+          colors: [Color(0xFFd32d32),Color(0xFFd32d32)],
           iconData: CustomIcons.googlePlus,
           onPressed: () {
             signInWithGoogle().whenComplete(
@@ -143,18 +121,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(
-          "¿No tiene cuenta? ",
-          style:
-              TextStyle(color: Color(0xFFffffff), fontFamily: "Poppins-Medium"),
-        ),
+        Text("¿No tiene cuenta? ",style:TextStyle(color: Color(0xFFffffff), fontFamily: "Poppins-Medium")),
         InkWell(
           onTap: () {
             Navigator.pushNamed(context, '/registro');
           },
-          child: Text("Regístrese",
-              style: TextStyle(
-                  color: Color(0xFF28409b), fontFamily: "Poppins-Bold")),
+          child: Text("Regístrese",style: TextStyle(color: Color(0xFF28409b), fontFamily: "Poppins-Bold")),
         ),
       ],
     );
@@ -173,9 +145,7 @@ class SocialIcon extends StatelessWidget {
       child: Container(
         width: 45.0,
         height: 45.0,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(colors: colors, tileMode: TileMode.clamp)),
+        decoration: BoxDecoration(shape: BoxShape.circle,gradient: LinearGradient(colors: colors, tileMode: TileMode.clamp)),
         child: RawMaterialButton(
           shape: CircleBorder(),
           onPressed: onPressed,
@@ -188,6 +158,5 @@ class SocialIcon extends StatelessWidget {
 
 class CustomIcons {
   static const IconData facebook = IconData(0xe901, fontFamily: "CustomIcons");
-  static const IconData googlePlus =
-      IconData(0xe902, fontFamily: "CustomIcons");
+  static const IconData googlePlus = IconData(0xe902, fontFamily: "CustomIcons");
 }

@@ -9,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 //ultimo
-
 class EditarPerfil extends StatefulWidget {
   static const String routeName = '/EditaPerfil';
 
@@ -38,8 +37,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   FocusNode _none = FocusNode();
   bool _autoValidate = false;
   bool showSpinner = false;
-  static Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   static Pattern patternStr = r'(^[a-zA-Z ]*$)';
   RegExp regExpStr = new RegExp(patternStr);
@@ -157,10 +155,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
     return new Scaffold(
       backgroundColor: Color(0xFF4cb2e2),
       resizeToAvoidBottomPadding: true,
-      appBar: new AppBar(
-        backgroundColor: Color(0xFF4cb2e2),
-        elevation: 0.0,
-      ),
+      appBar: new AppBar(backgroundColor: Color(0xFF4cb2e2),elevation: 0.0),
       body: new SingleChildScrollView(
         child: new Container(
           margin: new EdgeInsets.all(25.0),
@@ -180,14 +175,8 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
-          BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, 15.0),
-              blurRadius: 15.0),
-          BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, -10.0),
-              blurRadius: 10.0),
+          BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
+          BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
         ],
       ),
       child: Scaffold(
@@ -207,9 +196,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
                   _telefonoField(),
                   Sized22,
                   _emailField(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(20),
-                  ),
+                  SizedBox(height: ScreenUtil.getInstance().setHeight(20),),
                   _showErrorMessage(),
                   Sized22,
                   _submitButton(),
@@ -225,14 +212,10 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
 
   Widget _nombreField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: nombreCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Nombre',
-      ),
+      decoration: new InputDecoration(labelText: 'Nombre'),
       focusNode: _nombreFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _nombreFocus, _apellidosFocus);
@@ -248,14 +231,10 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
 
   Widget _apellidosField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: apellidosCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Apellidos',
-      ),
+      decoration: new InputDecoration(labelText: 'Apellidos'),
       focusNode: _apellidosFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _apellidosFocus, _none);
@@ -271,14 +250,10 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
 
   Widget _fechaNacimientoField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: nacimientoCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Fecha nacimiento',
-      ),
+      decoration: new InputDecoration(labelText: 'Fecha nacimiento'),
       focusNode: _nacimientoFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _nacimientoFocus, _telefonoFocus);
@@ -297,14 +272,11 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
             () {
               fechaNacimiento = datePick;
               isDateSelected = true;
-              nacimientoCtrl.text =
-                  "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
+              nacimientoCtrl.text = "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
             },
           );
         }
-        new Text(isDateSelected
-            ? "$fechaNacimiento"
-            : "Seleccione su fecha de nacimiento");
+        new Text(isDateSelected ? "$fechaNacimiento" : "Seleccione su fecha de nacimiento");
       },
       /*   onChanged: (value){
         nacimientoCtrl = value as TextEditingController;
@@ -315,14 +287,10 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
 
   Widget _telefonoField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: telCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Teléfono',
-      ),
+      decoration: new InputDecoration(labelText: 'Teléfono'),
       focusNode: _telefonoFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _telefonoFocus, _emailFocus);
@@ -338,14 +306,10 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
-        style: TextStyle(
-          fontFamily: "Poppins-Medium",
-        ),
+        style: TextStyle(fontFamily: "Poppins-Medium"),
         autovalidate: _autoValidate,
         controller: emailCtrl,
-        decoration: new InputDecoration(
-          labelText: 'Correo electrónico',
-        ),
+        decoration: new InputDecoration(labelText: 'Correo electrónico'),
         focusNode: _emailFocus,
         onFieldSubmitted: (value) {
           _fieldFocusChange(context, _emailFocus, _passFocus);
@@ -355,7 +319,8 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
           emailCtrl = value as TextEditingController;
         },
         validator: validateEmail,
-        textInputAction: TextInputAction.next);
+        textInputAction: TextInputAction.next
+    );
   }
 
   Widget _submitButton() {
@@ -367,14 +332,10 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
             width: ScreenUtil.getInstance().setWidth(450),
             height: ScreenUtil.getInstance().setHeight(100),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
+              gradient: LinearGradient(colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [
-                BoxShadow(
-                    color: Color(0xFF6078ea).withOpacity(.3),
-                    offset: Offset(0.0, 8.0),
-                    blurRadius: 8.0)
+                BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
               ],
             ),
             child: Material(
@@ -386,15 +347,9 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
                   setSpinnerStatus(false);
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      left: 12.0, right: 12.0, top: 12.0, bottom: 20.0),
+                  padding: EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0, bottom: 20.0),
                   child: Center(
-                    child: Text("GUARDAR CAMBIOS",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins-Bold",
-                            fontSize: 16,
-                            letterSpacing: 1.0)),
+                    child: Text("GUARDAR CAMBIOS",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 16,letterSpacing: 1.0)),
                   ),
                 ),
               ),

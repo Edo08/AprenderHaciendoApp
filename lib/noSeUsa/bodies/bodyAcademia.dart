@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
+/* import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/inscripcion.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/academyCard.dart';
 import 'package:provider/provider.dart';
@@ -92,3 +92,4 @@ class BodyAcademia extends StatelessWidget {
     );
   }
 }
+ */

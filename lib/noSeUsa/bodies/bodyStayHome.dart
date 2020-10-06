@@ -1,10 +1,11 @@
-import 'package:aprender_haciendo_app/core/services/providers/cursoProvider.dart';
-import 'package:aprender_haciendo_app/ui/views/cursoDetail.dart';
-import 'package:aprender_haciendo_app/ui/widgets/cards/cursosCard.dart';
+/* import 'package:aprender_haciendo_app/core/services/providers/paqueteProvider.dart';
+import 'package:aprender_haciendo_app/ui/views/paquetesDetail.dart';
+import 'package:aprender_haciendo_app/ui/widgets/cards/paquetesCard.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BodyCursos extends StatelessWidget {
+class BodyStayHome extends StatelessWidget {
   final TextStyle newProductStyle =
       TextStyle(fontSize: 24, fontFamily: "Poppins-Bold", color: Colors.white);
   final TextStyle nameProductStyle = TextStyle(
@@ -12,8 +13,8 @@ class BodyCursos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cursos = Provider.of<CursoProvider>(context);
-    final cursosList = cursos.cursos;
+    final paquetes = Provider.of<PaqueteProvider>(context);
+    final paquetesList = paquetes.paquetes;
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,8 +23,8 @@ class BodyCursos extends StatelessWidget {
             height: 10,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 15, right: 15),
-            child: Text("Cursos de Robótica",
+            padding: EdgeInsets.only(left: 15),
+            child: Text("Quédate en casa",
                 style: TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins-Bold",
@@ -34,8 +35,10 @@ class BodyCursos extends StatelessWidget {
             height: 5,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 15, right: 15),
-            child: Text("Para niños y niñas desde los 3 años en adelante.",
+            padding: EdgeInsets.only(left: 15, right: 20),
+            child: Text(
+                "Mantener la educación emocionante y atractiva en casa puede ser difícil. Estamos aquí para hacerlo un poco más fácil con algunos recursos para apoyar el proceso de aprendizaje en el hogar.",
+                textAlign: TextAlign.justify,
                 style: TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins-Medium",
@@ -47,7 +50,7 @@ class BodyCursos extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(left: 15, right: 15),
-            child: Text("Cursos disponibles:",
+            child: Text("Productos disponibles:",
                 style: TextStyle(
                     color: Colors.black,
                     fontFamily: "Poppins-Bold",
@@ -60,23 +63,23 @@ class BodyCursos extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: 70),
                 decoration: BoxDecoration(
-                  color: Color(0xFF38b4e7),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40)),
-                ),
+                    color: Color(0xFFffd403),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40))),
               ),
               ListView.builder(
-                itemCount: cursosList.length,
-                itemBuilder: (context, index) => CursosCard(
+                itemCount: paquetesList.length,
+                itemBuilder: (context, index) => PaquetesCard(
                   itemIndex: index,
-                  curso: cursosList[index],
+                  paquete: paquetesList[index],
                   press: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            CursoDetail(curso: cursosList[index]),
+                        builder: (context) => PackDetail(
+                          paquete: paquetesList[index],
+                        ),
                       ),
                     );
                   },
@@ -89,3 +92,4 @@ class BodyCursos extends StatelessWidget {
     );
   }
 }
+ */

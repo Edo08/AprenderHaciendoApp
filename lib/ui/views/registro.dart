@@ -38,8 +38,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   FocusNode _none = FocusNode();
   bool _autoValidate = false;
   bool showSpinner = false;
-  static Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   static Pattern patternStr = r'(^[a-zA-Z ]*$)';
   RegExp regExpStr = new RegExp(patternStr);
@@ -99,7 +98,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   }
 
   _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -201,14 +200,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
-          BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, 15.0),
-              blurRadius: 15.0),
-          BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, -10.0),
-              blurRadius: 10.0),
+          BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
+          BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
         ],
       ),
       child: Scaffold(
@@ -232,9 +225,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                   _passField(),
                   Sized22,
                   _passconfirmacionField(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(20),
-                  ),
+                  SizedBox(height: ScreenUtil.getInstance().setHeight(20)),
                   _showErrorMessage(),
                   Sized22,
                   _submitButton(),
@@ -250,14 +241,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _nombreField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: nombreCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Nombre',
-      ),
+      decoration: new InputDecoration(labelText: 'Nombre'),
       focusNode: _nombreFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _nombreFocus, _apellidosFocus);
@@ -273,14 +260,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _apellidosField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: apellidosCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Apellidos',
-      ),
+      decoration: new InputDecoration(labelText: 'Apellidos'),
       focusNode: _apellidosFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _apellidosFocus, _none);
@@ -296,14 +279,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _fechaNacimientoField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: nacimientoCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Fecha nacimiento',
-      ),
+      decoration: new InputDecoration(labelText: 'Fecha nacimiento'),
       focusNode: _nacimientoFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _nacimientoFocus, _telefonoFocus);
@@ -322,14 +301,11 @@ class _RegistroState extends State<Registro> with ValidationMixins {
             () {
               fechaNacimiento = datePick;
               isDateSelected = true;
-              nacimientoCtrl.text =
-                  "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
+              nacimientoCtrl.text = "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
             },
           );
         }
-        new Text(isDateSelected
-            ? "$fechaNacimiento"
-            : "Seleccione su fecha de nacimiento");
+        new Text(isDateSelected ? "$fechaNacimiento" : "Seleccione su fecha de nacimiento");
       },
       /*   onChanged: (value){
         nacimientoCtrl = value as TextEditingController;
@@ -340,14 +316,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _telefonoField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: telCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Teléfono',
-      ),
+      decoration: new InputDecoration(labelText: 'Teléfono'),
       focusNode: _telefonoFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _telefonoFocus, _emailFocus);
@@ -363,14 +335,10 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
-        style: TextStyle(
-          fontFamily: "Poppins-Medium",
-        ),
+        style: TextStyle(fontFamily: "Poppins-Medium"),
         autovalidate: _autoValidate,
         controller: emailCtrl,
-        decoration: new InputDecoration(
-          labelText: 'Correo electrónico',
-        ),
+        decoration: new InputDecoration(labelText: 'Correo electrónico'),
         focusNode: _emailFocus,
         onFieldSubmitted: (value) {
           _fieldFocusChange(context, _emailFocus, _passFocus);
@@ -385,15 +353,11 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _passField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: passwordCtrl,
       obscureText: true,
-      decoration: new InputDecoration(
-        labelText: 'Contraseña',
-      ),
+      decoration: new InputDecoration(labelText: 'Contraseña'),
       focusNode: _passFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _passFocus, _reppassFocus);
@@ -409,15 +373,11 @@ class _RegistroState extends State<Registro> with ValidationMixins {
 
   Widget _passconfirmacionField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: repeatPassCtrl,
       obscureText: true,
-      decoration: new InputDecoration(
-        labelText: 'Confirmar contraseña',
-      ),
+      decoration: new InputDecoration(labelText: 'Confirmar contraseña'),
       focusNode: _reppassFocus,
       onFieldSubmitted: (value) {
         _reppassFocus.unfocus();
@@ -469,14 +429,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                   padding: EdgeInsets.only(
                       left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),
                   child: Center(
-                    child: Text(
-                      "REGISTRARSE",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins-Bold",
-                          fontSize: 17,
-                          letterSpacing: 1.0),
-                    ),
+                    child: Text("REGISTRARSE",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 17,letterSpacing: 1.0)),
                   ),
                 ),
               ),

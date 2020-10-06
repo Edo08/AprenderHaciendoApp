@@ -1,22 +1,10 @@
 import 'package:aprender_haciendo_app/core/models/academyModelDB.dart';
 import 'package:flutter/material.dart';
 
-final TextStyle precioStyle =
-    TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
-final TextStyle nombreProductoStyle = TextStyle(
-    fontSize: 18,
-    fontFamily: "Poppins-Medium",
-    color: Colors.white,
-    fontWeight: FontWeight.w700);
-final TextStyle productsubTitleStyle = TextStyle(
-    fontFamily: "Poppins-Medium",
-    color: Colors.white,
-    fontWeight: FontWeight.w700);
-final TextStyle botonStyle = TextStyle(
-    fontSize: 14,
-    fontFamily: "Poppins-Medium",
-    color: Colors.black,
-    fontWeight: FontWeight.w500);
+final TextStyle precioStyle = TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
+final TextStyle nombreProductoStyle = TextStyle(fontSize: 18,fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w700);
+final TextStyle productsubTitleStyle = TextStyle(fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w700);
+final TextStyle botonStyle = TextStyle(fontSize: 14,fontFamily: "Poppins-Medium",color: Colors.black,fontWeight: FontWeight.w500);
 
 class AcademyCard extends StatelessWidget {
   const AcademyCard({
@@ -35,10 +23,7 @@ class AcademyCard extends StatelessWidget {
     // It  will provide us total height and width of our screen
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 20.0 / 2,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 20.0 / 2),
       height: 160,
       child: Stack(
         alignment: Alignment.bottomCenter,
@@ -47,16 +32,8 @@ class AcademyCard extends StatelessWidget {
             height: 150,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
-              gradient: LinearGradient(
-                  colors: [Color(0xFFd10100), Color(0xFFfe4936)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomLeft),
-              boxShadow: [
-                BoxShadow(
-                    color: Color(0xFF6078ea).withOpacity(.3),
-                    offset: Offset(0.0, 8.0),
-                    blurRadius: 8.0)
-              ],
+              gradient: LinearGradient(colors: [Color(0xFFd10100), Color(0xFFfe4936)],begin: Alignment.topLeft,end: Alignment.bottomLeft),
+              boxShadow: [BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)],
             ),
           ),
           Positioned(
@@ -66,10 +43,7 @@ class AcademyCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               height: 140,
               width: 180,
-              child: Image.network(
-                certificacion.imagen,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(certificacion.imagen,fit: BoxFit.cover),
             ),
           ),
           Positioned(
@@ -80,27 +54,16 @@ class AcademyCard extends StatelessWidget {
               width: size.width - 180,
               child: Column(
                 children: <Widget>[
-                  SizedBox(
-                    height: 3,
-                  ),
+                  SizedBox(height: 3),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Text(
-                      certificacion.nombre,
-                      style: nombreProductoStyle,
-                      textAlign: TextAlign.center,
-                    ),
+                    child: Text(certificacion.nombre,style: nombreProductoStyle,textAlign: TextAlign.center),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text(
-                      "₡" + "${(certificacion.precio).toStringAsFixed(0)}",
-                      style: precioStyle,
-                    ),
+                    child: Text("₡" + "${(certificacion.precio).toStringAsFixed(0)}",style: precioStyle),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 10),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Row(
@@ -111,19 +74,8 @@ class AcademyCard extends StatelessWidget {
                             alignment: Alignment.center,
                             height: 30,
                             width: 100,
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFFffffff),
-                                      Color(0xFFffffff)
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomRight),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                              "Inscribirse",
-                              style: botonStyle,
-                            ),
+                            decoration: BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFffffff),Color(0xFFffffff)],begin: Alignment.topCenter,end: Alignment.bottomRight),borderRadius: BorderRadius.circular(10)),
+                            child: Text("Inscribirse",style: botonStyle),
                           ),
                           onTap: press,
                         ),

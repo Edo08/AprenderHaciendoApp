@@ -31,10 +31,7 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Tienda",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
         Tienda(),
@@ -45,10 +42,7 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Quédate en casa",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
         QuedateEnCasa(),
@@ -59,10 +53,7 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Academia",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
         Academia(),
@@ -73,10 +64,7 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Eventos",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
         Eventos(),
@@ -87,10 +75,7 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Cursos",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
         Cursos(),
@@ -101,10 +86,7 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Historial compras",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
         ),
         HistorialCompras(),
@@ -114,10 +96,7 @@ class _IndexState extends State<Index> {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Cerrar sesión",
-          baseStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8),
-              fontSize: 20.0,
-              fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white10,
           onTap: () {
             showDialog(
@@ -175,9 +154,7 @@ class _IndexState extends State<Index> {
         ),
         //  value: cart.itemCount.toString(),
         //),
-        SizedBox(
-          width: 10,
-        )
+        SizedBox(width: 10)
       ],
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       //    backgroundColorContent: Colors.blue,
@@ -222,20 +199,10 @@ class _IndexState extends State<Index> {
         ),
         SizedBox(height: 20.0),
         Center(
-          child: new Text("Usuario",
-              style: new TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold)),
+          child: new Text("Usuario",style: new TextStyle(fontSize: 20.0,color: Colors.white,fontWeight: FontWeight.bold)),
         ),
         Center(
-          child: new Text(
-            "Correo",
-            style: new TextStyle(
-                fontSize: 18.0,
-                color: Colors.white70,
-                fontWeight: FontWeight.normal),
-          ),
+          child: new Text("Correo",style: new TextStyle(fontSize: 18.0,color: Colors.white70,fontWeight: FontWeight.normal)),
         ),
       ],
     );

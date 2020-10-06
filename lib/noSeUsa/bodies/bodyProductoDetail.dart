@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
+/* import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
 import 'package:aprender_haciendo_app/ui/widgets/productoImage.dart';
@@ -176,4 +176,4 @@ class BodyProductDetail extends StatelessWidget {
       ),
     );
   }
-}
+} */

@@ -25,15 +25,9 @@ class PackPoster extends StatelessWidget {
           Container(
             height: size.width * 0.7,
             width: size.width * 0.7,
-            child: Column(children: <Widget>[
-              ],)
+            child: Column(children: <Widget>[ ])
           ),
-          Image.network(
-            image,
-            height: size.width * 0.7,
-            width: size.width * 0.7,
-            fit: BoxFit.contain,
-          ),
+          Image.network(image,height: size.width * 0.7,width: size.width * 0.7,fit: BoxFit.contain),
         ],
       ),
     );

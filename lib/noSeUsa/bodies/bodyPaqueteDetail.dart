@@ -1,7 +1,10 @@
-import 'package:aprender_haciendo_app/core/models/eventosModelDB.dart';
+/* import 'package:aprender_haciendo_app/core/models/paquetesModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
+import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
 import 'package:aprender_haciendo_app/ui/widgets/packImage.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle nombreProductoStyle = TextStyle(
     fontSize: 25,
@@ -25,18 +28,51 @@ final TextStyle descripcionProductoStyle = TextStyle(
     fontFamily: "Poppins-Medium",
     color: Colors.grey,
     fontWeight: FontWeight.w500);
-final TextStyle botonStyle = TextStyle(
-    fontSize: 20,
-    fontFamily: "Poppins-Bold",
-    color: Colors.white,
-    fontWeight: FontWeight.w700);
+var alertStyle = AlertStyle(
+  animationType: AnimationType.fromTop,
+  isCloseButton: false,
+  isOverlayTapDismiss: false,
+  descStyle:
+      TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+  animationDuration: Duration(milliseconds: 400),
+  alertBorder: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+    side: BorderSide(
+      color: Colors.grey,
+    ),
+  ),
+);
 
-class BodyEventoDetail extends StatelessWidget {
-  final EventosModelDB evento;
+class BodyPackDetail extends StatelessWidget {
+  final PaquetesModelDB paquete;
 
-  const BodyEventoDetail({Key key, this.evento}) : super(key: key);
+  _onAlertButton(context) {
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.success,
+      title: "",
+      desc: "Producto agregado al carrito con éxito.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "ACEPTAR",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: "Poppins-Medium"),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        ),
+      ],
+    ).show();
+  }
+
+  const BodyPackDetail({Key key, this.paquete}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<UserProvider>(context, listen: false);
     // it provide us total height and width
     Size size = MediaQuery.of(context).size;
     // it enable scrolling on small devices
@@ -61,10 +97,10 @@ class BodyEventoDetail extends StatelessWidget {
                 children: <Widget>[
                   Center(
                     child: Hero(
-                      tag: '${evento.id}',
+                      tag: '${paquete.id}',
                       child: PackPoster(
                         size: size,
-                        image: evento.imagen,
+                        image: paquete.imagen,
                       ),
                     ),
                   ),
@@ -73,9 +109,19 @@ class BodyEventoDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        evento.nombre,
+                        paquete.nombre,
                         style: nombreProductoStyle,
                         textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "\₡${(paquete.precio).toStringAsFixed(0)}",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
@@ -83,19 +129,29 @@ class BodyEventoDetail extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         vertical: 20.0 / 2, horizontal: 20),
                     child: Text(
-                      evento.descripcion,
+                      paquete.descripcion,
                       style: descripcionProductoStyle,
                       textAlign: TextAlign.justify,
                     ),
                   ),
                   SizedBox(height: 10.0),
+                  Row(children: <Widget>[
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text("Cantidad de piezas:", style: nombrecantPStyle),
+                    Text(" " + "${paquete.cantPiezas.toString()}", style: cantPiezasStyle),
+                    SizedBox(
+                      width: 15,
+                    ),
+                  ]),
                   SizedBox(height: 10.0),
                   Row(children: <Widget>[
                     SizedBox(
                       width: 20,
                     ),
-                    Text("Para más información o inscribirse:",
-                        style: cantPiezasStyle),
+                    Text("Edades:", style: nombrecantPStyle),
+                    Text(" " + paquete.edades, style: cantPiezasStyle),
                   ]),
                   SizedBox(
                     height: 25,
@@ -114,31 +170,25 @@ class BodyEventoDetail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: GestureDetector(
-                child: Container(
-                  height: 40,
-                  child: Center(
-                    child: Text(
-                      "Clic aquí",
-                      style: botonStyle,
+                  child: Container(
+                    height: 40,
+                    child: Center(
+                      child: Text(
+                        "Agregar al carrito",
+                        style: botonStyle,
+                      ),
                     ),
                   ),
-                ),
-                onTap: () async {
-                  final url = evento.link;
-                  if (await canLaunch(url)) {
-                    await launch(
-                      url,
-                      forceSafariVC: false,
-                    );
-                  } else {
-                    print('No se encontró $url');
-                  }
-                },
-              ),
+                  onTap: () {
+                    _onAlertButton(context);
+                    cart.addItem(
+                        paquete.edades, paquete.precio, paquete.imagen, paquete.nombre);
+                    cart.reloadUserModel();
+                  }),
             ),
           ],
         ),
       ),
     );
   }
-}
+} */

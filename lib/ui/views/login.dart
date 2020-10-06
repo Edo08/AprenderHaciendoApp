@@ -99,7 +99,7 @@ class _LoginFormState extends State<LoginForm>
   }
 
   void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -113,14 +113,8 @@ class _LoginFormState extends State<LoginForm>
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
-            BoxShadow(
-                color: Colors.black12,
-                offset: Offset(0.0, 15.0),
-                blurRadius: 15.0),
-            BoxShadow(
-                color: Colors.black12,
-                offset: Offset(0.0, -10.0),
-                blurRadius: 10.0),
+            BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
+            BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
           ]),
       child: Visibility(
         visible: _isVisible,
@@ -144,31 +138,17 @@ class _LoginFormState extends State<LoginForm>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
-                    Text("Correo Electrónico",
-                        style: TextStyle(
-                            fontFamily: "Poppins-Medium",
-                            fontSize: ScreenUtil.getInstance().setSp(30))),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
+                    Text("Correo Electrónico",style: TextStyle(fontFamily: "Poppins-Medium",fontSize: ScreenUtil.getInstance().setSp(30))),
                     _correoField(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
-                    Text("Contraseña",
-                        style: TextStyle(
-                            fontFamily: "Poppins-Medium",
-                            fontSize: ScreenUtil.getInstance().setSp(30))),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
+                    Text("Contraseña",style: TextStyle(fontFamily: "Poppins-Medium",fontSize: ScreenUtil.getInstance().setSp(30))),
                     _passField(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                     _showErrorMessage(),
                     SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                     _ingresarButton(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(50),
-                    ),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
                     _olvidoPass(),
                   ],
                 ),
@@ -194,17 +174,10 @@ class _LoginFormState extends State<LoginForm>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(120),
-                    ),
-                    Text("Ingrese su correo electrónico",
-                        style: TextStyle(
-                            fontFamily: "Poppins-Medium",
-                            fontSize: ScreenUtil.getInstance().setSp(30))),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(120)),
+                    Text("Ingrese su correo electrónico",style: TextStyle(fontFamily: "Poppins-Medium",fontSize: ScreenUtil.getInstance().setSp(30))),
                     _correoField(),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                     SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                     _recuperarButton(),
                     SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
@@ -232,10 +205,7 @@ class _LoginFormState extends State<LoginForm>
                     colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [
-                  BoxShadow(
-                      color: Color(0xFF6078ea).withOpacity(.3),
-                      offset: Offset(0.0, 8.0),
-                      blurRadius: 8.0)
+                  BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
                 ]),
             child: Material(
               color: Colors.transparent,
@@ -246,12 +216,7 @@ class _LoginFormState extends State<LoginForm>
                   setSpinnerStatus(false);
                 },
                 child: Center(
-                  child: Text("INGRESAR",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins-Bold",
-                          fontSize: 18,
-                          letterSpacing: 1.0)),
+                  child: Text("INGRESAR",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 18,letterSpacing: 1.0)),
                 ),
               ),
             ),
@@ -274,10 +239,7 @@ class _LoginFormState extends State<LoginForm>
                     colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [
-                  BoxShadow(
-                      color: Color(0xFF6078ea).withOpacity(.3),
-                      offset: Offset(0.0, 8.0),
-                      blurRadius: 8.0)
+                  BoxShadow(color: Color(0xFF6078ea).withOpacity(.3), offset: Offset(0.0, 8.0), blurRadius: 8.0)
                 ]),
             child: Material(
               color: Colors.transparent,
@@ -299,12 +261,7 @@ class _LoginFormState extends State<LoginForm>
                   setSpinnerStatus(false);
                 },
                 child: Center(
-                  child: Text("RECUPERAR",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "Poppins-Bold",
-                          fontSize: 18,
-                          letterSpacing: 1.0)),
+                  child: Text("RECUPERAR",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 18,letterSpacing: 1.0)),
                 ),
               ),
             ),
@@ -323,12 +280,7 @@ class _LoginFormState extends State<LoginForm>
             setState(() => _isVisible = !_isVisible);
             _emailController.text = "";
           },
-          child: new Text(
-            "¿Olvidó la contraseña?",
-            style: TextStyle(
-                color: Colors.blue,
-                fontFamily: "Poppins-Medium",
-                fontSize: ScreenUtil.getInstance().setSp(28)),
+          child: new Text("¿Olvidó la contraseña?",style: TextStyle(color: Colors.blue,fontFamily: "Poppins-Medium",fontSize: ScreenUtil.getInstance().setSp(28)),
           ),
         ),
       ],
@@ -345,13 +297,7 @@ class _LoginFormState extends State<LoginForm>
             _emailController.text = "";
             _passwordController.text = "";
           },
-          child: new Text(
-            "Iniciar sesión",
-            style: TextStyle(
-                color: Colors.blue,
-                fontFamily: "Poppins-Medium",
-                fontSize: ScreenUtil.getInstance().setSp(28)),
-          ),
+          child: new Text("Iniciar sesión", style: TextStyle(color: Colors.blue,fontFamily: "Poppins-Medium",fontSize: ScreenUtil.getInstance().setSp(28))),
         ),
       ],
     );
@@ -404,8 +350,7 @@ class _LoginFormState extends State<LoginForm>
         _passFocus.unfocus();
         _focusNode.unfocus();
       },
-      decoration: InputDecoration(
-          hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+      decoration: InputDecoration(hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
       textInputAction: TextInputAction.next,
       onChanged: (value) {
         _password = value;

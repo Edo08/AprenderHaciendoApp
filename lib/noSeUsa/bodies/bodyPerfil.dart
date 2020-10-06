@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/ui/widgets/cards/perfilCard.dart';
+/* import 'package:aprender_haciendo_app/ui/widgets/cards/perfilCard.dart';
 import 'package:flutter/material.dart';
 
 class BodyPerfil extends StatelessWidget {
@@ -72,3 +72,4 @@ class BodyPerfil extends StatelessWidget {
     );
   }
 }
+ */

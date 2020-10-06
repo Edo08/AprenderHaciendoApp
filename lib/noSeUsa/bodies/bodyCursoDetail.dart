@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/models/paquetesModelDB.dart';
+/* import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
 import 'package:aprender_haciendo_app/ui/widgets/packImage.dart';
@@ -43,8 +43,8 @@ var alertStyle = AlertStyle(
   ),
 );
 
-class BodyPackDetail extends StatelessWidget {
-  final PaquetesModelDB paquete;
+class BodyCursoDetail extends StatelessWidget {
+  final CursosModelDB curso;
 
   _onAlertButton(context) {
     Alert(
@@ -52,7 +52,7 @@ class BodyPackDetail extends StatelessWidget {
       style: alertStyle,
       type: AlertType.success,
       title: "",
-      desc: "Producto agregado al carrito con éxito.",
+      desc: "Curso agregado al carrito con éxito.",
       buttons: [
         DialogButton(
           child: Text(
@@ -69,7 +69,7 @@ class BodyPackDetail extends StatelessWidget {
     ).show();
   }
 
-  const BodyPackDetail({Key key, this.paquete}) : super(key: key);
+  const BodyCursoDetail({Key key, this.curso}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<UserProvider>(context, listen: false);
@@ -97,10 +97,10 @@ class BodyPackDetail extends StatelessWidget {
                 children: <Widget>[
                   Center(
                     child: Hero(
-                      tag: '${paquete.id}',
+                      tag: '${curso.id}',
                       child: PackPoster(
                         size: size,
-                        image: paquete.imagen,
+                        image: curso.imagen,
                       ),
                     ),
                   ),
@@ -109,15 +109,14 @@ class BodyPackDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        paquete.nombre,
+                        curso.nombre,
                         style: nombreProductoStyle,
-                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   Center(
                     child: Text(
-                      "\₡${(paquete.precio).toStringAsFixed(0)}",
+                      "\₡${(curso.precio).toStringAsFixed(0)}",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -129,7 +128,7 @@ class BodyPackDetail extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         vertical: 20.0 / 2, horizontal: 20),
                     child: Text(
-                      paquete.descripcion,
+                      curso.descripcion,
                       style: descripcionProductoStyle,
                       textAlign: TextAlign.justify,
                     ),
@@ -139,8 +138,8 @@ class BodyPackDetail extends StatelessWidget {
                     SizedBox(
                       width: 20,
                     ),
-                    Text("Cantidad de piezas:", style: nombrecantPStyle),
-                    Text(" " + "${paquete.cantPiezas.toString()}", style: cantPiezasStyle),
+                    Text("Modalidad:", style: nombrecantPStyle),
+                    Text(" " + curso.modalidad, style: cantPiezasStyle),
                     SizedBox(
                       width: 15,
                     ),
@@ -151,7 +150,7 @@ class BodyPackDetail extends StatelessWidget {
                       width: 20,
                     ),
                     Text("Edades:", style: nombrecantPStyle),
-                    Text(" " + paquete.edades, style: cantPiezasStyle),
+                    Text(" " + curso.rangoEdad, style: cantPiezasStyle),
                   ]),
                   SizedBox(
                     height: 25,
@@ -181,8 +180,8 @@ class BodyPackDetail extends StatelessWidget {
                   ),
                   onTap: () {
                     _onAlertButton(context);
-                    cart.addItem(
-                        paquete.edades, paquete.precio, paquete.imagen, paquete.nombre);
+                    cart.addItem(curso.codigo, curso.precio, curso.imagen,
+                        curso.nombre);
                     cart.reloadUserModel();
                   }),
             ),
@@ -192,3 +191,4 @@ class BodyPackDetail extends StatelessWidget {
     );
   }
 }
+ */

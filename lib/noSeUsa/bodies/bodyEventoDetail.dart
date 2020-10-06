@@ -1,10 +1,7 @@
-import 'package:aprender_haciendo_app/core/models/cursosModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
-import 'package:aprender_haciendo_app/ui/widgets/addCarrito.dart';
+/* import 'package:aprender_haciendo_app/core/models/eventosModelDB.dart';
 import 'package:aprender_haciendo_app/ui/widgets/packImage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final TextStyle nombreProductoStyle = TextStyle(
     fontSize: 25,
@@ -28,51 +25,18 @@ final TextStyle descripcionProductoStyle = TextStyle(
     fontFamily: "Poppins-Medium",
     color: Colors.grey,
     fontWeight: FontWeight.w500);
-var alertStyle = AlertStyle(
-  animationType: AnimationType.fromTop,
-  isCloseButton: false,
-  isOverlayTapDismiss: false,
-  descStyle:
-      TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
-  animationDuration: Duration(milliseconds: 400),
-  alertBorder: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0),
-    side: BorderSide(
-      color: Colors.grey,
-    ),
-  ),
-);
+final TextStyle botonStyle = TextStyle(
+    fontSize: 20,
+    fontFamily: "Poppins-Bold",
+    color: Colors.white,
+    fontWeight: FontWeight.w700);
 
-class BodyCursoDetail extends StatelessWidget {
-  final CursosModelDB curso;
+class BodyEventoDetail extends StatelessWidget {
+  final EventosModelDB evento;
 
-  _onAlertButton(context) {
-    Alert(
-      context: context,
-      style: alertStyle,
-      type: AlertType.success,
-      title: "",
-      desc: "Curso agregado al carrito con éxito.",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "ACEPTAR",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: "Poppins-Medium"),
-          ),
-          onPressed: () => Navigator.pop(context),
-          width: 120,
-        ),
-      ],
-    ).show();
-  }
-
-  const BodyCursoDetail({Key key, this.curso}) : super(key: key);
+  const BodyEventoDetail({Key key, this.evento}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<UserProvider>(context, listen: false);
     // it provide us total height and width
     Size size = MediaQuery.of(context).size;
     // it enable scrolling on small devices
@@ -97,10 +61,10 @@ class BodyCursoDetail extends StatelessWidget {
                 children: <Widget>[
                   Center(
                     child: Hero(
-                      tag: '${curso.id}',
+                      tag: '${evento.id}',
                       child: PackPoster(
                         size: size,
-                        image: curso.imagen,
+                        image: evento.imagen,
                       ),
                     ),
                   ),
@@ -109,18 +73,9 @@ class BodyCursoDetail extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10.0 / 2),
                     child: Center(
                       child: Text(
-                        curso.nombre,
+                        evento.nombre,
                         style: nombreProductoStyle,
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      "\₡${(curso.precio).toStringAsFixed(0)}",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -128,29 +83,19 @@ class BodyCursoDetail extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         vertical: 20.0 / 2, horizontal: 20),
                     child: Text(
-                      curso.descripcion,
+                      evento.descripcion,
                       style: descripcionProductoStyle,
                       textAlign: TextAlign.justify,
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  Row(children: <Widget>[
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text("Modalidad:", style: nombrecantPStyle),
-                    Text(" " + curso.modalidad, style: cantPiezasStyle),
-                    SizedBox(
-                      width: 15,
-                    ),
-                  ]),
                   SizedBox(height: 10.0),
                   Row(children: <Widget>[
                     SizedBox(
                       width: 20,
                     ),
-                    Text("Edades:", style: nombrecantPStyle),
-                    Text(" " + curso.rangoEdad, style: cantPiezasStyle),
+                    Text("Para más información o inscribirse:",
+                        style: cantPiezasStyle),
                   ]),
                   SizedBox(
                     height: 25,
@@ -169,21 +114,27 @@ class BodyCursoDetail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: GestureDetector(
-                  child: Container(
-                    height: 40,
-                    child: Center(
-                      child: Text(
-                        "Agregar al carrito",
-                        style: botonStyle,
-                      ),
+                child: Container(
+                  height: 40,
+                  child: Center(
+                    child: Text(
+                      "Clic aquí",
+                      style: botonStyle,
                     ),
                   ),
-                  onTap: () {
-                    _onAlertButton(context);
-                    cart.addItem(curso.codigo, curso.precio, curso.imagen,
-                        curso.nombre);
-                    cart.reloadUserModel();
-                  }),
+                ),
+                onTap: () async {
+                  final url = evento.link;
+                  if (await canLaunch(url)) {
+                    await launch(
+                      url,
+                      forceSafariVC: false,
+                    );
+                  } else {
+                    print('No se encontró $url');
+                  }
+                },
+              ),
             ),
           ],
         ),
@@ -191,3 +142,4 @@ class BodyCursoDetail extends StatelessWidget {
     );
   }
 }
+ */

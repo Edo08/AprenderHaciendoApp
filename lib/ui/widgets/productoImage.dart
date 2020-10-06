@@ -83,12 +83,7 @@ class ProductPoster extends StatelessWidget {
               ), */
             ],)
           ),
-          Image.network(
-            image,
-            height: size.width * 0.7,
-            width: size.width * 0.7,
-            fit: BoxFit.cover,
-          ),
+          Image.network(image,height: size.width * 0.7,width: size.width * 0.7,fit: BoxFit.cover),
         ],
       ),
     );

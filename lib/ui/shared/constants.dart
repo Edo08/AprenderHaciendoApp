@@ -11,11 +11,8 @@ const kBlueColor = Color(0xFF40BAD5);
 const kDefaultPadding = 20.0;
 
 // our default Shadow
-const kDefaultShadow = BoxShadow(
-  offset: Offset(0, 15),
-  blurRadius: 27,
-  color: Colors.black12, // Black color with 12% opacity
-);
+const kDefaultShadow = BoxShadow(offset: Offset(0, 15),blurRadius: 27,color: Colors.black12);// Black color with 12% opacity
+
 
 const Sized22 = SizedBox(
   height: 22,

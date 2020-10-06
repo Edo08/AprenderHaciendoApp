@@ -1,4 +1,4 @@
-import 'package:aprender_haciendo_app/core/services/providers/eventoProvider.dart';
+/* import 'package:aprender_haciendo_app/core/services/providers/eventoProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/eventoDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/eventosCard.dart';
 import 'package:flutter/material.dart';
@@ -84,3 +84,4 @@ class BodyEventos extends StatelessWidget {
     );
   }
 }
+ */

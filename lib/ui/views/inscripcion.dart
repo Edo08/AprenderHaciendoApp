@@ -36,8 +36,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   FocusNode _none = FocusNode();
   bool _autoValidate = false;
   bool showSpinner = false;
-  static Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   static Pattern patternStr = r'(^[a-zA-Z ]*$)';
   RegExp regExpStr = new RegExp(patternStr);
@@ -52,16 +51,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   animationType: AnimationType.fromTop,
   isCloseButton: false,
   isOverlayTapDismiss: false,
-  descStyle:
-      TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+  descStyle: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
   animationDuration: Duration(milliseconds: 400),
-  alertBorder: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10.0),
-    side: BorderSide(
-      color: Colors.grey,
-    ),
-  ),
-);
+  alertBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0),side: BorderSide(color: Colors.grey)),
+  );
 
   void setSpinnerStatus(bool status) {
     setState(() {
@@ -159,13 +152,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
       desc: "Inscripción enviada.",
       buttons: [
         DialogButton(
-          child: Text(
-            "ACEPTAR",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontFamily: "Poppins-Medium"),
-          ),
+          child: Text("ACEPTAR",style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: "Poppins-Medium")),
           onPressed: () => Navigator.pop(context),
           width: 120,
         ),
@@ -180,11 +167,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(
-            Icons.keyboard_arrow_left,
-            color: Colors.black,
-            size: 30,
-          ),
+          icon: Icon(Icons.keyboard_arrow_left,color: Colors.black,size: 30),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -209,14 +192,8 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
-          BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, 15.0),
-              blurRadius: 15.0),
-          BoxShadow(
-              color: Colors.black12,
-              offset: Offset(0.0, -10.0),
-              blurRadius: 10.0),
+          BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
+          BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
         ],
       ),
       child: Scaffold(
@@ -254,14 +231,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _nombreField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: nombreCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Nombre',
-      ),
+      decoration: new InputDecoration(labelText: 'Nombre'),
       focusNode: _nombreFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _nombreFocus, _apellidosFocus);
@@ -277,14 +250,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _apellidosField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: apellidosCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Apellidos',
-      ),
+      decoration: new InputDecoration(labelText: 'Apellidos'),
       focusNode: _apellidosFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _apellidosFocus, _none);
@@ -300,14 +269,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _telefonoField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: telCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Teléfono',
-      ),
+      decoration: new InputDecoration(labelText: 'Teléfono'),
       focusNode: _telefonoFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _telefonoFocus, _emailFocus);
@@ -323,14 +288,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _emailField() {
     return TextFormField(
-        style: TextStyle(
-          fontFamily: "Poppins-Medium",
-        ),
+        style: TextStyle(fontFamily: "Poppins-Medium"),
         autovalidate: _autoValidate,
         controller: emailCtrl,
-        decoration: new InputDecoration(
-          labelText: 'Correo electrónico',
-        ),
+        decoration: new InputDecoration(labelText: 'Correo electrónico'),
         focusNode: _emailFocus,
         onFieldSubmitted: (value) {
           _fieldFocusChange(context, _emailFocus, _none);
@@ -345,14 +306,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   Widget _domicilioField() {
     return TextFormField(
-      style: TextStyle(
-        fontFamily: "Poppins-Medium",
-      ),
+      style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidate: _autoValidate,
       controller: domicilioCtrl,
-      decoration: new InputDecoration(
-        labelText: 'Domicilio',
-      ),
+      decoration: new InputDecoration(labelText: 'Domicilio'),
       focusNode: _domicilioFocus,
       onFieldSubmitted: (value) {
         _fieldFocusChange(context, _domicilioFocus, _apellidosFocus);
@@ -379,10 +336,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                   colors: [Color(0xFFd10100), Color(0xFFfe4936)]),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [
-                BoxShadow(
-                    color: Color(0xFF6078ea).withOpacity(.3),
-                    offset: Offset(0.0, 8.0),
-                    blurRadius: 8.0)
+                BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
               ],
             ),
             child: Material(
@@ -397,12 +351,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                   padding: EdgeInsets.only(
                       left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),
                   child: Center(
-                    child: Text("INSCRIBIRSE",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "Poppins-Bold",
-                            fontSize: 17,
-                            letterSpacing: 1.0)),
+                    child: Text("INSCRIBIRSE",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 17,letterSpacing: 1.0)),
                   ),
                 ),
               ),
