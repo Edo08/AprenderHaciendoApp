@@ -187,8 +187,8 @@ class AcademiaDetail extends StatelessWidget {
                         ),
                     onTap: () {
                       _onAlertButton(context);
-                      cart.addItem(certificacion.codigo, certificacion.precio, certificacion.imagen,
-                          certificacion.nombre); 
+                      cart.addItem(certificacion.codigo, certificacion.precio, certificacion.imagen, certificacion.nombre);
+                      cart.reloadUserModel(); 
                     }),
                   ),
                   SizedBox(height: 10,),

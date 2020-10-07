@@ -104,8 +104,7 @@ class ProductDetail extends StatelessWidget {
               AddToCart(
                 press: () {
                   _onAlertButton(context);
-                  cart.addItem(product.codigo, product.precio, product.image,
-                      product.nombre);
+                  cart.addItem(product.codigo, product.precio, product.image, product.nombre);
                   cart.reloadUserModel();
                 },
               ),

@@ -132,8 +132,7 @@ class CursoDetail extends StatelessWidget {
                   ),
                   onTap: () {
                     _onAlertButton(context);
-                    cart.addItem(curso.codigo, curso.precio, curso.imagen,
-                        curso.nombre);
+                    cart.addItem(curso.codigo, curso.precio, curso.imagen, curso.nombre);
                     cart.reloadUserModel();
                   }),
             ),

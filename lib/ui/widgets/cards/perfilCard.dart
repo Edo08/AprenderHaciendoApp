@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
-import 'package:aprender_haciendo_app/ui/views/EditarPerfil.dart';
+//import 'package:aprender_haciendo_app/ui/views/EditarPerfil.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -59,7 +59,7 @@ class _PerfilCardState extends State<PerfilCard> {
                 else 
                   Text("${user.userModel.direccion}", style: subTitleStyle),
                 SizedBox(height: 20),
-                Align(
+                /* Align(
                   alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +85,7 @@ class _PerfilCardState extends State<PerfilCard> {
                       ),
                     ],
                   ),
-                ),
+                ), */
               ],
             ),
           )
