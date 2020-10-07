@@ -1,13 +1,10 @@
-import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
+
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
-import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:aprender_haciendo_app/ui/views/metodoPagoEnvio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:uuid/uuid.dart';
 
 final TextStyle nameStyle = TextStyle(fontSize: 16, fontFamily: "Poppins-Bold");
 final TextStyle precioStyle = TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
@@ -241,10 +238,17 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   gradient: LinearGradient(
                       colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
                   borderRadius: BorderRadius.circular(10)),
-                child: Text("Confirmar compra",style: confirmarStyle),
+                child: Text("Confirmar",style: confirmarStyle),
               ),
               onTap: () async {
-                if (user.userModel.cart.length != 0) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        MetodoPagoEnvio(),
+                  ),
+                );
+                /* if (user.userModel.cart.length != 0) {
                   var uuid = Uuid();
                   String id = uuid.v4();
                   var userId = (await FirebaseAuth.instance.currentUser()).uid;
@@ -262,7 +266,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       print("Item added to cart");
                     } else {
                       print("ITEM WAS NOT REMOVED");
-                    }
+                    } 
                   }
                   Alert(
                     context: context,
@@ -299,9 +303,8 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         width: 120,
                       )
                     ],
-                  ).show();
-                }
-              },
+                  ).show();*/
+                },
             ),
             SizedBox(height: 30.0),
           ],
