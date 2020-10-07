@@ -123,8 +123,7 @@ class PackDetail extends StatelessWidget {
                     ),
                     onTap: () {
                       _onAlertButton(context);
-                      cart.addItem(paquete.edades, paquete.precio,
-                          paquete.imagen, paquete.nombre);
+                      cart.addItem(paquete.edades, paquete.precio, paquete.imagen, paquete.nombre);
                       cart.reloadUserModel();
                     }
                 ),
