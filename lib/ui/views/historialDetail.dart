@@ -117,7 +117,7 @@ class HistorialDetail extends StatelessWidget {
                     FittedBox(
                       child: DataTable(
                         columns: [
-                          DataColumn(label: Text('Codigo', style: tituloStyle)),
+                          DataColumn(label: Text('Código', style: tituloStyle)),
                           DataColumn(label: Text('Nombre', style: tituloStyle)),
                           DataColumn(label: Text('Precio', style: tituloStyle)),
                         ],
@@ -140,6 +140,18 @@ class HistorialDetail extends StatelessWidget {
                       SizedBox(width: 15),
                       Text("Total de la compra: ", style: tituloStyle),
                       Text("₡" + historial.total.toString(), style: montoStyle)
+                    ]),
+                    SizedBox(height: 10),
+                     Row(children: <Widget>[
+                      SizedBox(width: 15),
+                      Text("Método de pago: ", style: tituloStyle),
+                      Text(" ", style: montoStyle)
+                    ]),
+                    SizedBox(height: 10),
+                     Row(children: <Widget>[
+                      SizedBox(width: 15),
+                      Text("Método de entrega: ", style: tituloStyle),
+                      Text(" ", style: montoStyle)
                     ]),
                     SizedBox(height: 25),
                   ],
