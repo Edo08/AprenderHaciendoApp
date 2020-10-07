@@ -42,7 +42,7 @@ class _PerfilCardState extends State<PerfilCard> {
               children: <Widget>[
                 SizedBox(height: 35),
                 Text("Nombre completo",style: nombreStyle),
-                Text("${user.user.displayName}",style: subTitleStyle),
+                Text("${user.userModel.nombre.trim()} ${user.userModel.apellido.trim()}",style: subTitleStyle),
                 SizedBox(height: 10),
                 Text("Correo Electrónico",style: nombreStyle),
                 Text("${user.user.email}",style: subTitleStyle),

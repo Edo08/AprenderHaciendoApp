@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 //ultimo
 class Registro extends StatefulWidget {
@@ -113,32 +114,6 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     }
   }
 
-  _registrarse() async {
-    if (keyForm.currentState.validate()) {
-      try {
-        var auth = await UserProvider.initialize().createUser(  
-            nombre: nombreCtrl.text.trim(), 
-            apellido: apellidosCtrl.text.trim(), 
-            telefono: telCtrl.text.trim(), 
-            email: emailCtrl.text.trim(), 
-            password: passwordCtrl.text.trim(), 
-            fechaNacimiento: fechaNacimiento);
-        if (auth.success) {
-          Navigator.pushNamed(context, '/index');
-          createRecord();
-        } else {
-          print(auth.errorMessage);
-          setState(() {
-            _errorMessage = auth.errorMessage;
-          });
-        }
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      setState(() => _autoValidate = true);
-    }
-  }
 
   void borrarRegistro() {
     nombreCtrl.text = "";
@@ -150,25 +125,9 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     repeatPassCtrl.text = "";
   }
 
-  void createRecord() async {
-    var userId = (await FirebaseAuth.instance.currentUser()).uid;
-    var ref = databaseReference.collection("users").document("$userId");
-    await ref.setData(
-      {
-        'uid': '$userId',
-        'nombre': '${nombreCtrl.text}',
-        'apellido': '${apellidosCtrl.text}',
-        'fechaNacimiento': '$fechaNacimiento',
-        'telefono': '${telCtrl.text}',
-        'email': '${emailCtrl.text}',
-        'contraseña': '${passwordCtrl.text}'
-      },
-    );
-    borrarRegistro();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     return new Scaffold(
       backgroundColor: Color(0xFF4cb2e2),
       resizeToAvoidBottomPadding: true,
@@ -186,51 +145,120 @@ class _RegistroState extends State<Registro> with ValidationMixins {
           margin: new EdgeInsets.all(25.0),
           child: new Form(
             key: keyForm,
-            child: formUI(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget formUI() {
-    return Container(
-      height: ScreenUtil.getInstance().setHeight(1070),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
-          BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
-        ],
-      ),
-      child: Scaffold(
-        body: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
-              child: Column(
-                children: <Widget>[
-                  _nombreField(),
-                  Sized22,
-                  _apellidosField(),
-                  Sized22,
-                  _fechaNacimientoField(),
-                  Sized22,
-                  _telefonoField(),
-                  Sized22,
-                  _emailField(),
-                  Sized22,
-                  _passField(),
-                  Sized22,
-                  _passconfirmacionField(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(20)),
-                  _showErrorMessage(),
-                  Sized22,
-                  _submitButton(),
-                  Sized22
+            child:Container(
+              height: ScreenUtil.getInstance().setHeight(1070),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [
+                  BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
+                  BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
                 ],
+              ),
+              child: Scaffold(
+                body: ModalProgressHUD(
+                  inAsyncCall: showSpinner,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
+                      child: Column(
+                        children: <Widget>[
+                          _nombreField(),
+                          Sized22,
+                          _apellidosField(),
+                          Sized22,
+                          _fechaNacimientoField(),
+                          Sized22,
+                          _telefonoField(),
+                          Sized22,
+                          _emailField(),
+                          Sized22,
+                          _passField(),
+                          Sized22,
+                          _passconfirmacionField(),
+                          SizedBox(height: ScreenUtil.getInstance().setHeight(20)),
+                          _showErrorMessage(),
+                          Sized22,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              InkWell(
+                                child: Container(
+                                  width: ScreenUtil.getInstance().setWidth(450),
+                                  height: ScreenUtil.getInstance().setHeight(100),
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      boxShadow: [
+                                        BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
+                                      ]),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () async {
+                                      setSpinnerStatus(true);
+                                      if (keyForm.currentState.validate()) {
+                                        try {
+                                          var auth = await UserProvider.initialize().createUser(  
+                                              nombre: nombreCtrl.text.trim(), 
+                                              apellido: apellidosCtrl.text.trim(), 
+                                              telefono: telCtrl.text.trim(), 
+                                              email: emailCtrl.text.trim(), 
+                                              password: passwordCtrl.text.trim(), 
+                                              fechaNacimiento: fechaNacimiento);
+                                          if (auth.success) {
+                                            var userId = (await FirebaseAuth.instance.currentUser()).uid;
+                                            var ref = databaseReference.collection("users").document("$userId");
+                                            await ref.setData(
+                                              {
+                                                'uid': '$userId',
+                                                'nombre': '${nombreCtrl.text}',
+                                                'apellido': '${apellidosCtrl.text}',
+                                                'fechaNacimiento': '$fechaNacimiento',
+                                                'telefono': '${telCtrl.text}',
+                                                'email': '${emailCtrl.text}',
+                                                'contraseña': '${passwordCtrl.text}'
+                                              },
+                                            );
+                                            borrarRegistro();
+                                            user.reloadUserModel();
+                                            Navigator.pushNamed(context, '/index');
+                                          } else {
+                                            print(auth.errorMessage);
+                                            user.reloadUserModel();
+                                            setState(() {
+                                              _errorMessage = auth.errorMessage;
+                                            });
+                                          }
+                                        } catch (e) {
+                                          print(e);
+                                        }
+                                      } else {
+                                        user.reloadUserModel();
+                                        setState(() => _autoValidate = true);
+                                      }
+                                      setSpinnerStatus(false);
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),
+                                        child: Center(
+                                          child: Text("REGISTRARSE",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 17,letterSpacing: 1.0)),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Sized22
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -381,7 +409,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       focusNode: _reppassFocus,
       onFieldSubmitted: (value) {
         _reppassFocus.unfocus();
-        _submitButton(); //aqui va la accion de registrarse;
+        //_submitButton(); //aqui va la accion de registrarse;
       },
       keyboardType: TextInputType.visiblePassword,
       onChanged: (value) {
@@ -398,8 +426,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       textInputAction: TextInputAction.next,
     );
   }
-
-  Widget _submitButton() {
+}
+  /* Widget _submitButton() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -412,10 +440,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                     colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
                 borderRadius: BorderRadius.circular(6.0),
                 boxShadow: [
-                  BoxShadow(
-                      color: Color(0xFF6078ea).withOpacity(.3),
-                      offset: Offset(0.0, 8.0),
-                      blurRadius: 8.0)
+                  BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
                 ]),
             child: Material(
               color: Colors.transparent,
@@ -438,5 +463,50 @@ class _RegistroState extends State<Registro> with ValidationMixins {
         )
       ],
     );
-  }
-}
+  } */
+
+
+   /* void createRecord() async {
+    var userId = (await FirebaseAuth.instance.currentUser()).uid;
+    var ref = databaseReference.collection("users").document("$userId");
+    await ref.setData(
+      {
+        'uid': '$userId',
+        'nombre': '${nombreCtrl.text}',
+        'apellido': '${apellidosCtrl.text}',
+        'fechaNacimiento': '$fechaNacimiento',
+        'telefono': '${telCtrl.text}',
+        'email': '${emailCtrl.text}',
+        'contraseña': '${passwordCtrl.text}'
+      },
+    );
+    borrarRegistro();
+  } 
+   _registrarse() async {
+    if (keyForm.currentState.validate()) {
+      try {
+        var auth = await UserProvider.initialize().createUser(  
+            nombre: nombreCtrl.text.trim(), 
+            apellido: apellidosCtrl.text.trim(), 
+            telefono: telCtrl.text.trim(), 
+            email: emailCtrl.text.trim(), 
+            password: passwordCtrl.text.trim(), 
+            fechaNacimiento: fechaNacimiento);
+        if (auth.success) {
+          createRecord();
+          Navigator.pushNamed(context, '/index');
+          
+        } else {
+          print(auth.errorMessage);
+          setState(() {
+            _errorMessage = auth.errorMessage;
+          });
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      setState(() => _autoValidate = true);
+    }
+  } */
+
