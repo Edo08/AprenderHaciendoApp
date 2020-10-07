@@ -1,18 +1,25 @@
-
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/metodoPagoEnvio.dart';
+import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final TextStyle nameStyle = TextStyle(fontSize: 16, fontFamily: "Poppins-Bold");
-final TextStyle precioStyle = TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
-final TextStyle totalStyle = TextStyle(fontSize: 26, fontFamily: "Poppins-Bold", fontWeight: FontWeight.bold);
-final TextStyle subtotalStyle = TextStyle(fontSize: 24, fontFamily: "Poppins-Bold");
-final TextStyle subtotalPrecioStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
-final TextStyle totalprecioStyle = TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
-final TextStyle confirmarStyle = TextStyle(fontSize: 18, fontFamily: "Poppins-Bold", color: Colors.white);
+final TextStyle precioStyle =
+    TextStyle(fontSize: 17, fontWeight: FontWeight.bold);
+final TextStyle totalStyle = TextStyle(
+    fontSize: 26, fontFamily: "Poppins-Bold", fontWeight: FontWeight.bold);
+final TextStyle subtotalStyle =
+    TextStyle(fontSize: 24, fontFamily: "Poppins-Bold");
+final TextStyle subtotalPrecioStyle =
+    TextStyle(fontSize: 22, fontWeight: FontWeight.bold);
+final TextStyle totalprecioStyle =
+    TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
+final TextStyle confirmarStyle =
+    TextStyle(fontSize: 18, fontFamily: "Poppins-Bold", color: Colors.white);
 GlobalKey<FormState> keyForm = new GlobalKey();
 TextEditingController codigoCtrl = new TextEditingController();
 ProductoModelDB product;
@@ -29,14 +36,13 @@ class _ShoppingCartState extends State<ShoppingCart> {
     //final cart = Provider.of<UserProvider>(context);
     //final cartList = cart.items.values.toList();
     final user = Provider.of<UserProvider>(context);
-    UserServices userServices = UserServices();
     //user.reloadUserModel();
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.keyboard_arrow_left,color: Colors.black,size: 30),
+          icon: Icon(Icons.keyboard_arrow_left, color: Colors.black, size: 30),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -47,7 +53,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("Carrito de compras",style: TextStyle(color: Colors.black,fontFamily: "Poppins-Bold",fontSize: 26,fontWeight: FontWeight.w700)),
+            Text("Carrito de compras",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: "Poppins-Bold",
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700)),
             Container(
               width: 400,
               height: 450,
@@ -133,7 +144,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             ),
                                             onTap: () {},
                                           ), */
-                                          Text("Precio: ",style: nameStyle),
+                                          Text("Precio: ", style: nameStyle),
                                           /* Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 20.0),
@@ -160,7 +171,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                             onTap: () {},
                                           ), */
                                           Spacer(),
-                                          Text("\₡${user.userModel.cart[index].precio}",style: precioStyle),
+                                          Text(
+                                              "\₡${user.userModel.cart[index].precio}",
+                                              style: precioStyle),
                                         ],
                                       ),
                                     ],
@@ -172,14 +185,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                         key: ValueKey(user.userModel.cart[index]),
                         direction: DismissDirection.endToStart,
-                        onDismissed: (direction) async {                          
-                          await user.removeFromCart(cartItem: user.userModel.cart[index]);
+                        onDismissed: (direction) async {
+                          await user.removeFromCart(
+                              cartItem: user.userModel.cart[index]);
                           user.reloadUserModel();
                         },
                         background: Container(
                           padding: EdgeInsets.only(right: 20),
                           color: Theme.of(context).errorColor,
-                          child: Icon(Icons.delete,color: Colors.white),
+                          child: Icon(Icons.delete, color: Colors.white),
                           alignment: Alignment.centerRight,
                         ),
                       );
@@ -224,8 +238,9 @@ class _ShoppingCartState extends State<ShoppingCart> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text("Total",style: totalStyle),
-                Text("\₡${(user.userModel.totalCartPrice).toStringAsFixed(0)}",style: totalprecioStyle),
+                Text("Total", style: totalStyle),
+                Text("\₡${(user.userModel.totalCartPrice).toStringAsFixed(0)}",
+                    style: totalprecioStyle),
               ],
             ),
             Spacer(),
@@ -235,19 +250,44 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 height: 50,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
-                  borderRadius: BorderRadius.circular(10)),
-                child: Text("Confirmar",style: confirmarStyle),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Text("Confirmar", style: confirmarStyle),
               ),
               onTap: () async {
-                Navigator.push(
+                if (user.userModel.cart.length != 0) {
+                  Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        MetodoPagoEnvio(),
+                    builder: (context) => MetodoPagoEnvio(),
                   ),
                 );
+                } else {
+                  Alert(
+                    context: context,
+                    style: alertStyle,
+                    type: AlertType.warning,
+                    title: "",
+                    desc: "No hay articulos en el carrito",
+                    buttons: [
+                      DialogButton(
+                        child: Text(
+                          "ACEPTAR",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontFamily: "Poppins-Medium"),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        width: 120,
+                      )
+                    ],
+                  ).show();
+                }
+                
                 /* if (user.userModel.cart.length != 0) {
                   var uuid = Uuid();
                   String id = uuid.v4();
@@ -304,7 +344,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                       )
                     ],
                   ).show();*/
-                },
+              },
             ),
             SizedBox(height: 30.0),
           ],

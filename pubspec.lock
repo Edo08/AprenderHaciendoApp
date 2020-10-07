@@ -440,7 +440,7 @@ packages:
       name: smart_select
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.0"
+    version: "3.0.3"
   source_span:
     dependency: transitive
     description:
@@ -455,6 +455,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0-nullsafety.2"
+  sticky_headers:
+    dependency: transitive
+    description:
+      name: sticky_headers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.8+1"
   stream_channel:
     dependency: transitive
     description:
@@ -555,4 +562,4 @@ packages:
     version: "3.7.0"
 sdks:
   dart: ">=2.10.0-110 <=2.11.0-186.0.dev"
-  flutter: ">=1.17.1 <2.0.0"
+  flutter: ">=1.17.0 <2.0.0"

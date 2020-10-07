@@ -6,6 +6,7 @@ final TextStyle numOrdenStyle = TextStyle(fontSize: 24,fontFamily: "Poppins-Medi
 final TextStyle tituloStyle = TextStyle(fontSize: 18,fontFamily: "Poppins-Medium",color: Colors.black,fontWeight: FontWeight.w500);
 final TextStyle descripcionProductoStyle = TextStyle(fontSize: 18,fontFamily: "Poppins-Medium",color: Colors.grey,fontWeight: FontWeight.w500);
 final TextStyle montoStyle = TextStyle(fontSize: 19, color: Colors.grey, fontWeight: FontWeight.w500);
+final TextStyle subtituloStyle = TextStyle(fontSize: 15,fontFamily: "Poppins-Medium",color: Colors.black,fontWeight: FontWeight.w500);
 
 class HistorialDetail extends StatelessWidget {
   final OrderModelDB historial;
@@ -140,6 +141,18 @@ class HistorialDetail extends StatelessWidget {
                       SizedBox(width: 15),
                       Text("Total de la compra: ", style: tituloStyle),
                       Text("₡" + historial.total.toString(), style: montoStyle)
+                    ]),
+                    SizedBox(height: 25),
+                    Row(children: <Widget>[
+                      SizedBox(width: 15),
+                      Text("Metodo de Pago: ", style: tituloStyle),
+                      Text(historial.metPago.toString(), style: subtituloStyle)
+                    ]),
+                    SizedBox(height: 25),
+                    Row(children: <Widget>[
+                      SizedBox(width: 15),
+                      Text("Entrega: ", style: tituloStyle),
+                      Text(historial.metEnvio.toString(), style: subtituloStyle)
                     ]),
                     SizedBox(height: 25),
                   ],

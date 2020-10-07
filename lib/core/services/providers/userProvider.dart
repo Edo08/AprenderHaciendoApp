@@ -253,7 +253,7 @@ class UserProvider with ChangeNotifier {
   }
 
   void createOrder(
-      {String uid, String id, List<CarritoModelDB> cart, int total}) {
+      {String uid, String id, List<CarritoModelDB> cart, int total, String metEnvio, String metPago}) {
         
     List<Map> convertedCart = [];
     for (CarritoModelDB item in cart) {
@@ -264,6 +264,8 @@ class UserProvider with ChangeNotifier {
       "id": id,
       "fecha": DateTime.now(),
       "cart": convertedCart,
+      "metEnvio": metEnvio,
+      "metPago": metPago,
       "total": total,
       "createdAt": DateTime.now().millisecondsSinceEpoch,
     });

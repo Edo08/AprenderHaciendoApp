@@ -1,7 +1,15 @@
 
+import 'package:aprender_haciendo_app/core/models/carritoModelDB.dart';
+import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
+import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:smart_select/smart_select.dart';
+import 'package:uuid/uuid.dart';
 
 class MetodoPagoEnvio extends StatefulWidget {
   @override
@@ -27,6 +35,8 @@ class MetodoPagoEnvio extends StatefulWidget {
     ];
 
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
+    UserServices userServices = UserServices();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: buildAppBar(context),
@@ -34,22 +44,12 @@ class MetodoPagoEnvio extends StatefulWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.only(left: 15, right: 15),
-            child: Text(
-                "Método de pago",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "Poppins-Bold",
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700)),
+            child: Text("Método de pago",style: TextStyle(color: Colors.black,fontFamily: "Poppins-Bold",fontSize: 26,fontWeight: FontWeight.w700)),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
 
           SmartSelect<String>.single(
             title: 'Seleccione',
@@ -59,22 +59,12 @@ class MetodoPagoEnvio extends StatefulWidget {
             onChange: (val) => setState(() => pago = val)
           ),
           
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
           Padding(
             padding: EdgeInsets.only(left: 15, right: 15),
-            child: Text(
-                "Método de entrega",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: "Poppins-Bold",
-                    fontSize: 26,
-                    fontWeight: FontWeight.w700)),
+            child: Text("Método de entrega",style: TextStyle(color: Colors.black,fontFamily: "Poppins-Bold",fontSize: 26,fontWeight: FontWeight.w700)),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           SmartSelect<String>.single(
             title: 'Seleccione',
             placeholder: "", 
@@ -93,18 +83,51 @@ class MetodoPagoEnvio extends StatefulWidget {
                   gradient: LinearGradient(
                       colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
                   borderRadius: BorderRadius.circular(10)),
-              child: Text(
-                "Confirmar compra",
-                  style: confirmarStyle,
-                ),
-              ),
-              onTap: () async {
+              child: Text("Confirmar compra",style: confirmarStyle),
+            ),
+            onTap: () async {          
+              var uuid = Uuid();
+                  String id = uuid.v4();
+                  var userId = (await FirebaseAuth.instance.currentUser()).uid;
+                  var userModel = await userServices.getUserById(userId);
+                  user.createOrder(
+                      uid: userId,
+                      id: id,
+                      metPago: pago,
+                      metEnvio: envio,
+                      cart: userModel.cart, //cart.userModel.cart,
+                      total: userModel.totalCartPrice); //cart.userModel.totalCartPrice);
+                  user.reloadUserModel();
+                  for (CarritoModelDB cartItem in userModel.cart) {
+                    bool value = await user.removeFromCart(cartItem: cartItem);
+                    if (value) {
+                      user.reloadUserModel();
+                      print("Item added to cart");
+                    } else {
+                      print("ITEM WAS NOT REMOVED");
+                    } 
+                  }
+                  Alert(
+                    context: context,
+                    style: alertStyle,
+                    type: AlertType.success,
+                    title: "",
+                    desc: "Orden de compra generada.",
+                    buttons: [
+                      DialogButton(
+                        child: Text("ACEPTAR", style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: "Poppins-Medium")),
+                        onPressed: () {
+                          //Navigator.pop(context);
+                          Navigator.pushNamed(context, '/index');
+                        },
+                        width: 120,
+                      )
+                    ],
+                  ).show();
 
-              }, 
+            }, 
           ),
-          SizedBox(
-          height: 40,
-            ),     
+          SizedBox(height: 40),     
           ])
         ),
         );

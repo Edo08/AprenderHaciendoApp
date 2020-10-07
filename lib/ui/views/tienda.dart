@@ -1,4 +1,5 @@
 import 'package:aprender_haciendo_app/core/services/providers/productoProvider.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/productoCard.dart';
 import 'package:flutter/material.dart';
