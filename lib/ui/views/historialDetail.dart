@@ -113,8 +113,21 @@ class HistorialDetail extends StatelessWidget {
                             style: descripcionProductoStyle),
                           SizedBox(width: 15),
                         ]),
+                        
                       ),
                     ),
+                    Row(children: <Widget>[
+                      SizedBox(width: 15),
+                      Text("Metodo de Pago: ", style: tituloStyle),
+                      Text(historial.metPago.toString(), style: subtituloStyle)
+                    ]),
+                    SizedBox(height: 15),
+                    Row(children: <Widget>[
+                      SizedBox(width: 15),
+                      Text("Entrega: ", style: tituloStyle),
+                      Text(historial.metEnvio.toString(), style: subtituloStyle)
+                    ]),
+                    SizedBox(height: 15),
                     FittedBox(
                       child: DataTable(
                         columns: [
@@ -141,30 +154,6 @@ class HistorialDetail extends StatelessWidget {
                       SizedBox(width: 15),
                       Text("Total de la compra: ", style: tituloStyle),
                       Text("₡" + historial.total.toString(), style: montoStyle)
-                    ]),
-                    SizedBox(height: 10),
-                     Row(children: <Widget>[
-                      SizedBox(width: 15),
-                      Text("Método de pago: ", style: tituloStyle),
-                      Text(" ", style: montoStyle)
-                    ]),
-                    SizedBox(height: 10),
-                     Row(children: <Widget>[
-                      SizedBox(width: 15),
-                      Text("Método de entrega: ", style: tituloStyle),
-                      Text(" ", style: montoStyle)
-                    ]),
-                    SizedBox(height: 25),
-                    Row(children: <Widget>[
-                      SizedBox(width: 15),
-                      Text("Metodo de Pago: ", style: tituloStyle),
-                      Text(historial.metPago.toString(), style: subtituloStyle)
-                    ]),
-                    SizedBox(height: 25),
-                    Row(children: <Widget>[
-                      SizedBox(width: 15),
-                      Text("Entrega: ", style: tituloStyle),
-                      Text(historial.metEnvio.toString(), style: subtituloStyle)
                     ]),
                     SizedBox(height: 25),
                   ],
