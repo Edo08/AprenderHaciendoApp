@@ -48,7 +48,7 @@ class HistorialCard extends StatelessWidget {
                   child: Container(
                     child: Row(
                       children: <Widget>[
-                        Text("Número de compra: ", style: tituloStyle),
+                        Text("N° de compra: ", style: tituloStyle),
                         Text(compra.createdAt.toString(), style: subTitleStyle),
                         SizedBox(width: 15),
                       ],
