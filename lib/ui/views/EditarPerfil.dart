@@ -99,7 +99,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   }
 
   _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -160,51 +160,55 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
         child: new Container(
           margin: new EdgeInsets.all(25.0),
           child: new Form(
-            key: keyForm,
-            child: formUI(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget formUI() {
-    return Container(
-      height: ScreenUtil.getInstance().setHeight(1070),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
-          BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
-        ],
-      ),
-      child: Scaffold(
-        body: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
-              child: Column(
-                children: <Widget>[
-                  _nombreField(),
-                  Sized22,
-                  _apellidosField(),
-                  Sized22,
-                  _fechaNacimientoField(),
-                  Sized22,
-                  _telefonoField(),
-                  Sized22,
-                  _emailField(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(20),),
-                  _showErrorMessage(),
-                  Sized22,
-                  _submitButton(),
-                  Sized22
-                ],
-              ),
-            ),
-          ),
+              key: keyForm,
+              child: Container(
+                height: ScreenUtil.getInstance().setHeight(1070),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, 15.0),
+                        blurRadius: 15.0),
+                    BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, -10.0),
+                        blurRadius: 10.0),
+                  ],
+                ),
+                child: Scaffold(
+                  body: ModalProgressHUD(
+                    inAsyncCall: showSpinner,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
+                        child: Column(
+                          children: <Widget>[
+                            _nombreField(),
+                            Sized22,
+                            _apellidosField(),
+                            Sized22,
+                            _fechaNacimientoField(),
+                            Sized22,
+                            _telefonoField(),
+                            Sized22,
+                            _emailField(),
+                            SizedBox(
+                              height: ScreenUtil.getInstance().setHeight(20),
+                            ),
+                            _showErrorMessage(),
+                            Sized22,
+                            _submitButton(),
+                            Sized22
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )),
         ),
       ),
     );
@@ -272,11 +276,14 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
             () {
               fechaNacimiento = datePick;
               isDateSelected = true;
-              nacimientoCtrl.text = "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
+              nacimientoCtrl.text =
+                  "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
             },
           );
         }
-        new Text(isDateSelected ? "$fechaNacimiento" : "Seleccione su fecha de nacimiento");
+        new Text(isDateSelected
+            ? "$fechaNacimiento"
+            : "Seleccione su fecha de nacimiento");
       },
       /*   onChanged: (value){
         nacimientoCtrl = value as TextEditingController;
@@ -319,8 +326,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
           emailCtrl = value as TextEditingController;
         },
         validator: validateEmail,
-        textInputAction: TextInputAction.next
-    );
+        textInputAction: TextInputAction.next);
   }
 
   Widget _submitButton() {
@@ -332,10 +338,14 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
             width: ScreenUtil.getInstance().setWidth(450),
             height: ScreenUtil.getInstance().setHeight(100),
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
+              gradient: LinearGradient(
+                  colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
               borderRadius: BorderRadius.circular(6.0),
               boxShadow: [
-                BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
+                BoxShadow(
+                    color: Color(0xFF6078ea).withOpacity(.3),
+                    offset: Offset(0.0, 8.0),
+                    blurRadius: 8.0)
               ],
             ),
             child: Material(
@@ -347,9 +357,15 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
                   setSpinnerStatus(false);
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: 12.0, right: 12.0, top: 12.0, bottom: 20.0),
+                  padding: EdgeInsets.only(
+                      left: 12.0, right: 12.0, top: 12.0, bottom: 20.0),
                   child: Center(
-                    child: Text("GUARDAR CAMBIOS",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 16,letterSpacing: 1.0)),
+                    child: Text("GUARDAR CAMBIOS",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "Poppins-Bold",
+                            fontSize: 16,
+                            letterSpacing: 1.0)),
                   ),
                 ),
               ),
