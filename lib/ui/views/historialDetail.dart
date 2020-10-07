@@ -141,7 +141,7 @@ class HistorialDetail extends StatelessWidget {
                               cells: <DataCell>[
                                 DataCell(Text(element["codigo"], style: descripcionProductoStyle)), //Extracting from Map element the value
                                 DataCell(Text(element["nombre"],style: descripcionProductoStyle,textAlign: TextAlign.center)),
-                                DataCell(Text(element["precio"], style: montoStyle)),
+                                DataCell(Text("₡ "+ element["precio"], style: montoStyle)),
                               ],
                             )
                           ),
