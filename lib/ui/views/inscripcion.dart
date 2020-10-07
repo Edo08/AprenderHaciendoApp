@@ -11,10 +11,11 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Inscripcion extends StatefulWidget {
-  final AcademyModelDB certificacion;
-  const Inscripcion({Key key, this.certificacion}) : super(key: key);
+  final AcademyModelDB inscripcion;
+  const Inscripcion({Key key, this.inscripcion}) : super(key: key);
+
   @override
-  _InscripcionState createState() => _InscripcionState(); 
+  _InscripcionState createState() => _InscripcionState();
 }
 
 class _InscripcionState extends State<Inscripcion> with ValidationMixins {
@@ -34,9 +35,10 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   FocusNode _telefonoFocus = FocusNode();
   FocusNode _emailFocus = FocusNode();
   FocusNode _none = FocusNode();
-  bool _autoValidate = false;
+  AutovalidateMode _autoValidate = AutovalidateMode.disabled;
   bool showSpinner = false;
-  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  static Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   static Pattern patternStr = r'(^[a-zA-Z ]*$)';
   RegExp regExpStr = new RegExp(patternStr);
@@ -46,14 +48,18 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   DateTime fechaNacimiento; // instance of DateTime
   String birthDateInString;
   String _errorMessage = "";
+  //String inscripcionNombre = Inscripcion().inscripcion.nombre;
 
   var alertStyle = AlertStyle(
-  animationType: AnimationType.fromTop,
-  isCloseButton: false,
-  isOverlayTapDismiss: false,
-  descStyle: TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
-  animationDuration: Duration(milliseconds: 400),
-  alertBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0),side: BorderSide(color: Colors.grey)),
+    animationType: AnimationType.fromTop,
+    isCloseButton: false,
+    isOverlayTapDismiss: false,
+    descStyle:
+        TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+    animationDuration: Duration(milliseconds: 400),
+    alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        side: BorderSide(color: Colors.grey)),
   );
 
   void setSpinnerStatus(bool status) {
@@ -110,13 +116,13 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     }
   }
 
-  _registrarse() async {
+  /* _registrarse() async {
     if (keyForm.currentState.validate()) {    
       createRecord();     
     } else {
-      setState(() => _autoValidate = true);
+      setState(() => __autoValidate =  AutovalidateMode.always);
     }
-  }
+  } */
 
   void borrarInscripcion() {
     nombreCtrl.text = "";
@@ -126,12 +132,14 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     domicilioCtrl.text = "";
   }
 
-  void createRecord() async {
+/*   void createRecord() async {
+    var curso = certificacion;
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     var ref = databaseReference.collection("inscripciones").document();
     await ref.setData(
       {
         'uid': '$userId',
+        'curso': '$curso',
         'nombre': '${nombreCtrl.text}',
         'apellido': '${apellidosCtrl.text}',
         'telefono': '${telCtrl.text}',
@@ -141,7 +149,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     );
     _onAlertButton(context);
     borrarInscripcion(); 
-  }
+  } */
 
   _onAlertButton(context) {
     Alert(
@@ -152,7 +160,11 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
       desc: "Inscripción enviada.",
       buttons: [
         DialogButton(
-          child: Text("ACEPTAR",style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: "Poppins-Medium")),
+          child: Text("ACEPTAR",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontFamily: "Poppins-Medium")),
           onPressed: () => Navigator.pop(context),
           width: 120,
         ),
@@ -163,11 +175,11 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.keyboard_arrow_left,color: Colors.black,size: 30),
+          icon: Icon(Icons.keyboard_arrow_left, color: Colors.black, size: 30),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -178,49 +190,121 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
           margin: new EdgeInsets.all(25.0),
           child: new Form(
             key: keyForm,
-            child: formUI(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget formUI() {
-    return Container(
-      height: ScreenUtil.getInstance().setHeight(1070),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
-          BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
-        ],
-      ),
-      child: Scaffold(
-        body: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
-              child: Column(
-                children: <Widget>[
-                  _nombreField(),
-                  Sized22,
-                  _apellidosField(),
-                  Sized22,
-                  _telefonoField(),
-                  Sized22,
-                  _emailField(),
-                  Sized22,
-                  _domicilioField(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(20),
-                  ),
-                  _showErrorMessage(),
-                  Sized22,
-                  _submitButton(),
-                  Sized22
+            child: Container(
+              height: ScreenUtil.getInstance().setHeight(1070),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0.0, 15.0),
+                      blurRadius: 15.0),
+                  BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0.0, -10.0),
+                      blurRadius: 10.0),
                 ],
+              ),
+              child: Scaffold(
+                body: ModalProgressHUD(
+                  inAsyncCall: showSpinner,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
+                      child: Column(
+                        children: <Widget>[
+                          _nombreField(),
+                          Sized22,
+                          _apellidosField(),
+                          Sized22,
+                          _telefonoField(),
+                          Sized22,
+                          _emailField(),
+                          Sized22,
+                          _domicilioField(),
+                          SizedBox(
+                            height: ScreenUtil.getInstance().setHeight(20),
+                          ),
+                          _showErrorMessage(),
+                          Sized22,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              InkWell(
+                                child: Container(
+                                  width: ScreenUtil.getInstance().setWidth(450),
+                                  height:
+                                      ScreenUtil.getInstance().setHeight(100),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [
+                                      Color(0xFFd10100),
+                                      Color(0xFFfe4936)
+                                    ]),
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color:
+                                              Color(0xFF6078ea).withOpacity(.3),
+                                          offset: Offset(0.0, 8.0),
+                                          blurRadius: 8.0)
+                                    ],
+                                  ),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        setSpinnerStatus(true);
+                                        if (keyForm.currentState.validate()) {
+                                          var userId = (await FirebaseAuth
+                                                  .instance
+                                                  .currentUser())
+                                              .uid;
+                                          //var inscri = Inscripcion().inscripcion.nombre;
+                                          var ref = databaseReference
+                                              .collection("inscripciones")
+                                              .document();
+                                          await ref.setData(
+                                            {
+                                              'uid': '$userId',
+                                              //'curso':'$inscri',
+                                              'nombre': '${nombreCtrl.text}',
+                                              'apellido':'${apellidosCtrl.text}',
+                                              'telefono': '${telCtrl.text}',
+                                              'domicilio': '${domicilioCtrl.text}',
+                                              'email': '${emailCtrl.text}'
+                                            },
+                                          );
+                                          _onAlertButton(context);
+                                          borrarInscripcion();
+                                        } else {
+                                          setState(() => _autoValidate =  AutovalidateMode.always);
+                                        }
+                                        setSpinnerStatus(false);
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 16.0,
+                                            right: 16.0,
+                                            top: 12.0,
+                                            bottom: 20.0),
+                                        child: Center(
+                                          child: Text("INSCRIBIRSE",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 17,letterSpacing: 1.0)),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          Sized22
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -232,7 +316,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   Widget _nombreField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: nombreCtrl,
       decoration: new InputDecoration(labelText: 'Nombre'),
       focusNode: _nombreFocus,
@@ -251,7 +335,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   Widget _apellidosField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: apellidosCtrl,
       decoration: new InputDecoration(labelText: 'Apellidos'),
       focusNode: _apellidosFocus,
@@ -270,7 +354,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   Widget _telefonoField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: telCtrl,
       decoration: new InputDecoration(labelText: 'Teléfono'),
       focusNode: _telefonoFocus,
@@ -289,7 +373,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   Widget _emailField() {
     return TextFormField(
         style: TextStyle(fontFamily: "Poppins-Medium"),
-        autovalidate: _autoValidate,
+        autovalidateMode: _autoValidate,
         controller: emailCtrl,
         decoration: new InputDecoration(labelText: 'Correo electrónico'),
         focusNode: _emailFocus,
@@ -307,7 +391,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
   Widget _domicilioField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: domicilioCtrl,
       decoration: new InputDecoration(labelText: 'Domicilio'),
       focusNode: _domicilioFocus,
@@ -320,45 +404,6 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
         domicilioCtrl = value as TextEditingController;
       },
       //validator: validateNombre,
-    );
-  }
-
-  Widget _submitButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        InkWell(
-          child: Container(
-            width: ScreenUtil.getInstance().setWidth(450),
-            height: ScreenUtil.getInstance().setHeight(100),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [Color(0xFFd10100), Color(0xFFfe4936)]),
-              borderRadius: BorderRadius.circular(6.0),
-              boxShadow: [
-                BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
-              ],
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () async {
-                  setSpinnerStatus(true);
-                  await _registrarse();
-                  setSpinnerStatus(false);                 
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),
-                  child: Center(
-                    child: Text("INSCRIBIRSE",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 17,letterSpacing: 1.0)),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
-      ],
     );
   }
 }

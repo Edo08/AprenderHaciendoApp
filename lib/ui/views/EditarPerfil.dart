@@ -35,7 +35,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   FocusNode _passFocus = FocusNode();
   FocusNode _reppassFocus = FocusNode();
   FocusNode _none = FocusNode();
-  bool _autoValidate = false;
+  AutovalidateMode _autoValidate = AutovalidateMode.disabled;
   bool showSpinner = false;
   static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
@@ -119,7 +119,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
       Navigator.pushNamed(context, '/perfil');
       createRecord();
     } else {
-      setState(() => _autoValidate = true);
+      setState(() => _autoValidate =  AutovalidateMode.always);
     }
   }
 
@@ -217,7 +217,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   Widget _nombreField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: nombreCtrl,
       decoration: new InputDecoration(labelText: 'Nombre'),
       focusNode: _nombreFocus,
@@ -236,7 +236,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   Widget _apellidosField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: apellidosCtrl,
       decoration: new InputDecoration(labelText: 'Apellidos'),
       focusNode: _apellidosFocus,
@@ -255,7 +255,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   Widget _fechaNacimientoField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: nacimientoCtrl,
       decoration: new InputDecoration(labelText: 'Fecha nacimiento'),
       focusNode: _nacimientoFocus,
@@ -295,7 +295,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   Widget _telefonoField() {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: telCtrl,
       decoration: new InputDecoration(labelText: 'Teléfono'),
       focusNode: _telefonoFocus,
@@ -314,7 +314,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   Widget _emailField() {
     return TextFormField(
         style: TextStyle(fontFamily: "Poppins-Medium"),
-        autovalidate: _autoValidate,
+        autovalidateMode: _autoValidate,
         controller: emailCtrl,
         decoration: new InputDecoration(labelText: 'Correo electrónico'),
         focusNode: _emailFocus,

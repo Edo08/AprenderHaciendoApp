@@ -32,7 +32,7 @@ class _LoginFormState extends State<LoginForm>
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   bool showSpinner = false;
-  bool _autoValidate = false;
+  AutovalidateMode _autoValidate = AutovalidateMode.disabled;
   GlobalKey<FormState> keyForm = new GlobalKey();
   String _errorMessage = "";
   bool _isVisible = true;
@@ -84,7 +84,7 @@ class _LoginFormState extends State<LoginForm>
         print(e);
       }
     } else {
-      setState(() => _autoValidate = true);
+      setState(() => _autoValidate =  AutovalidateMode.always);
     }
   }
 
@@ -322,7 +322,7 @@ class _LoginFormState extends State<LoginForm>
 
   Widget _correoField() {
     return TextFormField(
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: _emailController,
       focusNode: _userFocus,
       onFieldSubmitted: (value) {
@@ -341,7 +341,7 @@ class _LoginFormState extends State<LoginForm>
 
   Widget _passField() {
     return TextFormField(
-      autovalidate: _autoValidate,
+      autovalidateMode: _autoValidate,
       controller: _passwordController,
       obscureText: true,
       focusNode: _passFocus,

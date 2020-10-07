@@ -1,4 +1,4 @@
-package com.example.aprender_haciendo_app
+package com.aprenderhaciendoapp.aprender_haciendo_app
 
 import io.flutter.embedding.android.FlutterActivity
 
