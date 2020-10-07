@@ -1,7 +1,8 @@
 import 'package:aprender_haciendo_app/core/models/academyModelDB.dart';
 import 'package:flutter/material.dart';
 
-final TextStyle precioStyle = TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
+final TextStyle precioStyle =
+    TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w500);
 final TextStyle nombreProductoStyle = TextStyle(fontSize: 18,fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w700);
 final TextStyle productsubTitleStyle = TextStyle(fontFamily: "Poppins-Medium",color: Colors.white,fontWeight: FontWeight.w700);
 final TextStyle botonStyle = TextStyle(fontSize: 14,fontFamily: "Poppins-Medium",color: Colors.black,fontWeight: FontWeight.w500);
@@ -75,7 +76,7 @@ class AcademyCard extends StatelessWidget {
                             height: 30,
                             width: 100,
                             decoration: BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFffffff),Color(0xFFffffff)],begin: Alignment.topCenter,end: Alignment.bottomRight),borderRadius: BorderRadius.circular(10)),
-                            child: Text("Inscribirse",style: botonStyle),
+                            child: Text("Ver más",style: botonStyle),
                           ),
                           onTap: press,
                         ),

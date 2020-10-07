@@ -1,5 +1,5 @@
 import 'package:aprender_haciendo_app/core/services/providers/academyProvider.dart';
-import 'package:aprender_haciendo_app/ui/views/inscripcion.dart';
+import 'package:aprender_haciendo_app/ui/views/academiaDetail.dart';
 import 'package:aprender_haciendo_app/ui/widgets/cards/academyCard.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +54,8 @@ class Academia extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Inscripcion(
-                                certifiacion: certificacionesList[index]),
+                             builder: (context) =>
+                            AcademiaDetail(certificacion: certificacionesList[index]),
                           ),
                         );
                         print("certificacion");

@@ -11,8 +11,8 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Inscripcion extends StatefulWidget {
-  final AcademyModelDB certifiacion;
-  const Inscripcion({Key key, this.certifiacion}) : super(key: key);
+  final AcademyModelDB certificacion;
+  const Inscripcion({Key key, this.certificacion}) : super(key: key);
   @override
   _InscripcionState createState() => _InscripcionState(); 
 }
