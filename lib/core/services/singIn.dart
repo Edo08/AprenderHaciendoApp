@@ -23,7 +23,6 @@ Future<String> signInWithGoogle() async {
 
   final AuthResult authResult = await _auth.signInWithCredential(credential);
   final FirebaseUser user = authResult.user;
-
   // Checking if email and name is null
   assert(user.email != null);
   assert(user.displayName != null);
@@ -43,8 +42,20 @@ Future<String> signInWithGoogle() async {
 
   final FirebaseUser currentUser = await _auth.currentUser();
   assert(user.uid == currentUser.uid);
+  print("signed in " + user.displayName);
+  return user != null? user.uid : null;
+}
 
-  return 'signInWithGoogle succeeded: $user';
+Future<GoogleSignInAccount> getSignedInAccount(
+    GoogleSignIn googleSignIn) async {
+  GoogleSignInAccount account = googleSignIn.currentUser;
+   final GoogleSignInAccount googleUser = await googleSignIn.signIn();
+  if (account == null || googleUser==null ) {
+    account = await googleSignIn.signInSilently();
+    print('Google Signin ERROR! googleUser: null!');
+    return null;
+  }
+  return account;
 }
 
 void signOutGoogle() async {

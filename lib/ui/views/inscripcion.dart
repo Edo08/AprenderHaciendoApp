@@ -1,6 +1,7 @@
 import 'package:aprender_haciendo_app/core/models/academyModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
 import 'package:aprender_haciendo_app/ui/shared/constants.dart';
+import 'package:aprender_haciendo_app/ui/views/tienda.dart';
 import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -278,6 +279,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                                           );
                                           _onAlertButton(context);
                                           borrarInscripcion();
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => Tienda()));
                                         } else {
                                           setState(() => _autoValidate =  AutovalidateMode.always);
                                         }

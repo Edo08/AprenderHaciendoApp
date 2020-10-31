@@ -5,6 +5,7 @@ import 'package:aprender_haciendo_app/core/models/userModelDB.dart';
 import 'package:aprender_haciendo_app/core/services/authRequest.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/orderServices.dart';
 import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
+import 'package:aprender_haciendo_app/core/services/singIn.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -113,6 +114,8 @@ class UserProvider with ChangeNotifier {
     try {
       await _auth.signOut();
       _status = Status.Unauthenticated;
+      signOutGoogle();
+
       notifyListeners();
       return Future.delayed(Duration.zero);
     } catch (e) {
@@ -247,10 +250,10 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  void getOrdersByUID() async {
+  /* void getOrdersByUID() async {
     _order = await _orderServices.getOrdersByUser(user.uid);
     notifyListeners();
-  }
+  } */
 
   void createOrder(
       {String uid, String id, List<CarritoModelDB> cart, int total, String metEnvio, String metPago}) {

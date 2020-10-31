@@ -1,5 +1,4 @@
 import 'package:aprender_haciendo_app/core/models/productoModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/helpers/userServices.dart';
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 import 'package:aprender_haciendo_app/ui/views/metodoPagoEnvio.dart';
 import 'package:aprender_haciendo_app/ui/views/productoDetail.dart';

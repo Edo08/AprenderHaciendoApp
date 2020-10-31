@@ -49,6 +49,7 @@ class OrderServices{
   Future<List<OrderModelDB>> getOrdersByUser(String uid) async =>
       await _firestore
           .collection(collection)
+          //.orderBy("fecha")
           .where ("uid", isEqualTo: uid)
           .getDocuments()
           .then((result) {

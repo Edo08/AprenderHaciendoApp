@@ -1,4 +1,5 @@
 import 'package:aprender_haciendo_app/core/services/singIn.dart';
+import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'index.dart';
@@ -18,55 +19,95 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return new Scaffold(
       backgroundColor: Color(0xFF4cb2e2),
       resizeToAvoidBottomPadding: true,
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(left: 100.0),
-                child: Image.asset("images/wedo2.png",width: ScreenUtil.getInstance().setWidth(390)),
-              ),
-              Expanded(child: Container()),
-            ],
-          ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 10.0),
-              child: Column(
-                children: <Widget>[
-                  _logo(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(180)),
-                  Login(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
-                  _horizontalLine(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
-                  _redesSociales(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
-                  _registrarseButton(),
-                ],
-              ),
+      body: WillPopScope(
+        onWillPop: _onBackPressed,
+        child: new Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(left: 100.0),
+                  child: Image.asset("images/wedo2.png",width: ScreenUtil.getInstance().setWidth(390)),
+                ),
+                Expanded(child: Container()),
+              ],
             ),
-          )
-        ],
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 10.0),
+                child: Column(
+                  children: <Widget>[
+                    _logo(),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(180)),
+                    Login(),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
+                    _horizontalLine(),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
+                    _redesSociales(),
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
+                    _registrarseButton(),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
-  Widget radioButton(bool isSelected) => 
-  Container(
-    width: 16.0,
-    height: 16.0,
-    padding: EdgeInsets.all(2.0),
-    decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(width: 2.0, color: Colors.black)),
-    child: isSelected ? 
-    Container(
-    width: double.infinity,
-    height: double.infinity,
-    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black)
-    ) : Container(),
-  );
+  Future<bool> _onBackPressed() {
+    return showDialog(
+            context: context,
+            builder: (BuildContext context) => CustomDialog(
+                  title: "Estas Seguro?",
+                  description:
+                      "¿Deseas Salir de la App?                          ",
+                  primaryButtonText: "Aceptar",
+                  primaryButton: _cerrar,
+                  secondaryButtonText: "Cancelar",
+                  secondaryButton: _noCerrar,
+                )) ??
+        false;
+  }
+
+  void _cerrar() {
+    try {
+      Navigator.of(context).pop(true);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _noCerrar() {
+    try {
+      Navigator.pushNamed(context, '/welcomeScreen');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void switchToIndex() {
+    
+  }
+
+  Widget radioButton(bool isSelected) => Container(
+        width: 16.0,
+        height: 16.0,
+        padding: EdgeInsets.all(2.0),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(width: 2.0, color: Colors.black)),
+        child: isSelected
+            ? Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration:
+              BoxDecoration(shape: BoxShape.circle, color: Colors.black))
+            : Container(),
+      );
 
   Widget _horizontalLine() {
     return Row(
@@ -97,20 +138,30 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         SocialIcon(
-          colors: [Color(0xFFd32d32),Color(0xFFd32d32)],
+          colors: [Color(0xFFd32d32), Color(0xFFd32d32)],
           iconData: CustomIcons.googlePlus,
           onPressed: () {
-            signInWithGoogle().whenComplete(
-              () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Index();
-                    },
-                  ),
-                );
-              },
-            );
+            /* signInWithGoogle().whenComplete(() {
+              FirebaseUser user = signInWithGoogle().then((user) => null);
+              if (user == null) {
+              //Route to login
+              } else {
+              //route to somewhere
+              } */
+            signInWithGoogle().then((user) {
+              if (user != null) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return Index();
+                }));
+                Navigator.pushReplacementNamed(context, '/Tienda');
+              } else {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return WelcomeScreen();
+                }));
+              }
+            }).catchError((error) {});
           },
         ),
       ],
@@ -145,7 +196,9 @@ class SocialIcon extends StatelessWidget {
       child: Container(
         width: 45.0,
         height: 45.0,
-        decoration: BoxDecoration(shape: BoxShape.circle,gradient: LinearGradient(colors: colors, tileMode: TileMode.clamp)),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(colors: colors, tileMode: TileMode.clamp)),
         child: RawMaterialButton(
           shape: CircleBorder(),
           onPressed: onPressed,

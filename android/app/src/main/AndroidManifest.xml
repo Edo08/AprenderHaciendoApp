@@ -7,8 +7,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="aprender_haciendo_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Aprender Haciendo CR"
+        android:icon="@mipmap/imagenah">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

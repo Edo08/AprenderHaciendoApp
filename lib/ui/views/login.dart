@@ -80,6 +80,7 @@ class _LoginFormState extends State<LoginForm>
             _errorMessage = auth.errorMessage;
           });
         }
+        Navigator.pushReplacementNamed(context, '/Tienda');
       } catch (e) {
         print(e);
       }

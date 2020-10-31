@@ -1,5 +1,4 @@
 import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
-import 'package:aprender_haciendo_app/core/services/singIn.dart';
 import 'package:aprender_haciendo_app/ui/views/academia.dart';
 import 'package:aprender_haciendo_app/ui/views/carrito.dart';
 import 'package:aprender_haciendo_app/ui/views/cursos.dart';
@@ -211,7 +210,6 @@ class _IndexState extends State<Index> {
   void _cerrarSesion() async {
     try {
       await UserProvider.initialize().signOut();
-      signOutGoogle();
       Navigator.pushNamed(context, '/welcomeScreen');
     } catch (e) {
       print(e);

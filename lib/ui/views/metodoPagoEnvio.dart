@@ -24,7 +24,7 @@ class MetodoPagoEnvio extends StatefulWidget {
     List<SmartSelectOption<String>> metodos = [
       SmartSelectOption<String>(value: 'Botón de pago', title: 'Botón de pago'),
       SmartSelectOption<String>(value: 'Tranferencia Sinpe', title: 'Tranferencia Sinpe'),
-      SmartSelectOption<String>(value: 'Transferencia Sinpe Móvil', title: 'Transferencia Sinpe Móvil (Montos menores a ₡100 000)'),
+      SmartSelectOption<String>(value: 'Sinpe Móvil', title: 'Transferencia Sinpe Móvil (Montos menores a ₡100 000)'),
       SmartSelectOption<String>(value: 'Efectivo', title: 'Efectivo - Pago contra entrega (Dentro del GAM)'),
     ];
 

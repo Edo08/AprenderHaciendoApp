@@ -224,6 +224,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                                             borrarRegistro();
                                             user.reloadUserModel();
                                             Navigator.pushNamed(context, '/index');
+                                            Navigator.pushReplacementNamed(context, '/Tienda');
                                           } else {
                                             print(auth.errorMessage);
                                             user.reloadUserModel();
