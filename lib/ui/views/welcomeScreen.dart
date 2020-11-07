@@ -150,16 +150,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               } */
             signInWithGoogle().then((user) {
               if (user != null) {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                   return Index();
                 }));
                 Navigator.pushReplacementNamed(context, '/Tienda');
-              } else {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return WelcomeScreen();
-                }));
+              /* } else {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                  return Index();
+                })); */
               }
             }).catchError((error) {});
           },

@@ -1,5 +1,6 @@
 import 'package:aprender_haciendo_app/ui/widgets/cards/perfilCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Perfil extends StatelessWidget {
   final TextStyle newProductStyle = TextStyle(fontSize: 24, fontFamily: "Poppins-Bold", color: Colors.white);
@@ -8,6 +9,7 @@ class Perfil extends StatelessWidget {
   static const String routeName = '/perfil';
   @override
   Widget build(BuildContext context) {
+     ScreenUtil.instance = ScreenUtil(width: 1125, height: 2436, allowFontScaling: true)..init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -54,13 +56,13 @@ class Perfil extends StatelessWidget {
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40))
                     ),
                   ),
-                  PerfilCard(),
+                  SingleChildScrollView(child: PerfilCard())
                 ],
               ),
             ),
           ],
         ),
-      ),
+      ),      
     );
   }
 }
