@@ -153,7 +153,7 @@ class Inscripcion extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 18,
                   fontFamily: "Poppins-Medium")),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pushNamed(context, '/index');,
           width: 120,
         ),
       ],
