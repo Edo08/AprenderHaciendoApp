@@ -177,8 +177,7 @@ class _MetodoPagoEnvio extends State<MetodoPagoEnvio> {
                         'Aprender Haciendo :: Orden de compra :: $id'
                     //..text = 'This is the plain text.\nThis is line 2 of the text part.';
                     ..html =
-                        "<h1>Hola ${user.userModel.nombre},</h1>\n<p>Gracias por comprar por medio de la App de Aprender Haciendo, pronto se pondran en contacto con usted para completar el proceso de pago</p>\n\n<h2>Detalles del pedido</h2>\n\n<p>Fecha: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}</p>\n<p>Metodo de pago: $pago</p>\n<p>Metodo de envio: $envio</p>\n<p>Productos $listaProductos</p>\n<p>Total sin envio ₡${userModel.totalCartPrice}</p>";
-                        //<p>Productos $cartlist</p>\n
+                        "<h1>Hola ${user.userModel.nombre} ${user.userModel.apellido},</h1>\n<p>Gracias por comprar por medio de la App de Aprender Haciendo, pronto se pondran en contacto con usted para completar el proceso de pago</p>\n\n<h2>Detalles del pedido</h2>\n\n<p>Fecha: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}</p>\n<p>Metodo de pago: $pago</p>\n<p>Metodo de envio: $envio</p>\n<p>Productos $listaProductos</p>\n<p>Total sin envio ₡${userModel.totalCartPrice}</p>";
                   try {
                     //final sendReport = await send(message, smtpServer);
                     await connection.send(message);

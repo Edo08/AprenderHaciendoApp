@@ -46,7 +46,7 @@ android {
         applicationId "com.aprenderhaciendoapp.aprender_haciendo_app"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 10
+        versionCode 11
         versionName flutterVersionName
     }
     signingConfigs {
