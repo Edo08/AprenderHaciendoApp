@@ -163,6 +163,9 @@ class _MetodoPagoEnvio extends State<MetodoPagoEnvio> {
 
                   String username = 'aprenderhaciendoprueba@gmail.com';
                   String password = 'Ahprueba2020';
+                  List<dynamic> listaProductos = userModel.cart.map((object) => {'':object.nombre, 'Precio': object.precio}).toList();
+                  //int listaproductoslenght = listaProductos.length;
+
                   final smtpServer = gmail(username, password);
                   var connection = PersistentConnection(smtpServer);
                   final message = Message()
@@ -174,8 +177,8 @@ class _MetodoPagoEnvio extends State<MetodoPagoEnvio> {
                         'Aprender Haciendo :: Orden de compra :: $id'
                     //..text = 'This is the plain text.\nThis is line 2 of the text part.';
                     ..html =
-                        "<h1>Hola ${user.user.displayName},</h1>\n<p>Gracias por comprar en Aprender Haciendo, pronto se pondran en contacto con usted para completar el proceso de pago</p>\n\n<h2>Detalles del pedido</h2>\n\n<p>Fecha: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}</p>\n<p>Metodo de pago: $pago</p>\n<p>Metodo de envio: $envio</p>\n<p>Total sin envio ₡${userModel.totalCartPrice}</p>";
-                        //<p>Productos ${userModel.cart.asMap()}</p>\n
+                        "<h1>Hola ${user.user.displayName},</h1>\n<p>Gracias por comprar en Aprender Haciendo, pronto se pondran en contacto con usted para completar el proceso de pago</p>\n\n<h2>Detalles del pedido</h2>\n\n<p>Fecha: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}</p>\n<p>Metodo de pago: $pago</p>\n<p>Metodo de envio: $envio</p>\n<p>Productos $listaProductos</p>\n<p>Total sin envio ₡${userModel.totalCartPrice}</p>";
+                        //<p>Productos $cartlist</p>\n
                   try {
                     //final sendReport = await send(message, smtpServer);
                     await connection.send(message);
