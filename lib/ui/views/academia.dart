@@ -44,23 +44,30 @@ class Academia extends StatelessWidget {
                         topRight: Radius.circular(40),
                       ),
                     ),
-                  ),
-                  ListView.builder(
-                    itemCount: certificacionesList.length,
-                    itemBuilder: (context, index) => AcademyCard(
-                      itemIndex: index,
-                      certificacion: certificacionesList[index],
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                             builder: (context) =>
-                            AcademiaDetail(certificacion: certificacionesList[index]),
+                    child: ListView.builder(
+                      itemCount: certificacionesList.length,
+                      //itemBuilder: (context, index) => AcademyCard(
+                      itemBuilder: (BuildContext context, int index) {
+                        return ChangeNotifierProvider.value(
+                          value: certificacionesList[index],
+                          child: AcademyCard(
+                            itemIndex: index,
+                            certificacion: certificacionesList[index],
+                            press: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AcademiaDetail(
+                                    certificacion: certificacionesList[index]
+                                  ),
+                                ),
+                              );
+                              print("${certificacionesList[index].nombre}");
+                            },
                           ),
                         );
-                        print("certificacion");
                       },
-                    ),
+                    )
                   ),
                 ],
               ),

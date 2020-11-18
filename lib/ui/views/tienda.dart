@@ -86,6 +86,7 @@ class _TiendaState extends State<Tienda> {
                               ),
                             ),
                           );
+                          print("${productList[index].nombre}");
                         },
                       ),
                     );
@@ -94,12 +95,12 @@ class _TiendaState extends State<Tienda> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
+                  /* Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProductDetail(product: productList[3]),
+                      builder: (context) => ProductDetail(product: productList[2]),
                     ),
-                  );
+                  ); */
                 },
                 child: Container(
                   height: ScreenUtil().setHeight(425),

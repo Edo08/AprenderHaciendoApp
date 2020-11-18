@@ -230,7 +230,7 @@ class AcademiaDetail extends StatelessWidget {
                         ),
                     onTap: () {
                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Inscripcion()),
+                      MaterialPageRoute(builder: (context) => Inscripcion(inscripcion: certificacion)),
                       );
                     }),
                   ),         

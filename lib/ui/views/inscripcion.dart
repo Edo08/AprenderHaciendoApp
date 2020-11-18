@@ -1,5 +1,4 @@
 import 'package:aprender_haciendo_app/core/models/academyModelDB.dart';
-import 'package:aprender_haciendo_app/core/services/validationMixins.dart';
 import 'package:aprender_haciendo_app/ui/shared/constants.dart';
 import 'package:aprender_haciendo_app/ui/views/tienda.dart';
 import 'package:aprender_haciendo_app/ui/widgets/appErrorMessage.dart';
@@ -9,69 +8,62 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:aprender_haciendo_app/core/services/providers/userProvider.dart';
 
-class Inscripcion extends StatefulWidget {
+
+final TextStyle barStyle = TextStyle(fontFamily: "Poppins-Bold", color: Colors.black);
+final auth = FirebaseAuth.instance;
+final databaseReference = Firestore.instance;
+GlobalKey<FormState> keyForm = new GlobalKey();
+TextEditingController nombreCtrl = new TextEditingController();
+TextEditingController apellidosCtrl = new TextEditingController();
+TextEditingController telCtrl = new TextEditingController();
+TextEditingController emailCtrl = new TextEditingController();
+TextEditingController domicilioCtrl = new TextEditingController();
+FocusNode _nombreFocus = FocusNode();
+FocusNode _apellidosFocus = FocusNode();
+FocusNode _domicilioFocus = FocusNode();
+FocusNode _telefonoFocus = FocusNode();
+FocusNode _emailFocus = FocusNode();
+FocusNode _none = FocusNode();
+AutovalidateMode _autoValidate = AutovalidateMode.disabled;
+bool showSpinner = false;
+Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+RegExp regex = new RegExp(pattern);
+Pattern patternStr = r'(^[a-zA-Z ]*$)';
+RegExp regExpStr = new RegExp(patternStr);
+Pattern pattterntel = r'(^[0-9]*$)';
+RegExp regExptel = new RegExp(pattterntel);
+bool isDateSelected = false;
+DateTime fechaNacimiento; // instance of DateTime
+String birthDateInString;
+String _errorMessage = "";
+var alertStyle = AlertStyle(
+  animationType: AnimationType.fromTop,
+  isCloseButton: false,
+  isOverlayTapDismiss: false,
+  descStyle:
+      TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
+  animationDuration: Duration(milliseconds: 400),
+  alertBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10.0),
+      side: BorderSide(color: Colors.grey)),
+);
+
+
+class Inscripcion extends StatelessWidget {
   final AcademyModelDB inscripcion;
   const Inscripcion({Key key, this.inscripcion}) : super(key: key);
 
   @override
-  _InscripcionState createState() => _InscripcionState();
-}
-
-class _InscripcionState extends State<Inscripcion> with ValidationMixins {
-  final TextStyle barStyle =
-      TextStyle(fontFamily: "Poppins-Bold", color: Colors.black);
-  final auth = FirebaseAuth.instance;
-  final databaseReference = Firestore.instance;
-  GlobalKey<FormState> keyForm = new GlobalKey();
-  TextEditingController nombreCtrl = new TextEditingController();
-  TextEditingController apellidosCtrl = new TextEditingController();
-  TextEditingController telCtrl = new TextEditingController();
-  TextEditingController emailCtrl = new TextEditingController();
-  TextEditingController domicilioCtrl = new TextEditingController();
-  FocusNode _nombreFocus = FocusNode();
-  FocusNode _apellidosFocus = FocusNode();
-  FocusNode _domicilioFocus = FocusNode();
-  FocusNode _telefonoFocus = FocusNode();
-  FocusNode _emailFocus = FocusNode();
-  FocusNode _none = FocusNode();
-  AutovalidateMode _autoValidate = AutovalidateMode.disabled;
-  bool showSpinner = false;
-  static Pattern pattern =
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-  RegExp regex = new RegExp(pattern);
-  static Pattern patternStr = r'(^[a-zA-Z ]*$)';
-  RegExp regExpStr = new RegExp(patternStr);
-  static Pattern pattterntel = r'(^[0-9]*$)';
-  RegExp regExptel = new RegExp(pattterntel);
-  bool isDateSelected = false;
-  DateTime fechaNacimiento; // instance of DateTime
-  String birthDateInString;
-  String _errorMessage = "";
-  //String inscripcionNombre = Inscripcion().inscripcion.nombre;
-
-  var alertStyle = AlertStyle(
-    animationType: AnimationType.fromTop,
-    isCloseButton: false,
-    isOverlayTapDismiss: false,
-    descStyle:
-        TextStyle(fontWeight: FontWeight.bold, fontFamily: "Poppins-Medium"),
-    animationDuration: Duration(milliseconds: 400),
-    alertBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(color: Colors.grey)),
-  );
-
   void setSpinnerStatus(bool status) {
-    setState(() {
       showSpinner = status;
-    });
   }
-
-  @override
   void initState() {
-    super.initState();
     nombreCtrl = TextEditingController();
     apellidosCtrl = TextEditingController();
     domicilioCtrl = TextEditingController();
@@ -84,10 +76,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     _emailFocus = FocusNode();
     _none = FocusNode();
   }
-
-  @override
   void dispose() {
-    super.dispose();
     nombreCtrl.dispose();
     apellidosCtrl.dispose();
     domicilioCtrl.dispose();
@@ -100,13 +89,11 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     _emailFocus.dispose();
     _none.dispose();
   }
-
   _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
-
   Widget _showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return ErrorMessage(errorMessage: _errorMessage);
@@ -158,7 +145,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
       style: alertStyle,
       type: AlertType.success,
       title: "",
-      desc: "Inscripción enviada.",
+      desc: "Inscripción enviada. Pronto se podran en contacto con usted",
       buttons: [
         DialogButton(
           child: Text("ACEPTAR",
@@ -175,6 +162,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -216,15 +204,15 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                           EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
                       child: Column(
                         children: <Widget>[
-                          _nombreField(),
+                          _nombreField(context),
                           Sized22,
-                          _apellidosField(),
+                          _apellidosField(context),
                           Sized22,
-                          _telefonoField(),
+                          _telefonoField(context),
                           Sized22,
-                          _emailField(),
+                          _emailField(context),
                           Sized22,
-                          _domicilioField(),
+                          _domicilioField(context),
                           SizedBox(
                             height: ScreenUtil.getInstance().setHeight(20),
                           ),
@@ -258,18 +246,15 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                                       onTap: () async {
                                         setSpinnerStatus(true);
                                         if (keyForm.currentState.validate()) {
-                                          var userId = (await FirebaseAuth
-                                                  .instance
-                                                  .currentUser())
-                                              .uid;
+                                          _onAlertButton(context);
+                                          var userId = (await FirebaseAuth.instance.currentUser()).uid;
                                           //var inscri = Inscripcion().inscripcion.nombre;
-                                          var ref = databaseReference
-                                              .collection("inscripciones")
-                                              .document();
+                                          var ref = databaseReference.collection("inscripciones").document();
                                           await ref.setData(
                                             {
                                               'uid': '$userId',
-                                              //'curso':'$inscri',
+                                              'fecha': '${DateTime.now()}',
+                                              'curso':'${inscripcion.nombre}',
                                               'nombre': '${nombreCtrl.text}',
                                               'apellido':'${apellidosCtrl.text}',
                                               'telefono': '${telCtrl.text}',
@@ -277,11 +262,37 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
                                               'email': '${emailCtrl.text}'
                                             },
                                           );
-                                          _onAlertButton(context);
+                                          
+                                            String username = 'aprenderhaciendoprueba@gmail.com';
+                                            String password = 'Ahprueba2020';
+                                            final smtpServer = gmail(username, password);
+                                            var connection = PersistentConnection(smtpServer);
+                                            final message = Message()
+                                              ..from = Address(username, 'Aprender Haciendo')
+                                              ..recipients.add('${user.user.email}')
+                                              //..ccRecipients.addAll(['aprenderhaciendoprueba@gmail.com'])
+                                              ..bccRecipients.add(Address('aprenderhaciendoprueba@gmail.com'))
+                                              ..subject =
+                                                  'Aprender Haciendo :: Inscripción :: ${inscripcion.nombre}'
+                                              //..text = 'This is the plain text.\nThis is line 2 of the text part.';
+                                              ..html =
+                                                  "<h1>Hola ${user.user.displayName},</h1>\n<p>Gracias por inscribirse al curso ${inscripcion.nombre} de Aprender Haciendo, pronto se pondran en contacto con usted para completar el proceso de inscripción</p>";
+                                            try {
+                                              //final sendReport = await send(message, smtpServer);
+                                              await connection.send(message);
+                                              //print('Message sent: ' + sendReport.toString());
+                                              print('Message sent');
+                                            } on MailerException catch (e) {
+                                              print('Message not sent.');
+                                              for (var p in e.problems) {
+                                                print('Problem: ${p.code}: ${p.msg}');
+                                              }
+                                            }
+
                                           borrarInscripcion();
                                           Navigator.push(context, MaterialPageRoute(builder: (context) => Tienda()));
                                         } else {
-                                          setState(() => _autoValidate =  AutovalidateMode.always);
+                                          _autoValidate =  AutovalidateMode.always;
                                         }
                                         setSpinnerStatus(false);
                                       },
@@ -315,7 +326,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     );
   }
 
-  Widget _nombreField() {
+  Widget _nombreField(context) {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidateMode: _autoValidate,
@@ -334,7 +345,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     );
   }
 
-  Widget _apellidosField() {
+  Widget _apellidosField(context) {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidateMode: _autoValidate,
@@ -353,7 +364,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     );
   }
 
-  Widget _telefonoField() {
+  Widget _telefonoField(context) {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidateMode: _autoValidate,
@@ -372,7 +383,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
     );
   }
 
-  Widget _emailField() {
+  Widget _emailField(context) {
     return TextFormField(
         style: TextStyle(fontFamily: "Poppins-Medium"),
         autovalidateMode: _autoValidate,
@@ -390,7 +401,7 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
         textInputAction: TextInputAction.next);
   }
 
-  Widget _domicilioField() {
+  Widget _domicilioField(context) {
     return TextFormField(
       style: TextStyle(fontFamily: "Poppins-Medium"),
       autovalidateMode: _autoValidate,
@@ -407,5 +418,60 @@ class _InscripcionState extends State<Inscripcion> with ValidationMixins {
       },
       //validator: validateNombre,
     );
+  }
+  String validateNombre(String value) {
+    if (value.length == 0) {
+      return "El nombre es necesario";
+      /* } else if (!regExpStr.hasMatch(value)) {
+    return "El nombre debe de ser a-z y A-Z"; */
+    } else if (value.isEmpty) {
+      return 'Por favor ingrese su Nombre';
+    }
+    return null;
+  }
+
+  String validateApellidos(String value) {
+    if (value.length == 0) {
+      return "Los apellidos son necesario";
+      /* } else if (!regExpStr.hasMatch(value)) {
+          return "El apellido debe de ser a-z y A-Z"; */
+    } else if (value.isEmpty) {
+      return 'Por favor ingrese sus Apellidos';
+    }
+    return null;
+  }
+
+  String validateNacimiento(String value) {
+    if (value.isEmpty) {
+      return 'Por favor ingrese su Fecha de nacimiento';
+    }
+    return null;
+  }
+
+  String validateTelefono(String value) {
+    if (value.isEmpty) {
+      return 'Por favor ingrese su telefono';
+    } else if (!regExptel.hasMatch(value)) {
+      return 'Su numero de telefono debe tener 8 digitos';
+    } 
+      return null;
+  }
+
+  String validateEmail(String value) {
+    if (value.isEmpty) {
+      return 'Ingrese su email';
+    } else if (!regex.hasMatch(value)) {
+      return 'Ingrese un email valido';
+    }
+    return null;
+  }
+
+  String validatePass(String value) {
+    if (value.isEmpty) {
+      return 'Por favor ingrese la contraseña';
+    } else if (value.length < 6) {
+      return 'Contraseña tiene que ser mayor de 6 caracteres';
+    }
+    return null;
   }
 }

@@ -1,8 +1,6 @@
-import 'package:aprender_haciendo_app/core/services/singIn.dart';
 import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'index.dart';
 import 'login.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -45,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(height: ScreenUtil.getInstance().setHeight(50)),
                     _horizontalLine(),
                     SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
-                    _redesSociales(),
+                    //_redesSociales(),
                     SizedBox(height: ScreenUtil.getInstance().setHeight(30)),
                     _registrarseButton(),
                   ],
@@ -133,7 +131,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 
-  Widget _redesSociales() {
+  /* Widget _redesSociales() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -148,23 +146,36 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               } else {
               //route to somewhere
               } */
+            /* signInWithGoogle().whenComplete(	            
+              () {	              
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Index();
+                    },	           
+                  ),	      
+                );	           
+              },	         
+            ); */
+              
             signInWithGoogle().then((user) {
               if (user != null) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                   return Index();
                 }));
                 Navigator.pushReplacementNamed(context, '/Tienda');
-              /* } else {
+              } else {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                  return Index();
-                })); */
+                  return WelcomeScreen();
+                }));
               }
-            }).catchError((error) {});
+            } 
+            ).catchError((error) {});
           },
         ),
       ],
     );
-  }
+  } */
 
   Widget _registrarseButton() {
     return Row(
