@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  wave:
+    git:
+      url: git://github.com/searchy2/wave.git
 
   cupertino_icons: ^0.1.3
   flutter_screenutil: ^0.4.2
@@ -19,7 +22,7 @@ dependencies:
   firebase_auth: ^0.16.1
   google_sign_in: ^4.4.4
   http: ^0.12.1
-  hidden_drawer_menu: ^1.1.4
+  hidden_drawer_menu: ^3.0.0
   carousel_slider: ^2.2.1
   flutter_svg: ^0.17.4
   google_fonts: ^1.1.0

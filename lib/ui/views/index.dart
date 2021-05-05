@@ -11,9 +11,8 @@ import 'package:aprender_haciendo_app/ui/widgets/customDialog.dart';
 import 'package:aprender_haciendo_app/ui/widgets/profileClipper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:provider/provider.dart';
-
 
 class Index extends StatefulWidget {
   static const String routeName = '/index';
@@ -21,17 +20,23 @@ class Index extends StatefulWidget {
   _IndexState createState() => _IndexState();
 }
 
-final TextStyle menuStyle = TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
+final TextStyle menuStyle =
+    TextStyle(fontSize: 18, fontFamily: "Poppins-Medium");
+
 class _IndexState extends State<Index> {
-  List<ScreenHiddenDrawer> items = new List();
+  List<ScreenHiddenDrawer> items = [];
   @override
   void initState() {
     items.add(
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Tienda",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
+          selectedStyle: null,
         ),
         Tienda(),
       ),
@@ -41,8 +46,12 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Quédate en casa",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
+          selectedStyle: null,
         ),
         QuedateEnCasa(),
       ),
@@ -52,8 +61,12 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Academia",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
+          selectedStyle: null,
         ),
         Academia(),
       ),
@@ -63,8 +76,12 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Eventos",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
+          selectedStyle: null,
         ),
         Eventos(),
       ),
@@ -74,8 +91,12 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Cursos",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
+          selectedStyle: null,
         ),
         Cursos(),
       ),
@@ -85,8 +106,12 @@ class _IndexState extends State<Index> {
       new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Historial compras",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white,
+          selectedStyle: null,
         ),
         HistorialCompras(),
       ),
@@ -95,8 +120,12 @@ class _IndexState extends State<Index> {
     items.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Cerrar sesión",
-          baseStyle: TextStyle(color: Colors.black.withOpacity(0.8),fontSize: 20.0,fontFamily: "Poppins-Medium"),
+          baseStyle: TextStyle(
+              color: Colors.black.withOpacity(0.8),
+              fontSize: 20.0,
+              fontFamily: "Poppins-Medium"),
           colorLineSelected: Colors.white10,
+          selectedStyle: null,
           onTap: () {
             showDialog(
               context: context,
@@ -132,11 +161,9 @@ class _IndexState extends State<Index> {
       slidePercent: 65.0,
       verticalScalePercent: 85.0,
       contentCornerRadius: 40.0,
-      iconMenuAppBar:
-          // Padding(padding : EdgeInsets.only(left: 50)),
-          (Image.asset("icons/icon_menu.png",
-              width: ScreenUtil.getInstance().setWidth(110),
-              height: ScreenUtil.getInstance().setHeight(110))),
+      leadingAppBar: (Image.asset("icons/icon_menu.png",
+          width: ScreenUtil.getInstance().setWidth(110),
+          height: ScreenUtil.getInstance().setHeight(110))),
       actionsAppBar: <Widget>[
         //Badge(child:
         IconButton(
@@ -198,10 +225,18 @@ class _IndexState extends State<Index> {
         ),
         SizedBox(height: 20.0),
         Center(
-          child: new Text("Usuario",style: new TextStyle(fontSize: 20.0,color: Colors.white,fontWeight: FontWeight.bold)),
+          child: new Text("Usuario",
+              style: new TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold)),
         ),
         Center(
-          child: new Text("Correo",style: new TextStyle(fontSize: 18.0,color: Colors.white70,fontWeight: FontWeight.normal)),
+          child: new Text("Correo",
+              style: new TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.white70,
+                  fontWeight: FontWeight.normal)),
         ),
       ],
     );

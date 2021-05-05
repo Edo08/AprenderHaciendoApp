@@ -37,7 +37,8 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   FocusNode _none = FocusNode();
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
   bool showSpinner = false;
-  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  static Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   static Pattern patternStr = r'(^[a-zA-Z ]*$)';
   RegExp regExpStr = new RegExp(patternStr);
@@ -99,7 +100,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   }
 
   _fieldFocusChange(
-    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -119,7 +120,7 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
       Navigator.pushNamed(context, '/perfil');
       createRecord();
     } else {
-      setState(() => _autoValidate =  AutovalidateMode.always);
+      setState(() => _autoValidate = AutovalidateMode.always);
     }
   }
 
@@ -154,8 +155,8 @@ class _EditarPerfilState extends State<EditarPerfil> with ValidationMixins {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Color(0xFF4cb2e2),
-      resizeToAvoidBottomPadding: true,
-      appBar: new AppBar(backgroundColor: Color(0xFF4cb2e2),elevation: 0.0),
+      resizeToAvoidBottomInset: true,
+      appBar: new AppBar(backgroundColor: Color(0xFF4cb2e2), elevation: 0.0),
       body: new SingleChildScrollView(
         child: new Container(
           margin: new EdgeInsets.all(25.0),

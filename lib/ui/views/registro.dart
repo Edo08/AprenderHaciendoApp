@@ -39,7 +39,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   FocusNode _none = FocusNode();
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
   bool showSpinner = false;
-  static Pattern pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+  static Pattern pattern =
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
   RegExp regex = new RegExp(pattern);
   static Pattern patternStr = r'(^[a-zA-Z ]*$)';
   RegExp regExpStr = new RegExp(patternStr);
@@ -99,7 +100,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
   }
 
   _fieldFocusChange(
-    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
@@ -113,7 +114,6 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       );
     }
   }
-
 
   void borrarRegistro() {
     nombreCtrl.text = "";
@@ -130,7 +130,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     final user = Provider.of<UserProvider>(context);
     return new Scaffold(
       backgroundColor: Color(0xFF4cb2e2),
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomInset: true,
       appBar: new AppBar(
         centerTitle: true,
         title: new Text('Registro',
@@ -145,14 +145,20 @@ class _RegistroState extends State<Registro> with ValidationMixins {
           margin: new EdgeInsets.all(25.0),
           child: new Form(
             key: keyForm,
-            child:Container(
+            child: Container(
               height: ScreenUtil.getInstance().setHeight(1070),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8.0),
                 boxShadow: [
-                  BoxShadow(color: Colors.black12,offset: Offset(0.0, 15.0),blurRadius: 15.0),
-                  BoxShadow(color: Colors.black12,offset: Offset(0.0, -10.0),blurRadius: 10.0),
+                  BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0.0, 15.0),
+                      blurRadius: 15.0),
+                  BoxShadow(
+                      color: Colors.black12,
+                      offset: Offset(0.0, -10.0),
+                      blurRadius: 10.0),
                 ],
               ),
               child: Scaffold(
@@ -160,7 +166,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                   inAsyncCall: showSpinner,
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
+                      padding:
+                          EdgeInsets.only(left: 16.0, right: 16.0, top: 12.0),
                       child: Column(
                         children: <Widget>[
                           _nombreField(),
@@ -176,7 +183,8 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                           _passField(),
                           Sized22,
                           _passconfirmacionField(),
-                          SizedBox(height: ScreenUtil.getInstance().setHeight(20)),
+                          SizedBox(
+                              height: ScreenUtil.getInstance().setHeight(20)),
                           _showErrorMessage(),
                           Sized22,
                           Row(
@@ -185,67 +193,105 @@ class _RegistroState extends State<Registro> with ValidationMixins {
                               InkWell(
                                 child: Container(
                                   width: ScreenUtil.getInstance().setWidth(450),
-                                  height: ScreenUtil.getInstance().setHeight(100),
+                                  height:
+                                      ScreenUtil.getInstance().setHeight(100),
                                   decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                          colors: [Color(0xFF65c6f4), Color(0xFF0074c9)]),
+                                      gradient: LinearGradient(colors: [
+                                        Color(0xFF65c6f4),
+                                        Color(0xFF0074c9)
+                                      ]),
                                       borderRadius: BorderRadius.circular(6.0),
                                       boxShadow: [
-                                        BoxShadow(color: Color(0xFF6078ea).withOpacity(.3),offset: Offset(0.0, 8.0),blurRadius: 8.0)
+                                        BoxShadow(
+                                            color: Color(0xFF6078ea)
+                                                .withOpacity(.3),
+                                            offset: Offset(0.0, 8.0),
+                                            blurRadius: 8.0)
                                       ]),
                                   child: Material(
                                     color: Colors.transparent,
                                     child: InkWell(
                                       onTap: () async {
-                                      setSpinnerStatus(true);
-                                      if (keyForm.currentState.validate()) {
-                                        try {
-                                          var auth = await UserProvider.initialize().createUser(  
-                                              nombre: nombreCtrl.text.trim(), 
-                                              apellido: apellidosCtrl.text.trim(), 
-                                              telefono: telCtrl.text.trim(), 
-                                              email: emailCtrl.text.trim(), 
-                                              password: passwordCtrl.text.trim(), 
-                                              fechaNacimiento: fechaNacimiento);
-                                          if (auth.success) {
-                                            var userId = (await FirebaseAuth.instance.currentUser()).uid;
-                                            var ref = databaseReference.collection("users").document("$userId");
-                                            await ref.setData(
-                                              {
-                                                'uid': '$userId',
-                                                'nombre': '${nombreCtrl.text}',
-                                                'apellido': '${apellidosCtrl.text}',
-                                                'fechaNacimiento': '$fechaNacimiento',
-                                                'telefono': '${telCtrl.text}',
-                                                'email': '${emailCtrl.text}',
-                                                'contraseña': '${passwordCtrl.text}'
-                                              },
-                                            );
-                                            borrarRegistro();
-                                            user.reloadUserModel();
-                                            Navigator.pushNamed(context, '/index');
-                                            Navigator.pushReplacementNamed(context, '/Tienda');
-                                          } else {
-                                            print(auth.errorMessage);
-                                            user.reloadUserModel();
-                                            setState(() {
-                                              _errorMessage = auth.errorMessage;
-                                            });
+                                        setSpinnerStatus(true);
+                                        if (keyForm.currentState.validate()) {
+                                          try {
+                                            var auth =
+                                                await UserProvider.initialize()
+                                                    .createUser(
+                                                        nombre: nombreCtrl.text
+                                                            .trim(),
+                                                        apellido: apellidosCtrl
+                                                            .text
+                                                            .trim(),
+                                                        telefono:
+                                                            telCtrl.text.trim(),
+                                                        email: emailCtrl.text
+                                                            .trim(),
+                                                        password: passwordCtrl
+                                                            .text
+                                                            .trim(),
+                                                        fechaNacimiento:
+                                                            fechaNacimiento);
+                                            if (auth.success) {
+                                              var userId = (await FirebaseAuth
+                                                      .instance
+                                                      .currentUser())
+                                                  .uid;
+                                              var ref = databaseReference
+                                                  .collection("users")
+                                                  .document("$userId");
+                                              await ref.setData(
+                                                {
+                                                  'uid': '$userId',
+                                                  'nombre':
+                                                      '${nombreCtrl.text}',
+                                                  'apellido':
+                                                      '${apellidosCtrl.text}',
+                                                  'fechaNacimiento':
+                                                      '$fechaNacimiento',
+                                                  'telefono': '${telCtrl.text}',
+                                                  'email': '${emailCtrl.text}',
+                                                  'contraseña':
+                                                      '${passwordCtrl.text}'
+                                                },
+                                              );
+                                              borrarRegistro();
+                                              user.reloadUserModel();
+                                              Navigator.pushNamed(
+                                                  context, '/index');
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/Tienda');
+                                            } else {
+                                              print(auth.errorMessage);
+                                              user.reloadUserModel();
+                                              setState(() {
+                                                _errorMessage =
+                                                    auth.errorMessage;
+                                              });
+                                            }
+                                          } catch (e) {
+                                            print(e);
                                           }
-                                        } catch (e) {
-                                          print(e);
+                                        } else {
+                                          user.reloadUserModel();
+                                          setState(() => _autoValidate =
+                                              AutovalidateMode.always);
                                         }
-                                      } else {
-                                        user.reloadUserModel();
-                                        setState(() => _autoValidate =  AutovalidateMode.always);
-                                      }
-                                      setSpinnerStatus(false);
+                                        setSpinnerStatus(false);
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.only(
-                                            left: 16.0, right: 16.0, top: 12.0, bottom: 20.0),
+                                            left: 16.0,
+                                            right: 16.0,
+                                            top: 12.0,
+                                            bottom: 20.0),
                                         child: Center(
-                                          child: Text("REGISTRARSE",style: TextStyle(color: Colors.white,fontFamily: "Poppins-Bold",fontSize: 17,letterSpacing: 1.0)),
+                                          child: Text("REGISTRARSE",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: "Poppins-Bold",
+                                                  fontSize: 17,
+                                                  letterSpacing: 1.0)),
                                         ),
                                       ),
                                     ),
@@ -330,11 +376,14 @@ class _RegistroState extends State<Registro> with ValidationMixins {
             () {
               fechaNacimiento = datePick;
               isDateSelected = true;
-              nacimientoCtrl.text = "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
+              nacimientoCtrl.text =
+                  "${fechaNacimiento.day}/${fechaNacimiento.month}/${fechaNacimiento.year}";
             },
           );
         }
-        new Text(isDateSelected ? "$fechaNacimiento" : "Seleccione su fecha de nacimiento");
+        new Text(isDateSelected
+            ? "$fechaNacimiento"
+            : "Seleccione su fecha de nacimiento");
       },
       /*   onChanged: (value){
         nacimientoCtrl = value as TextEditingController;
@@ -428,7 +477,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     );
   }
 }
-  /* Widget _submitButton() {
+/* Widget _submitButton() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -466,8 +515,7 @@ class _RegistroState extends State<Registro> with ValidationMixins {
     );
   } */
 
-
-   /* void createRecord() async {
+/* void createRecord() async {
     var userId = (await FirebaseAuth.instance.currentUser()).uid;
     var ref = databaseReference.collection("users").document("$userId");
     await ref.setData(
@@ -510,4 +558,3 @@ class _RegistroState extends State<Registro> with ValidationMixins {
       setState(() => _autoValidate = true);
     }
   } */
-
